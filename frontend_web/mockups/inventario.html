@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXION SYSTEM - Inventario</title>
+    <!-- Incluye Tailwind CSS (versión CDN para este ejemplo rápido) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .sidebar-item.active {
+            @apply bg-purple-700;
+        }
+        /* Para ajustar el ancho de algunas celdas con texto largo */
+        .table-cell-subcategory {
+            max-width: 250px; /* Ancho máximo para la subcategoría */
+            white-space: normal; /* Permite el salto de línea */
+        }
+        .table-cell-description {
+            max-width: 150px; /* Ancho máximo para descripciones si las hubiera */
+            white-space: normal;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900 bg-gray-100 min-h-screen flex">
+
+    <!-- Barra Lateral (Sidebar) - REUTILIZADO -->
+    <aside class="w-64 bg-gray-800 text-white flex-shrink-0">
+        <div class="p-6 text-2xl font-bold border-b border-gray-700">AXION SYSTEM</div>
+        <nav class="mt-6">
+            <ul>
+                <li><a href="home.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m0 0l7 7m-1 7H6a1 1 0 01-1-1v-10z"></path></svg>Inicio</a></li>
+                <li><a href="usuario.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M10 20v-2a3 3 0 013-3h4a3 3 0 013 3v2M3 8v10a2 2 0 002 2h14a2 2 0 002-2V8m-9 1-3 3"></path></svg>Usuarios</a></li>
+                <li><a href="categorias.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>Categorias</a></li>
+                <li><a href="subcategoria.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>Subcategorias</a></li>
+                <li><a href="inventario.html" class="sidebar-item active flex items-center py-3 px-6 hover:bg-purple-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h3l2 4M8 20l3-4m1 0h3"></path></svg>Inventario</a></li>
+                <li><a href="reportes.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>Reportes</a></li>
+                <li><a href="#" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17L9 11M6.5 17H6"></path></svg>Alertas</a></li>
+                <li><a href="#" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20V9l7.5-7.5M10.5 4.5l1.5-1.5M15 19l-3 3V11"></path></svg>Rutas de distribucion</a></li>
+                <li><a href="#" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-1.326 0-2.607.303-3.792.894A15.996 15.996 0 0012 16.5a15.996 15.996 0 003.792-.894C14.607 14.303 13.326 14 12 14z"></path></svg>Proveedores</a></li>
+                <li><a href="#" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.54-1.341 2.016-1.341 2.556 0A1.996 1.996 0 0013 7h1c.604 0 1.139.387 1.348.948l1.378 4.298c.118.368.172.766.172 1.171 0 .221-.019.43-.058.625M17 13.795L12 17.5l-5-3.705m5 0v-4.5"></path></svg>Mantenimiento</a></li>
+                <li><a href="#" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14v6m-3-3h6M5 7h14a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2zm0 0c1.657 0 3 2.239 3 5s-1.343 5-3 5m0-10v.01M17 7v.01"></path></svg>Alquiler</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="flex-1 p-8 overflow-x-auto">
+        <div class="max-w-7xl mx-auto bg-white rounded-lg shadow-xl p-8">
+
+            <!-- Encabezado del contenido - REUTILIZADO -->
+            <div class="flex items-center justify-between border-b pb-4 mb-6">
+                <h1 class="text-3xl font-semibold text-gray-800">AXION SYSTEM</h1>
+                <div class="flex items-center space-x-4">
+                    <span class="text-lg font-medium text-gray-700">Administrador</span>
+                    <svg class="h-8 w-8 text-gray-700 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A11.97 11.97 0 0112 15c2.327 0 4.512.645 6.379 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 3a10.016 10.016 0 01-19.062-.057c-.502 0-.909.454-.881 1l-.014.288c-.017 1.341-.01 2.684.025 4.027A10.007 10.007 0 0112 22a10.007 10.007 0 0110-10V13z"></path></svg>
+                    <svg class="h-8 w-8 text-red-500 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </div>
+            </div>
+
+            <!-- Barra de acciones (Agregar, Eliminar, Dar de baja inventario) -->
+            <div class="flex space-x-6 mb-8">
+                <!-- Botón Agregar Inventario -->
+                <button id="add-inventory-btn" class="flex flex-col items-center justify-center p-4 rounded-lg bg-gray-100 hover:bg-blue-100 cursor-pointer transition-colors duration-200">
+                    <svg class="h-10 w-10 text-blue-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h3l2 4M8 20l3-4m1 0h3"></path></svg>
+                    <span class="text-sm font-semibold text-gray-700">Agregar</span>
+                </button>
+                <!-- Botón Eliminar Inventario -->
+                <button id="delete-inventory-btn" class="flex flex-col items-center justify-center p-4 rounded-lg bg-gray-100 hover:bg-red-100 cursor-pointer transition-colors duration-200">
+                    <svg class="h-10 w-10 text-red-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    <span class="text-sm font-semibold text-gray-700">Eliminar</span>
+                </button>
+                <!-- Botón Dar de baja Inventario -->
+                <button id="deactivate-inventory-btn" class="flex flex-col items-center justify-center p-4 rounded-lg bg-gray-100 hover:bg-purple-100 cursor-pointer transition-colors duration-200">
+                    <svg class="h-10 w-10 text-purple-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <span class="text-sm font-semibold text-gray-700">Dar de baja</span>
+                </button>
+            </div>
+
+            <!-- Barra de búsqueda y filtro -->
+            <div class="mb-8 relative max-w-sm">
+                <!-- Se puede implementar con un input de texto para "Q Monitores" o un select para tipo de equipo si son predefinidos -->
+                <input type="text" placeholder="Buscar monitores" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+
+            <!-- Tabla de Inventario -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">#</th>
+                            <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Categoría</th>
+                            <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider table-cell-subcategory">Subcategoría</th>
+                            <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Proveedor</th>
+                            <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Ruta</th>
+                            <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Cantidad</th>
+                            <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Cantidad en stock</th>
+                            <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">En préstamo</th>
+                            <th class="py-3 px-4 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Modificar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <!-- Filas de ejemplo -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">Monitor</td>
+                            <td class="py-3 px-4 table-cell-subcategory">LED - LCD - OLED - Gaming - Touchscreen - Ultrawide - 4K</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4">Teclado</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Mecanico - Membrana - Inalambrico - Ergonomico - Gaming - Numerico</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                         <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">Mouse</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Optico - Láser - Inalambrico - Gaming - Vertical - Trackball - Ergonomico</td>
+                            <td class="py-3 px-4">HP</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">4</td>
+                            <td class="py-3 px-4">Cpu</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Intel - AMD - Servidor - Torre - Mini PC - Workstation - Gaming</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">Cable</td>
+                            <td class="py-3 px-4 table-cell-subcategory">HDMI - VGA - USB - Ethernet - DisplayPort - SATA - Auxiliar - Alimentacion</td>
+                            <td class="py-3 px-4">LG</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">6</td>
+                            <td class="py-3 px-4">Portátil</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Ultrabook - Gaming - 2 en 1 - Chromebook - Workstation - Empresarial - Estándar</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">7</td>
+                            <td class="py-3 px-4">Impresora</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Windows - Mac - Táctil - Para diseño - Empresarial - Gamer</td>
+                            <td class="py-3 px-4">HP</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">8</td>
+                            <td class="py-3 px-4">Equipo todo en uno</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Web - Seguridad - Reflex - Compacta - Videoconferencia - Infraroja</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">9</td>
+                            <td class="py-3 px-4">Camara</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Bluetooth - Estéreo - Barra de sonido - Home Theater - Portátil</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">10</td>
+                            <td class="py-3 px-4">DVR</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Inalámbricos - Con cable - Gaming - Con micrófono - Bluetooth - Cancelación de ruido</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">11</td>
+                            <td class="py-3 px-4">Parlantes</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Analógico - Digital - Hibrido - IP - NVR</td>
+                            <td class="py-3 px-4">LG</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">12</td>
+                            <td class="py-3 px-4">Diodemas</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Banda única - Doble banda - Tri-banda - Mesh - 4G/5G - VPN - Wi-Fi 6</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">13</td>
+                            <td class="py-3 px-4">Router</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Administrable - No administrable - PoE - Gigabit - Industrial - Modular</td>
+                            <td class="py-3 px-4">LG</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">14</td>
+                            <td class="py-3 px-4">Switch</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Torre completa - Semitorre - Mini torre - Rack - Gaming - Industrial</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">15</td>
+                            <td class="py-3 px-4">Gabinete</td>
+                            <td class="py-3 px-4 table-cell-subcategory">HDD - SSD - NVMe - Externo - Interno - NAS - Tarjeta SD - USB</td>
+                            <td class="py-3 px-4">Samsung</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4">16</td>
+                            <td class="py-3 px-4">Almacenamiento</td>
+                            <td class="py-3 px-4 table-cell-subcategory">Intel - AMD - Servidor - Torre - Mini PC - Workstation - Gaming</td>
+                            <td class="py-3 px-4">HP</td>
+                            <td class="py-3 px-4">5</td>
+                            <td class="py-3 px-4">3</td>
+                            <td class="py-3 px-4">1</td>
+                            <td class="py-3 px-4">2</td>
+                            <td class="py-3 px-4 flex justify-center items-center">
+                                <button class="edit-inventory-btn text-gray-600 hover:text-green-600">
+                                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal para Agregar Equipo de Inventario -->
+    <div id="add-inventory-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Agregar</h2>
+            <button id="close-add-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <form>
+                <div class="mb-4">
+                    <label for="new-equipment-name" class="block text-gray-700 text-sm font-semibold mb-2">Nombre equipo</label>
+                    <input type="text" id="new-equipment-name" name="new-equipment-name" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Ej: Laptop HP EliteBook 840 G8">
+                </div>
+                <div class="mb-4">
+                    <label for="add-category-select" class="block text-gray-700 text-sm font-semibold mb-2">Categorías</label>
+                    <div class="relative">
+                        <select id="add-category-select" name="category-select" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione categoría</option>
+                            <option value="monitor">Monitor</option>
+                            <option value="teclado">Teclado</option>
+                            <option value="laptop">Portátil</option>
+                            <!-- Agrega más categorías según sea necesario -->
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="add-subcategory-select" class="block text-gray-700 text-sm font-semibold mb-2">Subcategoría</label>
+                    <div class="relative">
+                        <select id="add-subcategory-select" name="subcategory-select" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione subcategoría</option>
+                            <!-- Estas opciones se cargarían dinámicamente basadas en la categoría seleccionada -->
+                            <option value="gaming">Gaming</option>
+                            <option value="ultrabook">Ultrabook</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="add-provider-select" class="block text-gray-700 text-sm font-semibold mb-2">Proveedor</label>
+                    <div class="relative">
+                        <select id="add-provider-select" name="provider-select" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione proveedor</option>
+                            <option value="samsung">Samsung</option>
+                            <option value="hp">HP</option>
+                            <option value="lg">LG</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="add-route-select" class="block text-gray-700 text-sm font-semibold mb-2">Ruta</label>
+                    <div class="relative">
+                        <select id="add-route-select" name="route-select" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione ruta</option>
+                            <option value="ruta5">Ruta 5</option>
+                            <option value="ruta6">Ruta 6</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="add-description" class="block text-gray-700 text-sm font-semibold mb-2">Descripción</label>
+                    <textarea id="add-description" name="description" rows="3" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Notas adicionales del equipo"></textarea>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="save-inventory-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <button type="button" id="cancel-add-inventory-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Agregar Equipo -->
+    <div id="add-inventory-confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación de Agregado</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-add-inventory-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-add-inventory-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Eliminar Equipo de Inventario -->
+    <div id="delete-inventory-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Eliminar</h2>
+            <button id="close-delete-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <form>
+                <div class="mb-4">
+                    <label for="delete-category-input" class="block text-gray-700 text-sm font-semibold mb-2">Escriba la categoría</label>
+                    <div class="relative">
+                        <input type="text" id="delete-category-input" name="delete-category-input" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej: Monitor">
+                        <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="delete-subcategory-input" class="block text-gray-700 text-sm font-semibold mb-2">Escriba la subcategoría</label>
+                    <div class="relative">
+                        <input type="text" id="delete-subcategory-input" name="delete-subcategory-input" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej: LED">
+                        <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="perform-delete-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <button type="button" id="cancel-delete-inventory-btn" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Eliminar Inventario -->
+    <div id="delete-inventory-confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-delete-inventory-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-delete-inventory-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Dar de Baja Equipo de Inventario -->
+    <div id="deactivate-inventory-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Dar de baja</h2>
+            <button id="close-deactivate-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <form>
+                 <div class="mb-4">
+                    <label for="deactivate-category-input" class="block text-gray-700 text-sm font-semibold mb-2">Escriba la categoría</label>
+                    <div class="relative">
+                        <input type="text" id="deactivate-category-input" name="deactivate-category-input" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej: Monitor">
+                        <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="deactivate-subcategory-input" class="block text-gray-700 text-sm font-semibold mb-2">Escriba la subcategoría</label>
+                    <div class="relative">
+                        <input type="text" id="deactivate-subcategory-input" name="deactivate-subcategory-input" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ej: LED">
+                        <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="perform-deactivate-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <button type="button" id="cancel-deactivate-inventory-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Dar de baja Inventario -->
+    <div id="deactivate-inventory-confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación de Baja</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-deactivate-inventory-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-deactivate-inventory-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Equipo de Inventario -->
+    <div id="edit-inventory-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Editar Inventario</h2>
+            <button id="close-edit-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <form>
+                <div class="mb-4">
+                    <label for="edit-equipment-name" class="block text-gray-700 text-sm font-semibold mb-2">Nombre equipo</label>
+                    <input type="text" id="edit-equipment-name" name="edit-equipment-name" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" value="Monitores" readonly> <!-- Valor precargado para el mockup -->
+                </div>
+                <div class="mb-4">
+                    <label for="edit-category-select" class="block text-gray-700 text-sm font-semibold mb-2">Categorías</label>
+                    <div class="relative">
+                        <select id="edit-category-select" name="category-select" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="monitor" selected>Monitor</option> <!-- Seleccionado por defecto -->
+                            <option value="teclado">Teclado</option>
+                            <option value="laptop">Portátil</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-subcategory-select" class="block text-gray-700 text-sm font-semibold mb-2">Subcategoría</label>
+                    <div class="relative">
+                        <select id="edit-subcategory-select" name="subcategory-select" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="led" selected>LED</option>
+                            <option value="oled">OLED</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-provider-select" class="block text-gray-700 text-sm font-semibold mb-2">Proveedor</label>
+                    <div class="relative">
+                        <select id="edit-provider-select" name="provider-select" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="samsung">Samsung</option>
+                            <option value="hp">HP</option>
+                            <option value="lg" selected>LG</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-route-select" class="block text-gray-700 text-sm font-semibold mb-2">Ruta</label>
+                    <div class="relative">
+                        <select id="edit-route-select" name="route-select" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="ruta5" selected>5</option>
+                            <option value="ruta6">6</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="edit-description" class="block text-gray-700 text-sm font-semibold mb-2">Descripción</label>
+                    <textarea id="edit-description" name="description" rows="3" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Notas adicionales del equipo"></textarea>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="save-edited-inventory-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <button type="button" id="cancel-edit-inventory-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Editar Inventario -->
+    <div id="edit-inventory-confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación de Edición</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-edit-inventory-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-edit-inventory-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función general para controlar la visibilidad de los modales
+        function toggleModal(modalId, show) {
+            document.getElementById(modalId).classList.toggle('hidden', !show);
+        }
+
+        // AGREGAR INVENTARIO
+        const addInventoryBtn = document.getElementById('add-inventory-btn');
+        const addInventoryModal = document.getElementById('add-inventory-modal');
+        const closeAddModalBtn = document.getElementById('close-add-modal-btn');
+        const saveInventoryBtn = document.getElementById('save-inventory-btn');
+        const cancelAddInventoryBtn = document.getElementById('cancel-add-inventory-btn');
+        const addInventoryConfirmModal = document.getElementById('add-inventory-confirm-modal');
+        const confirmAddInventoryAction = document.getElementById('confirm-add-inventory-action');
+        const cancelAddInventoryActionFinal = document.getElementById('cancel-add-inventory-action-final');
+
+        addInventoryBtn.addEventListener('click', () => toggleModal('add-inventory-modal', true));
+        closeAddModalBtn.addEventListener('click', () => toggleModal('add-inventory-modal', false));
+        cancelAddInventoryBtn.addEventListener('click', () => toggleModal('add-inventory-modal', false));
+        
+        saveInventoryBtn.addEventListener('click', () => {
+            // Aquí iría la validación del formulario
+            toggleModal('add-inventory-modal', false);
+            toggleModal('add-inventory-confirm-modal', true);
+        });
+        confirmAddInventoryAction.addEventListener('click', () => {
+            alert('Elemento de inventario agregado! (Simulación)');
+            toggleModal('add-inventory-confirm-modal', false);
+            // Lógica real para enviar al backend y refrescar la tabla
+        });
+        cancelAddInventoryActionFinal.addEventListener('click', () => {
+            toggleModal('add-inventory-confirm-modal', false);
+            toggleModal('add-inventory-modal', true);
+        });
+
+
+        // ELIMINAR INVENTARIO
+        const deleteInventoryBtn = document.getElementById('delete-inventory-btn');
+        const deleteInventoryModal = document.getElementById('delete-inventory-modal');
+        const closeDeleteModalBtn = document.getElementById('close-delete-modal-btn');
+        const performDeleteBtn = document.getElementById('perform-delete-btn');
+        const cancelDeleteInventoryBtn = document.getElementById('cancel-delete-inventory-btn');
+        const deleteInventoryConfirmModal = document.getElementById('delete-inventory-confirm-modal');
+        const confirmDeleteInventoryAction = document.getElementById('confirm-delete-inventory-action');
+        const cancelDeleteInventoryActionFinal = document.getElementById('cancel-delete-inventory-action-final');
+
+        deleteInventoryBtn.addEventListener('click', () => toggleModal('delete-inventory-modal', true));
+        closeDeleteModalBtn.addEventListener('click', () => toggleModal('delete-inventory-modal', false));
+        cancelDeleteInventoryBtn.addEventListener('click', () => toggleModal('delete-inventory-modal', false));
+
+        performDeleteBtn.addEventListener('click', () => {
+            toggleModal('delete-inventory-modal', false);
+            toggleModal('delete-inventory-confirm-modal', true);
+        });
+        confirmDeleteInventoryAction.addEventListener('click', () => {
+            alert('Elemento de inventario eliminado! (Simulación)');
+            toggleModal('delete-inventory-confirm-modal', false);
+        });
+        cancelDeleteInventoryActionFinal.addEventListener('click', () => {
+            toggleModal('delete-inventory-confirm-modal', false);
+            toggleModal('delete-inventory-modal', true);
+        });
+
+        // DAR DE BAJA INVENTARIO
+        const deactivateInventoryBtn = document.getElementById('deactivate-inventory-btn');
+        const deactivateInventoryModal = document.getElementById('deactivate-inventory-modal');
+        const closeDeactivateModalBtn = document.getElementById('close-deactivate-modal-btn');
+        const performDeactivateBtn = document.getElementById('perform-deactivate-btn');
+        const cancelDeactivateInventoryBtn = document.getElementById('cancel-deactivate-inventory-btn');
+        const deactivateInventoryConfirmModal = document.getElementById('deactivate-inventory-confirm-modal');
+        const confirmDeactivateInventoryAction = document.getElementById('confirm-deactivate-inventory-action');
+        const cancelDeactivateInventoryActionFinal = document.getElementById('cancel-deactivate-inventory-action-final');
+
+        deactivateInventoryBtn.addEventListener('click', () => toggleModal('deactivate-inventory-modal', true));
+        closeDeactivateModalBtn.addEventListener('click', () => toggleModal('deactivate-inventory-modal', false));
+        cancelDeactivateInventoryBtn.addEventListener('click', () => toggleModal('deactivate-inventory-modal', false));
+
+        performDeactivateBtn.addEventListener('click', () => {
+            toggleModal('deactivate-inventory-modal', false);
+            toggleModal('deactivate-inventory-confirm-modal', true);
+        });
+        confirmDeactivateInventoryAction.addEventListener('click', () => {
+            alert('Elemento de inventario dado de baja! (Simulación)');
+            toggleModal('deactivate-inventory-confirm-modal', false);
+        });
+        cancelDeactivateInventoryActionFinal.addEventListener('click', () => {
+            toggleModal('deactivate-inventory-confirm-modal', false);
+            toggleModal('deactivate-inventory-modal', true);
+        });
+
+        // MODIFICAR INVENTARIO
+        const editInventoryBtns = document.querySelectorAll('.edit-inventory-btn');
+        const editInventoryModal = document.getElementById('edit-inventory-modal');
+        const closeEditModalBtn = document.getElementById('close-edit-modal-btn');
+        const saveEditedInventoryBtn = document.getElementById('save-edited-inventory-btn');
+        const cancelEditInventoryBtn = document.getElementById('cancel-edit-inventory-btn');
+        const editInventoryConfirmModal = document.getElementById('edit-inventory-confirm-modal');
+        const confirmEditInventoryAction = document.getElementById('confirm-edit-inventory-action');
+        const cancelEditInventoryActionFinal = document.getElementById('cancel-edit-inventory-action-final');
+
+        editInventoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // En una aplicación real, aquí se precargaría el modal con los datos del equipo de la fila.
+                // const row = btn.closest('tr');
+                // const categoria = row.cells[1].textContent;
+                // const subcategoria = row.cells[2].textContent;
+                // document.getElementById('edit-category-select').value = categoria;
+                // document.getElementById('edit-subcategory-select').value = subcategoria; // Se requeriría lógica para filtrar subcategorías por categoría
+                toggleModal('edit-inventory-modal', true);
+            });
+        });
+        closeEditModalBtn.addEventListener('click', () => toggleModal('edit-inventory-modal', false));
+        cancelEditInventoryBtn.addEventListener('click', () => toggleModal('edit-inventory-modal', false));
+
+        saveEditedInventoryBtn.addEventListener('click', () => {
+            toggleModal('edit-inventory-modal', false);
+            toggleModal('edit-inventory-confirm-modal', true);
+        });
+        confirmEditInventoryAction.addEventListener('click', () => {
+            alert('Elemento de inventario modificado! (Simulación)');
+            toggleModal('edit-inventory-confirm-modal', false);
+        });
+        cancelEditInventoryActionFinal.addEventListener('click', () => {
+            toggleModal('edit-inventory-confirm-modal', false);
+            toggleModal('edit-inventory-modal', true);
+        });
+
+    </script>
+</body>
+</html>

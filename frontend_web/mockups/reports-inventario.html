@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXION SYSTEM - Reporte Inventario</title>
+    <!-- Incluye Tailwind CSS (versión CDN para este ejemplo rápido) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .sidebar-item.active {
+            @apply bg-purple-700;
+        }
+        /* Para ajustar el ancho de algunas celdas con texto largo si fuera necesario, aunque los campos de reporte suelen ser concisos */
+        .table-report-equipos {
+            max-width: 300px;
+            white-space: normal;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900 bg-gray-100 min-h-screen flex">
+
+    <!-- Barra Lateral (Sidebar) - REUTILIZADO -->
+    <aside class="w-64 bg-gray-800 text-white flex-shrink-0">
+        <div class="p-6 text-2xl font-bold border-b border-gray-700">AXION SYSTEM</div>
+        <nav class="mt-6">
+            <ul>
+                <li><a href="home.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m0 0l7 7m-1 7H6a1 1 0 01-1-1v-10z"></path></svg>Inicio</a></li>
+                <li><a href="usuario.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M10 20v-2a3 3 0 013-3h4a3 3 0 013 3v2M3 8v10a2 2 0 002 2h14a2 2 0 002-2V8m-9 1-3 3"></path></svg>Usuarios</a></li>
+                <li><a href="categorias.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>Categorias</a></li>
+                <li><a href="subcategoria.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>Subcategorias</a></li>
+                <li><a href="inventario.html" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h3l2 4M8 20l3-4m1 0h3"></path></svg>Inventario</a></li>
+                <li><a href="reportes.html" class="sidebar-item active flex items-center py-3 px-6 hover:bg-purple-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>Reportes</a></li>
+                <li><a href="#" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17L9 11M6.5 17H6"></path></svg>Alertas</a></li>
+                <li><a href="#" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20V9l7.5-7.5M10.5 4.5l1.5-1.5M15 19l-3 3V11"></path></svg>Rutas de distribucion</a></li>
+                <li><a href="#" class="sidebar-item flex items-center py-3 px-6 hover:bg-gray-700"><svg class="h-5 w-5 mr-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14c-1.326 0-2.607.303-3.792.894A15.996 15.996 0 0012 16.5a15.996 15.996 0 003.792-.894C14.607 14.303 13.326 14 12 14z"></path></svg>Proveedores</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="flex-1 p-8 overflow-x-auto">
+        <div class="max-w-7xl mx-auto bg-white rounded-lg shadow-xl p-8 flex"> <!-- Use flex para organizar contenido y descarga -->
+
+            <!-- Columna principal para la tabla y acciones -->
+            <div class="flex-grow flex flex-col pr-8 border-r border-gray-200">
+                <!-- Encabezado del contenido - REUTILIZADO -->
+                <div class="flex items-center justify-between border-b pb-4 mb-6 flex-shrink-0">
+                    <h1 class="text-3xl font-semibold text-gray-800">AXION SYSTEM</h1>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-lg font-medium text-gray-700">Administrador</span>
+                        <svg class="h-8 w-8 text-gray-700 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A11.97 11.97 0 0112 15c2.327 0 4.512.645 6.379 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 3a10.016 10.016 0 01-19.062-.057c-.502 0-.909.454-.881 1l-.014.288c-.017 1.341-.01 2.684.025 4.027A10.007 10.007 0 0112 22a10.007 10.007 0 0110-10V13z"></path></svg>
+                        <svg class="h-8 w-8 text-red-500 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    </div>
+                </div>
+
+                <div class="mb-6 flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <button class="flex items-center text-gray-600 hover:text-blue-600 font-semibold" onclick="window.history.back()">
+                            <svg class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8m-7 1.5H19a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z"></path></svg>
+                            Volver
+                        </button>
+                        <button id="edit-report-btn" class="flex flex-col items-center justify-center p-3 rounded-lg bg-gray-100 hover:bg-green-100 cursor-pointer transition-colors duration-200">
+                            <svg class="h-7 w-7 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.928a2 2 0 010 2.828L14.828 15H12v-2.828l6.707-6.707a2 2 0 012.828 0z"></path></svg>
+                        </button>
+                        <button id="delete-report-btn" class="flex flex-col items-center justify-center p-3 rounded-lg bg-gray-100 hover:bg-red-100 cursor-pointer transition-colors duration-200">
+                            <svg class="h-7 w-7 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                        <button id="deactivate-report-btn" class="flex flex-col items-center justify-center p-3 rounded-lg bg-gray-100 hover:bg-purple-100 cursor-pointer transition-colors duration-200">
+                            <svg class="h-7 w-7 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 relative">
+                        <input type="text" placeholder="Buscar" class="w-48 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <div class="relative">
+                            <select class="block appearance-none bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option>Filtrar por</option>
+                                <option>Equipos cantidad total</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full">
+                    <h2 class="text-3xl font-semibold text-gray-800 mb-6 border-b pb-4">Reporte Inventario</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider table-report-equipos">Equipos</th>
+                                    <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Cantidad total</th>
+                                    <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">En mantenimiento</th>
+                                    <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Alquilado</th>
+                                    <th class="py-3 px-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Disponibles</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">1. PC de escritorio Dell OptiPlex 7090</td>
+                                    <td class="py-3 px-4">40</td>
+                                    <td class="py-3 px-4">9</td>
+                                    <td class="py-3 px-4">29</td>
+                                    <td class="py-3 px-4">2</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">2. Laptop HP EliteBook 840 GB</td>
+                                    <td class="py-3 px-4">38</td>
+                                    <td class="py-3 px-4">4</td>
+                                    <td class="py-3 px-4">30</td>
+                                    <td class="py-3 px-4">4</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">3. Monitor LG UltraWide 34WN80C-B</td>
+                                    <td class="py-3 px-4">41</td>
+                                    <td class="py-3 px-4">12</td>
+                                    <td class="py-3 px-4">25</td>
+                                    <td class="py-3 px-4">4</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">4. Teclado mecánico Logitech G915</td>
+                                    <td class="py-3 px-4">17</td>
+                                    <td class="py-3 px-4">5</td>
+                                    <td class="py-3 px-4">10</td>
+                                    <td class="py-3 px-4">2</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">5. Mouse inalámbrico Microsoft Surface Precision</td>
+                                    <td class="py-3 px-4">12</td>
+                                    <td class="py-3 px-4">4</td>
+                                    <td class="py-3 px-4">6</td>
+                                    <td class="py-3 px-4">2</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">6. Impresora multifuncional Canon PIXMA TR8620</td>
+                                    <td class="py-3 px-4">20</td>
+                                    <td class="py-3 px-4">1</td>
+                                    <td class="py-3 px-4">15</td>
+                                    <td class="py-3 px-4">4</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">7. Scanner Epson WorkForce ES-400</td>
+                                    <td class="py-3 px-4">14</td>
+                                    <td class="py-3 px-4">4</td>
+                                    <td class="py-3 px-4">5</td>
+                                    <td class="py-3 px-4">5</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">8. Disco duro externo Seagate Backup Plus 5TB</td>
+                                    <td class="py-3 px-4">35</td>
+                                    <td class="py-3 px-4">6</td>
+                                    <td class="py-3 px-4">12</td>
+                                    <td class="py-3 px-4">17</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">9. Tableta gráfico Wacom Intuos Pro</td>
+                                    <td class="py-3 px-4">18</td>
+                                    <td class="py-3 px-4">0</td>
+                                    <td class="py-3 px-4">3</td>
+                                    <td class="py-3 px-4">15</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 table-report-equipos">10. Docking station Lenovo ThinkPad</td>
+                                    <td class="py-3 px-4">3</td>
+                                    <td class="py-3 px-4">1</td>
+                                    <td class="py-3 px-4">1</td>
+                                    <td class="py-3 px-4">1</td>
+                                </tr>
+                                <!-- Añadir más filas según sea necesario -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna de opciones de descarga -->
+            <div class="w-56 flex-shrink-0 pl-6 flex flex-col justify-center space-y-6">
+                <button id="download-pdf-btn" class="flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg shadow hover:bg-red-100 transition-colors duration-200">
+                    <svg class="h-10 w-10 text-red-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5l2 2h5a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
+                    <span class="text-sm font-semibold text-gray-700">Descargar como PDF</span>
+                </button>
+                <button id="download-excel-btn" class="flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg shadow hover:bg-green-100 transition-colors duration-200">
+                    <svg class="h-10 w-10 text-green-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5l2 2h5a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
+                    <span class="text-sm font-semibold text-gray-700">Descargar como EXCEL</span>
+                </button>
+                <button id="download-word-btn" class="flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg shadow hover:bg-blue-100 transition-colors duration-200">
+                    <svg class="h-10 w-10 text-blue-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5l2 2h5a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
+                    <span class="text-sm font-semibold text-gray-700">Descargar como WORD</span>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal para Descargar Reporte (selección de fecha) -->
+    <div id="download-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Descargar reporte</h2>
+            <button id="close-download-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="mb-4">
+                <label for="report-date" class="block text-gray-700 text-sm font-semibold mb-2">Seleccione la fecha del reporte</label>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="report-date" name="report-date" value="05 /05 /2025" class="w-32 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <button class="p-2 border border-gray-300 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <svg class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h8m-11 0h2.75A.25.25 0 005 11h2.75M16 11h2.75a.25.25 0 00.25-.25v-2.5a.25.25 0 00-.25-.25H16.25a.25.25 0 00-.25.25v2.5M3 11a2 2 0 00-2 2v6a2 2 0 002 2h18a2 2 0 002-2v-6a2 2 0 00-2-2H3z"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Calendar Grid Placeholder -->
+            <div class="border border-gray-300 rounded-md p-4 bg-gray-50 text-center mb-6">
+                <p class="font-semibold text-gray-800 mb-2">JUNE 2025</p>
+                <div class="grid grid-cols-7 gap-2 text-xs text-gray-600 mb-2">
+                    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                </div>
+                <div class="grid grid-cols-7 gap-2 text-sm text-gray-800">
+                    <span class="text-gray-400"></span><span class="text-gray-400"></span><span class="text-gray-400">1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                    <span>6</span><span>7</span><span>8</span><span>9</span><span class="bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center mx-auto cursor-pointer">10</span><span>11</span><span>12</span>
+                    <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span>
+                    <span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span>
+                    <span>27</span><span>28</span><span>29</span><span>30</span>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="download-report-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Descargar</button>
+                <button type="button" id="cancel-download-report-action" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Descargar Reporte -->
+    <div id="confirm-download-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-download-action-final" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-download-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Reporte (de Inventario) -->
+    <div id="edit-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Editar reporte</h2>
+            <button id="close-edit-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <form>
+                <div class="mb-4">
+                    <label for="edit-report-equipment-name" class="block text-gray-700 text-sm font-semibold mb-2">Nombre equipo</label>
+                    <div class="relative">
+                        <select id="edit-report-equipment-name" name="equipment-name" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione un equipo</option>
+                            <option value="dell-7090">PC de escritorio Dell OptiPlex 7090</option>
+                            <option value="hp-elitebook">Laptop HP EliteBook 840 GB</option>
+                            <!-- Agrega más equipos -->
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-total-quantity" class="block text-gray-700 text-sm font-semibold mb-2">Cantidad total</label>
+                    <input type="number" id="edit-total-quantity" name="total-quantity" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" value="40">
+                </div>
+                <div class="mb-4">
+                    <label for="edit-in-maintenance" class="block text-gray-700 text-sm font-semibold mb-2">En mantenimiento</label>
+                    <input type="number" id="edit-in-maintenance" name="in-maintenance" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" value="9">
+                </div>
+                <div class="mb-4">
+                    <label for="edit-rented" class="block text-gray-700 text-sm font-semibold mb-2">Alquilado</label>
+                    <input type="number" id="edit-rented" name="rented" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" value="29">
+                </div>
+                <div class="mb-6">
+                    <label for="edit-available" class="block text-gray-700 text-sm font-semibold mb-2">Disponibles</label>
+                    <input type="number" id="edit-available" name="available" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" value="2">
+                </div>
+                 <div class="mb-6">
+                    <label for="edit-report-description" class="block text-gray-700 text-sm font-semibold mb-2">Descripción</label>
+                    <textarea id="edit-report-description" name="description" rows="3" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Notas adicionales"></textarea>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="save-edited-report-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <button type="button" id="cancel-edit-report-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Editar Reporte -->
+    <div id="confirm-edit-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación de Edición</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-edit-report-action-final" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-edit-report-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Eliminar Reporte (en este contexto, implica la fuente del dato del reporte) -->
+    <div id="remove-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Eliminar Reporte</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-remove-report-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-remove-report-action" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Dar de Baja Reporte (en este contexto, implica la fuente del dato del reporte) -->
+    <div id="deactivate-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Dar de baja Reporte</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-deactivate-report-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-deactivate-report-action" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Función general para controlar la visibilidad de los modales
+        function toggleModal(modalId, show) {
+            document.getElementById(modalId).classList.toggle('hidden', !show);
+        }
+
+        // CONTROLADOR DE MODALES DE DESCARGA
+        const downloadPdfBtn = document.getElementById('download-pdf-btn');
+        const downloadExcelBtn = document.getElementById('download-excel-btn');
+        const downloadWordBtn = document.getElementById('download-word-btn');
+        const downloadReportModal = document.getElementById('download-report-modal');
+        const closeDownloadModalBtn = document.getElementById('close-download-modal-btn');
+        const downloadReportAction = document.getElementById('download-report-action');
+        const cancelDownloadReportAction = document.getElementById('cancel-download-report-action');
+        const confirmDownloadModal = document.getElementById('confirm-download-modal');
+        const confirmDownloadActionFinal = document.getElementById('confirm-download-action-final');
+        const cancelDownloadActionFinal = document.getElementById('cancel-download-action-final');
+
+        // Abre el modal de descarga al hacer clic en cualquier botón de descarga
+        [downloadPdfBtn, downloadExcelBtn, downloadWordBtn].forEach(btn => {
+            btn.addEventListener('click', () => toggleModal('download-report-modal', true));
+        });
+        closeDownloadModalBtn.addEventListener('click', () => toggleModal('download-report-modal', false));
+        cancelDownloadReportAction.addEventListener('click', () => toggleModal('download-report-modal', false));
+
+        downloadReportAction.addEventListener('click', () => {
+            toggleModal('download-report-modal', false);
+            toggleModal('confirm-download-modal', true);
+        });
+        confirmDownloadActionFinal.addEventListener('click', () => {
+            alert('Reporte descargado! (Simulación de la descarga)');
+            toggleModal('confirm-download-modal', false);
+            // Aquí iría la lógica para generar y forzar la descarga del archivo.
+        });
+        cancelDownloadActionFinal.addEventListener('click', () => {
+            toggleModal('confirm-download-modal', false);
+            toggleModal('download-report-modal', true); // Vuelve al modal de fecha si se cancela la confirmación
+        });
+
+
+        // CONTROLADOR DE MODAL DE EDICIÓN DE REPORTE (para inventario)
+        const editReportBtn = document.getElementById('edit-report-btn');
+        const editReportModal = document.getElementById('edit-report-modal');
+        const closeEditModalBtn = document.getElementById('close-edit-modal-btn');
+        const saveEditedReportBtn = document.getElementById('save-edited-report-btn');
+        const cancelEditReportBtn = document.getElementById('cancel-edit-report-btn');
+        const confirmEditReportModal = document.getElementById('confirm-edit-report-modal');
+        const confirmEditReportActionFinal = document.getElementById('confirm-edit-report-action-final');
+        const cancelEditReportActionFinal = document.getElementById('cancel-edit-report-action-final');
+
+        editReportBtn.addEventListener('click', () => toggleModal('edit-report-modal', true));
+        closeEditModalBtn.addEventListener('click', () => toggleModal('edit-report-modal', false));
+        cancelEditReportBtn.addEventListener('click', () => toggleModal('edit-report-modal', false));
+
+        saveEditedReportBtn.addEventListener('click', () => {
+            toggleModal('edit-report-modal', false);
+            toggleModal('confirm-edit-report-modal', true);
+        });
+        confirmEditReportActionFinal.addEventListener('click', () => {
+            alert('Reporte (datos) modificados! (Simulación)');
+            toggleModal('confirm-edit-report-modal', false);
+            // Lógica para enviar los datos al backend y actualizar el inventario.
+        });
+        cancelEditReportActionFinal.addEventListener('click', () => {
+            toggleModal('confirm-edit-report-modal', false);
+            toggleModal('edit-report-modal', true);
+        });
+
+        // CONTROLADOR DE MODAL DE ELIMINAR REPORTE (de inventario)
+        const deleteReportBtn = document.getElementById('delete-report-btn');
+        const removeReportModal = document.getElementById('remove-report-modal');
+        const confirmRemoveReportAction = document.getElementById('confirm-remove-report-action');
+        const cancelRemoveReportAction = document.getElementById('cancel-remove-report-action');
+
+        deleteReportBtn.addEventListener('click', () => toggleModal('remove-report-modal', true));
+        confirmRemoveReportAction.addEventListener('click', () => {
+            alert('Reporte eliminado! (Simulación de la eliminación de datos)');
+            toggleModal('remove-report-modal', false);
+            // Aquí la lógica real para eliminar los datos fuente del reporte.
+        });
+        cancelRemoveReportAction.addEventListener('click', () => toggleModal('remove-report-modal', false));
+
+        // CONTROLADOR DE MODAL DE DAR DE BAJA REPORTE (de inventario)
+        const deactivateReportBtn = document.getElementById('deactivate-report-btn');
+        const deactivateReportModal = document.getElementById('deactivate-report-modal');
+        const confirmDeactivateReportAction = document.getElementById('confirm-deactivate-report-action');
+        const cancelDeactivateReportAction = document.getElementById('cancel-deactivate-report-action');
+
+        deactivateReportBtn.addEventListener('click', () => toggleModal('deactivate-report-modal', true));
+        confirmDeactivateReportAction.addEventListener('click', () => {
+            alert('Reporte dado de baja! (Simulación de baja de datos)');
+            toggleModal('deactivate-report-modal', false);
+            // Aquí la lógica real para desactivar o marcar como inactivo los datos fuente.
+        });
+        cancelDeactivateReportAction.addEventListener('click', () => toggleModal('deactivate-report-modal', false));
+
+    </script>
+</body>
+</html>
