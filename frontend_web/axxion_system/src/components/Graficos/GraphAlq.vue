@@ -116,7 +116,6 @@
                 <v-chart :option="chartByIncome" style="height: 300px;" autoresize />
             </article>
             <br><br>
-
             <!-- Gráfico de Barra Horizontal: Top Equipos Más Rentados -->
             <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 border border-gray-200">
                 <h2 class="font-bold text-2xl mb-4 text-white flex items-center gap-2">

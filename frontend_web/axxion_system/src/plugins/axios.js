@@ -38,7 +38,7 @@ apiClient.interceptors.response.use(
 
     if (error.response.status === 401 && !originalRequest._retry) {
       if (originalRequest.url.includes('/auth/login') || originalRequest.url.includes('/auth/refresh')) {
-        return Promise.reject(error);
+        throw error;
       }
       
       originalRequest._retry = true;
@@ -56,11 +56,11 @@ apiClient.interceptors.response.use(
         console.log('Interceptor: Refresh token inválido. Deslogueando...');
         await authStore.logout();
         window.location.href = '/login'; 
-        return Promise.reject(refreshError);
+        throw error;
       }
     }
     
-    return Promise.reject(error);
+    throw error;
   }
 );
 

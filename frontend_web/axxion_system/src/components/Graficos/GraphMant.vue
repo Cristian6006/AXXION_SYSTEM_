@@ -67,8 +67,8 @@
                     </svg>
                 </span>
             </fwb-card>
-            <br><br>
         </section>
+        <br><br>
         <section class="bg-white rounded-md shadow-md p-4">
             <h2 class="text-xl font-bold mb-4 text-black">
                 Resumen de Mantenimientos
@@ -99,8 +99,27 @@
                 </table>
             </div>
         </section>
+        <br><br>
+        <section>
+            <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[900px]">
+                <h2 class="font-bold text-2xl mb-4">costo total de propiedad</h2>
+                <v-chart :option="chartByTCO" style="height: 300px;" autoresize />
+            </article>
+            <br><br>
+            <!-- Gráfico de Dona: Estado del Inventario -->
+            <article class="md:col-span-1 bg-white shadow-xl rounded-md p-4 border border-gray-200">
+                <h2 class="font-bold text-xl mb-4 text-gray-700 flex items-center gap-2">
+                    <font-awesome-icon icon="fa-solid fa-chart-pie" class="text-purple-500"/>
+                    Disponibilidad de Equipos
+                </h2>
+                
+                <div v-if="isLoading" class="flex justify-center items-center h-[300px]">
+                    <span class="loader border-purple-500"></span>
+                </div>
+                <v-chart v-else :option="chartByResume" style="height: 350px;" autoresize />
+            </article>
+        </section>
     </div>
-    
 </template>
 
 <script setup>
@@ -108,12 +127,42 @@ import { FwbCard } from 'flowbite-vue';
 import ReportMantService from '@/services/ReportMantService';
 import { ref, onMounted, computed, watch } from 'vue';
 
+// Importaciones de ECharts
+import VChart from 'vue-echarts'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import { PieChart, BarChart, LineChart } from 'echarts/charts'
+import {
+    TitleComponent,
+    TooltipComponent,
+    LegendComponent,
+    GridComponent
+} from 'echarts/components'
+
+use([
+    CanvasRenderer,
+    PieChart,
+    BarChart,
+    LineChart,
+    TitleComponent,
+    TooltipComponent,
+    LegendComponent,
+    GridComponent
+])
+
+// --- VARIABLES REACTIVAS ---
 const tiempoPromedioReparacion = ref(0)
 const tasaIncumplimiento = ref(0)
 const totalAnalizados = ref(0)
 const isLoading = ref(false)
 const porcentaje = ref('')
 const mantenimiento = ref([])
+const vampiroData = ref([])
+const desviacionData = ref([])
+
+// -- Gráficos --
+const chartByTCO = ref(null)
+const chartByResume = ref(null)
 
 watch (tasaIncumplimiento, (newValue) => {
     if(newValue <= 30){
@@ -131,21 +180,162 @@ watch (tasaIncumplimiento, (newValue) => {
 onMounted(async () => {
     isLoading.value = true;
     try {
-        const [resumenData] = await Promise.all([
-            ReportMantService.getReporteEficiencia()
+        // Pedir datos al Backend
+        const [resumenData, analisisFinanciero] = await Promise.all([
+            ReportMantService.getReporteEficiencia(),
+            ReportMantService.getanalisisFinanciero()
         ]);
+
+        // Llenar los KPIs (Tarjetas)
         tiempoPromedioReparacion.value = resumenData.resumen.tiempo_promedio_reparacion_dias || 0;
         tasaIncumplimiento.value = resumenData.resumen.tasa_de_incumplimiento || 0;
         totalAnalizados.value = resumenData.resumen.total_analizados || 0;
+
         // Datos Tabla
         mantenimiento.value = resumenData.detalle || [];
         console.log('Mantenimientos cargado: ', mantenimiento.value);
+        
+        // DEBUG: Ver estructura completa de analisisFinanciero
+        console.log('analisisFinanciero completo:', analisisFinanciero);
+        console.log('analisisFinanciero.resumen:', analisisFinanciero.resumen);
+        console.log('analisisFinanciero.desviacion_presupuestaria:', analisisFinanciero.desviacion_presupuestaria);
+
+        // --- CARGA DE GRÁFICOS ---
+        await cargarGraficoBarras(analisisFinanciero.tco_por_activo.activos_vampiro)
+        await cargarGraficoDona(analisisFinanciero.resumen.desviacion_presupuestaria)
+
     } catch(error) {
         console.log('Error al cargar el dashboard:', error);
     } finally {
         isLoading.value = false;
     }
 });
+
+const cargarGraficoBarras = async (data) => {
+    try {
+        // Asignar los datos recibidos al ref
+        vampiroData.value = data || [];
+        
+        // Validar que haya datos
+        if(!vampiroData.value || vampiroData.value.length === 0) {
+            console.warn('No hay datos de activos vampiro para mostrar');
+            return;
+        }
+        
+        const etiquetas = vampiroData.value.map(item => item.nombre_item);
+        const valores = vampiroData.value.map(item => item.tco_total);
+        
+        chartByTCO.value = {
+            textStyle: { fontFamily: 'Inter, sans-serif' },
+            tooltip: { 
+                trigger: 'axis', 
+                axisPointer: { type: 'shadow' },
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                textStyle: { color: '#121212' }
+            },
+            grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+            xAxis: [{
+                type: 'category',
+                data: etiquetas,
+                axisLine: { lineStyle: { color: '#6b7280' } },
+                axisLabel: { color: '#e5e7eb' }
+            }],
+            yAxis: [{
+                type: 'value',
+                splitLine: { lineStyle: { color: '#374151' } },
+                axisLabel: { color: '#e5e7eb', formatter: (val) => `$${val}` }
+            }],
+            series: [{
+                name: 'Ingresos',
+                type: 'bar',
+                barWidth: '50%',
+                data: valores,
+                itemStyle: { color: '#34d399', borderRadius: [4, 4, 0, 0] }
+            }]
+        }
+    } catch(e) {
+        console.error("Error en grafico de barras", e);
+    }
+}
+
+const cargarGraficoDona = async (data) => {
+    try {
+        // Asignar los datos recibidos al ref
+        desviacionData.value = data || {};
+        
+        // Validar que haya datos
+        if (!data || !data.total_mantenimientos_analizados) {
+            console.warn('No hay datos de desviación presupuestaria para mostrar');
+            return;
+        }
+
+        const total = data.total_mantenimientos_analizados;
+        const malos = data.mantenimientos_subestimados || 0;
+        const buenos = total - malos;
+
+        // Mapa de colores para el gráfico
+        const colorMap = {
+            'Presupuestado': '#3b82f6',  // Azul
+            'Ejecutado': '#10b981'        // Verde
+        };
+
+        const pieData = [
+            {
+                value: parseFloat(buenos),
+                name: 'Presupuestado',
+                itemStyle: { color: colorMap['Presupuestado'] }
+            },
+            {
+                value: parseFloat(malos),
+                name: 'Ejecutado',
+                itemStyle: { color: colorMap['Ejecutado'] }
+            }
+        ];
+
+        chartByResume.value = {
+            textStyle: { fontFamily: 'Inter, sans-serif' },
+            tooltip: {
+                trigger: 'item',
+                formatter: '<b>{b}</b><br/> ${c} ({d}%)'
+            },
+            legend: {
+                bottom: '0%',
+                left: 'center',
+                icon: 'circle'
+            },
+            series: [
+                {
+                    name: 'Presupuesto',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: 20,
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: pieData
+                }
+            ]
+        };
+    } catch (e) {
+        console.error("Error en gráfico de dona", e);
+    }
+}
 
 
 </script>

@@ -16,11 +16,11 @@
     :class="[
         'sidebar bg-gray-800 text-white flex-shrink-0 transition-all duration-300',
         
-        // MÓVIL: Fijo, encima de todo, oculto a la izquierda
+        // MÓVIL
         'fixed inset-y-0 left-0 z-50 w-70 transform',
         isMobileOpen ? 'translate-x-0' : '-translate-x-full',
 
-        // ESCRITORIO: Relativo 
+        // ESCRITORIO
         'md:relative md:translate-x-0', 
         isCollapsed ? 'md:w-20' : 'md:w-70'
       ]"

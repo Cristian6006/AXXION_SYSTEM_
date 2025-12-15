@@ -14,6 +14,17 @@ class ReportMantService {
             throw error
         }
     }
+    
+    async getanalisisFinanciero(){
+        try {
+            const response = await this.api.get('/reportes/analisisFinanciero')
+            console.log('Report API response: ', response.data)
+            return response.data
+        } catch(error) {
+            console.log('Report API response: ', error)
+            throw error
+        }
+    }
 }
 
 export default new ReportMantService();

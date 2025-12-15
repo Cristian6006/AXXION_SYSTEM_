@@ -12,6 +12,8 @@ use Illuminate\Validation\Rule;
 
 class InventarioItemController extends Controller
 {
+    private const VALIDATION_FAILED_MESSAGE  = 'Validation failed';
+    private const ITEM_MISSING_MESSAGE = 'Item de inventario no encontrado';
     /**
      * Muestra el listado de todos los items del inventario.
      * Carga relaciones con producto, mantenimientos y rentas.
@@ -52,10 +54,10 @@ class InventarioItemController extends Controller
 
             if ($validator->fails()) {
                 return response()->json([
-                    'message' => 'Validation failed',
+                    'message' => self::VALIDATION_FAILED_MESSAGE,
                     'errors' => $validator->errors(),
-                    'status' => 400
-                ], 400);
+                    'status' => 422
+                ], 422);
             }
 
             DB::beginTransaction();
@@ -91,7 +93,7 @@ class InventarioItemController extends Controller
 
             if (!$inventarioItem) {
                 return response()->json([
-                    'message' => 'Item de inventario no encontrado',
+                    'message' => self::ITEM_MISSING_MESSAGE,
                     'status' => 404
                 ], 404);
             }
@@ -121,7 +123,7 @@ class InventarioItemController extends Controller
 
             if (!$inventarioItem) {
                 return response()->json([
-                    'message' => 'Item de inventario no encontrado',
+                    'message' => self::ITEM_MISSING_MESSAGE,
                     'status' => 404
                 ], 404);
             }
@@ -138,10 +140,10 @@ class InventarioItemController extends Controller
 
             if ($validator->fails()) {
                 return response()->json([
-                    'message' => 'Validation failed',
+                    'message' => self::VALIDATION_FAILED_MESSAGE,
                     'errors' => $validator->errors(),
-                    'status' => 400
-                ], 400);
+                    'status' => 422
+                ], 422);
             }
 
             DB::beginTransaction();
@@ -178,7 +180,7 @@ class InventarioItemController extends Controller
 
             if (!$inventarioItem) {
                 return response()->json([
-                    'message' => 'Item de inventario no encontrado',
+                    'message' => self::ITEM_MISSING_MESSAGE,
                     'status' => 404
                 ], 404);
             }
@@ -195,10 +197,10 @@ class InventarioItemController extends Controller
 
             if ($validator->fails()) {
                 return response()->json([
-                    'message' => 'Validation failed',
+                    'message' => self::VALIDATION_FAILED_MESSAGE,
                     'errors' => $validator->errors(),
-                    'status' => 400
-                ], 400);
+                    'status' => 422
+                ], 422);
             }
 
             DB::beginTransaction();

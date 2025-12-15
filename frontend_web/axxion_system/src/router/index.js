@@ -1,7 +1,7 @@
 // router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import Home from '/src/views/Home.vue'
+import Home from '@/views/Home.vue'
 import User from '@/views/User.vue'
 import Login from '@/views/login.vue'
 import Inventory from '@/views/Inventory.vue'

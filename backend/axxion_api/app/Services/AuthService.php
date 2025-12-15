@@ -25,7 +25,7 @@ class AuthService
             'iat' => time(),
             'exp' => $expirationTime,
         ];
-        
+
         $token = JWT::encode($payload, config('app.key'), 'HS256');
 
         return [
@@ -57,58 +57,58 @@ class AuthService
         return [
             'access_token' => $accessTokenData['token'],
             'token_type' => 'Bearer',
-            'expires_in' => $accessTokenData['expires_in'], 
+            'expires_in' => $accessTokenData['expires_in'],
             'user' => $user,
             'cookie' => $cookie,
         ];
     }
 
-public function refresh(string $refreshToken): array
-{
-    $tokenHash = hash('sha256', $refreshToken);
-    
-    $storedToken = RefreshToken::where('token_hash', $tokenHash)->with('user')->first();
+    public function refresh(string $refreshToken): array
+    {
+        $tokenHash = hash('sha256', $refreshToken);
 
-    if (!$storedToken || $storedToken->isExpired()) {
-        throw new \Exception('Refresh token inválido o expirado');
+        $storedToken = RefreshToken::where('token_hash', $tokenHash)->with('user')->first();
+
+        if (!$storedToken || $storedToken->isExpired()) {
+            throw new \Exception('Refresh token inválido o expirado');
+        }
+        $user = $storedToken->user;
+        $user->load('roles');
+        // Elimina el token antiguo para que no pueda ser reutilizado.
+        $storedToken->delete();
+
+        // Genera un NUEVO Access Token.
+        $newAccessTokenData = $this->generateAccessToken($user);
+
+        // Genera un NUEVO Refresh Token.
+        $newRefreshToken = $this->generateRefreshToken();
+
+        // Guarda el hash del NUEVO refresh token en la BBDD.
+        RefreshToken::createForUser($user, $newRefreshToken, [
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent()
+        ]);
+
+        // Crea la NUEVA cookie para el NUEVO refresh token.
+        $newCookie = $this->createRefreshTokenCookie($newRefreshToken);
+
+        // Devuelve todo junto.
+        return [
+            'access_token' => $newAccessTokenData['token'],
+            'token_type' => 'Bearer',
+            'expires_in' => $newAccessTokenData['expires_in'],
+            'cookie' => $newCookie,
+            'user' => $user,
+        ];
     }
-    $user = $storedToken->user;
-    $user->load('roles');
-    // Elimina el token antiguo para que no pueda ser reutilizado.
-    $storedToken->delete();
 
-    // Genera un NUEVO Access Token.
-    $newAccessTokenData = $this->generateAccessToken($user);
-
-    // Genera un NUEVO Refresh Token.
-    $newRefreshToken = $this->generateRefreshToken();
-
-    // Guarda el hash del NUEVO refresh token en la BBDD.
-    RefreshToken::createForUser($user, $newRefreshToken, [
-        'ip_address' => request()->ip(),
-        'user_agent' => request()->userAgent()
-    ]);
-
-    // Crea la NUEVA cookie para el NUEVO refresh token.
-    $newCookie = $this->createRefreshTokenCookie($newRefreshToken);
-
-    // Devuelve todo junto.
-    return [
-        'access_token' => $newAccessTokenData['token'],
-        'token_type'   => 'Bearer',
-        'expires_in'   => $newAccessTokenData['expires_in'],
-        'cookie'       => $newCookie, 
-        'user'         => $user,
-    ];
-}
-
-        public function logout(string $refreshToken): void
+    public function logout(string $refreshToken): void
     {
         $tokenHash = hash('sha256', $refreshToken);
         RefreshToken::where('token_hash', $tokenHash)->delete();
     }
 
-        private function createRefreshTokenCookie(string $token): \Symfony\Component\HttpFoundation\Cookie
+    private function createRefreshTokenCookie(string $token): \Symfony\Component\HttpFoundation\Cookie
     {
         return Cookie::make(
             'refresh_token',
@@ -121,30 +121,5 @@ public function refresh(string $refreshToken): array
             false,
             'strict' // sameSite
         );
-    }
-
-        private function createJWT(array $payload): string
-    {
-        $header = json_encode(['typ' => 'JWT', 'alg' => 'HS256']);
-        $payload = json_encode($payload);
-        
-        $base64UrlHeader = $this->base64UrlEncode($header);
-        $base64UrlPayload = $this->base64UrlEncode($payload);
-        
-        $signature = hash_hmac(
-            'sha256',
-            $base64UrlHeader . "." . $base64UrlPayload,
-            config('app.key'),
-            true
-        );
-        
-        $base64UrlSignature = $this->base64UrlEncode($signature);
-        
-        return $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
-    }
-
-    private function base64UrlEncode($data): string
-    {
-        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }
 }
