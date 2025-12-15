@@ -20,6 +20,8 @@ use App\Http\Controllers\Api\AlertaController;
 use App\Http\Controllers\Api\InventarioItemController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ReporteMantController;
+use App\Http\Controllers\Api\ReportUserController;
+
 
 /**
  * ANALOGÍA: Este archivo actúa como el 'Mapa de Rutas' o el 'Directorio Telefónico' de la API. 
@@ -225,6 +227,10 @@ Route::middleware(['jwt'])->group(function () {
         // Reportes Mantenimientos
         Route::get('/reporteEficiencia', [ReporteMantController::class, 'reporteEficiencia']);
         Route::get('/analisisFinanciero', [ReporteMantController::class, 'analisisFinanciero']);
+        // Reportes Usuarios
+        Route::get('/distribucionPorDepartamento', [ReportUserController::class, 'distribucionPorDepartamento']);
+        Route::get('/seguridadYRoles', [ReportUserController::class, 'seguridadYRoles']);
+        Route::get('/reporteCompleto', [ReportUserController::class, 'reporteCompleto']);
     });
 
     // ============================================
