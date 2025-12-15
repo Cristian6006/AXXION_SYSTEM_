@@ -1,11 +1,10 @@
 // plugins/axios.js
 import axios from 'axios'
-import { useAuth } from '@/composables/useAuth'
 import { useAuthStore } from '@/stores/auth';
 
 // Configuración base
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api', 
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
   withCredentials: true,
   headers: {
     'Accept': 'application/json',
@@ -40,26 +39,26 @@ apiClient.interceptors.response.use(
       if (originalRequest.url.includes('/auth/login') || originalRequest.url.includes('/auth/refresh')) {
         throw error;
       }
-      
+
       originalRequest._retry = true;
 
       try {
         console.log('Interceptor: Access token expirado. Intentando refrescar...');
-        await authStore.refreshAccessToken(); 
+        await authStore.refreshAccessToken();
 
         originalRequest.headers.Authorization = `Bearer ${authStore.accessToken}`;
-        
+
         // Usamos la misma instancia 'apiClient' que creó el interceptor.
         return apiClient(originalRequest);
 
       } catch (refreshError) {
         console.log('Interceptor: Refresh token inválido. Deslogueando...');
         await authStore.logout();
-        window.location.href = '/login'; 
+        window.location.href = '/login';
         throw error;
       }
     }
-    
+
     throw error;
   }
 );
