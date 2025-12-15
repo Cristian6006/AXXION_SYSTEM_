@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class MantenimientoController extends Controller
 {
+    private const INCORRECT_DATA_MESSAJE = 'Datos de validación incorrectos';
+    private const MAINTENANCE_NOT_FOUND_MESSAJE = 'Mantenimiento no encontrado';
     /**
      * Lista todos los mantenimientos registrados.
      */
@@ -57,7 +59,7 @@ class MantenimientoController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'error' => 'Datos de validación incorrectos',
+                'error' => self::INCORRECT_DATA_MESSAJE,
                 'messages' => $validator->errors()
             ], 422);
         }
@@ -91,7 +93,7 @@ class MantenimientoController extends Controller
         try {
             $mantenimiento = Mantenimiento::with('inventarioItem')->find($id);
             if (!$mantenimiento) {
-                return response()->json(['error' => 'Mantenimiento no encontrado'], 404);
+                return response()->json(['error' => self::MAINTENANCE_NOT_FOUND_MESSAJE], 404);
             }
 
             return response()->json($mantenimiento);
@@ -131,7 +133,7 @@ class MantenimientoController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'error' => 'Datos de validación incorrectos',
+                'error' => self::INCORRECT_DATA_MESSAJE,
                 'messages' => $validator->errors()
             ], 422);
         }
@@ -140,7 +142,7 @@ class MantenimientoController extends Controller
             $mantenimiento = Mantenimiento::find($id);
 
             if (!$mantenimiento) {
-                return response()->json(['error' => 'Mantenimiento no encontrado'], 404);
+                return response()->json(['error' => self::MAINTENANCE_NOT_FOUND_MESSAJE], 404);
             }
 
             DB::beginTransaction();
@@ -185,7 +187,7 @@ class MantenimientoController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'error' => 'Datos de validación incorrectos',
+                'error' => self::INCORRECT_DATA_MESSAJE,
                 'messages' => $validator->errors()
             ], 422);
         }
@@ -194,7 +196,7 @@ class MantenimientoController extends Controller
             $mantenimiento = Mantenimiento::find($id);
 
             if (!$mantenimiento) {
-                return response()->json(['error' => 'Mantenimiento no encontrado'], 404);
+                return response()->json(['error' => self::MAINTENANCE_NOT_FOUND_MESSAJE], 404);
             }
 
             DB::beginTransaction();
@@ -226,7 +228,7 @@ class MantenimientoController extends Controller
             $mantenimiento = Mantenimiento::find($id);
 
             if (!$mantenimiento) {
-                return response()->json(['error' => 'Mantenimiento no encontrado'], 404);
+                return response()->json(['error' => self::MAINTENANCE_NOT_FOUND_MESSAJE], 404);
             }
 
             DB::beginTransaction();

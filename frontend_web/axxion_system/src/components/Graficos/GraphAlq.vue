@@ -1,49 +1,61 @@
 <template>
     <div>
         <section class="flex flex-wrap justify-center gap-12">
-            <fwb-card class="w-sm flex-1 min-w-[300px] bg-linear-to-br from-[#00c54e] to-[#01a93f]">
-                <div class="p-5">
-                    <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900  dark:text-white">
+            <fwb-card class="relative w-sm flex-1 min-w-[300px] bg-linear-to-br from-[#00c54e] to-[#019239] overflow-hidden">
+                <div class="p-5 relative z-10">
+                    <h5 class="mb-2 text-lg font-bold tracking-tight text-white">
                         Total Rentas Activas
                     </h5>
-                    <p class="text-4xl font-extrabold text-white flex justify-between">
-                        <a>
-                            {{ totalRentasActivas }}
-                        </a>
-                        <a class="bg-[#32c36a] rounded-full p-2">
-                            <font-awesome-icon icon="fa-solid fa-cubes" />
-                        </a>
+                    <p class="text-4xl font-bold text-white">
+                        {{ totalRentasActivas }}
                     </p>
                 </div>
+                <span class="absolute -inset-y-6 -right-3 opacity-20 pr-3">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-50 h-50"
+                        viewBox="0 -960 960 960"
+                        fill="#FFFFFF">
+                        <path d="m122.43-227.56-56.56-56.57 308.39-306.83 167 167 219.52-220.65H638.87v-79.78H894.7v255.83h-78.79v-118.48L540.26-310.83l-167-167-250.83 250.27Z"/>
+                    </svg>
+                </span>
             </fwb-card>
-            <fwb-card class="w-sm flex-1 min-w-[300px] bg-linear-to-br from-[#fbfb14] to-[#b6bb0f]">
-                <div class="p-5">
+            <fwb-card class="relative w-sm flex-1 min-w-[300px] bg-linear-to-br from-[#ff2626] to-[#920103]">
+                <div class="p-5 relative z-10">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900  dark:text-white">
                         Rentas Atrasadas
                     </h5>
                     <p class="text-3xl font-extrabold text-white flex justify-between">
-                        <b>
-                            {{ alertasAtrasadas }}
-                        </b>
-                        <b class="bg-[#cce624] rounded-full p-2">
-                            <font-awesome-icon icon="fa-solid fa-dollar-sign" />
-                        </b>
+                        {{ alertasAtrasadas }}
                     </p>
                 </div>
+                <span class="absolute -inset-y-2 -right-8 opacity-20 pr-3">
+                    <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        class="w-45 h-45"
+                        viewBox="0 -960 960 960"
+                        fill="#FFFFFF">
+                        <path d="M446.78-273.78h72.44V-520h-72.44v246.22Zm33.25-311.74q17.64 0 29.55-11.64 11.9-11.64 11.9-28.84 0-18.69-11.92-30.58-11.92-11.9-29.54-11.9-18.26 0-29.88 11.9-11.62 11.89-11.62 30.3 0 17.55 11.94 29.16 11.93 11.6 29.57 11.6Zm.31 519.65q-86.2 0-161.5-32.39-75.3-32.4-131.74-88.84-56.44-56.44-88.84-131.73-32.39-75.3-32.39-161.59t32.39-161.67q32.4-75.37 88.75-131.34t131.69-88.62q75.34-32.65 161.67-32.65 86.34 0 161.78 32.61 75.45 32.6 131.37 88.5 55.93 55.89 88.55 131.45 32.63 75.56 32.63 161.87 0 86.29-32.65 161.58t-88.62 131.48q-55.97 56.18-131.42 88.76-75.46 32.58-161.67 32.58Zm.16-79.22q139.24 0 236.83-97.73 97.58-97.73 97.58-237.68 0-139.24-97.4-236.83-97.4-97.58-237.79-97.58-139.02 0-236.83 97.4-97.8 97.4-97.8 237.79 0 139.02 97.73 236.83 97.73 97.8 237.68 97.8ZM480-480Z"/>
+                    </svg>
+                </span>
             </fwb-card>
-            <fwb-card class="w-sm flex-1 min-w-[300px] bg-linear-to-br from-[#9914fb] to-[#ac45ff]">
-                <div class="p-5">
+            <fwb-card class="relative w-sm flex-1 min-w-[300px] bg-linear-to-br from-[#336bbd] to-[#0046ad]">
+                <div class="p-5 relative z-10">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900  dark:text-white">
                         Dinero en Garantias
                     </h5>
                     <p class="text-3xl font-extrabold text-white flex justify-between">
-                        <b>
-                            ${{ dineroEnGarantias.toLocaleString() }}
-                        </b>
-                        <b class="bg-[#b254ff] rounded-full p-2">
-                            <font-awesome-icon icon="fa-solid fa-dollar-sign" />
-                        </b>
+                        ${{ dineroEnGarantias.toLocaleString() }}
                     </p>
+                    <span class="absolute -inset-y-3.5 -right-11 opacity-20 pr-3">
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            viewBox="0 -960 960 960" 
+                            class="w-36 h-36"
+                            fill="#FFFFFF">
+                            <path d="M448.74-113.78v-85.13q-60.39-10.57-98.02-46.33-37.63-35.76-53.07-90.72l68.44-26.95q15.87 50.26 47.87 72.63 32 22.37 74.17 22.37 46.3 0 74.76-22.03 28.46-22.02 28.46-60.06 0-41.17-27.79-64.89-27.78-23.72-103.21-47.59-70.87-21.87-106.94-61.85-36.06-39.97-36.06-98.67 0-53.3 34.08-92.28 34.09-38.98 97.31-46.81v-84.13h66.22v84.13q46.13 7.26 80.32 32.89 34.2 25.63 51.76 67.59l-67.3 27.96q-14-30.87-37.5-45.94-23.5-15.06-60.37-15.06-43.17 0-67.35 18.45-24.17 18.46-24.17 51.07 0 34.61 26.61 56.98 26.61 22.37 109.87 47.93 69.13 22.13 103.32 62.76 34.2 40.63 34.2 103.46 0 64.7-37.85 104.61t-111.54 51.48v84.13h-66.22Z"/>
+                        </svg>
+                    </span>
                 </div>
             </fwb-card>
         </section>
@@ -52,7 +64,6 @@
             <h2 class="text-xl font-bold mb-4 text-red-600">
                 Rentas Atrasadas
             </h2>
-            
             <!-- Estado de Carga -->
             <div v-if="isLoading" class="flex justify-center p-4">
                 <span class="loader"></span>
@@ -105,10 +116,9 @@
                 <v-chart :option="chartByIncome" style="height: 300px;" autoresize />
             </article>
             <br><br>
-
             <!-- Gráfico de Barra Horizontal: Top Equipos Más Rentados -->
-            <article class="bg-white shadow-xl text-gray-800 rounded-md p-4 border border-gray-200">
-                <h2 class="font-bold text-2xl mb-4 text-gray-700 flex items-center gap-2">
+            <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 border border-gray-200">
+                <h2 class="font-bold text-2xl mb-4 text-white flex items-center gap-2">
                     Top Equipos Más Rentados
                 </h2>
                 <div v-if="isLoading" class="flex justify-center items-center h-[300px]">
@@ -245,9 +255,9 @@ const chartByTopProducts = ref(null)
 const chartInventoryStatus = ref(null)
 
 const colorMap = {
-    'Disponible': '#22c55e',      // Green-500
-    'Rentado': '#3b82f6',         // Blue-500
-    'EnMantenimiento': '#f97316', // Orange-500
+    'Disponible': '#019239',      // Green-500
+    'Rentado': '#0046ad',         // Blue-500
+    'EnMantenimiento': '#920103', // Orange-500
     'DeBaja': '#64748b'           // Slate-500
 };
 
@@ -301,7 +311,7 @@ const cargarGraficoIngresos = async () => {
                 trigger: 'axis', 
                 axisPointer: { type: 'shadow' },
                 backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                textStyle: { color: '#333' }
+                textStyle: { color: '#e5e7eb' }
             },
             grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
             xAxis: [{
@@ -458,4 +468,6 @@ const cargarAnalisisROI = async () => {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
 </style>

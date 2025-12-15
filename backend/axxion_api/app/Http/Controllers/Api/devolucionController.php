@@ -41,9 +41,9 @@ class devolucionController extends Controller
                 $data = [
                     'message' => 'Validation failed',
                     'errors' => $validator->errors(),
-                    'status' => 201
+                    'status' => 422
                 ];
-                return response()->json($data, 201);
+                return response()->json($data, 422);
             }
             $devolucion = Devolucion::create([
                 'renta_id' => $request->renta_id,
@@ -63,9 +63,9 @@ class devolucionController extends Controller
             $devolucion->load('renta');
             $data = [
                 'devolucion' => $devolucion,
-                'status' => 200
+                'status' => 201
             ];
-            return response()->json($data, 200);
+            return response()->json($data, 201);
         }
     /**
      * Muestra los detalles de una devolución específica.
@@ -128,9 +128,9 @@ class devolucionController extends Controller
                 $data = [
                     'message' => 'Validator failed',
                     'errors' => $validator->errors(),
-                    'status' => 201
+                    'status' => 422
                 ];
-                return response()->json($data, 201);
+                return response()->json($data, 422);
             }
             $devolucion->renta_id = $request->renta_id;
             $devolucion->fecha_devolucion_programada = $request->fecha_devolucion_programada;
@@ -171,9 +171,9 @@ class devolucionController extends Controller
                 $data = [
                     'message' => 'Error en la Validacion',
                     'errors' => $validator->errors(),
-                    'status' => 201
+                    'status' => 422
                 ];
-                return response()->json($data, 201);
+                return response()->json($data, 422);
             }
 
             if($request->has('renta_id')){

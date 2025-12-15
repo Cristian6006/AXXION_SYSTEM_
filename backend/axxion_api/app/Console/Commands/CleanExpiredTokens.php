@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\RefreshToken;
 
 class CleanExpiredTokens extends Command
 {
@@ -25,6 +26,7 @@ class CleanExpiredTokens extends Command
      */
     public function handle()
     {
-        //
+        $deletedCount = RefreshToken::cleanupExpired();
+        $this->info("Deleted {$deletedCount} expired tokens.");
     }
 }
