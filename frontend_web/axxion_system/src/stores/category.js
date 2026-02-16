@@ -55,34 +55,26 @@ export const useCategoryStore = defineStore('category', {
     
     async addSubcategory(parentId, datosSub) {
   try {
-    // 1. PREPARAR EL PAYLOAD (Ahora con Descripción)
     const payload = {
       nombre: datosSub.nombre,
-      descripcion: datosSub.descripcion, // <--- Agregado
-      categorias: [parentId] // Array de IDs para la relación
+      descripcion: datosSub.descripcion, 
+      categorias: [parentId] 
     };
 
     const response = await CategoryService.createSubcategory(payload);
     
-    // 2. CORRECCIÓN: LEER LA PROPIEDAD CORRECTA
-    // Antes buscábamos .categoria, ahora el log dice .subcategoria
     const nuevaSub = response.data.subcategoria; 
 
-    // 3. ACTUALIZACIÓN LOCAL
     const padre = this.categories.find(c => c.id === parentId);
 
     if (padre && nuevaSub && nuevaSub.id) {
         
-        // Inicializamos array si no existe
         if (!padre.subcategorias) padre.subcategorias = [];
 
-        console.log("✅ Inyección Local Exitosa:", nuevaSub.nombre);
         padre.subcategorias.push(nuevaSub);
 
     } else {
-       // Solo si falla la inyección, recargamos
-       console.warn("⚠️ Recargando lista por seguridad...");
-       await this.fetchCategories();
+      await this.fetchCategories();
     }
 
   } catch (error) {
