@@ -349,7 +349,11 @@ const handleAction = async () => {
         await store.addSubcategory(modal.parentId, {nombre: modal.data.nombre, descripcion: modal.data.descripcion});
       }
       else if (modal.mode === 'edit') {
-        await store.updadateSubcategory(modal.parentId, modal.data.id, {nombre: modal.data.nombre, descripcion: modal.data.descripcion});
+        const payload = {
+          nombre: modal.data.nombre,
+          descripcion: modal.data.descripcion
+        };
+        await store.updateSubcategory(modal.parentId, modal.data.id, payload);
       }
       else if (modal.mode === 'delete') {
         await store.removeSubcategory(modal.parentId, modal.data.id);

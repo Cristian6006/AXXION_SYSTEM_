@@ -54,50 +54,45 @@ export const useCategoryStore = defineStore('category', {
     },
     
     async addSubcategory(parentId, datosSub) {
-  try {
-    const payload = {
-      nombre: datosSub.nombre,
-      descripcion: datosSub.descripcion, 
-      categorias: [parentId] 
-    };
-
-    const response = await CategoryService.createSubcategory(payload);
-    
-    const nuevaSub = response.data.subcategoria; 
-
-    const padre = this.categories.find(c => c.id === parentId);
-
-    if (padre && nuevaSub && nuevaSub.id) {
-        
-        if (!padre.subcategorias) padre.subcategorias = [];
-
-        padre.subcategorias.push(nuevaSub);
-
-    } else {
-      await this.fetchCategories();
-    }
-
-  } catch (error) {
-    throw error;
-  }
-},
+      try {
+        const payload = {
+          nombre: datosSub.nombre,
+          descripcion: datosSub.descripcion, 
+          categorias: [parentId] 
+        };
+        const response = await CategoryService.createSubcategory(payload);
+        const nuevaSub = response.data.subcategoria; 
+        const padre = this.categories.find(c => c.id === parentId);
+        if (padre && nuevaSub && nuevaSub.id) {
+          if (!padre.subcategorias) padre.subcategorias = [];
+          padre.subcategorias.push(nuevaSub);
+        } else {
+          await this.fetchCategories();
+        }
+      } catch (error) {
+        throw error;
+      }
+    },
     async removeSubcategory(parentId, subId) {
       await CategoryService.deleteSubcategory(subId);
       
-      const padre = this.categories.find(c => c.id === parentId);
+      const padre = this.categories.find(c => c.id == parentId);
       if(padre && padre.subcategorias) {
-        padre.subcategorias = padre.subcategorias.filter(s = s.id !== subId);
+        padre.subcategorias = padre.subcategorias.filter(s => s.id !== subId);
       }
     },
-    async updadateSubcategory(parentId, subId, datos) {
-      await CategoryService.updateSubcategory(subId, datos);
-      
-      const padre = this.categories.find(c => c.id === parentId);
-      if (padre && padre.subcategorias) {
-        const index = padre.subcategorias.findIndex(s => s.id === parentId);
-        if (index !== -1) {
-          padre.subcategorias[index] = {... padre.subcategorias[index], ...datos};
-        }
+    async updateSubcategory(parentId, subId, datosNuevos) {
+      await CategoryService.updateSubcategory(subId, datosNuevos);
+      const padre = this.categories.find(c => c.id == parentId);
+      const index = padre.subcategorias.findIndex(s => s.id == subId);
+      if (index !== -1) {
+        padre.subcategorias[index] = { 
+            ...padre.subcategorias[index], 
+            ...datosNuevos 
+        };
+      } else {
+        console.error("No encontré la subcategoría con ID:", subId);
+        console.log("IDs disponibles:", padre.subcategorias.map(s => s.id));
       }
     }
   }

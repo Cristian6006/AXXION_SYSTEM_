@@ -22,9 +22,9 @@ return new class extends Migration
             $table->index(['user_id', 'expires_at']);
 
             $table->foreign('user_id')
-              ->references('id')
-              ->on('usuario')
-              ->onDelete('cascade');
+                ->references('id')
+                ->on('usuario')
+                ->onDelete('cascade');
         });
     }
 
