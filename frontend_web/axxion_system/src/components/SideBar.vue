@@ -1,9 +1,29 @@
 <template>
+  <div class="contents">
+    <div 
+      v-if="isMobileOpen" 
+      @click="isMobileOpen = false"
+      class="fixed inset-0  bg-opacity-50 z-40 md:hidden transition-opacity duration-300"
+    ></div>
+    <button 
+      v-if="!isMobileOpen"
+      @click="isMobileOpen = true"
+      class="md:hidden fixed top-4 left-4 z-30 bg-gray-800 text-white p-3 rounded-lg shadow-lg hover:bg-[#01995f] transition-colors"
+    >
+      <font-awesome-icon icon="fa-solid fa-bars" class="w-6 h-6"/>
+    </button>
   <aside 
     :class="[
-      'sidebar bg-gray-800 text-white flex-shrink-0 transition-all duration-300 relative',
-      isCollapsed ? 'w-20' : 'w-70'
-    ]"
+        'sidebar bg-gray-800 text-white flex-shrink-0 transition-all duration-300',
+        
+        // MÓVIL
+        'fixed inset-y-0 left-0 z-50 w-70 transform',
+        isMobileOpen ? 'translate-x-0' : '-translate-x-full',
+
+        // ESCRITORIO
+        'md:relative md:translate-x-0', 
+        isCollapsed ? 'md:w-20' : 'md:w-70'
+      ]"
   >
     <!-- Toggle Button -->
     <button
@@ -17,12 +37,19 @@
       />
     </button>
 
+    <button 
+        @click="isMobileOpen = false"
+        class="md:hidden absolute right-4 top-4 text-white hover:text-[#01995f]"
+      >
+        <font-awesome-icon icon="fa-solid fa-times" class="w-6 h-6"/>
+      </button>
+
     <!-- Header -->
     <div
       class="p-4 flex h-18 items-center justify-center text-xl font-bold border-b border-gray-700 overflow-hidden"
     >
       <transition name="fade" mode="out-in">
-        <span v-if="!isCollapsed" key="full">AXION SYSTEM</span>
+        <span v-if="!isCollapsed || isMobileOpen" key="full">AXION SYSTEM</span>
         <span v-else key="short" class="text-2xl">AX</span>
       </transition>
     </div>
@@ -38,7 +65,7 @@
           >
             <font-awesome-icon icon="fa-solid fa-home" class="w-5 h-5 flex-shrink-0" />
             <transition name="slide-fade">
-              <span v-if="!isCollapsed" class="ml-3">Inicio</span>
+              <span v-if="!isCollapsed || isMobileOpen" class="ml-3">Inicio</span>
             </transition>
           </RouterLink>
         </li>
@@ -51,7 +78,7 @@
           >
             <font-awesome-icon icon="fa-solid fa-users" class="w-5 h-5 flex-shrink-0" />
             <transition name="slide-fade">
-              <span v-if="!isCollapsed" class="ml-3">Usuarios</span>
+              <span v-if="!isCollapsed || isMobileOpen" class="ml-3">Usuarios</span>
             </transition>
           </RouterLink>
         </li>
@@ -64,7 +91,7 @@
           >
             <font-awesome-icon icon="fa-solid fa-tags" class="w-5 h-5 flex-shrink-0" />
             <transition name="slide-fade">
-              <span v-if="!isCollapsed" class="ml-3">Categorías</span>
+              <span v-if="!isCollapsed || isMobileOpen" class="ml-3">Categorías</span>
             </transition>
           </RouterLink>
         </li>
@@ -77,13 +104,13 @@
           >
             <font-awesome-icon icon="fa-solid fa-boxes" class="w-5 h-5 flex-shrink-0" />
             <transition name="slide-fade">
-              <span v-if="!isCollapsed" class="ml-3">Inventario</span>
+              <span v-if="!isCollapsed || isMobileOpen" class="ml-3">Inventario</span>
             </transition>
           </RouterLink>
         </li>
 
         <!-- Reportes (Dropdown) -->
-        <li v-if="!isCollapsed">
+        <li v-if="!isCollapsed || isMobileOpen">
           <button 
             @click="toggleReports"
             class="w-full flex justify-between items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"
@@ -146,7 +173,7 @@
           >
             <font-awesome-icon icon="fa-solid fa-bell" class="w-5 h-5 flex-shrink-0" />
             <transition name="slide-fade">
-              <span v-if="!isCollapsed" class="ml-3">Alertas</span>
+              <span v-if="!isCollapsed || isMobileOpen" class="ml-3">Alertas</span>
             </transition>
           </RouterLink>
         </li>
@@ -159,7 +186,7 @@
           >
             <font-awesome-icon icon="fa-solid fa-tools" class="w-5 h-5 flex-shrink-0" />
             <transition name="slide-fade">
-              <span v-if="!isCollapsed" class="ml-3">Mantenimientos</span>
+              <span v-if="!isCollapsed || isMobileOpen" class="ml-3">Mantenimientos</span>
             </transition>
           </RouterLink>
         </li>
@@ -172,13 +199,14 @@
           >
             <font-awesome-icon icon="fa-solid fa-calendar-check" class="w-5 h-5 flex-shrink-0" />
             <transition name="slide-fade">
-              <span v-if="!isCollapsed" class="ml-3">Alquiler</span>
+              <span v-if="!isCollapsed || isMobileOpen" class="ml-3">Alquiler</span>
             </transition>
           </RouterLink>
         </li>
       </ul>
     </nav>
   </aside>
+  </div>
 </template>
 
 <script setup>
@@ -187,6 +215,7 @@ import { ref } from "vue";
 
 const showReports = ref(false);
 const isCollapsed = ref(false);
+const isMobileOpen = ref(false);
 
 function toggleReports() {
   showReports.value = !showReports.value;
@@ -198,6 +227,10 @@ function toggleSidebar() {
   if (isCollapsed.value) {
     showReports.value = false;
   }
+}
+
+function toggleMobileMenu() {
+  isMobileOpen.value = !isMobileOpen.value;
 }
 </script>
 

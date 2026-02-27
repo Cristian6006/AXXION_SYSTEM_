@@ -1,7 +1,7 @@
 <template>
 <div>
 <header class="flex items-center justify-between border-b pb-4 mb-6 flex-shrink-0">
-    <h1 class="text-3xl font-semibold text-gray-800">AXION SYSTEM</h1>
+    <h1 class="text-3xl font-semibold text-gray-800">AXXION SYSTEM</h1>
     <div class="flex items-center space-x-4">
         <div v-if="authStore.isAuthenticated">
             <span class="text-lg font-medium text-gray-700">{{ userRoleName }}</span>

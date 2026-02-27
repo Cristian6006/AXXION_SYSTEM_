@@ -15,9 +15,13 @@ use App\Http\Controllers\Api\direccionController;
 use App\Http\Controllers\Api\entregaController;
 use App\Http\Controllers\Api\MantenimientoController;
 use App\Http\Controllers\Api\ReporteController;
+use App\Http\Controllers\Api\ReporteRentaController;
 use App\Http\Controllers\Api\AlertaController;
 use App\Http\Controllers\Api\InventarioItemController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ReporteMantController;
+use App\Http\Controllers\Api\ReportUserController;
+
 
 /**
  * ANALOGÍA: Este archivo actúa como el 'Mapa de Rutas' o el 'Directorio Telefónico' de la API. 
@@ -53,7 +57,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::get('/usuario/{id}', [UsuarioController::class, 'show']);
     Route::put('/usuario/{id}', [UsuarioController::class, 'update']);
     Route::patch('/usuario/{id}', [UsuarioController::class, 'update']);
-    
+
     // Solo administradores pueden eliminar usuarios
     // Middleware 'check.role:ADMIN' asegura que solo usuarios con rol ADMIN accedan.
     Route::delete('/usuario/{id}', [UsuarioController::class, 'destroy'])->middleware('check.role:ADMIN');
@@ -63,12 +67,12 @@ Route::middleware(['jwt'])->group(function () {
     // ============================================
     Route::get('/producto', [ProductoController::class, 'index']);
     Route::get('/producto/{id}', [ProductoController::class, 'show']);
-    
+
     // Solo usuarios autenticados pueden crear/modificar productos
     Route::post('/producto', [ProductoController::class, 'store']);
     Route::put('/producto/{id}', [ProductoController::class, 'update']);
     Route::patch('/producto/{id}', [ProductoController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar productos
     Route::delete('/producto/{id}', [ProductoController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -92,7 +96,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/categoria', [categoriaController::class, 'store']);
     Route::put('/categoria/{id}', [categoriaController::class, 'update']);
     Route::patch('/categoria/{id}', [categoriaController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar categorías
     Route::delete('/categoria/{id}', [categoriaController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -105,7 +109,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/subcategoria', [subcategoriaController::class, 'store']);
     Route::put('/subcategoria/{id}', [subcategoriaController::class, 'update']);
     Route::patch('/subcategoria/{id}', [subcategoriaController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar subcategorías
     Route::delete('/subcategoria/{id}', [subcategoriaController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -118,7 +122,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/cliente', [clienteController::class, 'store']);
     Route::put('/cliente/{id}', [clienteController::class, 'update']);
     Route::patch('/cliente/{id}', [clienteController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar clientes
     Route::delete('/cliente/{id}', [clienteController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -131,7 +135,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/cotizacion', [cotizacionController::class, 'store']);
     Route::put('/cotizacion/{id}', [cotizacionController::class, 'update']);
     Route::patch('/cotizacion/{id}', [cotizacionController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar cotizaciones
     Route::delete('/cotizacion/{id}', [cotizacionController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -144,7 +148,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/detalleCotizacion', [detalleCotizacionController::class, 'store']);
     Route::put('/detalleCotizacion/{id}', [detalleCotizacionController::class, 'update']);
     Route::patch('/detalleCotizacion/{id}', [detalleCotizacionController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar detalles de cotización
     Route::delete('/detalleCotizacion/{id}', [detalleCotizacionController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -157,7 +161,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/devolucion', [devolucionController::class, 'store']);
     Route::put('/devolucion/{id}', [devolucionController::class, 'update']);
     Route::patch('/devolucion/{id}', [devolucionController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar devoluciones
     Route::delete('/devolucion/{id}', [devolucionController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -170,7 +174,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/direccion', [direccionController::class, 'store']);
     Route::put('/direccion/{id}', [direccionController::class, 'update']);
     Route::patch('/direccion/{id}', [direccionController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar direcciones
     Route::delete('/direccion/{id}', [direccionController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -183,7 +187,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/entrega', [entregaController::class, 'store']);
     Route::put('/entrega/{id}', [entregaController::class, 'update']);
     Route::patch('/entrega/{id}', [entregaController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar entregas
     Route::delete('/entrega/{id}', [entregaController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -196,7 +200,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/mantenimiento', [MantenimientoController::class, 'store']);
     Route::put('/mantenimiento/{id}', [MantenimientoController::class, 'update']);
     Route::patch('/mantenimiento/{id}', [MantenimientoController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar mantenimientos
     Route::delete('/mantenimiento/{id}', [MantenimientoController::class, 'destroy'])->middleware('check.role:ADMIN');
 
@@ -209,9 +213,25 @@ Route::middleware(['jwt'])->group(function () {
     // REPORTES (requiere autenticación)
     // Generación de reportes y métricas del sistema.
     // ============================================
-
-    Route::get('/reportes/metrics', [ReporteController::class, 'metrics']);
-    Route::get('/reportes/metricsAlq', [ReporteController::class, 'metricsAlq']);
+    // Reportes Inventario
+    Route::prefix('reportes')->group(function () {
+        Route::get('/metrics', [ReporteController::class, 'metrics']);
+        Route::get('/metricsAlq', [ReporteController::class, 'metricsAlq']);
+        // Reportes Alquiler
+        Route::get('/resumenGeneral', [ReporteRentaController::class, 'resumenGeneral']);
+        Route::get('/obtenerRentasAtrasadas', [ReporteRentaController::class, 'obtenerRentasAtrasadas']);
+        Route::get('/ingresosPorMes', [ReporteRentaController::class, 'ingresosPorMes']);
+        Route::get('/topEquiposRentados', [ReporteRentaController::class, 'topEquiposRentados']);
+        Route::get('/estadoInventario', [ReporteRentaController::class, 'estadoInventario']);
+        Route::get('/roiPorEquipo', [ReporteRentaController::class, 'roiPorEquipo']);
+        // Reportes Mantenimientos
+        Route::get('/reporteEficiencia', [ReporteMantController::class, 'reporteEficiencia']);
+        Route::get('/analisisFinanciero', [ReporteMantController::class, 'analisisFinanciero']);
+        // Reportes Usuarios
+        Route::get('/distribucionPorDepartamento', [ReportUserController::class, 'distribucionPorDepartamento']);
+        Route::get('/seguridadYRoles', [ReportUserController::class, 'seguridadYRoles']);
+        Route::get('/reporteCompleto', [ReportUserController::class, 'reporteCompleto']);
+    });
 
     // ============================================
     // ALQUILER (requiere autenticación)
@@ -234,7 +254,7 @@ Route::middleware(['jwt'])->group(function () {
     Route::post('/inventario_item', [InventarioItemController::class, 'store']);
     Route::put('/inventario_item/{id}', [InventarioItemController::class, 'update']);
     Route::patch('/inventario_item/{id}', [InventarioItemController::class, 'updatePartial']);
-    
+
     // Solo administradores pueden eliminar items de inventario
     Route::delete('/inventario_item/{id}', [InventarioItemController::class, 'destroy'])->middleware('check.role:ADMIN');
 

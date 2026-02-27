@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use App\Models\Usuario;
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
 class JwtMiddleware
@@ -26,7 +25,7 @@ class JwtMiddleware
 
         try {
             $payload = $this->validateToken($token);
-            
+
             // Verificar expiración
             if (isset($payload['exp']) && $payload['exp'] < time()) {
                 return response()->json([
@@ -37,7 +36,7 @@ class JwtMiddleware
 
             // Cargar usuario
             $user = Usuario::find($payload['sub']);
-            
+
             if (!$user) {
                 return response()->json([
                     'success' => false,
@@ -65,7 +64,7 @@ class JwtMiddleware
     private function getTokenFromRequest(Request $request): ?string
     {
         $header = $request->header('Authorization', '');
-        
+
         if (preg_match('/Bearer\s+(.*)$/i', $header, $matches)) {
             return $matches[1];
         }

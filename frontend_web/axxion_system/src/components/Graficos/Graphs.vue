@@ -27,14 +27,14 @@
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900  dark:text-white">
                         Equipos disponibles
                     </h5>
-                    <p class="text-4xl font-extrabold text-white flex justify-between" >
-                        <f>
+                    <div class="text-4xl font-extrabold text-white flex justify-between" >
+                        <div>
                             {{ equiposDisponibles }}
-                        </f>
-                        <f class="bg-[#fb7532] rounded-full p-2">
+                        </div>
+                        <div class="bg-[#fb7532] rounded-full p-2">
                             <font-awesome-icon icon="fa-solid fa-screwdriver-wrench" />
-                        </f>
-                    </p>
+                        </div>
+                    </div>
                 </div>
             </fwb-card>
         </section>

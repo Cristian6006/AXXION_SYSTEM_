@@ -11,11 +11,13 @@ import { CanvasRenderer } from 'echarts/renderers'
 import { BarChart, PieChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
 
+
+
 /* import all the icons in Free Solid, Free Regular, and Brands styles */
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import axios from 'axios';
+import axios from '@/plugins/axios';
 import { createPinia } from 'pinia';
 library.add(fas, far, fab)
 
