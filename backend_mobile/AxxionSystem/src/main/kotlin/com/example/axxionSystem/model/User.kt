@@ -39,5 +39,5 @@ data class User(
         joinColumns = [JoinColumn(name = "usuario_id")],
         inverseJoinColumns = [JoinColumn(name = "rol_id")]
     )
-    val roles: Set<Rol> = HashSet()
+    var roles: MutableSet<Rol> = mutableSetOf()
 )

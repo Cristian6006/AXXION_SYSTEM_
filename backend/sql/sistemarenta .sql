@@ -38,6 +38,7 @@ SET time_zone = "+00:00";
 
 
 DROP DATABASE IF EXISTS sistemarenta;
+
 CREATE DATABASE IF NOT EXISTS `sistemarenta` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `sistemarenta`;
 
@@ -48,7 +49,7 @@ USE `sistemarenta`;
 -- Estructura de tabla para la tabla `categoria`
 --
 
-CREATE TABLE `categoria` (
+CREATE TABLE  IF NOT EXISTS `categoria` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` text DEFAULT NULL,
@@ -56,6 +57,7 @@ CREATE TABLE `categoria` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 --
 -- Volcado de datos para la tabla `categoria`
