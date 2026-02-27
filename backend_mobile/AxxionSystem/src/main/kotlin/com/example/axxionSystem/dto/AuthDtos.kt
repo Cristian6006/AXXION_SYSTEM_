@@ -42,6 +42,7 @@ data class RegisterRequest(
     )
     val password: String,
 
+
     val deviceName: String? = "Unknown Device"
 )
 
@@ -54,4 +55,18 @@ data class LoginRequest(
     val password: String,
 
     val deviceName:String? = "Unknown Device"
+)
+
+data class UserProfileResponse(
+    val id: Int?,
+    val nombreUsuario: String,
+    val nombre: String,
+    val nombre2: String,
+    val apellido1: String,
+    val apellido2: String,
+    val telefono: String?,
+    val departamento: String?,
+    val estado: String?,
+    val email: String,
+    val roles: List<String>
 )

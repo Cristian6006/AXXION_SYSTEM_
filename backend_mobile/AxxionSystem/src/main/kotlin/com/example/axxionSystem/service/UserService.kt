@@ -1,8 +1,11 @@
 package com.example.axxionSystem.service
 
-import com.example.axxionSystem.model.User
+import com.example.axxionSystem.dto.UserProfileResponse
+import com.example.axxionSystem.repository.RefreshTokenRepository
 import com.example.axxionSystem.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
@@ -11,18 +14,29 @@ class UserService {
     @Autowired
     lateinit var userRepository: UserRepository
 
-    fun registerUser(user: User): User {
-        val email = user.email
+    @Autowired
+    lateinit var refreshTokenRepository: RefreshTokenRepository
 
-        if (userRepository.existsByEmail(email)) {
-            throw IllegalArgumentException("El correo ${user.email} ya esta registrado ")
-        }
+    fun obtenerPerfilActual(): UserProfileResponse {
+        val authentication = SecurityContextHolder.getContext().authentication
+        val email = authentication.name
 
-        return userRepository.save(user)
-    }
+        val usuario = userRepository.findByEmail(email)
+            .orElseThrow { UsernameNotFoundException("Usuario no encontrado") }
 
-    fun getUserById(id:Int): User? {
-        return userRepository.findById(id).orElse(null)
+        return UserProfileResponse(
+            id = usuario.id,
+            nombreUsuario = usuario.userName,
+            nombre = usuario.firstName,
+            nombre2 = usuario.secondName,
+            apellido1 = usuario.surName,
+            apellido2 = usuario.surName2,
+            email = usuario.email,
+            telefono = usuario.phone,
+            departamento = usuario.department,
+            estado = usuario.state,
+            roles = usuario.roles.map { it.name }
+        )
     }
 
 

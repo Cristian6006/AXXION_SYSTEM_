@@ -6,6 +6,7 @@ import com.example.axxionSystem.model.RefreshToken
 import com.example.axxionSystem.model.User
 import com.example.axxionSystem.repository.RefreshTokenRepository
 import com.example.axxionSystem.repository.UserRepository
+import com.example.axxionSystem.repository.RolRepository
 import com.example.axxionSystem.util.JwtUtil
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,6 +21,7 @@ class AuthService {
 
     @Autowired lateinit var userRepository: UserRepository
     @Autowired lateinit var refreshTokenRepository: RefreshTokenRepository
+    @Autowired  lateinit var rolRepository: RolRepository
     @Autowired lateinit var passwordEncoder: PasswordEncoder
     @Autowired lateinit var jwtUtil: JwtUtil
 
@@ -42,6 +44,13 @@ class AuthService {
             department = request.departamento,
             state = request.estado
         )
+
+        val rolBasico = rolRepository.findByCode("OPER")
+            .orElseThrow {RuntimeException("Error Critico: El rol OPER no existe en la BD")}
+
+        user.roles
+            .add(rolBasico)
+
         return userRepository.save(user)
     }
 
