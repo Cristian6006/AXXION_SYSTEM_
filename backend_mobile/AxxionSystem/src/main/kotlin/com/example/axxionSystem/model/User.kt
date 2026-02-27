@@ -20,7 +20,7 @@ data class User(
     @Column(name = "apellido2", nullable = false)
     val surName2: String,
     @Column(name = "password_hash", nullable = false)
-    val password: String,
+    var password: String,
     @Column(nullable = false, unique = true)
     val email: String,
     @Column(name = "telefono")

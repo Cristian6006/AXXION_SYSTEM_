@@ -26,7 +26,7 @@ class SecurityConfig {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
-            .csrf {it.disable()} // Desactivar CSRF
+            .csrf {it.disable()}
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers("/api/auth/**").permitAll() // PERMITIR PÚBLICAMENTE: Login, Registro y Refresh
                 auth.anyRequest().authenticated() // BLOQUEAR TODO LO DEMÁS
@@ -34,7 +34,6 @@ class SecurityConfig {
             .sessionManagement { session -> // NO GUARDAR ESTADO (STATELESS) -> Usar JWT
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
-            // AÑADIR NUESTRO FILTRO JWT ANTES DEL FILTRO DE SPRING
             .authenticationProvider(authenticationProvider())
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
 

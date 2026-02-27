@@ -70,3 +70,21 @@ data class UserProfileResponse(
     val email: String,
     val roles: List<String>
 )
+
+data class ForgotPasswordRequest (
+    @field:NotBlank(message = "El email es obligatorio")
+    @field:Email(message = "Formato de correo invalido")
+    val email: String
+)
+
+data class ResetPasswordRequest (
+    @field:NotBlank(message = "El código PIN es obligatorio")
+    val token: String,
+    @field:NotBlank(message = "La nueva contraseña es obligatoria")
+    @field:Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
+    @field:Pattern(
+        regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$",
+        message = "Debe contener una mayúscula, una minúscula y un número"
+    )
+    val nuevaPassword: String
+)

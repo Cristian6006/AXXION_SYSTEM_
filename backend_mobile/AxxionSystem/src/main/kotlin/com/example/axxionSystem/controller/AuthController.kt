@@ -1,7 +1,9 @@
 package com.example.axxionSystem.controller
 
+import com.example.axxionSystem.dto.ForgotPasswordRequest
 import com.example.axxionSystem.dto.LoginRequest
 import com.example.axxionSystem.dto.RegisterRequest
+import com.example.axxionSystem.dto.ResetPasswordRequest
 import com.example.axxionSystem.service.AuthService
 import jakarta.servlet.http.HttpServletResponse
 import jakarta.validation.Valid
@@ -19,6 +21,18 @@ import org.springframework.web.bind.annotation.RestController
 class AuthController {
 
     @Autowired lateinit var authService: AuthService
+
+    @PostMapping("/olvido-contraseña")
+    fun forgotPassword(@Valid @RequestBody request: ForgotPasswordRequest): ResponseEntity<Any> {
+        authService.solicitarRecuperacionPassword(request)
+        return ResponseEntity.ok(mapOf("mensaje" to "Si el correo existe, hemos enviado un PIN de 6 digitos"))
+    }
+
+    @PostMapping("/resetear-contraseña")
+    fun resetPassword(@Valid @RequestBody request: ResetPasswordRequest): ResponseEntity<Any> {
+        authService.restablecerPassword(request)
+        return ResponseEntity.ok(mapOf("mensaje" to "Contraseña actualizada exitosamente"))
+    }
 
     @PostMapping("/registro")
     fun register(@Valid @RequestBody request: RegisterRequest): ResponseEntity<Any> {

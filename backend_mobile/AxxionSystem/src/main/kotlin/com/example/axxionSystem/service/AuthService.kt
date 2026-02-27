@@ -1,9 +1,13 @@
 package com.example.axxionSystem.service
 
+import com.example.axxionSystem.dto.ForgotPasswordRequest
 import com.example.axxionSystem.dto.LoginRequest
 import com.example.axxionSystem.dto.RegisterRequest
+import com.example.axxionSystem.dto.ResetPasswordRequest
+import com.example.axxionSystem.model.PasswordResetToken
 import com.example.axxionSystem.model.RefreshToken
 import com.example.axxionSystem.model.User
+import com.example.axxionSystem.repository.PasswordResetTokenRepository
 import com.example.axxionSystem.repository.RefreshTokenRepository
 import com.example.axxionSystem.repository.UserRepository
 import com.example.axxionSystem.repository.RolRepository
@@ -21,12 +25,55 @@ class AuthService {
 
     @Autowired lateinit var userRepository: UserRepository
     @Autowired lateinit var refreshTokenRepository: RefreshTokenRepository
-    @Autowired  lateinit var rolRepository: RolRepository
+    @Autowired lateinit var rolRepository: RolRepository
     @Autowired lateinit var passwordEncoder: PasswordEncoder
     @Autowired lateinit var jwtUtil: JwtUtil
+    @Autowired lateinit var emailService: EmailService
+    @Autowired lateinit var passwordResetTokenRepository: PasswordResetTokenRepository
 
     @Value("\${jwt.refresh-expiration}")
     var refreshExpirationMs: Long = 0
+
+    @org.springframework.transaction.annotation.Transactional
+    fun solicitarRecuperacionPassword(request: ForgotPasswordRequest)
+    {
+        val usuario = userRepository.findByEmail(request.email).orElse(null) ?: return
+
+        passwordResetTokenRepository.deleteByUsuario_Id(usuario.id!!)
+
+        val pinGenerado = generarPinSeguro()
+
+        val resetToken = PasswordResetToken(
+            token = pinGenerado,
+            usuario = usuario,
+            fechaExpiracion = java.time.LocalDateTime.now().plusMinutes(15)
+        )
+        passwordResetTokenRepository.save(resetToken)
+
+        emailService.enviarCorreoRecuperacion(usuario.email, pinGenerado)
+    }
+
+    @org.springframework.transaction.annotation.Transactional
+    fun restablecerPassword(request: ResetPasswordRequest) {
+        val resetToken = passwordResetTokenRepository.findByToken(request.token)
+            .orElseThrow { IllegalArgumentException("El código PIN es inválido o no existe.") }
+
+        if (resetToken.fechaExpiracion.isBefore(java.time.LocalDateTime.now())) {
+            passwordResetTokenRepository.delete(resetToken)
+            throw IllegalArgumentException("El código PIN ha expirado. Solicita uno nuevo.")
+        }
+
+        val usuario = resetToken.usuario
+        usuario.password = passwordEncoder.encode(request.nuevaPassword)
+        userRepository.save(usuario)
+
+        passwordResetTokenRepository.delete(resetToken)
+    }
+
+    @Transactional
+    fun logout(usuarioId: Int) {
+        refreshTokenRepository.deleteByUsuario_Id(usuarioId)
+    }
 
     fun register(request: RegisterRequest): User {
         if (userRepository.existsByEmail(request.email)) {
@@ -78,10 +125,13 @@ class AuthService {
         return AuthResponse(accessToken, refreshTokenString)
     }
 
-    @Transactional
-    fun logout(usuarioId: Int) {
-        refreshTokenRepository.deleteByUsuario_Id(usuarioId)
+    private fun generarPinSeguro(): String {
+        val random = java.security.SecureRandom()
+        val pin = random.nextInt(999999)
+
+        return String.format("%06d", pin)
     }
+
 }
 
 data class AuthResponse(val accessToken: String, val refreshToken: String)
