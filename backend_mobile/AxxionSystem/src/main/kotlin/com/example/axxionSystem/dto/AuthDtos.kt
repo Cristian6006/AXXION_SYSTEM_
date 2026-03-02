@@ -88,3 +88,21 @@ data class ResetPasswordRequest (
     )
     val nuevaPassword: String
 )
+
+data class BiometricRegisterRequest (
+    @field:NotBlank(message = "El ID del dispositivo es obligatorio")
+    val deviceId: String,
+
+    @field:NotBlank(message = "La llave pública es obligatoria")
+    val publicKey: String
+)
+
+data class BiometricLoginRequest(
+    @field:NotBlank
+    val deviceId: String,
+
+    @field:NotBlank
+    val signature: String,
+
+    val timestamp: Long
+)

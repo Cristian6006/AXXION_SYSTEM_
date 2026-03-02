@@ -1,5 +1,6 @@
 package com.example.axxionSystem.service
 
+import com.example.axxionSystem.dto.BiometricLoginRequest
 import com.example.axxionSystem.dto.ForgotPasswordRequest
 import com.example.axxionSystem.dto.LoginRequest
 import com.example.axxionSystem.dto.RegisterRequest
@@ -7,10 +8,12 @@ import com.example.axxionSystem.dto.ResetPasswordRequest
 import com.example.axxionSystem.model.PasswordResetToken
 import com.example.axxionSystem.model.RefreshToken
 import com.example.axxionSystem.model.User
+import com.example.axxionSystem.repository.DispositivoBiometricoRepository
 import com.example.axxionSystem.repository.PasswordResetTokenRepository
 import com.example.axxionSystem.repository.RefreshTokenRepository
 import com.example.axxionSystem.repository.UserRepository
 import com.example.axxionSystem.repository.RolRepository
+import com.example.axxionSystem.util.CryptoUtil
 import com.example.axxionSystem.util.JwtUtil
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,6 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.time.Instant
 import java.util.*
+import java.security.MessageDigest
+import kotlin.math.abs
 
 @Service
 class AuthService {
@@ -30,6 +35,10 @@ class AuthService {
     @Autowired lateinit var jwtUtil: JwtUtil
     @Autowired lateinit var emailService: EmailService
     @Autowired lateinit var passwordResetTokenRepository: PasswordResetTokenRepository
+    @Autowired lateinit var cryptoUtil: CryptoUtil
+    @Autowired lateinit var dispositivoRepository: DispositivoBiometricoRepository
+
+
 
     @Value("\${jwt.refresh-expiration}")
     var refreshExpirationMs: Long = 0
@@ -113,9 +122,11 @@ class AuthService {
 
         val refreshTokenString = UUID.randomUUID().toString()
 
+        val hashedToken = hashToken(refreshTokenString)
+
         val refreshTokenEntity = RefreshToken(
             usuario = user,
-            tokenHash = refreshTokenString,
+            tokenHash = hashedToken,
             deviceName = request.deviceName,
             expiresAt = Instant.now().plusMillis(refreshExpirationMs),
             createdAt = Instant.now()
@@ -125,11 +136,74 @@ class AuthService {
         return AuthResponse(accessToken, refreshTokenString)
     }
 
+    fun loginBiometrico(request: BiometricLoginRequest): AuthResponse {
+
+        val dispositivo = dispositivoRepository.findByDeviceId(request.deviceId)
+            .orElseThrow { IllegalArgumentException("Dispositivo no registrado para biometría.") }
+
+        val ahora = System.currentTimeMillis()
+        val diferenciaSegundos = abs(ahora - request.timestamp) / 1000
+
+        if (diferenciaSegundos > 60) {
+            throw IllegalArgumentException("La petición expiró. Posible ataque de repetición detectado.")
+        }
+
+        val payloadEsperado = "${request.deviceId}|${request.timestamp}"
+
+        val firmaValida = cryptoUtil.verifySignature(
+            publicKeyBase64 = dispositivo.publicKey,
+            payload = payloadEsperado,
+            signatureBase64 = request.signature
+        )
+
+        if (!firmaValida) {
+            throw IllegalArgumentException("Firma biométrica inválida. Acceso denegado.")
+        }
+
+        val usuario = dispositivo.usuario
+        val accessToken = jwtUtil.generateAccessToken(usuario.email)
+
+        val refreshTokenString = UUID.randomUUID().toString()
+
+        val hashedToken = hashToken(refreshTokenString)
+
+        val refreshTokenEntity = RefreshToken(
+            usuario = usuario,
+            tokenHash = hashedToken,
+            deviceName = request.deviceId,
+            expiresAt = Instant.now().plusMillis(refreshExpirationMs),
+            createdAt = Instant.now()
+        )
+        refreshTokenRepository.save(refreshTokenEntity)
+
+        return AuthResponse(accessToken, refreshTokenString)
+    }
+
+    fun refreshAccessToken(refreshToken: String): String {
+        val hashedIncomingToken = hashToken(refreshToken)
+
+        val tokenEntity = refreshTokenRepository.findByTokenHash(hashedIncomingToken).
+                orElseThrow {IllegalArgumentException("Token de refresco inválido")}
+
+        if (tokenEntity.expiresAt.isBefore(Instant.now())) {
+            refreshTokenRepository.delete(tokenEntity)
+            throw IllegalArgumentException("Token de refresco expirado")
+        }
+
+        return jwtUtil.generateAccessToken(tokenEntity.usuario.email)
+    }
+
     private fun generarPinSeguro(): String {
         val random = java.security.SecureRandom()
         val pin = random.nextInt(999999)
 
         return String.format("%06d", pin)
+    }
+
+    private fun hashToken(token: String): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        val hashBytes = digest.digest(token.toByteArray())
+        return hashBytes.joinToString("") {"%02x".format(it)}
     }
 
 }
