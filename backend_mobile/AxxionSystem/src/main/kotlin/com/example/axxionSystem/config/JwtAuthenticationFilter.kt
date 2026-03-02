@@ -25,7 +25,7 @@ class JwtAuthenticationFilter: OncePerRequestFilter(){
     ) {
         val authHeader = request.getHeader("Authorization")
 
-        if (authHeader != null && authHeader.startsWith("Barer ")) {
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
             val token = authHeader.substring(7)
 
             if(jwtUtil.validateToken(token)) {

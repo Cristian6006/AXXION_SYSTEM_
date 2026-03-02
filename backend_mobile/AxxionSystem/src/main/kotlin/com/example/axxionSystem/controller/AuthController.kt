@@ -41,7 +41,7 @@ class AuthController {
 
         return ResponseEntity.ok(mapOf(
             "accessToken" to authResponse.accessToken,
-            "tokenType" to "Besrer",
+            "tokenType" to "Bearer",
             "expiresIn" to 900
         ))
     }
