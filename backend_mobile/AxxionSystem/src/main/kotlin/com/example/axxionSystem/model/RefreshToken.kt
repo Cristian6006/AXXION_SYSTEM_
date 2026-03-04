@@ -23,7 +23,7 @@ data class RefreshToken(
     @Column(name = "expires_at", nullable = false)
     val expiresAt: Instant,
     @Column(name = "last_used_at")
-    val lastUsedAt: Instant? = null,
+    var lastUsedAt: Instant? = null,
     @Column(name = "created_at")
     val createdAt: Instant = Instant.now(),
     @Column(name = "update_at")
