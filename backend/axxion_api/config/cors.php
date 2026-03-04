@@ -8,6 +8,7 @@ return [
 
     'allowed_origins' => [
         'http://localhost:5173', // Vite dev server
+        'http://localhost:4173', // Vite preview
         'http://localhost:8080',
         env('FRONTEND_URL', 'http://localhost:5173'),
     ],

@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { registerSW } from 'virtual:pwa-register'
 import App from './App.vue'
 import router from './router'
 import './Style.css'
@@ -26,10 +27,20 @@ use([CanvasRenderer, BarChart, PieChart, TitleComponent, TooltipComponent, Legen
 const app = createApp(App)
 const pinia = createPinia()
 app.component('v-chart', ECharts)
-app.component('font-awesome-icon' , FontAwesomeIcon)
-app.use(pinia) 
+app.component('font-awesome-icon', FontAwesomeIcon)
+app.use(pinia)
 app.use(router)
 app.mount('#app')
+...................................................................................................
+const updateSW = registerSW({
+    onNeedRefresh() {
+        console.log('New content available, click on reload button to update.')
+    },
+    onOfflineReady() {
+        console.log('App is ready to work offline.')
+    },
+})
+
 
 
 
