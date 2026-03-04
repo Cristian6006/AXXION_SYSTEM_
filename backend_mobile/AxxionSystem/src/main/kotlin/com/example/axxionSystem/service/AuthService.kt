@@ -190,6 +190,9 @@ class AuthService {
             throw IllegalArgumentException("Token de refresco expirado")
         }
 
+        tokenEntity.lastUsedAt = Instant.now()
+        refreshTokenRepository.save(tokenEntity)
+
         return jwtUtil.generateAccessToken(tokenEntity.usuario.email)
     }
 

@@ -17,12 +17,16 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.CookieValue
+import org.springframework.security.core.context.SecurityContextHolder
+import com.example.axxionSystem.repository.UserRepository
 
 @RestController
 @RequestMapping("/api/auth")
 class AuthController {
 
     @Autowired lateinit var authService: AuthService
+    @Autowired lateinit var userRepository: UserRepository
 
     @PostMapping("/olvido-contraseña")
     fun forgotPassword(@Valid @RequestBody request: ForgotPasswordRequest): ResponseEntity<Any> {
@@ -81,5 +85,46 @@ class AuthController {
             "accessToken" to authResponse.accessToken,
             "tokenType" to "Bearer"
         ))
+    }
+
+    @PostMapping("/refresh")
+    fun refreshToken(
+        @CookieValue(name = "refresh_token", required = false) refreshToken: String?
+    ): ResponseEntity<Any> {
+        if (refreshToken.isNullOrBlank()) {
+            return ResponseEntity.status(401).body(mapOf("error" to "Refresh token no encontrado. Inicie sesion nuevamente"))
+        }
+        return try {
+            val newAccessToken = authService.refreshAccessToken(refreshToken)
+
+            ResponseEntity.ok(mapOf(
+                "accessToken" to newAccessToken,
+                "tokenType" to "Bearer ",
+                "expiresIn" to 900
+            ))
+        } catch (e: IllegalArgumentException) {
+            ResponseEntity.status(401).body(mapOf("error" to e.message))
+        }
+    }
+
+    @PostMapping("/logout")
+    fun logout(response: HttpServletResponse): ResponseEntity<Any> {
+        val emailAutenticado = SecurityContextHolder.getContext().authentication.name
+        val usuario = userRepository.findByEmail(emailAutenticado).orElse(null)
+
+        if (usuario != null) {
+            authService.logout(usuario.id!!)
+        }
+
+        val deleteCookie = ResponseCookie.from("refresh_token", "")
+            .httpOnly(true)
+            .secure(false)
+            .path("/api/auth/refresh")
+            .maxAge(0)
+            .build()
+
+        response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString())
+
+        return ResponseEntity.ok(mapOf("mensaje" to "Sesion cerrada exitosamente"))
     }
 }
