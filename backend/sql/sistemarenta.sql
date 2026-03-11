@@ -730,13 +730,6 @@ CREATE TABLE `usuario` (
 --
 -- Volcado de datos para la tabla `usuario`
 --
-
-INSERT INTO `usuario` (`id`, `nombre_usuario`, `nombre`, `nombre2`, `apellido1`, `apellido2`, `password_hash`, `email`, `telefono`, `departamento`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Admin', 'Principal', 'del Sistema', '', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@axxion.com', '1234567890', 'Administración', 'Activo', '2025-09-19 05:24:18', '2025-09-19 05:24:18'),
-(5, 'f', 'j', 'h', 'h', 'g', '$2y$12$ebWwh0Z07Wurit4kNHrah.6G5sJ3U.J4.lXxdILXn6.rmpgboOO2S', 'julian@example.com.co', '777', 'Tecnología', 'Activo', '2025-09-19 21:47:30', '2025-09-19 21:47:30'),
-(6, 'jjulain', 'andres', 'amdfres', 'aguilar', 'vargas', '$2y$12$IfQa.8uNlis1kMY/NDBjO.VNlmbcYU0cwNMN38Ds7Qardlid6QXGS', 'example@auxiliar.com', '1', 'Marketing', 'Activo', '2025-09-20 01:32:04', '2025-09-20 01:32:04'),
-(7, 'CRISTIAN', 'Cristian', 'Camilo', 'Cifuentes', 'Gaona', '$2y$12$RyfCB1swasINQhbInJsjV.cB/HCE.UdHNSKsbHsX6BSxQWKv0yK7G', 'c@example.com', '22161510', 'Ventas', 'Activo', '2025-11-07 20:20:43', '2025-11-07 20:20:43');
-
 -- --------------------------------------------------------
 
 --

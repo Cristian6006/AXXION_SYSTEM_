@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8eee542b-2511-4ac4-b3ff-76812283a768" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../backend/axxion_api/tests/Feature/UsuarioTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/axxion_api/app/Http/Controllers/Api/UsuarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/axxion_api/app/Http/Controllers/Api/UsuarioController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/sql/sistemarenta.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/sql/sistemarenta.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/config/SecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/config/SecurityConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/controller/AuthController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/controller/AuthController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/RefreshToken.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/RefreshToken.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/Rol.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/Rol.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/User.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/AlquilerService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/AlquilerService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/UserService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend_web/axxion_system/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend_web/axxion_system/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend_web/axxion_system/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend_web/axxion_system/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend_web/axxion_system/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend_web/axxion_system/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend_web/axxion_system/src/plugins/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend_web/axxion_system/src/plugins/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend_web/axxion_system/src/stores/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend_web/axxion_system/src/stores/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend_web/axxion_system/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend_web/axxion_system/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend_web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend_web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend_web/src/views/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend_web/src/views/layout.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/etc/apache2/sites-available/axxion/AXXION_SYSTEM_/frontend_movil" value="3AmC1sDv9N1eYPM2209FW7coxiu" />
+    </persistenceIdMap>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="2077" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "sihjulian"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Cristian6006/AXXION_SYSTEM_.git",
+    "accountId": "081a3381-c92c-4103-a6ef-9dca902832f6"
+  }
+}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="3AmC1sDv9N1eYPM2209FW7coxiu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "DEV__julian",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/etc/apache2/sites-available/axxion/AXXION_SYSTEM_/frontend_movil/AxxionSystem",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8eee542b-2511-4ac4-b3ff-76812283a768" name="Changes" comment="" />
+      <created>1773188147360</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1773188147360</updated>
+      <workItem from="1773188150339" duration="34000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

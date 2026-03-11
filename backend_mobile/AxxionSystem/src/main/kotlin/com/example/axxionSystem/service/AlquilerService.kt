@@ -142,7 +142,7 @@ class AlquilerService {
     }
 
     @Transactional
-    fun firmarEntrega(request: EntregaFirmaRequest): Entrega {
+    fun firmarEntrega(request: EntregaFirmaRequest): EntregaResponse {
         val renta = rentaRepository.findById(request.rentaId)
             .orElseThrow { IllegalArgumentException("Renta no encontrada") }
         val direccion = direccionRepository.findById(request.direccionId)
@@ -166,11 +166,18 @@ class AlquilerService {
 
         actualizarCondicionesSalida(renta.id!!, request.condicionesSalida)
 
-        return entrega
+        return EntregaResponse(
+            id = entrega.id!!,
+            rentaId = renta.id!!,
+            direccionId = direccion.id!!,
+            estado = entrega.estadoEntrega,
+            fechaEnvio = entrega.fechaEnvio,
+            notas = entrega.notas
+        )
     }
 
     @Transactional
-    fun firmarDevolucion(request: DevolucionFirmaRequest): Devolucion {
+    fun firmarDevolucion(request: DevolucionFirmaRequest): DevolucionResponse {
         val renta = rentaRepository.findById(request.rentaId)
             .orElseThrow { IllegalArgumentException("Renta no encontrada") }
 
@@ -198,7 +205,13 @@ class AlquilerService {
 
         actualizarCondicionesRegreso(renta.id!!, request.condicionesRegreso)
 
-        return devolucion
+        return DevolucionResponse(
+            id = devolucion.id!!,
+            rentaId = renta.id!!,
+            estado = devolucion.estadoDevolucion,
+            fechaDevolucionReal = devolucion.fechaDevolucionReal,
+            notasGenerales = devolucion.notasGenerales
+        )
     }
 
     fun rentasPorCliente(clienteId: Int): List<RentaResponse> {

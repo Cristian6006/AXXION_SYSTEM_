@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="45da5be4-76ab-4ebf-81da-3601ef8b19e1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../axxion_api/tests/Feature/UsuarioTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../axxion_api/app/Http/Controllers/Api/UsuarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../axxion_api/app/Http/Controllers/Api/UsuarioController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sistemarenta.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sistemarenta.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/config/SecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/config/SecurityConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/controller/AuthController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/controller/AuthController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/AlquilerService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/AlquilerService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/UserService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_web/axxion_system/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_web/axxion_system/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_web/axxion_system/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_web/axxion_system/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_web/axxion_system/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_web/axxion_system/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_web/axxion_system/src/plugins/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_web/axxion_system/src/plugins/axios.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_web/axxion_system/src/stores/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_web/axxion_system/src/stores/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_web/axxion_system/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_web/axxion_system/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend_web/src/views/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend_web/src/views/layout.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/etc/apache2/sites-available/axxion/AXXION_SYSTEM_/backend/sql" value="3AaxTFBLHGm1MnaxpFuQPkb5d1Y" />
+    </persistenceIdMap>
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="20" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "sihjulian"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Cristian6006/AXXION_SYSTEM_.git",
+    "accountId": "081a3381-c92c-4103-a6ef-9dca902832f6"
+  }
+}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="3AaxTFBLHGm1MnaxpFuQPkb5d1Y" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "DEV__julian",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/etc/apache2/sites-available/axxion/AXXION_SYSTEM_/backend/sql",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="45da5be4-76ab-4ebf-81da-3601ef8b19e1" name="Changes" comment="" />
+      <created>1772844490251</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1772844490251</updated>
+      <workItem from="1772844494858" duration="478000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

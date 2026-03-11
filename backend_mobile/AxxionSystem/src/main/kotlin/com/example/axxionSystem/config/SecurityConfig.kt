@@ -28,7 +28,7 @@ class SecurityConfig {
         http
             .csrf {it.disable()} // Desactivar CSRF
             .authorizeHttpRequests { auth ->
-                auth.requestMatchers("/api/auth/**").permitAll() // PERMITIR PÚBLICAMENTE: Login, Registro y Refresh
+                auth.requestMatchers("/api/auth/**", "/usuarios").permitAll() // PERMITIR PÚBLICAMENTE: Login, Registro, Refresh y /usuarios del AppBase
                 auth.anyRequest().authenticated() // BLOQUEAR TODO LO DEMÁS
             }
             .sessionManagement { session -> // NO GUARDAR ESTADO (STATELESS) -> Usar JWT

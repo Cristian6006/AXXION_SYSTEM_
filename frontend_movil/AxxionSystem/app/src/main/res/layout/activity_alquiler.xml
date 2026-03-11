@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D1B2A">
+
+    <!-- AppBar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#112240"
+        app:elevation="4dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingStart="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:text="📋 Alquiler"
+                        android:textColor="#E8EAF6"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tvSubtitle"
+                        android:text="Solicitudes y Rentas"
+                        android:textColor="#78909C"
+                        android:textSize="12sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVolver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="← Atrás"
+                    android:textSize="13sp"
+                    android:textColor="#4FC3F7"
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- Tab Strip -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#112240"
+            app:tabTextColor="#78909C"
+            app:tabSelectedTextColor="#4FC3F7"
+            app:tabIndicatorColor="#4FC3F7"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="fixed"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Contenido -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- ProgressBar -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:indeterminateTint="#4FC3F7"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"/>
+
+        <!-- Lista de Items (Solicitudes o Rentas) -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#112240"
+            app:cardElevation="4dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerAlquiler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:clipToPadding="false"/>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Botón Nueva Solicitud -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNueva"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="+ Nueva Solicitud"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            app:backgroundTint="#1565C0"
+            app:cornerRadius="12dp"/>
+
+        <!-- Botón Ver Rentas del cliente -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMisRentas"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="📦 Ver mis Rentas (cliente ID 1)"
+            android:textSize="13sp"
+            android:layout_marginTop="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="#4FC3F7"
+            app:strokeWidth="1.5dp"
+            app:cornerRadius="12dp"
+            android:textColor="#4FC3F7"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

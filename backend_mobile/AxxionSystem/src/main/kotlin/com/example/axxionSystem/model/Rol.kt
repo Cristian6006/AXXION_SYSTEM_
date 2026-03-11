@@ -16,6 +16,6 @@ data class Rol(
     val description: String?,
     @Column(name = "created_at")
     val createdAt: Instant = Instant.now(),
-    @Column(name = "update_at")
-    var updateAt: Instant? = null
+    @Column(name = "updated_at")
+    var updatedAt: Instant? = null
 )
