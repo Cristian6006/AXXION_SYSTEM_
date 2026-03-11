@@ -42,6 +42,7 @@ data class RegisterRequest(
     )
     val password: String,
 
+
     val deviceName: String? = "Unknown Device"
 )
 
@@ -54,4 +55,54 @@ data class LoginRequest(
     val password: String,
 
     val deviceName:String? = "Unknown Device"
+)
+
+data class UserProfileResponse(
+    val id: Int?,
+    val nombreUsuario: String,
+    val nombre: String,
+    val nombre2: String,
+    val apellido1: String,
+    val apellido2: String,
+    val telefono: String?,
+    val departamento: String?,
+    val estado: String?,
+    val email: String,
+    val roles: List<String>
+)
+
+data class ForgotPasswordRequest (
+    @field:NotBlank(message = "El email es obligatorio")
+    @field:Email(message = "Formato de correo invalido")
+    val email: String
+)
+
+data class ResetPasswordRequest (
+    @field:NotBlank(message = "El código PIN es obligatorio")
+    val token: String,
+    @field:NotBlank(message = "La nueva contraseña es obligatoria")
+    @field:Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
+    @field:Pattern(
+        regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$",
+        message = "Debe contener una mayúscula, una minúscula y un número"
+    )
+    val nuevaPassword: String
+)
+
+data class BiometricRegisterRequest (
+    @field:NotBlank(message = "El ID del dispositivo es obligatorio")
+    val deviceId: String,
+
+    @field:NotBlank(message = "La llave pública es obligatoria")
+    val publicKey: String
+)
+
+data class BiometricLoginRequest(
+    @field:NotBlank
+    val deviceId: String,
+
+    @field:NotBlank
+    val signature: String,
+
+    val timestamp: Long
 )

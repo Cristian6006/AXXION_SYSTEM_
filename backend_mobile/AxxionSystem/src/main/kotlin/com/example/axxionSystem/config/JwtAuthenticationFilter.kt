@@ -25,8 +25,9 @@ class JwtAuthenticationFilter: OncePerRequestFilter(){
     ) {
         val authHeader = request.getHeader("Authorization")
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            val token = authHeader.substring(7)
+        if (authHeader != null && authHeader.startsWith("Bearer ", ignoreCase = true)) {
+            val token = authHeader.substring(7).trim()
+
 
             if(jwtUtil.validateToken(token)) {
                 val email = jwtUtil.extractUsername(token)
@@ -39,7 +40,10 @@ class JwtAuthenticationFilter: OncePerRequestFilter(){
                     authToken.details = WebAuthenticationDetailsSource().buildDetails(request)
 
                     SecurityContextHolder.getContext().authentication = authToken
+
                 }
+            } else {
+                println("El token falló la validación (Expirado o Firma Inválida)")
             }
         }
         filterChain.doFilter(request, response)
