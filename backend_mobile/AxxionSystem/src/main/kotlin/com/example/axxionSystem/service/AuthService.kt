@@ -178,8 +178,8 @@ class AuthService {
 
         return AuthResponse(accessToken, refreshTokenString)
     }
-
-    fun refreshAccessToken(refreshToken: String): String {
+    @org.springframework.transaction.annotation.Transactional
+    fun refreshAccessToken(refreshToken: String): AuthResponse  {
         val hashedIncomingToken = hashToken(refreshToken)
 
         val tokenEntity = refreshTokenRepository.findByTokenHash(hashedIncomingToken).
@@ -187,13 +187,26 @@ class AuthService {
 
         if (tokenEntity.expiresAt.isBefore(Instant.now())) {
             refreshTokenRepository.delete(tokenEntity)
-            throw IllegalArgumentException("Token de refresco expirado")
+            throw IllegalArgumentException("La sesión ha expirado. Inicie sesión nuevamente.")
         }
 
-        tokenEntity.lastUsedAt = Instant.now()
-        refreshTokenRepository.save(tokenEntity)
+        refreshTokenRepository.delete(tokenEntity)
 
-        return jwtUtil.generateAccessToken(tokenEntity.usuario.email)
+        val nuevoAccessToken = jwtUtil.generateAccessToken(tokenEntity.usuario.email)
+
+        val nuevoRefreshToken = UUID.randomUUID().toString()
+        val nuevoHashedToken = hashToken(nuevoRefreshToken)
+
+        val nuevoTokenEntity = RefreshToken(
+            usuario = tokenEntity.usuario,
+            tokenHash = nuevoHashedToken,
+            deviceName = tokenEntity.deviceName,
+            expiresAt = Instant.now().plusMillis(refreshExpirationMs),
+            createdAt = Instant.now()
+        )
+        refreshTokenRepository.save(nuevoTokenEntity)
+
+        return AuthResponse(nuevoAccessToken, nuevoRefreshToken)
     }
 
     private fun generarPinSeguro(): String {

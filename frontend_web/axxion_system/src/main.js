@@ -31,7 +31,7 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(pinia)
 app.use(router)
 app.mount('#app')
-...................................................................................................
+
 const updateSW = registerSW({
     onNeedRefresh() {
         console.log('New content available, click on reload button to update.')
