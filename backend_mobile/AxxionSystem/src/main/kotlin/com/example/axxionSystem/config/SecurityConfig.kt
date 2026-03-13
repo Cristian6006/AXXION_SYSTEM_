@@ -28,8 +28,10 @@ class SecurityConfig {
         http
             .csrf {it.disable()}
             .authorizeHttpRequests { auth ->
-                auth.requestMatchers("/api/auth/**", "/usuarios").permitAll() // PERMITIR PÚBLICAMENTE: Login, Registro, Refresh y /usuarios del AppBase
-                auth.anyRequest().authenticated() // BLOQUEAR TODO LO DEMÁS
+                auth
+                    .requestMatchers("/api/auth/**", "/usuarios").permitAll()
+                    .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-resources/**", "/webjars/**").permitAll()
+                    .anyRequest().authenticated()
             }
             .sessionManagement { session -> // NO GUARDAR ESTADO (STATELESS) -> Usar JWT
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

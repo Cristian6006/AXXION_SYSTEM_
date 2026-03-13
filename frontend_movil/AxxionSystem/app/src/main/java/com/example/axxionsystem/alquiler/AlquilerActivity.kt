@@ -2,26 +2,25 @@ package com.example.axxionsystem.alquiler
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.axxionsystem.R
 import com.example.axxionsystem.common.api.RetrofitInstance
+import com.example.axxionsystem.alquiler.model.AlquilerItem
 import com.example.axxionsystem.alquiler.model.SolicitudCreateRequest
 import com.example.axxionsystem.alquiler.model.SolicitudResponse
 import com.example.axxionsystem.alquiler.model.RentaResponse
-import com.example.axxionsystem.common.adapters.SimpleTextAdapter
+import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.view.LayoutInflater
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.example.axxionsystem.alquiler.model.EntregaFirmaRequest
 import com.example.axxionsystem.alquiler.model.EntregaResponse
 import com.example.axxionsystem.alquiler.model.DevolucionFirmaRequest
@@ -42,6 +41,12 @@ class AlquilerActivity : AppCompatActivity() {
     private lateinit var btnVolver: Button
     private lateinit var btnNueva: Button
     private lateinit var btnMisRentas: Button
+    private lateinit var tvEmpty: TextView
+
+    // Listas para mantener los datos
+    private var listaSolicitudes = mutableListOf<SolicitudResponse>()
+    private var listaRentas = mutableListOf<RentaResponse>()
+    private var mostrandoRentas = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +57,7 @@ class AlquilerActivity : AppCompatActivity() {
         btnVolver     = findViewById(R.id.btnVolver)
         btnNueva      = findViewById(R.id.btnNueva)
         btnMisRentas  = findViewById(R.id.btnMisRentas)
+        tvEmpty       = findViewById(R.id.tvEmpty)
 
         recycler.layoutManager = LinearLayoutManager(this)
 
@@ -61,13 +67,23 @@ class AlquilerActivity : AppCompatActivity() {
         cargarSolicitudes()
 
         btnNueva.setOnClickListener { mostrarDialogoNuevaSolicitud() }
-        btnMisRentas.setOnClickListener { cargarRentas(clienteId = 1) }
+        btnMisRentas.setOnClickListener { 
+            if (!mostrandoRentas) {
+                cargarRentas(clienteId = 1)
+            } else {
+                cargarSolicitudes()
+            }
+        }
     }
 
     // ─── Solicitudes ──────────────────────────────────
 
     private fun cargarSolicitudes() {
+        mostrandoRentas = false
+        btnMisRentas.text = "📦 Ver mis Rentas (cliente ID 1)"
         progressBar.visibility = View.VISIBLE
+        tvEmpty.visibility = View.GONE
+        
         RetrofitInstance.api.consultarSolicitudes()
             .enqueue(object : Callback<List<SolicitudResponse>> {
                 override fun onResponse(
@@ -76,8 +92,8 @@ class AlquilerActivity : AppCompatActivity() {
                 ) {
                     progressBar.visibility = View.GONE
                     if (response.isSuccessful) {
-                        val lista = response.body() ?: emptyList()
-                        mostrarSolicitudes(lista)
+                        listaSolicitudes = (response.body() ?: emptyList()).toMutableList()
+                        mostrarSolicitudes(listaSolicitudes)
                     } else {
                         Toast.makeText(this@AlquilerActivity, "Error ${response.code()}: al cargar solicitudes", Toast.LENGTH_SHORT).show()
                     }
@@ -90,33 +106,45 @@ class AlquilerActivity : AppCompatActivity() {
     }
 
     private fun mostrarSolicitudes(lista: List<SolicitudResponse>) {
-        val datos = lista.map {
-            "Solicitud #${it.id} | Estado: ${it.estado}\n" +
-            "Cliente ID: ${it.clienteId} | Cantidad: ${it.cantidadSolicitada ?: 1}\n" +
-            (if (!it.descripcionNecesidad.isNullOrBlank()) "Desc: ${it.descripcionNecesidad}" else "")
+        val items = lista.map { response ->
+            val estadoStr = response.estado?.name?.replace("_", " ") ?: "SIN ESTADO"
+            AlquilerItem(
+                id = response.id,
+                tipo = AlquilerItem.TipoItem.SOLICITUD,
+                estado = estadoStr,
+                clienteId = response.clienteId,
+                cantidad = response.cantidadSolicitada,
+                descripcion = response.descripcionNecesidad,
+                mostrarAcciones = false
+            )
         }
-        recycler.adapter = SimpleTextAdapter(datos, "#4FC3F7")
+        
+        if (items.isEmpty()) {
+            tvEmpty.visibility = View.VISIBLE
+            tvEmpty.text = "📋 No hay solicitudes de alquiler.\n¡Crea una nueva solicitud!"
+            recycler.visibility = View.GONE
+        } else {
+            tvEmpty.visibility = View.GONE
+            recycler.visibility = View.VISIBLE
+            recycler.adapter = AlquilerAdapter(items)
+        }
     }
 
     private fun mostrarDialogoNuevaSolicitud() {
-        val dialogView = LayoutInflater.from(this).inflate(android.R.layout.simple_list_item_1, null)
-        val layout = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(48, 24, 48, 16)
-        }
-        val inputClienteId = EditText(this).apply { hint = "Cliente ID (número)"; inputType = android.text.InputType.TYPE_CLASS_NUMBER }
-        val inputDesc = EditText(this).apply { hint = "Descripción de necesidad" }
-        val inputCantidad = EditText(this).apply { hint = "Cantidad (número)"; inputType = android.text.InputType.TYPE_CLASS_NUMBER; setText("1") }
-        val inputProductoAlt = EditText(this).apply { hint = "Producto alternativo (opcional)" }
-        layout.addView(inputClienteId)
-        layout.addView(inputCantidad)
-        layout.addView(inputDesc)
-        layout.addView(inputProductoAlt)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_nueva_solicitud, null)
+        
+        val inputClienteId = dialogView.findViewById<TextInputEditText>(R.id.inputClienteId)
+        val inputCantidad = dialogView.findViewById<TextInputEditText>(R.id.inputCantidad)
+        val inputDescripcion = dialogView.findViewById<TextInputEditText>(R.id.inputDescripcion)
+        val inputProductoAlt = dialogView.findViewById<TextInputEditText>(R.id.inputProductoAlt)
 
-        AlertDialog.Builder(this)
+        // Valores por defecto
+        inputCantidad.setText("1")
+
+        AlertDialog.Builder(this, R.style.Theme_AxxionSystem_Dialog)
             .setTitle("Nueva Solicitud de Alquiler")
-            .setView(layout)
-            .setPositiveButton("Crear") { _, _ ->
+            .setView(dialogView)
+            .setPositiveButton("Crear Solicitud") { _, _ ->
                 val clienteId = inputClienteId.text.toString().toIntOrNull()
                 if (clienteId == null) {
                     Toast.makeText(this, "El ID de cliente debe ser un número", Toast.LENGTH_SHORT).show()
@@ -125,7 +153,7 @@ class AlquilerActivity : AppCompatActivity() {
                 val request = SolicitudCreateRequest(
                     clienteId = clienteId,
                     cantidadSolicitada = inputCantidad.text.toString().toIntOrNull() ?: 1,
-                    descripcionNecesidad = inputDesc.text.toString().ifBlank { null },
+                    descripcionNecesidad = inputDescripcion.text.toString().ifBlank { null },
                     nombreProductoAlternativo = inputProductoAlt.text.toString().ifBlank { null }
                 )
                 crearSolicitud(request)
@@ -157,17 +185,21 @@ class AlquilerActivity : AppCompatActivity() {
     // ─── Rentas ───────────────────────────────────────
 
     private fun cargarRentas(clienteId: Int) {
+        mostrandoRentas = true
+        btnMisRentas.text = "📋 Ver Solicitudes"
         progressBar.visibility = View.VISIBLE
+        tvEmpty.visibility = View.GONE
+        
         RetrofitInstance.api.rentasPorCliente(clienteId)
             .enqueue(object : Callback<List<RentaResponse>> {
                 override fun onResponse(call: Call<List<RentaResponse>>, response: Response<List<RentaResponse>>) {
                     progressBar.visibility = View.GONE
                     if (response.isSuccessful) {
-                        val lista = response.body() ?: emptyList()
-                        if (lista.isEmpty()) {
+                        listaRentas = (response.body() ?: emptyList()).toMutableList()
+                        if (listaRentas.isEmpty()) {
                             Toast.makeText(this@AlquilerActivity, "Sin rentas para el cliente #$clienteId", Toast.LENGTH_SHORT).show()
                         } else {
-                            mostrarRentas(lista)
+                            mostrarRentas(listaRentas)
                         }
                     } else {
                         Toast.makeText(this@AlquilerActivity, "Error ${response.code()}", Toast.LENGTH_SHORT).show()
@@ -181,21 +213,37 @@ class AlquilerActivity : AppCompatActivity() {
     }
 
     private fun mostrarRentas(lista: List<RentaResponse>) {
-        val datos = lista.map {
-            "Renta #${it.id} | Estado: ${it.estado}\n" +
-            "Inicio: ${it.fechaInicio?.substringBefore("T") ?: "–"}\n" +
-            "Fin previsto: ${it.fechaFinPrevista?.substringBefore("T") ?: "–"}\n" +
-            "Items: ${it.items.size}"
+        val items = lista.map { response ->
+            val estadoStr = response.estado?.name?.replace("_", " ") ?: "SIN ESTADO"
+            AlquilerItem(
+                id = response.id,
+                tipo = AlquilerItem.TipoItem.RENTA,
+                estado = estadoStr,
+                clienteId = response.clienteId,
+                fechaInicio = response.fechaInicio?.substringBefore("T"),
+                fechaFinPrevista = response.fechaFinPrevista?.substringBefore("T"),
+                itemsCount = response.items.size,
+                mostrarAcciones = true
+            )
         }
-        recycler.adapter = SimpleTextAdapter(datos, "#4FC3F7") { position ->
-            val renta = lista[position]
-            mostrarOpcionesRenta(renta)
+        
+        if (items.isEmpty()) {
+            tvEmpty.visibility = View.VISIBLE
+            tvEmpty.text = "📦 No hay rentals activos.\n¡Crea una solicitud de alquiler!"
+            recycler.visibility = View.GONE
+        } else {
+            tvEmpty.visibility = View.GONE
+            recycler.visibility = View.VISIBLE
+            recycler.adapter = AlquilerAdapter(items) { position ->
+                val renta = lista[position]
+                mostrarOpcionesRenta(renta)
+            }
         }
     }
 
     private fun mostrarOpcionesRenta(renta: RentaResponse) {
-        val opciones = arrayOf("Firmar Entrega (Dirección ID 1)", "Firmar Devolución", "Cerrar")
-        AlertDialog.Builder(this)
+        val opciones = arrayOf("✍️ Firmar Entrega (Dirección obra)", "↩️ Firmar Devolución", "Cerrar")
+        AlertDialog.Builder(this, R.style.Theme_AxxionSystem_Dialog)
             .setTitle("Opciones Renta #${renta.id}")
             .setItems(opciones) { _, which ->
                 when (which) {
@@ -207,20 +255,21 @@ class AlquilerActivity : AppCompatActivity() {
     }
 
     private fun mostrarDialogoFirmaEntrega(renta: RentaResponse) {
-        val layout = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(48, 24, 48, 16)
-        }
-        val inputDir = EditText(this).apply { hint = "ID Dirección (número)"; inputType = android.text.InputType.TYPE_CLASS_NUMBER; setText("1") }
-        val inputFirma = EditText(this).apply { hint = "Firma Digital (texto/Base64)" }
-        val inputNotas = EditText(this).apply { hint = "Notas de entrega" }
-        layout.addView(inputDir); layout.addView(inputFirma); layout.addView(inputNotas)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_firma_entrega, null)
+        
+        val tvRentaId = dialogView.findViewById<TextView>(R.id.tvRentaId)
+        val inputDireccionId = dialogView.findViewById<TextInputEditText>(R.id.inputDireccionId)
+        val inputFirma = dialogView.findViewById<TextInputEditText>(R.id.inputFirma)
+        val inputNotas = dialogView.findViewById<TextInputEditText>(R.id.inputNotas)
 
-        AlertDialog.Builder(this)
-            .setTitle("Firmar Entrega Renta #${renta.id}")
-            .setView(layout)
-            .setPositiveButton("Firmar") { _, _ ->
-                val dirId = inputDir.text.toString().toIntOrNull() ?: 1
+        tvRentaId.text = "Renta #${renta.id}"
+        inputDireccionId.setText("1")
+
+        AlertDialog.Builder(this, R.style.Theme_AxxionSystem_Dialog)
+            .setTitle("Firmar Entrega")
+            .setView(dialogView)
+            .setPositiveButton("Firmar Entrega") { _, _ ->
+                val dirId = inputDireccionId.text.toString().toIntOrNull() ?: 1
                 val request = EntregaFirmaRequest(
                     rentaId = renta.id,
                     direccionId = dirId,
@@ -230,7 +279,7 @@ class AlquilerActivity : AppCompatActivity() {
                 RetrofitInstance.api.firmarEntrega(request).enqueue(object : Callback<EntregaResponse> {
                     override fun onResponse(call: Call<EntregaResponse>, response: Response<EntregaResponse>) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@AlquilerActivity, "✅ Entrega firmada", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AlquilerActivity, "✅ Entrega firmada correctamente", Toast.LENGTH_SHORT).show()
                             cargarRentas(renta.clienteId)
                         } else {
                             Toast.makeText(this@AlquilerActivity, "Error: ${response.code()}", Toast.LENGTH_SHORT).show()
@@ -246,19 +295,19 @@ class AlquilerActivity : AppCompatActivity() {
     }
 
     private fun mostrarDialogoFirmaDevolucion(renta: RentaResponse) {
-        val layout = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(48, 24, 48, 16)
-        }
-        val inputFirma = EditText(this).apply { hint = "Firma Digital" }
-        val inputRecibe = EditText(this).apply { hint = "Nombre de quien recibe" }
-        val inputNotas = EditText(this).apply { hint = "Notas generales" }
-        layout.addView(inputFirma); layout.addView(inputRecibe); layout.addView(inputNotas)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_firma_devolucion, null)
+        
+        val tvRentaId = dialogView.findViewById<TextView>(R.id.tvRentaId)
+        val inputFirma = dialogView.findViewById<TextInputEditText>(R.id.inputFirma)
+        val inputRecibe = dialogView.findViewById<TextInputEditText>(R.id.inputRecibe)
+        val inputNotas = dialogView.findViewById<TextInputEditText>(R.id.inputNotas)
 
-        AlertDialog.Builder(this)
-            .setTitle("Firmar Devolución Renta #${renta.id}")
-            .setView(layout)
-            .setPositiveButton("Firmar") { _, _ ->
+        tvRentaId.text = "Renta #${renta.id}"
+
+        AlertDialog.Builder(this, R.style.Theme_AxxionSystem_Dialog)
+            .setTitle("Firmar Devolución")
+            .setView(dialogView)
+            .setPositiveButton("Firmar Devolución") { _, _ ->
                 val request = DevolucionFirmaRequest(
                     rentaId = renta.id,
                     firmaDigital = inputFirma.text.toString(),
@@ -268,7 +317,7 @@ class AlquilerActivity : AppCompatActivity() {
                 RetrofitInstance.api.firmarDevolucion(request).enqueue(object : Callback<DevolucionResponse> {
                     override fun onResponse(call: Call<DevolucionResponse>, response: Response<DevolucionResponse>) {
                         if (response.isSuccessful) {
-                            Toast.makeText(this@AlquilerActivity, "✅ Devolución firmada", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AlquilerActivity, "✅ Devolución firmada correctamente", Toast.LENGTH_SHORT).show()
                             cargarRentas(renta.clienteId)
                         } else {
                             Toast.makeText(this@AlquilerActivity, "Error: ${response.code()}", Toast.LENGTH_SHORT).show()

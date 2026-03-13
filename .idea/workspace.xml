@@ -5,24 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3329dcbe-dd5f-400c-a53c-6661a39554b5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/axxion_api/tests/Feature/UsuarioTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/axxion_api/app/Http/Controllers/Api/UsuarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/axxion_api/app/Http/Controllers/Api/UsuarioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/sql/sistemarenta.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sql/sistemarenta.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/config/SecurityConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/config/SecurityConfig.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/controller/AuthController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/controller/AuthController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/RefreshToken.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/RefreshToken.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/Rol.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/Rol.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/model/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/AlquilerService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/AlquilerService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/service/UserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/src/plugins/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/src/plugins/axios.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/src/stores/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/src/stores/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/vite.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend_web/src/views/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/src/views/layout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,32 +52,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Spring Boot.AxxionSystemApplication.executor": "Run",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "DEV__julian",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/etc/apache2/sites-available/axxion/AXXION_SYSTEM_",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AxxionSystemApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;DEV__julian&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/etc/apache2/sites-available/axxion/AXXION_SYSTEM_&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="AxxionSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="AxxionSystem" />
@@ -121,6 +104,7 @@
       <updated>1772198641378</updated>
       <workItem from="1772198644058" duration="4601000" />
       <workItem from="1773191190237" duration="1155000" />
+      <workItem from="1773207490319" duration="347000" />
     </task>
     <servers />
   </component>

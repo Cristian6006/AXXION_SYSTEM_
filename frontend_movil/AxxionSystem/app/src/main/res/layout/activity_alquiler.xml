@@ -94,6 +94,18 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="4dp"/>
 
+        <!-- Mensaje cuando no hay datos -->
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#78909C"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:layout_marginTop="48dp"/>
+
         <!-- Lista de Items (Solicitudes o Rentas) -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

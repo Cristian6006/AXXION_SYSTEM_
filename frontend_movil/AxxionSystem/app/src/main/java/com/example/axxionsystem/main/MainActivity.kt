@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
         ).bind()
     }
 
-    private fp.exampleun goToDashboard() {
+    private fun goToDashboard() {
         startActivity(Intent(this, DashboardActivity::class.java))
         finish() // Add finish() to prevent returning to MainActivity
     }
