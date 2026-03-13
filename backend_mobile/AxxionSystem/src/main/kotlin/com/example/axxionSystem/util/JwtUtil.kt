@@ -38,11 +38,12 @@ class JwtUtil {
     }
 
     fun validateToken(token: String): Boolean {
-        try {
+        return try {
             Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
-            return true
+            true
         } catch (e: Exception) {
-            return false
+            println("ERROR JWT EXACTO: ${e.javaClass.simpleName} - ${e.message}")
+             false
         }
     }
 

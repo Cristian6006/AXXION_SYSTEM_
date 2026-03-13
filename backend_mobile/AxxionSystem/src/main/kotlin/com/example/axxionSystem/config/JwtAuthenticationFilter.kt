@@ -28,7 +28,6 @@ class JwtAuthenticationFilter: OncePerRequestFilter(){
         if (authHeader != null && authHeader.startsWith("Bearer ", ignoreCase = true)) {
             val token = authHeader.substring(7).trim()
 
-
             if(jwtUtil.validateToken(token)) {
                 val email = jwtUtil.extractUsername(token)
 

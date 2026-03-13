@@ -43,7 +43,7 @@ class AuthController {
     @PostMapping("/registro")
     fun register(@Valid @RequestBody request: RegisterRequest): ResponseEntity<Any> {
         authService.register(request)
-        return ResponseEntity.status(HttpStatus.CREATED).body("")
+        return ResponseEntity.status(HttpStatus.CREATED).body(request)
     }
 
     @PostMapping("/login")
@@ -89,20 +89,32 @@ class AuthController {
 
     @PostMapping("/refresh")
     fun refreshToken(
-        @CookieValue(name = "refresh_token", required = false) refreshToken: String?
+        @CookieValue(name = "refresh_token", required = false) refreshToken: String?,
+        response: HttpServletResponse
     ): ResponseEntity<Any> {
         if (refreshToken.isNullOrBlank()) {
             return ResponseEntity.status(401).body(mapOf("error" to "Refresh token no encontrado. Inicie sesion nuevamente"))
         }
         return try {
-            val newAccessToken = authService.refreshAccessToken(refreshToken)
+            val authResponse = authService.refreshAccessToken(refreshToken)
+
+            val nuevaRefreshCookie = ResponseCookie.from("refresh_token", authResponse.refreshToken)
+                .httpOnly(true)
+                .secure(false)
+                .path("/api/auth/refresh")
+                .maxAge(7 * 24 * 60 * 60)
+                .build()
+
+            response.addHeader(HttpHeaders.SET_COOKIE, nuevaRefreshCookie.toString())
 
             ResponseEntity.ok(mapOf(
-                "accessToken" to newAccessToken,
+                "accessToken" to authResponse.accessToken,
                 "tokenType" to "Bearer ",
                 "expiresIn" to 900
             ))
         } catch (e: IllegalArgumentException) {
+            val deleteCookie = ResponseCookie.from("refresh_token", "").maxAge(0).path("/api/auth/refresh").build()
+            response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString())
             ResponseEntity.status(401).body(mapOf("error" to e.message))
         }
     }

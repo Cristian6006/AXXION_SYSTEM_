@@ -18,7 +18,7 @@ class CustomUserDetailsService: UserDetailsService {
         val user = userRepository.findByEmail(email)
             .orElseThrow {UsernameNotFoundException("Usuario no enccontrado con email: $email")}
 
-        val autoridad = user.roles.map {
+        var autoridad = user.roles.map {
             SimpleGrantedAuthority(it.code)
         }
 
