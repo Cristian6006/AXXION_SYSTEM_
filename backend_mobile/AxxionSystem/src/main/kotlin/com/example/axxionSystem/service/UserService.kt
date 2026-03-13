@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
+import com.example.axxionSystem.model.User
 
 @Service
 class UserService {
@@ -37,6 +38,10 @@ class UserService {
             estado = usuario.state,
             roles = usuario.roles.map { it.name }
         )
+    }
+
+    fun getAllUsers(): List<User> {
+        return userRepository.findAll()
     }
 
 

@@ -34,8 +34,10 @@ class SecurityConfig {
             .cors { it.configurationSource(corsConfigurationSource()) }
             .csrf {it.disable()}
             .authorizeHttpRequests { auth ->
-                auth.requestMatchers("/api/auth/**", "/api/biometria/**").permitAll()
-                auth.anyRequest().authenticated()
+                auth
+                    .requestMatchers("/api/auth/**", "/api/biometria/**").permitAll()
+                    .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-resources/**", "/webjars/**").permitAll()
+                    .anyRequest().authenticated()
             }
             .exceptionHandling { exceptions ->
                 exceptions.authenticationEntryPoint(customAuthenticationEntryPoint())
