@@ -52,7 +52,7 @@ class AuthController {
 
         val refreshCookie = ResponseCookie.from("refresh_token", authResponse.refreshToken)
             .httpOnly(true)
-            .secure(false)
+            .secure(true)
             .path("/api/auth/refresh")
             .maxAge(7*24*60*60)
             .build()
@@ -73,7 +73,7 @@ class AuthController {
 
         val refreshCookie = ResponseCookie.from("refresh_token", authResponse.refreshToken)
             .httpOnly(true)
-            .secure(false)
+            .secure(true)
             .path("/api/auth/refresh")
             .maxAge(7 * 24 * 60 * 60)
             .build()
@@ -100,7 +100,7 @@ class AuthController {
 
             val nuevaRefreshCookie = ResponseCookie.from("refresh_token", authResponse.refreshToken)
                 .httpOnly(true)
-                .secure(false)
+                .secure(true)
                 .path("/api/auth/refresh")
                 .maxAge(7 * 24 * 60 * 60)
                 .build()
@@ -130,7 +130,7 @@ class AuthController {
 
         val deleteCookie = ResponseCookie.from("refresh_token", "")
             .httpOnly(true)
-            .secure(false)
+            .secure(true)
             .path("/api/auth/refresh")
             .maxAge(0)
             .build()
