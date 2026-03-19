@@ -299,15 +299,24 @@ export const useMaintenanceStore = defineStore('maintenance', () => {
     }
 
     if (filters.estado) {
-      filtered = filtered.filter(maintenance => maintenance.estado_mantenimiento === filters.estado);
+      filtered = filtered.filter(maintenance => 
+        maintenance.estado_mantenimiento && 
+        maintenance.estado_mantenimiento.toUpperCase() === filters.estado.toUpperCase()
+      );
     }
 
     if (filters.tipo) {
-      filtered = filtered.filter(maintenance => maintenance.tipo_mantenimiento === filters.tipo);
+      filtered = filtered.filter(maintenance => 
+        maintenance.tipo_mantenimiento && 
+        maintenance.tipo_mantenimiento.toUpperCase() === filters.tipo.toUpperCase()
+      );
     }
 
     if (filters.responsable) {
-      filtered = filtered.filter(maintenance => maintenance.responsable === filters.responsable);
+      // Comparación flexible para manejar IDs numéricos y strings
+      filtered = filtered.filter(maintenance => 
+        maintenance.responsable == filters.responsable
+      );
     }
 
     if (filters.fecha_inicio) {

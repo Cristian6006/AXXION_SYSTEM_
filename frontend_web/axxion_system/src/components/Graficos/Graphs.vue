@@ -3,111 +3,77 @@
         <section class="flex flex-wrap gap-6">
             <fwb-card class="w-sm flex-1 min-w-[300px] bg-linear-to-br from-[#00c54e] to-[#01a93f]">
                 <div class="p-5">
-                    <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900  dark:text-white">
-                        Items Totales
-                    </h5>
-                    <p class="text-4xl font-extrabold text-white flex justify-between">
-                        <a>
-                            {{ itemsTotales }}
-                        </a>
-                        <a class="bg-[#32c36a] rounded-full p-2">
-                            <font-awesome-icon icon="fa-solid fa-cubes" />
-                        </a>
-                    </p>
+                    <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Items Totales</h5>
+                    <p class="text-4xl font-extrabold text-white">{{ itemsTotales }}</p>
                 </div>
             </fwb-card>
-            <fwb-card class="w-sm flex-1 min-w-[300px]">
+            <fwb-card class="w-sm flex-1 min-w-[300px] bg-linear-to-br from-[#9914fb] to-[#ac45ff]">
                 <div class="p-5">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900  dark:text-white">
                         Valor Total del Inventario
                     </h5>
-                    <p class="text-4xl font-extrabold text-emerald-600 dark:text-emerald-400">
-                        ${{ valorTotal.toLocaleString() }}
+                    <p class="text-3xl font-extrabold text-white flex justify-between">
+                        <b>
+                            ${{ valorTotal.toLocaleString() }}
+                        </b>
+                        <b class="bg-[#b254ff] rounded-full p-2">
+                            <font-awesome-icon icon="fa-solid fa-dollar-sign" />
+                        </b>
                     </p>
                 </div>
             </fwb-card>
-            <fwb-card class="w-sm flex-1 min-w-[300px]">
+            <fwb-card class="w-sm flex-1 min-w-[300px] bg-linear-to-br from-[#f44a01] to-[#fe6900]">
                 <div class="p-5">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900  dark:text-white">
                         Equipos disponibles
                     </h5>
-                    <p class="text-4xl font-extrabold text-indigo-600 dark:text-indigo-400">
-                        {{ equiposDisponibles }}
-                    </p>
+                    <div class="text-4xl font-extrabold text-white flex justify-between" >
+                        <div>
+                            {{ equiposDisponibles }}
+                        </div>
+                        <div class="bg-[#fb7532] rounded-full p-2">
+                            <font-awesome-icon icon="fa-solid fa-screwdriver-wrench" />
+                        </div>
+                    </div>
                 </div>
             </fwb-card>
         </section>
         <br><br>
+        <!-- SELECTOR -->
         <h4>Selecciona un gráfico</h4>
-        <select v-model="selected" class="bg-gray-800  rounded-xl text-amber-50 container">
-                <option class="rounded-xl text-amber-50 container" disabled value="">Selecciona un gráfico</option>
-                <option>Lineal</option>
-                <option>Barra</option>
-                <option>Pastel</option>
-            </select>
+        <select v-model="selectedType" class="bg-gray-800 rounded-xl text-amber-50 container p-2">
+            <option disabled value="">Selecciona un gráfico</option>
+            <option value="line">Lineal</option>
+            <option value="bar">Barra</option>
+            <option value="pie">Pastel</option>
+        </select>
+        
         <br><br>
-        <div v-if="selected === 'Lineal'">
-            <section class="flex flex-wrap gap-6">
-                <!-- Gráfico por Categoría -->
-                <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[450px]">
-                    <h2 class="font-bold text-2xl mb-4">Equipos por Categoría</h2>
-                    <v-chart :option="chartByCategory" style="height: 300px;" autoresize />
-                </article>
-                <!-- Gráfico por Valor -->
-                <article class="bg-gray-800 shadow-xl/30 text-white rounded-md pl-4 p-4 flex-1 min-w-[450px]">
-                    <h2 class="font-bold text-2xl mb-4">Valor Total por Categoría</h2>
-                    <v-chart :option="chartByValue" style="height: 300px;" autoresize />
-                </article>
-                <!-- Gráfico por Condicion -->
-                <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[450px]">
-                    <h2 class="font-bold text-2xl mb-4">Equipos por Condición</h2>
-                    <v-chart :option="chartByCondition" style="height: 300px;" autoresize />
-                </article>    
-            </section>
-        </div>
-        <div v-else-if="selected === 'Barra'">
-            <section class="flex flex-wrap gap-6">
-                <!-- Gráfico por Categoría -->
-                <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[450px]">
-                    <h2 class="font-bold text-2xl mb-4">Equipos por Categoría</h2>
-                    <v-chart :option="chartByCategoryB" style="height: 300px;" autoresize />
-                </article>
-                <!-- Gráfico por Valor -->
-                <article class="bg-gray-800 shadow-xl/30 text-white rounded-md pl-4 p-4 flex-1 min-w-[450px]">
-                    <h2 class="font-bold text-2xl mb-4">Valor Total por Categoría</h2>
-                    <v-chart :option="chartByValueB" style="height: 300px;" autoresize />
-                </article>
-                <!-- Gráfico por Condicion -->
-                <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[450px]">
-                    <h2 class="font-bold text-2xl mb-4">Equipos por Condición</h2>
-                    <v-chart :option="chartByConditionB" style="height: 300px;" autoresize />
-                </article>    
-            </section>
-        </div>
-        <div v-else-if="selected === 'Pastel'">
-            <section class="flex flex-wrap gap-6">
-                <!-- Gráfico por Categoría -->
-                <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[450px]">
-                    <h2 class="font-bold text-2xl mb-4">Equipos por Categoría</h2>
-                    <v-chart :option="chartByCategoryP" style="height: 300px;" autoresize />
-                </article>
-                <!-- Gráfico por Valor -->
-                <article class="bg-gray-800 shadow-xl/30 text-white rounded-md pl-4 p-4 flex-1 min-w-[450px]">
-                    <h2 class="font-bold text-2xl mb-4">Valor Total por Categoría</h2>
-                    <v-chart :option="chartByValueP" style="height: 300px;" autoresize />
-                </article>
-                <!-- Gráfico por Condicion -->
-                <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[450px]">
-                    <h2 class="font-bold text-2xl mb-4">Equipos por Condición</h2>
-                    <v-chart :option="chartByConditionP" style="height: 300px;" autoresize />
-                </article>    
-            </section>
-        </div>
+        <section class="flex flex-wrap gap-6">
+            
+            <!-- Gráfico 1: Categoría -->
+            <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[450px]">
+                <h2 class="font-bold text-2xl mb-4">Equipos por Categoría</h2>
+                <v-chart :option="chartOptionsCategory" style="height: 300px;" autoresize />
+            </article>
+
+            <!-- Gráfico 2: Valor -->
+            <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[450px]">
+                <h2 class="font-bold text-2xl mb-4">Valor Total por Categoría</h2>
+                <v-chart :option="chartOptionsValue" style="height: 300px;" autoresize />
+            </article>
+
+            <!-- Gráfico 3: Condición -->
+            <article class="bg-gray-800 shadow-xl/30 text-white rounded-md p-4 flex-1 min-w-[450px]">
+                <h2 class="font-bold text-2xl mb-4">Equipos por Condición</h2>
+                <v-chart :option="chartOptionsCondition" style="height: 300px;" autoresize />
+            </article>    
+        </section>
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import InventoryService from '@/services/InventoryService'
 import ReportService from '@/services/ReportService'
 import VChart from 'vue-echarts'
@@ -115,418 +81,124 @@ import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { PieChart, BarChart, LineChart } from 'echarts/charts'
 import { FwbCard } from 'flowbite-vue'
-import {
-    TitleComponent,
-    TooltipComponent,
-    LegendComponent,
-    GridComponent
-} from 'echarts/components'
+import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
 
-use([
-    CanvasRenderer,
-    PieChart,
-    BarChart,
-    LineChart,
-    TitleComponent,
-    TooltipComponent,
-    LegendComponent,
-    GridComponent
-])
+use([CanvasRenderer, PieChart, BarChart, LineChart, TitleComponent, TooltipComponent, LegendComponent, GridComponent])
 
-const chartByCategory = ref({})
-const chartByCategoryP = ref({})
-const chartByCategoryB = ref({})
-const chartByValue = ref({})
-const chartByValueB = ref({})
-const chartByValueP = ref({})
-const chartByCondition = ref({})
-const chartByConditionB = ref({})
-const chartByConditionP = ref({})
+// ESTADO: Variables simples para datos 
 const itemsTotales = ref(0)
 const valorTotal = ref(0)
 const equiposDisponibles = ref(0)
-const selected = ref('Lineal')
+const selectedType = ref('line') // 'line', 'bar', 'pie'
 
+// Guardamos solo los DATOS PROCESADOS
+const rawData = ref({
+    categories: {}, 
+    values: {},     
+    conditions: {}  
+})
 
+// Esta función crea la configuración de ECharts dinámicamente
+const getChartConfig = (type, dataObj, colorHex) => {
+    const labels = Object.keys(dataObj);
+    const values = Object.values(dataObj);
+    
+    // Configuración base común (estilos de texto, tooltip)
+    const baseConfig = {
+        tooltip: { trigger: type === 'pie' ? 'item' : 'axis' },
+        legend: { textStyle: { color: "#fff" }, top: '5%' },
+        grid: { containLabel: true, left: '3%', right: '4%', bottom: '3%' },
+    };
+
+    // Configuración específica según el tipo seleccionado
+    if (type === 'pie') {
+        return {
+            ...baseConfig,
+            series: [{
+                type: 'pie',
+                radius: ['40%', '70%'],
+                itemStyle: { borderRadius: 10, borderColor: '#121212', borderWidth: 1 },
+                label: { show: false, position: 'center' },
+                emphasis: { label: { show: true, fontSize: 20, fontWeight: 'bold' } },
+                // Para pastel necesitamos transformar los datos a [{name: 'A', value: 10}]
+                data: labels.map((label, index) => ({ name: label, value: values[index] }))
+            }]
+        };
+    } else {
+        // Configuración para Linea y Barra (comparten ejes X/Y)
+        return {
+            ...baseConfig,
+            xAxis: { 
+                type: 'category', 
+                data: labels,
+                axisLabel: { color: "#fff" },
+                axisLine: { lineStyle: { color: "#fff" } }
+            },
+            yAxis: { 
+                type: 'value',
+                axisLabel: { color: "#fff" },
+                splitLine: { lineStyle: { color: "rgba(255, 255, 255, 0.2)" } }
+            },
+            series: [{
+                data: values,
+                type: type, // 'line' o 'bar'
+                smooth: true, // Hace la línea curva si es lineal
+                areaStyle: type === 'line' ? { opacity: 0.3 } : null,
+                itemStyle: { color: colorHex },
+                color: colorHex // Color principal
+            }]
+        };
+    }
+}
+
+// Cada vez que 'selectedType' o 'rawData' cambien, estas variables se recalculan solas.
+
+const chartOptionsCategory = computed(() => {
+    return getChartConfig(selectedType.value, rawData.value.categories, '#FA15DF');
+});
+
+const chartOptionsValue = computed(() => {
+    return getChartConfig(selectedType.value, rawData.value.values, '#6317FA');
+});
+
+const chartOptionsCondition = computed(() => {
+    return getChartConfig(selectedType.value, rawData.value.conditions, '#3DFA17');
+});
 
 onMounted(async () => {
     try {
-        const data = await ReportService.getMetrics()
-        itemsTotales.value = data.items_totales
-        valorTotal.value = data.valor_total
-        equiposDisponibles.value = data.equipos_disponibles
+        // Carga métricas rápidas
+        const metrics = await ReportService.getMetrics();
+        itemsTotales.value = metrics.items_totales;
+        valorTotal.value = metrics.valor_total;
+        equiposDisponibles.value = metrics.equipos_disponibles;
+
+        // Carga inventario completo
+        const items = await InventoryService.getProducts();
+        
+        // Procesamos los datos y los guardamos en rawData
+        const cats = {};
+        const vals = {};
+        const conds = {};
+
+        items.forEach(item => {
+            const cat = item.categoria || 'Sin categoría';
+            cats[cat] = (cats[cat] || 0) + 1;
+            vals[cat] = (vals[cat] || 0) + parseFloat(item.valor_actual || 0);
+            
+            const cond = item.condicion || 'No definida';
+            conds[cond] = (conds[cond] || 0) + 1;
+        });
+
+        // Actualizamos la referencia reactiva una sola vez
+        rawData.value = {
+            categories: cats,
+            values: vals,
+            conditions: conds
+        };
+
     } catch (error) {
-        console.error('Error cargando métricas:', error)
+        console.error('Error cargando datos:', error);
     }
-
-
-try {
-    const items = await InventoryService.getProducts() 
-    console.log('Inventario (productos):', items)
-
-    const categorias = {}
-    const valores = {}
-    const condiciones = {}
-
-    items.forEach(item => {
-        const categoria = item.categoria || 'Sin categoría'
-        categorias[categoria] = (categorias[categoria] || 0) + 1
-        valores[categoria] = (valores[categoria] || 0) + parseFloat(item.valor_actual || 0)
-        const condicion = item.condicion || 'No definida'
-        condiciones[condicion] = (condiciones[condicion] || 0) + 1
-    })
-
-    // GRAFICOS LINEALES
-
-    // EQUIPOS POR CATEGORIA
-
-    chartByCategory.value = {
-        tooltip: { 
-            trigger: 'axis', 
-            axisPointer: {
-                type: 'cross',
-                label: {
-                    backgroundColor: '#6a7985'
-                }
-            } 
-        },
-        legend: { 
-            top: '5%', 
-            left: 'center',
-            textStyle: {
-                color: "rgba(255, 255, 255)"
-            }
-        },
-        xAxis: {  
-            boundaryGap: false,
-            type: 'category', data: Object.keys(categorias), 
-            axisLine: {
-                lineStyle: {
-                    color: "rgba(255, 255, 255)"
-            }
-    }
-        },
-        yAxis: { 
-            type: 'value',
-            splitLine: {
-                lineStyle: {
-                    color: "rgba(255, 255, 255)"
-                }
-            }
-        },
-        axisLabel: {
-            color: "rgba(255, 255, 255)"
-        },
-        series: [
-            {
-            name: 'Equipos',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {
-                color: "rgba(99, 23, 250)"
-            },
-            emphasis: {
-                focus: 'series'
-            },
-            data: Object.values(categorias),
-            colorBy: "series"
-            }
-        ]
-        
-    }
-
-    // VALOR TOTAL
-
-    chartByValue.value = {
-        tooltip: { 
-            trigger: 'axis', 
-            axisPointer: {
-                type: 'cross',
-                label: {
-                    backgroundColor: '#6a7985'
-                }
-            } 
-        },
-        legend: { 
-            top: '5%', 
-            left: 'center',
-            textStyle: {
-                color: "rgba(255, 255, 255)"
-            }
-        },
-        xAxis: {  
-            boundaryGap: false,
-            type: 'category', data: Object.keys(valores), 
-            axisLine: {
-                lineStyle: {
-                    color: "rgba(255, 255, 255)"
-            }
-    }
-        },
-        yAxis: { 
-            type: 'value',
-            splitLine: {
-                lineStyle: {
-                    color: "rgba(255, 255, 255)"
-                }
-            }
-        },
-        axisLabel: {
-            color: "rgba(255, 255, 255)"
-        },
-        series: [
-            {
-            name: 'Equipos',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {
-                color: "rgba(250, 212, 23)"
-            },
-            emphasis: {
-                focus: 'series'
-            },
-            data: Object.values(valores),
-            colorBy: "series"
-            }
-        ]
-    }
-
-    // EQUIPOS POR CONDICION
-
-    chartByCondition.value = {
-        tooltip: { 
-            trigger: 'axis', 
-            axisPointer: {
-                type: 'cross',
-                label: {
-                    backgroundColor: '#6a7985'
-                }
-            } 
-        },
-        legend: { 
-            top: '5%', 
-            left: 'center',
-            textStyle: {
-                color: "rgba(255, 255, 255)"
-            }
-        },
-        xAxis: {  
-            boundaryGap: false,
-            type: 'category', data: Object.keys(condiciones), 
-            axisLine: {
-                lineStyle: {
-                    color: "rgba(255, 255, 255)"
-            }
-    }
-        },
-        yAxis: { 
-            type: 'value',
-            splitLine: {
-                lineStyle: {
-                    color: "rgba(255, 255, 255)"
-                }
-            }
-        },
-        axisLabel: {
-            color: "rgba(255, 255, 255)"
-        },
-        series: [
-            {
-            name: 'Equipos',
-            type: 'line',
-            stack: 'Total',
-            areaStyle: {
-                color: "rgba(61, 250, 23)"
-            },
-            emphasis: {
-                focus: 'series'
-            },
-            data: Object.values(condiciones),
-            colorBy: "series"
-            }
-        ]
-    }
-
-    // GRAFICO DE BARRAS
-
-    chartByCategoryB.value = {
-        tooltip: { 
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        xAxis: { type: 'category', data: Object.keys(categorias) },
-        yAxis: { type: 'value' },
-        series: [
-            {
-                data: Object.values(categorias),
-                type: 'bar',
-                itemStyle: { color: '#FA15DF' }
-            }
-        ]
-    }
-    chartByValueB.value = {
-        tooltip: { 
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        xAxis: { type: 'category', data: Object.keys(valores) },
-        yAxis: { type: 'value' },
-        series: [
-            {
-                data: Object.values(valores),
-                type: 'bar',
-                itemStyle: { color: '#6317FA' }
-            }
-        ]
-    }
-    chartByConditionB.value = {
-        tooltip: { 
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        xAxis: { type: 'category', data: Object.keys(condiciones) },
-        yAxis: { type: 'value' },
-        series: [
-            {
-                data: Object.values(condiciones),
-                type: 'bar',
-                itemStyle: { color: '#3DFA17' }
-            }
-        ]
-    }
-
-    // GRAFICOS DE PASTEL
-
-    chartByCategoryP.value = {
-        tooltip: { trigger: 'item' },
-        legend: { 
-            top: '5%', 
-            left: 'center',
-            textStyle: {
-                color: "rgba(255, 255, 255)"
-            }
-        },
-        series: [
-            {
-            name: 'Equipos',
-            type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            padAngle: 5,
-            itemStyle: {
-                borderRadius: 10,
-                borderColor: '#121212',
-                borderWidth: 1
-            },
-            label: {
-                show: false,
-                position: 'center'
-            },
-            emphasis: {
-                label: {
-                    show: true,
-                    fontSize: 20,
-                    fontWeight: 'bold'
-                }
-            },
-            labelLine: {
-                show: false
-            },
-            data: Object.entries(categorias).map(([name, value]) => ({ name, value }))
-            }
-        ]
-        
-    }
-    chartByValueP.value = {
-        tooltip: { trigger: 'item' },
-        legend: { 
-            top: '5%', 
-            left: 'center',
-            textStyle: {
-                color: "rgba(255, 255, 255)"
-            }
-        },
-        series: [
-            {
-            name: 'Equipos',
-            type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            padAngle: 5,
-            itemStyle: {
-                borderRadius: 10,
-                borderColor: '#121212',
-                borderWidth: 1
-            },
-            label: {
-                show: false,
-                position: 'center'
-            },
-            emphasis: {
-                label: {
-                    show: true,
-                    fontSize: 20,
-                    fontWeight: 'bold'
-                }
-            },
-            labelLine: {
-                show: false
-            },
-            data: Object.entries(valores).map(([name, value]) => ({ name, value }))
-            }
-        ]
-        
-    }
-    chartByConditionP.value = {
-        tooltip: { trigger: 'item' },
-        legend: { 
-            top: '5%', 
-            left: 'center',
-            textStyle: {
-                color: "rgba(255, 255, 255)"
-            }
-        },
-        series: [
-            {
-            name: 'Equipos',
-            type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            padAngle: 5,
-            itemStyle: {
-                borderRadius: 10,
-                borderColor: '#121212',
-                borderWidth: 1
-            },
-            label: {
-                show: false,
-                position: 'center'
-            },
-            emphasis: {
-                label: {
-                    show: true,
-                    fontSize: 20,
-                    fontWeight: 'bold'
-                }
-            },
-            labelLine: {
-                show: false
-            },
-            data: Object.entries(condiciones).map(([name, value]) => ({ name, value }))
-            }
-        ]
-        
-    }
-
-} catch (error) {
-    console.error('Error cargando inventario:', error)
-}
-})
-
+});
 </script>

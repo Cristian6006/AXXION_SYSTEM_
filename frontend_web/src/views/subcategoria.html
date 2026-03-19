@@ -2,19 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXION SYSTEM - Subcategorías</title>
-    <!-- Incluye Tailwind CSS (versión CDN para este ejemplo rápido) -->
-    <link href="/frontend_web/src/css/main.css" rel="stylesheet">
-    <style>
-        /* CSS personalizado para el estado activo de la barra lateral, ya presente */
-        .sidebar-item.active {
-            @apply bg-purple-700;
-        }
-    </style>
-</head>
-<body class="font-sans antialiased text-gray-900 bg-gray-100 min-h-screen flex">
-
     <!-- Barra Lateral (Sidebar) - REUTILIZADO -->
     <aside class="w-64 bg-gray-800 text-white flex-shrink-0">
         <div class="p-6 text-2xl font-bold border-b border-gray-700">AXION SYSTEM</div>
@@ -459,18 +446,25 @@
             <p class="text-gray-700 mb-6">¿Está seguro?</p>
             <div class="flex justify-end space-x-4">
                 <button type="button" id="confirm-modify-subcategory-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
-                <button type="button" id="cancel-modify-subcategory-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                    <button type="button" id="cancel-modify-subcategory-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Función general para controlar la visibilidad de los modales
+        /**
+         * Función general para controlar la visibilidad de los modales.
+         * Alterna la clase 'hidden' del elemento con el ID proporcionado.
+         * @param {string} modalId - El ID del modal a controlar.
+         * @param {boolean} show - true para mostrar, false para ocultar.
+         */
         function toggleModal(modalId, show) {
             document.getElementById(modalId).classList.toggle('hidden', !show);
         }
 
-        // AGREGAR SUBCATEGORÍA
+        /**
+         * Lógica para el manejo del Modal de AGREGAR SUBCATEGORÍA.
+         */
         const addSubcategoryBtn = document.getElementById('add-subcategory-btn');
         const addSubcategoryModal = document.getElementById('add-subcategory-modal');
         const closeAddModalBtn = document.getElementById('close-add-modal-btn');
@@ -480,27 +474,35 @@
         const confirmAddSubcategoryAction = document.getElementById('confirm-add-subcategory-action');
         const cancelAddSubcategoryAction = document.getElementById('cancel-add-subcategory-action');
 
+        // Eventos para abrir y cerrar el modal de agregar
         addSubcategoryBtn.addEventListener('click', () => toggleModal('add-subcategory-modal', true));
         closeAddModalBtn.addEventListener('click', () => toggleModal('add-subcategory-modal', false));
         cancelAddSubcategoryBtn.addEventListener('click', () => toggleModal('add-subcategory-modal', false));
         
+        // Evento para guardar (abre confirmación)
         saveSubcategoryBtn.addEventListener('click', () => {
-            // Aquí iría la validación del formulario de agregar subcategoría
+            // NOTA: Aquí iría la validación del formulario de agregar subcategoría
             toggleModal('add-subcategory-modal', false);
             toggleModal('add-subcategory-confirm-modal', true);
         });
+
+        // Evento para confirmar la acción de agregar
         confirmAddSubcategoryAction.addEventListener('click', () => {
             alert('Subcategoría agregada! (Simulación)');
             toggleModal('add-subcategory-confirm-modal', false);
-            // Lógica real para enviar al backend y refrescar la tabla
+            // TODO: Lógica real para enviar al backend y refrescar la tabla
         });
+
+        // Evento para cancelar la confirmación y volver al formulario
         cancelAddSubcategoryAction.addEventListener('click', () => {
             toggleModal('add-subcategory-confirm-modal', false);
             toggleModal('add-subcategory-modal', true); // Vuelve al modal de entrada de datos
         });
 
 
-        // ELIMINAR SUBCATEGORÍA
+        /**
+         * Lógica para el manejo del Modal de ELIMINAR SUBCATEGORÍA.
+         */
         const deleteSubcategoryBtn = document.getElementById('delete-subcategory-btn');
         const deleteSubcategoryModal = document.getElementById('delete-subcategory-modal');
         const closeDeleteModalBtn = document.getElementById('close-delete-modal-btn');
@@ -510,52 +512,74 @@
         const confirmDeleteSubcategoryAction = document.getElementById('confirm-delete-subcategory-action');
         const cancelDeleteSubcategoryActionFinal = document.getElementById('cancel-delete-subcategory-action-final');
 
+        // Eventos para abrir y cerrar el modal de eliminar
         deleteSubcategoryBtn.addEventListener('click', () => toggleModal('delete-subcategory-modal', true));
         closeDeleteModalBtn.addEventListener('click', () => toggleModal('delete-subcategory-modal', false));
         cancelDeleteSubcategoryBtn.addEventListener('click', () => toggleModal('delete-subcategory-modal', false));
         
+        // Evento para solicitar eliminación (abre confirmación)
         performDeleteBtn.addEventListener('click', () => {
             toggleModal('delete-subcategory-modal', false);
             toggleModal('delete-subcategory-confirm-modal', true);
         });
+
+        // Evento para confirmar la eliminación definitiva
         confirmDeleteSubcategoryAction.addEventListener('click', () => {
             alert('Subcategoría eliminada! (Simulación)');
             toggleModal('delete-subcategory-confirm-modal', false);
+            // TODO: Llamada al backend para eliminar el registro
         });
+
+        // Evento para cancelar la confirmación
         cancelDeleteSubcategoryActionFinal.addEventListener('click', () => {
             toggleModal('delete-subcategory-confirm-modal', false);
             toggleModal('delete-subcategory-modal', true);
         });
 
 
-        // DAR DE BAJA SUBCATEGORÍA
+        /**
+         * Lógica para el manejo del Modal de DAR DE BAJA SUBCATEGORÍA.
+         */
         const deactivateSubcategoryBtn = document.getElementById('deactivate-subcategory-btn');
         const deactivateSubcategoryModal = document.getElementById('deactivate-subcategory-modal');
         const closeDeactivateModalBtn = document.getElementById('close-deactivate-modal-btn');
         const performDeactivateBtn = document.getElementById('perform-deactivate-btn');
         const cancelDeactivateSubcategoryBtn = document.getElementById('cancel-deactivate-subcategory-btn');
         const deactivateSubcategoryConfirmModal = document.getElementById('deactivate-subcategory-confirm-modal');
-        const confirmDeactivateSubcategoryAction = document.getElementById('confirm-deactivate-subcategory-action');
+        const confirmDeactivateSubcategoryAction = document => {
+            alert('Subcategoría dada de baja! (Simulación)');
+            toggleModal('deactivate-subcategory-confirm-modal', false);
+            // TODO: Llamada al backend para actualizar estado
+        };
         const cancelDeactivateSubcategoryActionFinal = document.getElementById('cancel-deactivate-subcategory-action-final');
 
+        // Eventos para abrir y cerrar el modal de dar de baja
         deactivateSubcategoryBtn.addEventListener('click', () => toggleModal('deactivate-subcategory-modal', true));
         closeDeactivateModalBtn.addEventListener('click', () => toggleModal('deactivate-subcategory-modal', false));
         cancelDeactivateSubcategoryBtn.addEventListener('click', () => toggleModal('deactivate-subcategory-modal', false));
 
+        // Evento para solicitar baja (abre confirmación)
         performDeactivateBtn.addEventListener('click', () => {
             toggleModal('deactivate-subcategory-modal', false);
             toggleModal('deactivate-subcategory-confirm-modal', true);
         });
+
+        // Evento para confirmar la baja
         confirmDeactivateSubcategoryAction.addEventListener('click', () => {
             alert('Subcategoría dada de baja! (Simulación)');
             toggleModal('deactivate-subcategory-confirm-modal', false);
+            // TODO: Llamada al backend para actualizar estado
         });
+
+        // Evento para cancelar la confirmación
         cancelDeactivateSubcategoryActionFinal.addEventListener('click', () => {
             toggleModal('deactivate-subcategory-confirm-modal', false);
             toggleModal('deactivate-subcategory-modal', true);
         });
 
-        // MODIFICAR SUBCATEGORÍA
+        /**
+         * Lógica para el manejo del Modal de MODIFICAR SUBCATEGORÍA.
+         */
         const editSubcategoryBtns = document.querySelectorAll('.edit-subcategory-btn');
         const modifySubcategoryModal = document.getElementById('modify-subcategory-modal');
         const closeModifyModalBtn = document.getElementById('close-modify-modal-btn');
@@ -565,23 +589,32 @@
         const confirmModifySubcategoryAction = document.getElementById('confirm-modify-subcategory-action');
         const cancelModifySubcategoryActionFinal = document.getElementById('cancel-modify-subcategory-action-final');
 
+        // Asignar evento a todos los botones de editar en la tabla
         editSubcategoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // En una app real, aquí se prellenaría el modal con los datos de la subcategoría seleccionada.
+                // NOTA: En una app real, aquí se prellenaría el modal con los datos de la subcategoría seleccionada.
                 toggleModal('modify-subcategory-modal', true);
             });
         });
+
+        // Eventos para cerrar el modal de modificar
         closeModifyModalBtn.addEventListener('click', () => toggleModal('modify-subcategory-modal', false));
         cancelModifySubcategoryBtn.addEventListener('click', () => toggleModal('modify-subcategory-modal', false));
 
+        // Evento para guardar cambios (abre confirmación)
         saveModifiedSubcategoryBtn.addEventListener('click', () => {
             toggleModal('modify-subcategory-modal', false);
             toggleModal('modify-subcategory-confirm-modal', true);
         });
+
+        // Evento para confirmar la modificación
         confirmModifySubcategoryAction.addEventListener('click', () => {
             alert('Subcategoría modificada! (Simulación)');
             toggleModal('modify-subcategory-confirm-modal', false);
+            // TODO: Llamada al backend para actualizar el registro
         });
+
+        // Evento para cancelar la confirmación
         cancelModifySubcategoryActionFinal.addEventListener('click', () => {
             toggleModal('modify-subcategory-confirm-modal', false);
             toggleModal('modify-subcategory-modal', true);

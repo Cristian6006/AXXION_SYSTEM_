@@ -38,6 +38,16 @@ import ReportService from '@/services/ReportService'
 import { text } from '@fortawesome/fontawesome-svg-core'
 import { defineProps } from 'vue'
 
+/**
+ * Componente BarChart.
+ * 
+ * Visualiza estadísticas de inventario utilizando gráficos de ECharts.
+ * Muestra tres tipos de gráficos según el modo seleccionado:
+ * - Por Categoría: Cantidad de equipos por categoría.
+ * - Por Valor: Valor monetario total por categoría.
+ * - Por Condición: Estado físico de los equipos.
+ */
+
 
 // registrar echarts
 use([
@@ -61,12 +71,21 @@ const itemsTotales = ref(0)
 const valorTotal = ref(0)
 const equiposDisponibles = ref(0)
 
+// Props
+// items: Lista de equipos para generar los gráficos.
+// metrics: Métricas pre-calculadas (opcional).
+// mode: Filtro de visualización ('all', 'category', 'value', 'condition').
 const props = defineProps({
     items: { type: Array, default: null },
     metrics: { type: Object, default: null },
     mode: { type: String, default: 'all' } 
 })
 
+/**
+ * Procesa la lista de items para generar los datos necesarios para los gráficos.
+ * Agrupa por categoría y condición, y suma los valores monetarios.
+ * @param {Array} items - Lista de equipos del inventario.
+ */
 function buildChartsFromItems(items) {
     const categorias = {}
     const valores = {}
@@ -118,10 +137,13 @@ function buildChartsFromItems(items) {
     }
 }
 
+// Observa cambios en la prop 'items' para regenerar los gráficos automáticamente.
 watch(() => props.items, (newItems) => {
     if (newItems && Array.isArray(newItems)) buildChartsFromItems(newItems)
 })
 
+// Al montar, carga métricas y datos si no se proporcionan vía props.
+// Esto permite que el componente funcione de forma autónoma o controlada por el padre.
 onMounted(async () => {
     if (props.metrics) {
         itemsTotales.value = props.metrics.items_totales || 0

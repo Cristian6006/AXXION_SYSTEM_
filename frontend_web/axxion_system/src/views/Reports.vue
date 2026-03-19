@@ -99,6 +99,16 @@ import Graphs from '@/components/Graficos/Graphs.vue';
 import InventoryService from '@/services/InventoryService';
 import ExportWorksheet from '@/components/ExportWorksheet .vue'
 
+/**
+ * Vista Reports.
+ * 
+ * Reporte general de inventario.
+ * Funcionalidades:
+ * - Visualización de gráficos generales de inventario.
+ * - Tabla detallada de todos los productos en inventario con información completa (precios, estado, ubicación, etc.).
+ * - Exportación del inventario completo a Excel.
+ */
+
 const products = ref([]);
 const inventario = ref([]);
 

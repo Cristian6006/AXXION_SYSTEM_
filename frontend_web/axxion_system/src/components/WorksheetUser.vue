@@ -19,7 +19,16 @@
     import UserService from "@/services/UserService";
     import { ref, onMounted} from 'vue';
     import { FwbButton } from "flowbite-vue";
+
+    /**
+     * Componente WorksheetUser.
+     * 
+     * Permite exportar el listado de usuarios a un archivo Excel (.xlsx).
+     * Utiliza 'xlsx' para la generación del archivo y 'file-saver' para la descarga.
+     */
+
     const usuario = ref([]);
+    // Carga la lista de usuarios al montar el componente.
     const loadUsuario = async () => {
         try {
             const data = await UserService.getUsers();
@@ -28,6 +37,10 @@
             console.error("Error al cargar usuarios:", err);
         }
     };
+    /**
+     * Genera y descarga el reporte de usuarios en Excel.
+     * Mapea los campos a encabezados legibles en español.
+     */
     const exportUsuarioExcel = () => {
         if (!usuario.value.length) {
             alert("No hay datos en usuarios");

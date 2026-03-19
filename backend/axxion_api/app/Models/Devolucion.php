@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modelo que representa una Devolución.
+ * 
+ * Registra el evento de retorno de los equipos rentados al finalizar el contrato.
+ */
 class Devolucion extends Model
 {
     use HasFactory;
@@ -20,6 +25,9 @@ class Devolucion extends Model
         'notas_generales',
     ];
 
+    /**
+     * Relación: La devolución está asociada a una renta específica.
+     */
     public function renta()
     {
         return $this->belongsTo(Renta::class);

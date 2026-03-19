@@ -11,6 +11,9 @@ use Illuminate\Validation\Rule;
 
 class entregaController extends Controller
 {
+    /**
+     * Lista todas las entregas programadas o realizadas.
+     */
         public function index(){
         $entrega = Entrega::all();
         $data = [
@@ -19,6 +22,12 @@ class entregaController extends Controller
         ];
         return response()->json($data, 200);
         }
+    /**
+     * Programa o registra una nueva entrega.
+     * 
+     * ANALOGÍA: Esta función es como generar una guía de paquetería. 
+     * Se define qué se envía (renta), a dónde (dirección), cuándo y quién lo lleva (compañía de envío).
+     */
         public function store(Request $request)
         {
             try {
@@ -72,6 +81,9 @@ class entregaController extends Controller
             }
         }
     
+    /**
+     * Muestra los detalles de una entrega específica.
+     */
         public function show($id){
             $entrega = Entrega::find($id);
             if(!$entrega){
@@ -87,6 +99,9 @@ class entregaController extends Controller
             ];
             return response()->json($data, 200);
         }
+    /**
+     * Elimina un registro de entrega.
+     */
         public function destroy($id){
             $entrega = Entrega::find($id);
             if(!$entrega){
@@ -103,6 +118,9 @@ class entregaController extends Controller
             ];
             return response()->json($data, 200);
         }
+    /**
+     * Actualiza la información de una entrega.
+     */
         public function update(Request $request, $id){
             try {
                 $entrega = Entrega::find($id);
@@ -155,6 +173,9 @@ class entregaController extends Controller
                 ], 500);
             }
         }
+    /**
+     * Actualización parcial de una entrega.
+     */
         public function updatePartial(Request $request, $id)
         {
             try {

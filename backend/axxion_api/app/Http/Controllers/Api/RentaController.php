@@ -12,10 +12,19 @@ use Illuminate\Validation\Rule;
 
 class RentaController extends Controller
 {
+    /**
+     * Lista todas las rentas con sus detalles completos (cliente, cotización, equipos, entrega, devolución).
+     */
     public function index() 
     {
         try {
-            $renta = Renta::with('cliente', 'cotizacion', 'inventarioItems', 'entrega', 'devolucion')->get();
+            $renta = Renta::with([
+                'cliente', 
+                'cotizacion', 
+                'inventarioItems.producto',  // Agregar relación producto
+                'entrega', 
+                'devolucion'
+            ])->get();
             $data = [
                 'renta' => $renta,
                 'status' => 200
@@ -29,6 +38,12 @@ class RentaController extends Controller
                 ], 500);
             }
     }
+    /**
+     * Crea una nueva renta en el sistema.
+     * 
+     * ANALOGÍA: Es como firmar un contrato de alquiler. Se validan las fechas, el cliente, 
+     * el dinero (depósito y total) y se entregan las llaves (equipos).
+     */
     public function store(Request $request) 
     {
         try {
@@ -86,10 +101,19 @@ class RentaController extends Controller
                 ], 500);
             }
     }
+    /**
+     * Muestra los detalles de una renta específica.
+     */
     public function show($id)
     {
         try {
-                $renta = Renta::with('cliente', 'cotizacion', 'inventarioItems', 'entrega', 'devolucion')->find($id);
+                $renta = Renta::with([
+                    'cliente', 
+                    'cotizacion', 
+                    'inventarioItems.producto',  // Agregar relación producto
+                    'entrega', 
+                    'devolucion'
+                ])->find($id);
                 if (!$renta) {
                     $data = [
                         'message' => 'Renta no encontrada',
@@ -110,6 +134,13 @@ class RentaController extends Controller
                 ], 500);
             }
     }
+    /**
+     * Elimina una renta y gestiona el estado de los equipos asociados.
+     * 
+     * ANALOGÍA: Esta función es como cancelar una reserva de hotel: no solo se borra la reserva, 
+     * sino que la habitación (equipo) se envía a limpieza (mantenimiento) para asegurar que 
+     * esté lista para el siguiente huésped.
+     */
     public function destroy($id)
     {
         try {
@@ -121,8 +152,24 @@ class RentaController extends Controller
                 ];
                 return response()->json($data, 404);
             }
+            
             DB::transaction(function () use ($renta) {
+                // Obtener IDs de items antes de detach
+                $inventarioItemIds = $renta->inventarioItems->pluck('id')->toArray();
+                
+                // Actualizar estado de items a EnMantenimiento al eliminar renta
+                if (!empty($inventarioItemIds)) {
+                    DB::table('inventario_item')
+                        ->whereIn('id', $inventarioItemIds)
+                        ->update([
+                            'estado_item' => 'EnMantenimiento',
+                            'updated_at' => now()
+                        ]);
+                }
+                
+                // Detach items de la renta
                 $renta->inventarioItems()->detach();
+                
                 if ($renta->entrega) {
                     $renta->entrega()->delete();
                 }
@@ -131,7 +178,9 @@ class RentaController extends Controller
                 }
                 $renta->delete();
             });
+            
             $data = [
+                'message' => 'Renta eliminada y equipos enviados a mantenimiento',
                 'renta' => $renta,
                 'status' => 200
             ];
@@ -144,6 +193,10 @@ class RentaController extends Controller
                 ], 500);
         }
     }
+    /**
+     * Actualiza una renta existente y sincroniza los equipos.
+     * Maneja lógica compleja para cambiar el estado de los equipos según si la renta finaliza o se cancela.
+     */
     public function update(Request $request, $id) 
     {
         try {
@@ -208,6 +261,31 @@ class RentaController extends Controller
                 }
             }
             $renta->save();
+
+            // Actualizar estado de items según el estado de la renta
+            $inventarioItemIds = $renta->inventarioItems->pluck('id')->toArray();
+
+            if (!empty($inventarioItemIds)) {
+                if ($request->estado_renta === 'Finalizada') {
+                    // Si la renta finaliza, enviar equipos a mantenimiento
+                    // Esto disparará el trigger trg_inventario_item_after_update
+                    DB::table('inventario_item')
+                        ->whereIn('id', $inventarioItemIds)
+                        ->update([
+                            'estado_item' => 'EnMantenimiento',
+                            'updated_at' => now()
+                        ]);
+                } elseif ($request->estado_renta === 'Cancelada') {
+                    // Si la renta se cancela, poner equipos disponibles
+                    DB::table('inventario_item')
+                        ->whereIn('id', $inventarioItemIds)
+                        ->update([
+                            'estado_item' => 'Disponible',
+                            'updated_at' => now()
+                        ]);
+                }
+            }
+
             $data = [
                 'message' => 'renta actualizada',
                 'renta' => $renta,
@@ -222,6 +300,9 @@ class RentaController extends Controller
                 ], 500);
             }
     }
+    /**
+     * Actualización parcial de una renta (PATCH).
+     */
     public function updatePartial(Request $request, $id)
     {
         try {

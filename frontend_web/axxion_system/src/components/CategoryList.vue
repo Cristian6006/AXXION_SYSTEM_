@@ -31,6 +31,15 @@
 
 <script setup>
 import { FwbButton } from 'flowbite-vue'
+
+/**
+ * Componente CategoryList.
+ * 
+ * Muestra una lista simple de categorías.
+ * Permite seleccionar, editar y eliminar categorías mediante eventos.
+ */
+// Props
+// categorias: Array de objetos categoría a listar.
 defineProps({
   categorias: {
     type: Array,

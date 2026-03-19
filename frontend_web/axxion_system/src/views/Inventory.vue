@@ -1,6 +1,7 @@
 <template>
   <div class="app flex">
     <SideBar/>
+    <CartDrawer />
     <RouterView></RouterView>
 
     <main class="container h-screen p-4 flex-1 overflow-y-auto">
@@ -97,16 +98,17 @@
             <font-awesome-icon icon="fa-solid fa-plus" class="mr-2"/>
             Agregar Equipo
           </fwb-button>
-          
+
           <fwb-button 
+            v-if="cartStore.itemCount > 0"
             gradient="purple-blue" 
             size="lg" 
-            @click="showMaintenanceModal"
+            @click="cartStore.openCart"
           >
-            <font-awesome-icon icon="fa-solid fa-tools" class="mr-2"/>
-            Programar Mantenimiento
+            <font-awesome-icon icon="fa-solid fa-shopping-cart" class="mr-2"/>
+            Ver Carrito ({{ cartStore.itemCount }})
           </fwb-button>
-          
+                  
           <fwb-button 
             gradient="purple" 
             size="lg" 
@@ -150,13 +152,10 @@
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
                 <option value="">Todos los estados</option>
-                <option 
-                  v-for="state in inventoryStore.uniqueStates" 
-                  :key="state.value" 
-                  :value="state.value"
-                >
-                  {{ state.label }}
-                </option>
+                <option value="disponible">Disponible</option>
+                <option value="alquilado">Alquilado</option>
+                <option value="mantenimiento">En Mantenimiento</option>
+                <option value="de_baja">De Baja</option>
               </select>
             </div>
             
@@ -410,59 +409,57 @@
       </template>
     </fwb-modal>
   </div>
-<!--footer-->
-  <footer>
-  <fwb-footer>
-    <fwb-footer-copyright
-      by="Flowbite™"
-      href="https://flowbite.com/"
-      copyright-message="All Rights Reserved."
-    />
-    <fwb-footer-link-group>
-      <fwb-footer-link href="#">
-        About
-      </fwb-footer-link>
-      <fwb-footer-link href="#">
-        Privacy Policy
-      </fwb-footer-link>
-      <fwb-footer-link href="#">
-        Licensing
-      </fwb-footer-link>
-      <fwb-footer-link href="#">
-        Contact
-      </fwb-footer-link>
-    </fwb-footer-link-group>
-  </fwb-footer>
-</footer>
+  <Footer />
 </template>
 
 <script setup>
 import { ref, computed, watch, onMounted, nextTick } from 'vue';
+import { useInventarioItemStore } from '@/stores/inventarioItem.js';
+import { useCartStore } from '@/stores/CartStore'; // Import CartStore
+
+// Nombre del componente para cumplir con reglas de Vue
+defineOptions({
+  name: 'InventoryView'
+});
 import { useInventoryStore } from '@/stores/inventory.js';
 import { useMaintenanceStore } from '@/stores/maintenance.js';
 import { useUserStore } from '@/stores/user.js';
 import SideBar from '@/components/SideBar.vue';
 import headerP from '@/components/headerP.vue';
+import Footer from '@/components/Footer.vue';
 import EquipmentCard from '@/components/EquipmentCard.vue';
 import EquipmentForm from '@/components/EquipmentForm.vue';
 import EquipmentDetails from '@/components/EquipmentDetails.vue';
+import CartDrawer from '@/components/CartDrawer.vue'; // Import CartDrawer
 import { 
   FwbAlert,
+  FwbBadge,
   FwbButton,
   FwbModal,
   FwbCard,
   FwbInput,
-  FwbPagination,
-  FwbFooter,
-  FwbFooterCopyright,
-  FwbFooterLink,
-  FwbFooterLinkGroup
+  FwbPagination
 } from 'flowbite-vue';
 
 // Stores
+const inventarioItemStore  = useInventarioItemStore();
 const inventoryStore = useInventoryStore();
 const maintenanceStore = useMaintenanceStore();
 const userStore = useUserStore();
+const cartStore = useCartStore(); // Initialize CartStore
+
+/**
+ * Vista Inventory.
+ * 
+ * Gestión completa del inventario de equipos.
+ * Funcionalidades principales:
+ * - Listado de equipos con paginación y filtrado (búsqueda, estado, categoría).
+ * - Dashboard de KPIs (disponibles, alquilados, mantenimiento, ingresos).
+ * - Alertas automáticas para mantenimientos y devoluciones.
+ * - CRUD de equipos (Crear, Leer, Actualizar, Eliminar) mediante modales.
+ * - Programación directa de mantenimientos desde el inventario.
+ * - Integración con carrito de compras para alquileres.
+ */
 
 // Estado local
 const displayedProducts = ref([]);
@@ -496,6 +493,7 @@ const maintenanceForm = ref({
 const maintenanceTypes = computed(() => maintenanceStore.getAvailableTypes());
 const maintenancePriorities = computed(() => maintenanceStore.getAvailablePriorities());
 
+// Computed: Opciones de técnicos filtradas por rol (Técnico o Administrador).
 const technicianOptions = computed(() => {
   const users = userStore.users || [];
   return users
@@ -506,17 +504,73 @@ const technicianOptions = computed(() => {
     }));
 });
 
-// Computed del store
-const products = computed(() => inventoryStore.productList);
-const isLoading = computed(() => inventoryStore.loading);
+// Computed del store - Transformar inventario_items a formato compatible con EquipmentCard
+// Mapea los datos crudos del backend a una estructura unificada para la vista.
+const products = computed(() => {
+  return inventarioItemStore.inventarioItems.map(item => {
+    const producto = item.producto || {};
+    // Mapear estado_item a estado para compatibilidad
+    const estadoMap = {
+      'Disponible': 'disponible',
+      'Rentado': 'alquilado',
+      'EnMantenimiento': 'mantenimiento',
+      'DeBaja': 'de_baja'
+    };
+    
+    return {
+      // Datos del inventario_item
+      id: item.id,
+      inventario_item_id: item.id,
+      numero_serie: item.numero_serie || producto.numero_serie,
+      estado_item: item.estado_item,
+      estado: estadoMap[item.estado_item] || item.estado_item?.toLowerCase() || producto.estado || 'disponible',
+      fecha_adquisicion: item.fecha_adquisicion,
+      costo_adquisicion: item.costo_adquisicion,
+      ubicacion_fisica: item.ubicacion_fisica || producto.ubicacion,
+      notas: item.notas || producto.notas,
+      
+      // Datos del producto anidado
+      producto_id: producto.id || item.producto_id,
+      nombre: producto.nombre,
+      descripcion: producto.descripcion,
+      marca: producto.marca,
+      modelo: producto.modelo,
+      categoria: producto.categoria,
+      especificaciones: producto.especificaciones || {},
+      precio_referencia_renta: producto.precio_referencia_renta,
+      precio_alquiler_dia: producto.precio_alquiler_dia,
+      precio_alquiler_semanal: producto.precio_alquiler_semanal,
+      precio_alquiler_mensual: producto.precio_alquiler_mensual,
+      precio_compra: producto.precio_compra,
+      valor_actual: producto.valor_actual,
+      fecha_compra: producto.fecha_compra,
+      condicion: producto.condicion,
+      sku: producto.sku,
+      
+      // Arrays relacionados
+      mantenimientos: item.mantenimientos || [],
+      rentas: item.rentas || [],
+      
+      // Información de renta activa (viene del backend)
+      renta_activa: item.renta_activa || null,
+      
+      // Para compatibilidad con código existente
+      images: producto.images || [],
+      totalRevenue: 0 // Calcular desde rentas si es necesario
+    };
+  });
+});
+
+const isLoading = computed(() => inventarioItemStore.loading);
 
 // Métricas del panel de control
+// Calcula KPIs en tiempo real basados en los productos filtrados y su estado.
 const metrics = computed(() => {
-  // Sincronizar estados con mantenimientos activos
-  const productsWithMaintenanceStatus = inventoryStore.productList.map(product => {
+  // Usar los productos transformados
+  const productsWithMaintenanceStatus = products.value.map(product => {
     // Verificar si el producto tiene un mantenimiento activo
     const hasActiveMaintenance = maintenanceStore.maintenances.some(maintenance => 
-      maintenance.inventario_item_id === product.id && 
+      maintenance.inventario_item_id === product.inventario_item_id && 
       ['PROGRAMADO', 'EN_PROCESO'].includes(maintenance.estado_mantenimiento)
     );
     
@@ -531,11 +585,25 @@ const metrics = computed(() => {
   const rented = productsWithMaintenanceStatus.filter(p => p.estado === 'alquilado').length;
   const maintenance = productsWithMaintenanceStatus.filter(p => p.estado === 'mantenimiento').length;
   
+  // Calcular ingresos mensuales desde rentas
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+  const monthlyRevenue = productsWithMaintenanceStatus.reduce((total, product) => {
+    if (product.rentas && Array.isArray(product.rentas)) {
+      const monthRentas = product.rentas.filter(renta => {
+        const rentaDate = new Date(renta.fecha_inicio || renta.created_at);
+        return rentaDate.getMonth() === currentMonth && rentaDate.getFullYear() === currentYear;
+      });
+      return total + monthRentas.reduce((sum, renta) => sum + (parseFloat(renta.monto_total || 0)), 0);
+    }
+    return total;
+  }, 0);
+  
   return {
     available,
     rented,
     maintenance,
-    monthlyRevenue: 15420 // Placeholder - calcular desde datos reales
+    monthlyRevenue: monthlyRevenue || 0
   };
 });
 
@@ -544,6 +612,7 @@ const dismissedAlerts = ref([]); // IDs de alertas cerradas manualmente
 const manualAlerts = ref([]); // Alertas agregadas manualmente (éxito/error)
 
 // Alertas dinámicas basadas en datos reales
+// Genera alertas automáticas para mantenimientos activos y devoluciones pendientes.
 const systemAlerts = computed(() => {
   const alertsList = [];
   
@@ -581,12 +650,13 @@ const systemAlerts = computed(() => {
 const alerts = computed(() => [...manualAlerts.value, ...systemAlerts.value]);
 
 // Filtros y búsqueda
+// Aplica filtros de búsqueda, estado y categoría sobre la lista de productos.
 const filteredProducts = computed(() => {
-  // Primero sincronizar estados con mantenimientos activos
-  let filtered = inventoryStore.productList.map(product => {
+  // Usar los productos transformados y sincronizar estados con mantenimientos activos
+  let filtered = products.value.map(product => {
     // Verificar si el producto tiene un mantenimiento activo
     const hasActiveMaintenance = maintenanceStore.maintenances.some(maintenance => 
-      maintenance.inventario_item_id === product.id && 
+      maintenance.inventario_item_id === product.inventario_item_id && 
       ['PROGRAMADO', 'EN_PROCESO'].includes(maintenance.estado_mantenimiento)
     );
     
@@ -608,9 +678,18 @@ const filteredProducts = computed(() => {
     );
   }
 
-  // Filtro de estado
+  // Filtro de estado - mapear estados del inventario_item
   if (statusFilter.value) {
-    filtered = filtered.filter(p => p.estado === statusFilter.value);
+    const estadoMap = {
+      'disponible': 'disponible',
+      'alquilado': 'alquilado',
+      'mantenimiento': 'mantenimiento',
+      'de_baja': 'de_baja'
+    };
+    filtered = filtered.filter(p => {
+      const estadoFiltro = estadoMap[statusFilter.value] || statusFilter.value;
+      return p.estado === estadoFiltro || p.estado_item === statusFilter.value;
+    });
   }
 
   // Filtro de categoría
@@ -701,6 +780,7 @@ function resetMaintenanceForm() {
   };
 }
 
+// Programa un nuevo mantenimiento para un equipo.
 async function scheduleMaintenance() {
   try {
     // Validar que haya un equipo seleccionado o en el formulario
@@ -751,19 +831,14 @@ async function scheduleMaintenance() {
 // Funciones de acción
 async function confirmDelete() {
   if (selectedProduct.value) {
-    console.log('Iniciando eliminación del producto:', selectedProduct.value.nombre);
     try {
       const productId = selectedProduct.value.id;
       const productName = selectedProduct.value.nombre;
       
-      console.log('Llamando a deleteProduct con ID:', productId);
-      await inventoryStore.deleteProduct(productId);
-      
-      console.log('Producto eliminado del store, cerrando modal...');
-      closeModal();
-      
-      // Mostrar mensaje de éxito
-      console.log(`Producto "${productName}" eliminado exitosamente`);
+      console.log('Llamando a deleteInventarioItem con ID:', productId);
+      // Usar el store de inventarioItem para eliminar el ítem específico
+      await inventarioItemStore.deleteInventarioItem(productId);
+    
       
       // Forzar actualización completa de la vista
       await forceRefresh();
@@ -795,8 +870,15 @@ async function confirmDelete() {
 }
 
 function rentProduct(product) {
-  // Implementar lógica de alquiler
-  console.log('Alquilar producto:', product);
+  cartStore.addToCart(product);
+  // Optional: Show a toast or notification
+  manualAlerts.value.unshift({
+      id: Date.now(),
+      type: 'success',
+      icon: true,
+      title: 'Agregado al Carrito',
+      message: `${product.nombre} agregado al carrito de cotización.`
+  });
 }
 
 function exportReport() {
@@ -829,13 +911,27 @@ function handlePageChange(page) {
 async function forceRefresh() {
   console.log('Forzando actualización completa de la vista...');
   try {
+    // Recargar inventario items (que incluyen los productos anidados)
+    await inventarioItemStore.fetchInventarioItems();
+    
+    // También recargar productos del inventoryStore para mantener sincronización
     await inventoryStore.fetchProducts();
+    
+    // Recargar mantenimientos
     await maintenanceStore.fetchMaintenances();
+    
+    // Sincronizar estados
     await syncEquipmentStatesWithMaintenances();
+    
+    // Esperar a que Vue actualice el DOM
     await nextTick();
+    
     console.log('Actualización completa exitosa');
+    console.log('Inventario items cargados:', inventarioItemStore.inventarioItems.length);
+    console.log('Productos cargados:', inventoryStore.productList.length);
   } catch (error) {
     console.error('Error en actualización completa:', error);
+    throw error;
   }
 }
 
@@ -843,14 +939,28 @@ async function handleProductSuccess() {
   console.log('Producto guardado exitosamente, actualizando vista...');
   closeModal();
   
+  // Esperar un momento para que el backend procese la actualización
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
   // Usar función de actualización completa
   await forceRefresh();
+  
+  // Mostrar mensaje de éxito
+  manualAlerts.value.unshift({
+    id: Date.now(),
+    type: 'success',
+    icon: true,
+    title: modalMode.value === 'add' ? 'Equipo Agregado' : 'Equipo Actualizado',
+    message: modalMode.value === 'add' 
+      ? 'El equipo ha sido agregado exitosamente.' 
+      : 'El equipo ha sido actualizado exitosamente.'
+  });
 }
 
 // Cargar datos
 const loadProducts = async () => {
   try {
-    await inventoryStore.fetchProducts();
+    await inventarioItemStore.fetchInventarioItems();
     
     // Animación de carga progresiva
     displayedProducts.value = [];
@@ -861,7 +971,7 @@ const loadProducts = async () => {
       displayedProducts.value.push(products.value[i]);
     }
   } catch (error) {
-    console.error('Error al cargar productos:', error);
+    console.error('Error al cargar inventario items:', error);
   }
 };
 
@@ -870,8 +980,8 @@ watch([searchQuery, statusFilter, categoryFilter], () => {
   currentPage.value = 1; // Reset pagination when filters change
 });
 
-watch(() => inventoryStore.productList, (newProducts) => {
-  console.log('Vista: Productos del store actualizados:', newProducts.length);
+watch(() => inventarioItemStore.inventarioItems, (newItems) => {
+  console.log('Vista: Inventario items del store actualizados:', newItems.length);
   // Forzar re-renderizado
   nextTick(() => {
     console.log('Vista: Re-renderizado completado');
@@ -894,13 +1004,14 @@ async function syncEquipmentStatesWithMaintenances() {
     
     // Actualizar el estado de los equipos que tienen mantenimientos activos
     for (const maintenance of activeMaintenances) {
-      const product = inventoryStore.productList.find(p => p.id === maintenance.inventario_item_id);
+      const item = inventarioItemStore.inventarioItems.find(item => item.id === maintenance.inventario_item_id);
       
-      if (product && product.estado !== 'mantenimiento') {
-        console.log(`Actualizando estado del equipo ${product.nombre} a mantenimiento`);
-        // Actualizar solo el estado sin hacer llamada al API
-        // Esto es temporal para la vista, el backend debería manejar esto
-        product.estado = 'mantenimiento';
+      if (item && item.estado_item !== 'EnMantenimiento') {
+        console.log(`Actualizando estado del equipo ${item.producto?.nombre} a mantenimiento`);
+        // Actualizar el estado del inventario_item
+        await inventarioItemStore.updateInventarioItemPartial(item.id, {
+          estado_item: 'EnMantenimiento'
+        });
       }
     }
     
@@ -913,10 +1024,10 @@ async function syncEquipmentStatesWithMaintenances() {
 // Al montar el componente
 onMounted(async () => {
   console.log('Vista de inventario montada');
-  // Cargar productos, categorías, usuarios y mantenimientos
+  // Cargar inventario items, categorías, usuarios y mantenimientos
   await Promise.all([
     loadProducts(),
-    inventoryStore.fetchCategories(),
+    inventoryStore.fetchCategories(), // Mantener para filtros de categoría
     userStore.fetchUsers(), // Cargar usuarios para el selector de técnicos
     maintenanceStore.fetchMaintenances() // Cargar mantenimientos para sincronización
   ]);
@@ -927,49 +1038,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.loader {
-  width: 60px;
-  height: 40px;
-  position: relative;
-  display: inline-block;
-  --base-color: #263238;
-}
-.loader::before {
-  content: '';  
-  left: 0;
-  top: 0;
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #FFF;
-  background-image: radial-gradient(circle 8px at 18px 18px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 18px 0px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 0px 18px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 36px 18px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 18px 36px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 5px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 30px 30px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 5px 30px, var(--base-color) 100%, transparent 0), radial-gradient(circle 4px at 5px 5px, var(--base-color) 100%, transparent 0);
-  background-repeat: no-repeat;
-  box-sizing: border-box;
-  animation: rotationBack 3s linear infinite;
-}
-.loader::after {
-  content: '';  
-  left: 35px;
-  top: 15px;
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: #FFF;
-  background-image: radial-gradient(circle 5px at 12px 12px, var(--base-color) 100%, transparent 0), radial-gradient(circle 2.5px at 12px 0px, var(--base-color) 100%, transparent 0), radial-gradient(circle 2.5px at 0px 12px, var(--base-color) 100%, transparent 0), radial-gradient(circle 2.5px at 24px 12px, var(--base-color) 100%, transparent 0), radial-gradient(circle 2.5px at 12px 24px, var(--base-color) 100%, transparent 0), radial-gradient(circle 2.5px at 20px 3px, var(--base-color) 100%, transparent 0), radial-gradient(circle 2.5px at 20px 3px, var(--base-color) 100%, transparent 0), radial-gradient(circle 2.5px at 20px 20px, var(--base-color) 100%, transparent 0), radial-gradient(circle 2.5px at 3px 20px, var(--base-color) 100%, transparent 0), radial-gradient(circle 2.5px at 3px 3px, var(--base-color) 100%, transparent 0);
-  background-repeat: no-repeat;
-  box-sizing: border-box;
-  animation: rotationBack 4s linear infinite reverse;
-}
-@keyframes rotationBack {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
-}  
+  
 .overlay {
   position: relative;
   top: 100px; 

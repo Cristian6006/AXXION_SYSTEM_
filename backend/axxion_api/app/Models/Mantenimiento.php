@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modelo que representa un registro de Mantenimiento.
+ * 
+ * Documenta las reparaciones o servicios realizados a un ítem del inventario.
+ */
 class Mantenimiento extends Model
 {
     use HasFactory;
@@ -33,6 +38,9 @@ class Mantenimiento extends Model
         'costo_real' => 'decimal:2',
     ];
 
+    /**
+     * Relación: El mantenimiento se realiza sobre un ítem específico del inventario.
+     */
     public function inventarioItem()
     {
         return $this->belongsTo(InventarioItem::class);

@@ -10,8 +10,18 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import { FwbButton } from 'flowbite-vue'
 import SubCategoryService from '@/services/SubCategoryService';
+import CategoryService from '@/services/CategoryService'; // Asumiendo que existe, dado el uso en el código original
+
+/**
+ * Componente SubCategoryCard.
+ * 
+ * Botón/Tarjeta para seleccionar o alternar una categoría.
+ * (Nota: El nombre sugiere 'SubCategory' pero parece manejar categorías principales).
+ */
+// Carga las categorías disponibles al montar el componente.
 const fetchCategorias = async () => {
   try {
     const response = await CategoryService.getCategory();
@@ -24,6 +34,8 @@ const fetchCategorias = async () => {
 const categorias = ref([]);
 const selectedCategoria = ref(null);
 
+// Alterna la selección de una categoría.
+// Si se hace clic en la misma, se deselecciona.
 const toggleCategoria = (id) => {
   if (selectedCategoria.value?.id === id) {
     selectedCategoria.value = null;

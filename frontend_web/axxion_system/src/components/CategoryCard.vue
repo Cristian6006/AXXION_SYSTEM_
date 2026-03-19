@@ -40,7 +40,16 @@
 <script setup>
 import { FwbButton, FwbCard } from "flowbite-vue";
 
+/**
+ * Componente CategoryCard.
+ * 
+ * Tarjeta visual para mostrar los detalles de una categoría individual.
+ * Incluye botones de acción rápida para editar y eliminar.
+ */
+
 // Props: recibimos la categoría a mostrar
+// Props: recibimos la categoría a mostrar
+// category: Objeto con los datos de la categoría (nombre, descripción, tipo).
 const props = defineProps({
   category: {
     type: Object,
@@ -49,5 +58,6 @@ const props = defineProps({
 });
 
 // Emitimos eventos al padre
+// Emitimos eventos al padre para manejar las acciones
 const emit = defineEmits(["edit", "delete"]);
 </script>

@@ -14,7 +14,18 @@
 <script setup>
 import { computed } from 'vue';
 
+/**
+ * Componente StatusBadge.
+ * 
+ * Muestra una etiqueta (badge) con color e icono según el estado proporcionado.
+ * Normaliza estados en inglés y español para mantener consistencia visual.
+ * Soporta estados de inventario, alquiler, mantenimiento y usuarios.
+ */
+
 // Props
+// Props
+// status: El string de estado a visualizar (ej. 'available', 'disponible', 'active').
+// size: Tamaño del badge ('sm', 'md', 'lg').
 const props = defineProps({
   status: {
     type: String,
@@ -28,6 +39,8 @@ const props = defineProps({
 });
 
 // Computed
+// Computed: Configuración centralizada de estados.
+// Mapea cada estado posible a su etiqueta legible, icono y clases de color.
 const statusConfig = computed(() => {
   const configs = {
     // Estados de inventario (inglés - compatibilidad)
@@ -141,6 +154,7 @@ const statusConfig = computed(() => {
 const statusLabel = computed(() => statusConfig.value.label);
 const statusIcon = computed(() => statusConfig.value.icon);
 
+// Computed: Combina las clases base de color con las clases de tamaño.
 const badgeClasses = computed(() => {
   const baseClasses = statusConfig.value.classes;
   const sizeClasses = {

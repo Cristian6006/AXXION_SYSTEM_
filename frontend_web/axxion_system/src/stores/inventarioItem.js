@@ -100,10 +100,11 @@ export const useInventarioItemStore = defineStore('inventarioItem', () => {
       error.value = null;
       
       const service = new InventarioItemService();
-      const response = await service.getInventarioItems();
+      // Usar el endpoint que incluye renta_activa
+      const response = await service.getItemsWithRentalStatus();
       
       inventarioItems.value = response.inventario_items || response;
-      console.log('Inventario items cargados:', inventarioItems.value);
+      console.log('Inventario items cargados con estado de renta:', inventarioItems.value);
       
     } catch (err) {
       error.value = 'Error al cargar los items de inventario: ' + (err.response?.data?.error || err.message);

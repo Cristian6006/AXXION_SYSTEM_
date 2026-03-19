@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXION SYSTEM - Reporte Mantenimientos</title>
-    <!-- Incluye Tailwind CSS (versión CDN para este ejemplo rápido) -->
-    <link href="/frontend_web/src/css/main.css" rel="stylesheet">
-    <style>
-        .sidebar-item.active {
-            @apply bg-purple-700;
-        }
-        /* Para ajustar el ancho de la columna de Acciones realizadas, si es necesario */
-        .table-cell-acciones {
-            max-width: 250px; /* Suficiente espacio para las descripciones de acciones */
-            white-space: normal; /* Permite que el texto se envuelva */
         }
     </style>
 </head>
@@ -348,18 +335,220 @@
             <div class="flex justify-end space-x-4">
                 <button type="button" id="confirm-deactivate-maintenance-report-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
                 <button type="button" id="cancel-deactivate-maintenance-report-action" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                                    <td class="py-3 px-4 whitespace-nowrap">8. Disco duro externo Seagate Backup Plus 5TB</td>
+                                    <td class="py-3 px-4 whitespace-nowrap">Preventivo</td>
+                                    <td class="py-3 px-4 table-cell-acciones">Ajustes</td>
+                                    <td class="py-3 px-4 whitespace-nowrap">11/05/2024</td>
+                                    <td class="py-3 px-4 whitespace-nowrap">18/05/2024</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 whitespace-nowrap">9. Tableta gráfico Wacom Intuos Pro</td>
+                                    <td class="py-3 px-4 whitespace-nowrap">Preventivo</td>
+                                    <td class="py-3 px-4 table-cell-acciones">limpieza.a</td>
+                                    <td class="py-3 px-4 whitespace-nowrap">19/05/2024</td>
+                                    <td class="py-3 px-4 whitespace-nowrap">03/06/2024</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 whitespace-nowrap">10. Docking station Lenovo ThinkPad</td>
+                                    <td class="py-3 px-4 whitespace-nowrap">Correctivo</td>
+                                    <td class="py-3 px-4 table-cell-acciones">reemplazo de componente</td>
+                                    <td class="py-3 px-4 whitespace-nowrap">15/05/2024</td>
+                                    <td class="py-3 px-4 whitespace-nowrap">28/05/2024</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna de opciones de descarga - REUTILIZADO -->
+            <div class="w-56 flex-shrink-0 pl-6 flex flex-col justify-center space-y-6">
+                <button id="download-pdf-btn" class="flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg shadow hover:bg-red-100 transition-colors duration-200">
+                    <svg class="h-10 w-10 text-red-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5l2 2h5a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
+                    <span class="text-sm font-semibold text-gray-700">Descargar como PDF</span>
+                </button>
+                <button id="download-excel-btn" class="flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg shadow hover:bg-green-100 transition-colors duration-200">
+                    <svg class="h-10 w-10 text-green-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5l2 2h5a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
+                    <span class="text-sm font-semibold text-gray-700">Descargar como EXCEL</span>
+                </button>
+                <button id="download-word-btn" class="flex flex-col items-center justify-center p-4 bg-gray-200 rounded-lg shadow hover:bg-blue-100 transition-colors duration-200">
+                    <svg class="h-10 w-10 text-blue-600 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5l2 2h5a2 2 0 012 2v10a2 2 0 01-2 2z"></path></svg>
+                    <span class="text-sm font-semibold text-gray-700">Descargar como WORD</span>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modals de descarga de reportes (REUTILIZADOS del reporte de inventario/empleados) -->
+    <!-- Modal para Descargar Reporte (selección de fecha) -->
+    <div id="download-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Descargar reporte</h2>
+            <button id="close-download-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="mb-4">
+                <label for="report-date" class="block text-gray-700 text-sm font-semibold mb-2">Seleccione la fecha del reporte</label>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="report-date" name="report-date" value="05 /05 /2025" class="w-32 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <button class="p-2 border border-gray-300 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <svg class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h8m-11 0h2.75A.25.25 0 005 11h2.75M16 11h2.75a.25.25 0 00.25-.25v-2.5a.25.25 0 00-.25-.25H16.25a.25.25 0 00-.25.25v2.5M3 11a2 2 0 00-2 2v6a2 2 0 002 2h18a2 2 0 002-2v-6a2 2 0 00-2-2H3z"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Calendar Grid Placeholder -->
+            <div class="border border-gray-300 rounded-md p-4 bg-gray-50 text-center mb-6">
+                <p class="font-semibold text-gray-800 mb-2">JUNE 2025</p>
+                <div class="grid grid-cols-7 gap-2 text-xs text-gray-600 mb-2">
+                    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                </div>
+                <div class="grid grid-cols-7 gap-2 text-sm text-gray-800">
+                    <span class="text-gray-400"></span><span class="text-gray-400"></span><span class="text-gray-400">1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                    <span>6</span><span>7</span><span>8</span><span>9</span><span class="bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center mx-auto cursor-pointer">10</span><span>11</span><span>12</span>
+                    <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span>
+                    <span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span>
+                    <span>27</span><span>28</span><span>29</span><span>30</span>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="download-report-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Descargar</button>
+                <button type="button" id="cancel-download-report-action" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Descargar Reporte (REUTILIZADO) -->
+    <div id="confirm-download-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-download-action-final" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-download-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Reporte (Mantenimientos) -->
+    <div id="edit-maintenance-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Editar reporte</h2>
+            <button id="close-edit-maintenance-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <form>
+                <div class="mb-4">
+                    <label for="edit-maintenance-equipment-name" class="block text-gray-700 text-sm font-semibold mb-2">Equipo</label>
+                    <div class="relative">
+                        <select id="edit-maintenance-equipment-name" name="equipment-name" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione un equipo</option>
+                            <option value="dell-optiplex">PC de escritorio Dell OptiPlex 7090</option>
+                            <option value="hp-elitebook">Laptop HP EliteBook 840 GB</option>
+                            <option value="monitor-lg">Monitor LG UltraWide 34WN80C-B</option>
+                            <!-- Más opciones de equipo aquí -->
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-maintenance-type" class="block text-gray-700 text-sm font-semibold mb-2">Tipo de mantenimiento</label>
+                    <div class="relative">
+                        <select id="edit-maintenance-type" name="maintenance-type" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione tipo</option>
+                            <option value="correctivo">Correctivo</option>
+                            <option value="preventivo">Preventivo</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-maintenance-actions" class="block text-gray-700 text-sm font-semibold mb-2">Acciones realizadas</label>
+                    <div class="relative">
+                         <select id="edit-maintenance-actions" name="maintenance-actions" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione acción</option>
+                            <option value="reemplazo-piezas">reemplazo de piezas</option>
+                            <option value="limpieza">limpieza.a</option>
+                            <option value="calibracion">calibración</option>
+                            <option value="reparacion">reparacion</option>
+                            <option value="ajustes">Ajustes</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-maintenance-start-date" class="block text-gray-700 text-sm font-semibold mb-2">Fecha de inicio</label>
+                    <input type="date" id="edit-maintenance-start-date" name="start-date" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" value="2024-05-21">
+                </div>
+                <div class="mb-6">
+                    <label for="edit-maintenance-end-date" class="block text-gray-700 text-sm font-semibold mb-2">Fecha de fin</label>
+                    <input type="date" id="edit-maintenance-end-date" name="end-date" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" value="2024-06-03">
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="save-edited-maintenance-report-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <button type="button" id="cancel-edit-maintenance-report-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Editar Reporte Mantenimientos (REUTILIZADO) -->
+    <div id="confirm-edit-maintenance-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación de Edición</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-edit-maintenance-action-final" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-edit-maintenance-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Eliminar Reporte Mantenimientos (se refiere al registro de mantenimiento) (REUTILIZADO) -->
+    <div id="remove-maintenance-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Eliminar Reporte</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-remove-maintenance-report-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-remove-maintenance-report-action" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Dar de Baja Reporte Mantenimientos (se refiere al registro de mantenimiento) (REUTILIZADO) -->
+    <div id="deactivate-maintenance-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Dar de baja Reporte</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-deactivate-maintenance-report-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-deactivate-maintenance-report-action" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
             </div>
         </div>
     </div>
 
 
     <script>
-        // Función general para controlar la visibilidad de los modales
+        /**
+         * Función utilitaria para mostrar u ocultar modales.
+         * Utiliza la clase 'hidden' de Tailwind CSS para controlar la visibilidad.
+         * @param {string} modalId - El ID del elemento modal en el DOM.
+         * @param {boolean} show - true para mostrar el modal, false para ocultarlo.
+         */
         function toggleModal(modalId, show) {
             document.getElementById(modalId).classList.toggle('hidden', !show);
         }
 
-        // CONTROLADOR DE MODALES DE DESCARGA (REUTILIZADO)
+        // ==========================================
+        // GESTIÓN DE MODALES DE DESCARGA
+        // ==========================================
         const downloadPdfBtn = document.getElementById('download-pdf-btn');
         const downloadExcelBtn = document.getElementById('download-excel-btn');
         const downloadWordBtn = document.getElementById('download-word-btn');
@@ -371,28 +560,37 @@
         const confirmDownloadActionFinal = document.getElementById('confirm-download-action-final');
         const cancelDownloadActionFinal = document.getElementById('cancel-download-action-final');
 
-        // Abre el modal de descarga al hacer clic en cualquier botón de descarga
+        // Configuración de eventos para abrir el modal de descarga
         [downloadPdfBtn, downloadExcelBtn, downloadWordBtn].forEach(btn => {
             btn.addEventListener('click', () => toggleModal('download-report-modal', true));
         });
+        
+        // Cerrar modal de descarga
         closeDownloadModalBtn.addEventListener('click', () => toggleModal('download-report-modal', false));
         cancelDownloadReportAction.addEventListener('click', () => toggleModal('download-report-modal', false));
 
+        // Transición a confirmación de descarga
         downloadReportAction.addEventListener('click', () => {
             toggleModal('download-report-modal', false);
             toggleModal('confirm-download-modal', true);
         });
+
+        // Acción final de descarga (Simulada)
         confirmDownloadActionFinal.addEventListener('click', () => {
             alert('Reporte descargado! (Simulación de la descarga)');
             toggleModal('confirm-download-modal', false);
         });
+
+        // Cancelar confirmación y volver atrás
         cancelDownloadActionFinal.addEventListener('click', () => {
             toggleModal('confirm-download-modal', false);
             toggleModal('download-report-modal', true);
         });
 
 
-        // CONTROLADOR DE MODAL DE EDICIÓN DE REPORTE MANTENIMIENTOS
+        // ==========================================
+        // GESTIÓN DEL MODAL DE EDICIÓN DE MANTENIMIENTO
+        // ==========================================
         const editMaintenanceReportBtn = document.getElementById('edit-maintenance-report-btn');
         const editMaintenanceReportModal = document.getElementById('edit-maintenance-report-modal');
         const closeEditMaintenanceModalBtn = document.getElementById('close-edit-maintenance-modal-btn');
@@ -402,47 +600,71 @@
         const confirmEditMaintenanceActionFinal = document.getElementById('confirm-edit-maintenance-action-final');
         const cancelEditMaintenanceActionFinal = document.getElementById('cancel-edit-maintenance-action-final');
 
+        // Abrir/Cerrar modal de edición
         editMaintenanceReportBtn.addEventListener('click', () => toggleModal('edit-maintenance-report-modal', true));
         closeEditMaintenanceModalBtn.addEventListener('click', () => toggleModal('edit-maintenance-report-modal', false));
         cancelEditMaintenanceReportBtn.addEventListener('click', () => toggleModal('edit-maintenance-report-modal', false));
 
+        // Guardar cambios (transición a confirmación)
         saveEditedMaintenanceReportBtn.addEventListener('click', () => {
             toggleModal('edit-maintenance-report-modal', false);
             toggleModal('confirm-edit-maintenance-report-modal', true);
         });
+
+        // Confirmar cambios (Simulado)
         confirmEditMaintenanceActionFinal.addEventListener('click', () => {
             alert('Registro de mantenimiento modificado! (Simulación)');
             toggleModal('confirm-edit-maintenance-report-modal', false);
         });
+
+        // Cancelar confirmación
         cancelEditMaintenanceActionFinal.addEventListener('click', () => {
             toggleModal('confirm-edit-maintenance-report-modal', false);
             toggleModal('edit-maintenance-report-modal', true);
         });
 
-        // CONTROLADOR DE MODAL DE ELIMINAR REPORTE MANTENIMIENTOS
+        // ==========================================
+        // GESTIÓN DEL MODAL DE ELIMINACIÓN
+        // ==========================================
         const deleteMaintenanceReportBtn = document.getElementById('delete-maintenance-report-btn');
         const removeMaintenanceReportModal = document.getElementById('remove-maintenance-report-modal');
         const confirmRemoveMaintenanceReportAction = document.getElementById('confirm-remove-maintenance-report-action');
         const cancelRemoveMaintenanceReportAction = document.getElementById('cancel-remove-maintenance-report-action');
 
+        // Abre el modal de eliminación
+        // NOTA: Este botón 'deleteMaintenanceReportBtn' no está presente en el HTML proporcionado,
+        // por lo que este evento no se disparará a menos que se añada el botón.
         deleteMaintenanceReportBtn.addEventListener('click', () => toggleModal('remove-maintenance-report-modal', true));
+        
+        // Confirma la eliminación (simulada)
         confirmRemoveMaintenanceReportAction.addEventListener('click', () => {
             alert('Registro de mantenimiento eliminado! (Simulación)');
             toggleModal('remove-maintenance-report-modal', false);
         });
+        
+        // Cancela la eliminación
         cancelRemoveMaintenanceReportAction.addEventListener('click', () => toggleModal('remove-maintenance-report-modal', false));
 
-        // CONTROLADOR DE MODAL DE DAR DE BAJA REPORTE MANTENIMIENTOS
+        // ==========================================
+        // GESTIÓN DEL MODAL DE DAR DE BAJA
+        // ==========================================
         const deactivateMaintenanceReportBtn = document.getElementById('deactivate-maintenance-report-btn');
         const deactivateMaintenanceReportModal = document.getElementById('deactivate-maintenance-report-modal');
         const confirmDeactivateMaintenanceReportAction = document.getElementById('confirm-deactivate-maintenance-report-action');
         const cancelDeactivateMaintenanceReportAction = document.getElementById('cancel-deactivate-maintenance-report-action');
 
+        // Abre el modal de dar de baja
+        // NOTA: Este botón 'deactivateMaintenanceReportBtn' no está presente en el HTML proporcionado,
+        // por lo que este evento no se disparará a menos que se añada el botón.
         deactivateMaintenanceReportBtn.addEventListener('click', () => toggleModal('deactivate-maintenance-report-modal', true));
+        
+        // Confirma la acción de dar de baja (simulada)
         confirmDeactivateMaintenanceReportAction.addEventListener('click', () => {
             alert('Registro de mantenimiento dado de baja! (Simulación)');
             toggleModal('deactivate-maintenance-report-modal', false);
         });
+        
+        // Cancela la acción de dar de baja
         cancelDeactivateMaintenanceReportAction.addEventListener('click', () => toggleModal('deactivate-maintenance-report-modal', false));
 
     </script>

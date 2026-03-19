@@ -1,4 +1,4 @@
-import apiClient from './axiosConfig';
+import apiClient from '@/plugins/axios';
 
 class InventarioItemService {
   constructor() {
@@ -115,6 +115,21 @@ class InventarioItemService {
       return response.data;
     } catch (error) {
       console.error('Error al obtener inventario items por estado:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get inventario items with rental status
+   */
+  async getItemsWithRentalStatus() {
+    try {
+      console.log('InventarioItemService: Obteniendo items con estado de renta');
+      const response = await this.api.get('/inventario_item_with_rental_status');
+      console.log('InventarioItemService: Respuesta de items con renta:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error('InventarioItemService: Error al obtener items con estado de renta:', error.response?.data || error.message);
       throw error;
     }
   }

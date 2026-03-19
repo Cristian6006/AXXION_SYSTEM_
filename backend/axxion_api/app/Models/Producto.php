@@ -5,6 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modelo que representa un Producto en el catálogo.
+ * 
+ * Define las características generales de un tipo de equipo (ej. 'Taladro Percutor Modelo X').
+ * No representa una unidad física específica (ver InventarioItem).
+ */
 class Producto extends Model
 {
     use HasFactory;
@@ -44,21 +50,33 @@ class Producto extends Model
         'fecha_compra' => 'date',
     ];
 
+    /**
+     * Relación: Un producto puede pertenecer a varias subcategorías.
+     */
     public function subcategorias()
     {
         return $this->belongsToMany(Subcategoria::class, 'producto_subcategoria');
     }
 
+    /**
+     * Relación: Un producto tiene muchas unidades físicas (items) en inventario.
+     */
     public function inventarioItems()
     {
         return $this->hasMany(InventarioItem::class);
     }
 
+    /**
+     * Relación: Un producto puede ser solicitado muchas veces.
+     */
     public function solicitudes()
     {
         return $this->belongsToMany(Solicitud::class, 'solicitud_producto');
     }
 
+    /**
+     * Relación: Un producto puede aparecer en muchos detalles de cotización.
+     */
     public function detallesCotizacion()
     {
         return $this->hasMany(DetalleCotizacion::class);

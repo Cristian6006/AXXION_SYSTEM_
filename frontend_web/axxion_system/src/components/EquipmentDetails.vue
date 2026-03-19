@@ -357,7 +357,20 @@ import { useInventoryStore } from '@/stores/inventory.js';
 import { FwbCard, FwbButton } from 'flowbite-vue';
 import StatusBadge from './StatusBadge.vue';
 
+/**
+ * Componente EquipmentDetails.
+ * 
+ * Muestra la información detallada de un equipo específico seleccionado.
+ * Incluye:
+ * - Información básica y estado actual.
+ * - Especificaciones técnicas completas.
+ * - Historial de alquileres y mantenimientos.
+ * - Información financiera y ROI.
+ * - Acciones disponibles (editar, alquilar, mantener, reportar).
+ */
+
 // Props
+// equipment: Objeto con todos los datos del equipo a visualizar.
 const props = defineProps({
   equipment: {
     type: Object,
@@ -376,6 +389,10 @@ const rentalHistory = ref([]);
 const maintenanceHistory = ref([]);
 
 // Métodos
+
+/**
+ * Obtiene la etiqueta legible para una categoría.
+ */
 const getCategoryLabel = (category) => {
   const labels = {
     laptop: 'Laptop',
@@ -397,6 +414,9 @@ const getConditionLabel = (condition) => {
   return labels[condition] || condition;
 };
 
+/**
+ * Formatea una fecha ISO a un formato local legible (ej. "15 de octubre de 2023").
+ */
 const formatDate = (dateString) => {
   if (!dateString) return '';
   const date = new Date(dateString);
@@ -407,6 +427,10 @@ const formatDate = (dateString) => {
   });
 };
 
+/**
+ * Carga el historial de alquileres del equipo desde el store.
+ * Si falla, usa datos de ejemplo para visualización.
+ */
 const loadRentalHistory = async () => {
   try {
     rentalHistory.value = await inventoryStore.getRentalHistory(props.equipment.id);
@@ -434,6 +458,9 @@ const loadRentalHistory = async () => {
   }
 };
 
+/**
+ * Carga el historial de mantenimientos del equipo.
+ */
 const loadMaintenanceHistory = async () => {
   try {
     maintenanceHistory.value = await inventoryStore.getMaintenanceHistory(props.equipment.id);

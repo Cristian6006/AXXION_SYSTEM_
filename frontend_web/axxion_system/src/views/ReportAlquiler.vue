@@ -1,135 +1,37 @@
 <template>
-    <div class="app flex">
-        <SideBar />
-        <RouterView />
-        <main class="container h-screen p-4 flex-1 overflow-y-auto flex flex-col">
-            <headerP />
-            <div class="flex flex-row justify-between">
-                <h1 class="text-3xl font-bold mb-6 text-black">Reportes de Alquileres</h1>
-                <section>
-                <div class="flex justify-end mb-4">
-                    <ExportWorksheet
-                    filename="inventario.xlsx"
-                    sheetName="Inventario"
-                    :data="inventario"
-                    :columns="[
-                    { key: 'id', label: 'ID' },
-                    { key: 'nombre', label: 'Nombre' },
-                    { key: 'marca', label: 'Marca' },
-                    { key: 'modelo', label: 'Modelo' },
-                    { key: 'estado', label: 'Estado' },
-                    { key: 'ubicacion', label: 'Ubicación' },
-                    ]"
-                />
-                </div>
-            </section>
-            </div>
-            <select v-model="selected" class="bg-gray-800  rounded-xl text-amber-50">
-                <option class="rounded-xl text-amber-50" disabled value="">Selecciona un gráfico</option>
-                <option>Lineal</option>
-                <option>Barra</option>
-                <option>Pastel</option>
-            </select>
-            <p>Selected: {{ selected }}</p>
-            <div v-if="currentComponent" class="flex-1 mt-4">
-                <component :is="currentComponent" :items="filteredItems" :metrics="metrics" :mode-prop="modeProp"/>
-            </div>
-        </main>
+    <div>
+        <div class="app flex">
+            <SideBar/>
+            <RouterView></RouterView>
+            <main class="container h-screen p-4 flex-1 overflow-y-auto">
+                <headerP/>
+                <section class="flex flex-col">
+                    <h1 class="text-2xl"><strong>Reportes de alquiler</strong></h1>
+                    <br>
+                    <GraphAlq/>
+                </section>
+            </main>
+        </div>
+        <Footer/>
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import ExportWorksheet from '@/components/ExportWorksheet .vue'
-import SideBar from '@/components/SideBar.vue'
-import headerP from '@/components/headerP.vue'
-import { RouterView } from 'vue-router'
-import LineBar from '@/components/LineBar.vue'
-import BarChart from '@/components/BarChart.vue';   
-import PieGraph from '@/components/PieGraph.vue';
-import InventoryService from '@/services/InventoryService'
-import ReportService from '@/services/ReportService'
+import { onMounted, ref } from 'vue';
+import SideBar from '@/components/SideBar.vue';
+import headerP from '@/components/headerP.vue';
+import GraphAlq from '@/components/Graficos/GraphAlq.vue';
+import Footer from '@/components/Footer.vue';
 
-const lineal = ref(LineBar)
-const Barras = ref(BarChart)
-const Pastel = ref(PieGraph)
-
-const selected = ref('Lineal')
-
-const componentsMap = {
-    Lineal: LineBar,
-    Barra: BarChart,
-    Pastel: PieGraph,
-}
-const currentComponent = computed(() => componentsMap[selected.value] || null)
-
-const items = ref([])
-const inventario = ref([])
-const metrics = ref(null)
-const loading = ref(true)
-const loadError = ref(null)
-const selectedCategory = ref('')
-const dateFrom = ref('')
-const dateTo = ref('')
-const categories = ref([])
-const filteredItems = ref([])
-const modeProp = ref('all')
-
-onMounted(async () => {
-    loading.value = true
-    loadError.value = null
-    try {
-        const [fetchedItems, fetchedMetrics] = await Promise.all([
-            InventoryService.getProducts(),
-            ReportService.getMetrics()
-        ])
-        items.value = Array.isArray(fetchedItems) ? fetchedItems : []
-        metrics.value = fetchedMetrics || null
-    } catch (err) {
-        console.error('Error cargando datos en ReportAlquiler:', err)
-        loadError.value = err
-    } finally {
-        loading.value = false
-    }
-        categories.value = Array.from(new Set(items.value.map(i => i.categoria).filter(Boolean)))
-        filteredItems.value = items.value.slice()
-})
-
-function applyFilters() {
-    let result = items.value.slice()
-    if (selectedCategory.value) {
-        result = result.filter(i => i.categoria === selectedCategory.value)
-    }
-    if (dateFrom.value) {
-        const from = new Date(dateFrom.value)
-        result = result.filter(i => i.fecha ? new Date(i.fecha) >= from : true)
-    }
-    if (dateTo.value) {
-        const to = new Date(dateTo.value)
-        result = result.filter(i => i.fecha ? new Date(i.fecha) <= to : true)
-    }
-    filteredItems.value = result
-}
-
-function resetFilters() {
-    selectedCategory.value = ''
-    dateFrom.value = ''
-    dateTo.value = ''
-    filteredItems.value = items.value.slice()
-}
-
+/**
+ * Vista ReportAlquiler.
+ * 
+ * Muestra reportes y gráficos específicos relacionados con los alquileres.
+ * Utiliza el componente GraphAlq para visualizar la información.
+ */
 </script>
 
-<style >
-.fwb-select, .fwb-select select, .fwb-select option, .fwb-select .fwbdropdown {
-  color: #f9fafb !important;       /* texto visible en dark */
-  background-color: #111827 !important; /* fondo oscuro */
-}
+<style>
 
-/* opción seleccionada resaltada */
-.fwb-select option:checked {
-  background-color: #2563eb !important; /* azul seleccionado */
-  color: #ffffff !important;
-}
 </style>
 

@@ -1,5 +1,4 @@
-// src/services/SubCategoryService.js
-import apiClient from './axiosConfig';
+import apiClient from '@/plugins/axios';
 
 export default {
   async create(payload) {              

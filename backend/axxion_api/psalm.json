@@ -1,0 +1,27 @@
+{
+    "name": "AXXION System",
+    "description": "Laravel API for AXXION System",
+    "errorLevel": 3,
+    "plugins": [
+        "Psalm\\Plugin\\Finder"
+    ],
+    "projectFiles": [
+        "app",
+        "routes",
+        "database"
+    ],
+    "exclude_files": [
+        "vendor",
+        "storage",
+        "tests"
+    ],
+    "ignoreErrors": [
+        "UndefinedClass",
+        "MixedAssignment",
+        "MixedArgument"
+    ],
+    "php_version": "8.2",
+    "ensurePureCallables": true,
+    "sealAllMethods": false,
+    "sealAllProperties": false
+}

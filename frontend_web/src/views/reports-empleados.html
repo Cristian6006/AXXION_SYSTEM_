@@ -8,7 +8,7 @@
     <link href="/frontend_web/src/css/main.css" rel="stylesheet">
     <style>
         .sidebar-item.active {
-            @apply bg-purple-700;
+            background-color: #7e22ce; /* Reemplazo de @apply bg-purple-700 */
         }
         /* No se requieren clases específicas de tabla para este mockup de reporte de empleados,
            ya que los campos suelen ser de ancho fijo y sin envoltura de texto.
@@ -306,95 +306,142 @@
 
 
     <script>
-        // Función general para controlar la visibilidad de los modales
+        /**
+         * Función utilitaria para mostrar u ocultar modales.
+         * Utiliza la clase 'hidden' de Tailwind CSS para controlar la visibilidad.
+         * @param {string} modalId - El ID del elemento modal en el DOM.
+         * @param {boolean} show - true para mostrar el modal, false para ocultarlo.
+         */
         function toggleModal(modalId, show) {
             document.getElementById(modalId).classList.toggle('hidden', !show);
         }
 
-        // CONTROLADOR DE MODALES DE DESCARGA (REUTILIZADO)
+        // ==========================================
+        // GESTIÓN DE MODALES DE DESCARGA
+        // ==========================================
+        // Referencias a los botones de descarga (PDF, Excel, Word)
         const downloadPdfBtn = document.getElementById('download-pdf-btn');
         const downloadExcelBtn = document.getElementById('download-excel-btn');
         const downloadWordBtn = document.getElementById('download-word-btn');
+        
+        // Referencias a los elementos del modal de descarga
         const downloadReportModal = document.getElementById('download-report-modal');
         const closeDownloadModalBtn = document.getElementById('close-download-modal-btn');
         const downloadReportAction = document.getElementById('download-report-action');
         const cancelDownloadReportAction = document.getElementById('cancel-download-report-action');
+        
+        // Referencias a los elementos del modal de confirmación de descarga
         const confirmDownloadModal = document.getElementById('confirm-download-modal');
         const confirmDownloadActionFinal = document.getElementById('confirm-download-action-final');
         const cancelDownloadActionFinal = document.getElementById('cancel-download-action-final');
 
-        // Abre el modal de descarga al hacer clic en cualquier botón de descarga
+        // Configuración de eventos para abrir el modal de descarga desde cualquier botón de formato
         [downloadPdfBtn, downloadExcelBtn, downloadWordBtn].forEach(btn => {
             btn.addEventListener('click', () => toggleModal('download-report-modal', true));
         });
+
+        // Eventos para cerrar el modal de selección de fecha
         closeDownloadModalBtn.addEventListener('click', () => toggleModal('download-report-modal', false));
         cancelDownloadReportAction.addEventListener('click', () => toggleModal('download-report-modal', false));
 
+        // Flujo de descarga: Selección de fecha -> Confirmación -> Acción Final
         downloadReportAction.addEventListener('click', () => {
-            toggleModal('download-report-modal', false);
-            toggleModal('confirm-download-modal', true);
+            toggleModal('download-report-modal', false); // Cierra selección de fecha
+            toggleModal('confirm-download-modal', true); // Abre confirmación
         });
+
+        // Simulación de la acción final de descarga
         confirmDownloadActionFinal.addEventListener('click', () => {
             alert('Reporte descargado! (Simulación de la descarga)');
             toggleModal('confirm-download-modal', false);
         });
+
+        // Cancelar en la confirmación regresa al modal anterior (selección de fecha)
         cancelDownloadActionFinal.addEventListener('click', () => {
             toggleModal('confirm-download-modal', false);
             toggleModal('download-report-modal', true);
         });
 
 
-        // CONTROLADOR DE MODAL DE EDICIÓN DE REPORTE EMPLEADOS
+        // ==========================================
+        // GESTIÓN DEL MODAL DE EDICIÓN DE EMPLEADO
+        // ==========================================
         const editEmployeeReportBtn = document.getElementById('edit-employee-report-btn');
         const editEmployeeReportModal = document.getElementById('edit-employee-report-modal');
         const closeEditEmployeeModalBtn = document.getElementById('close-edit-employee-modal-btn');
         const saveEditedEmployeeReportBtn = document.getElementById('save-edited-employee-report-btn');
         const cancelEditEmployeeReportBtn = document.getElementById('cancel-edit-employee-report-btn');
+        
+        // Modal de confirmación para edición
         const confirmEditEmployeeReportModal = document.getElementById('confirm-edit-employee-report-modal');
         const confirmEditEmployeeActionFinal = document.getElementById('confirm-edit-employee-action-final');
         const cancelEditEmployeeActionFinal = document.getElementById('cancel-edit-employee-action-final');
 
+        // Abrir modal de edición
         editEmployeeReportBtn.addEventListener('click', () => toggleModal('edit-employee-report-modal', true));
+        
+        // Cerrar modal de edición
         closeEditEmployeeModalBtn.addEventListener('click', () => toggleModal('edit-employee-report-modal', false));
         cancelEditEmployeeReportBtn.addEventListener('click', () => toggleModal('edit-employee-report-modal', false));
 
+        // Flujo de edición: Formulario -> Confirmación -> Guardado
         saveEditedEmployeeReportBtn.addEventListener('click', () => {
+            // Aquí se validaría el formulario antes de proceder
             toggleModal('edit-employee-report-modal', false);
             toggleModal('confirm-edit-employee-report-modal', true);
         });
+
+        // Simulación de guardado de cambios
         confirmEditEmployeeActionFinal.addEventListener('click', () => {
             alert('Datos del empleado modificados! (Simulación)');
             toggleModal('confirm-edit-employee-report-modal', false);
+            // Aquí se enviaría la petición al backend
         });
+
+        // Cancelar confirmación regresa al formulario de edición
         cancelEditEmployeeActionFinal.addEventListener('click', () => {
             toggleModal('confirm-edit-employee-report-modal', false);
             toggleModal('edit-employee-report-modal', true);
         });
 
-        // CONTROLADOR DE MODAL DE ELIMINAR REPORTE EMPLEADOS
+        // ==========================================
+        // GESTIÓN DEL MODAL DE ELIMINACIÓN
+        // ==========================================
         const deleteEmployeeReportBtn = document.getElementById('delete-employee-report-btn');
         const removeEmployeeReportModal = document.getElementById('remove-employee-report-modal');
         const confirmRemoveEmployeeReportAction = document.getElementById('confirm-remove-employee-report-action');
         const cancelRemoveEmployeeReportAction = document.getElementById('cancel-remove-employee-report-action');
 
+        // Abrir modal de eliminación
         deleteEmployeeReportBtn.addEventListener('click', () => toggleModal('remove-employee-report-modal', true));
+
+        // Confirmar eliminación
         confirmRemoveEmployeeReportAction.addEventListener('click', () => {
             alert('Reporte (datos de empleado) eliminado! (Simulación)');
             toggleModal('remove-employee-report-modal', false);
         });
+
+        // Cancelar eliminación
         cancelRemoveEmployeeReportAction.addEventListener('click', () => toggleModal('remove-employee-report-modal', false));
 
-        // CONTROLADOR DE MODAL DE DAR DE BAJA REPORTE EMPLEADOS
+        // ==========================================
+        // GESTIÓN DEL MODAL DE DAR DE BAJA
+        // ==========================================
         const deactivateEmployeeReportBtn = document.getElementById('deactivate-employee-report-btn');
         const deactivateEmployeeReportModal = document.getElementById('deactivate-employee-report-modal');
         const confirmDeactivateEmployeeReportAction = document.getElementById('confirm-deactivate-employee-report-action');
         const cancelDeactivateEmployeeReportAction = document.getElementById('cancel-deactivate-employee-report-action');
 
+        // Abrir modal de dar de baja
         deactivateEmployeeReportBtn.addEventListener('click', () => toggleModal('deactivate-employee-report-modal', true));
+
+        // Confirmar dar de baja
         confirmDeactivateEmployeeReportAction.addEventListener('click', () => {
             alert('Reporte (empleado) dado de baja! (Simulación)');
             toggleModal('deactivate-employee-report-modal', false);
         });
+
+        // Cancelar dar de baja
         cancelDeactivateEmployeeReportAction.addEventListener('click', () => toggleModal('deactivate-employee-report-modal', false));
 
     </script>

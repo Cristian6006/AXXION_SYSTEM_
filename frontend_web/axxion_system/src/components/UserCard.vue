@@ -14,6 +14,16 @@ interface User {
   estado: string;
 };
 
+/**
+ * Componente UserCard.
+ * 
+ * Tarjeta de presentación para un usuario del sistema.
+ * Muestra:
+ * - Avatar y estado (activo/inactivo).
+ * - Información personal y de contacto.
+ * - Botones de acción rápida (editar, eliminar).
+ */
+
 
 
 
@@ -21,15 +31,21 @@ const test = () => {
   console.log();
 };
 
+// Props
+// user: Objeto con la información completa del usuario.
 const props = defineProps<{
   user: User;
 }>();
 
+// Emits
+// deleteUser: Evento para solicitar la eliminación del usuario.
+// updateUser: Evento para solicitar la actualización del usuario.
 const emit = defineEmits<{
   deleteUser: [user: User];
   updateUser: [user: User];
 }>();
 
+// Computed: Concatena los nombres y apellidos para mostrar el nombre completo.
 const fullName = computed(() => {
   return [props.user.nombre, props.user.nombre2, props.user.apellido1, props.user.apellido2]
     .filter(Boolean)

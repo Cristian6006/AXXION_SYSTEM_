@@ -38,12 +38,22 @@
 <script setup>
 import { ref, computed } from 'vue'
 
+/**
+ * Componente Table.
+ * 
+ * Tabla de datos reutilizable y responsiva.
+ * Genera automáticamente las cabeceras basándose en las claves del primer objeto de datos.
+ * Soporta modo oscuro y estados vacíos.
+ */
+
 const items = ref([
   // Example of how data could look. Kept empty as requested.
   { 'Song': 'The Sliding Mr. Bones', 'Artist': 'Malcolm Lockyer', 'Year': 1961 },
   { 'Song': 'Witchy Woman', 'Artist': 'The Eagles', 'Year': 1972 },
 ]);
 
+// Computed: Genera las cabeceras de la tabla dinámicamente.
+// Si no hay datos, muestra cabeceras por defecto.
 const headers = computed(() => {
     if (items.value.length === 0) {
         return ['Column 1', 'Column 2', 'Column 3']; // Default headers

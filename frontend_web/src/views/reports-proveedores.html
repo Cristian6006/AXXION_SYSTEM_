@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXION SYSTEM - Reporte Proveedores</title>
-    <!-- Incluye Tailwind CSS (versión CDN para este ejemplo rápido) -->
-    <link href="/frontend_web/src/css/main.css" rel="stylesheet">
-    <style>
-        .sidebar-item.active {
-            @apply bg-purple-700;
-        }
-    </style>
-</head>
-<body class="font-sans antialiased text-gray-900 bg-gray-100 min-h-screen flex">
-
     <!-- Barra Lateral (Sidebar) - REUTILIZADO -->
     <aside class="w-64 bg-gray-800 text-white flex-shrink-0">
         <div class="p-6 text-2xl font-bold border-b border-gray-700">AXION SYSTEM</div>
@@ -340,18 +327,220 @@
             <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
             <div class="flex justify-end space-x-4">
                 <button type="button" id="confirm-deactivate-provider-action-final" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <span class="text-sm font-semibold text-gray-700">Descargar como WORD</span>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modals de descarga de reportes (REUTILIZADOS) -->
+    <!-- Modal para Descargar Reporte (selección de fecha) -->
+    <div id="download-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Descargar reporte</h2>
+            <button id="close-download-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="mb-4">
+                <label for="report-date" class="block text-gray-700 text-sm font-semibold mb-2">Seleccione la fecha del reporte</label>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="report-date" name="report-date" value="05 /05 /2025" class="w-32 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <button class="p-2 border border-gray-300 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <svg class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h8m-11 0h2.75A.25.25 0 005 11h2.75M16 11h2.75a.25.25 0 00.25-.25v-2.5a.25.25 0 00-.25-.25H16.25a.25.25 0 00-.25.25v2.5M3 11a2 2 0 00-2 2v6a2 2 0 002 2h18a2 2 0 002-2v-6a2 2 0 00-2-2H3z"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Calendar Grid Placeholder -->
+            <div class="border border-gray-300 rounded-md p-4 bg-gray-50 text-center mb-6">
+                <p class="font-semibold text-gray-800 mb-2">JUNE 2025</p>
+                <div class="grid grid-cols-7 gap-2 text-xs text-gray-600 mb-2">
+                    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                </div>
+                <div class="grid grid-cols-7 gap-2 text-sm text-gray-800">
+                    <span class="text-gray-400"></span><span class="text-gray-400"></span><span class="text-gray-400">1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                    <span>6</span><span>7</span><span>8</span><span>9</span><span class="bg-blue-500 text-white rounded-full h-8 w-8 flex items-center justify-center mx-auto cursor-pointer">10</span><span>11</span><span>12</span>
+                    <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span>
+                    <span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span>
+                    <span>27</span><span>28</span><span>29</span><span>30</span>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="download-report-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Descargar</button>
+                <button type="button" id="cancel-download-report-action" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Descargar Reporte (REUTILIZADO) -->
+    <div id="confirm-download-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-download-action-final" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-download-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Reporte (Proveedores) -->
+    <div id="edit-provider-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Editar reporte</h2>
+            <button id="close-edit-provider-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <form>
+                <div class="mb-4">
+                    <label for="edit-provider-name" class="block text-gray-700 text-sm font-semibold mb-2">Nombre</label>
+                    <div class="relative">
+                        <select id="edit-provider-name" name="provider-name" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione proveedor</option>
+                            <option value="techporta">1.TechPorta S.A.</option>
+                            <option value="pc-solutions">2.PC Solutions Ltda</option>
+                            <!-- Agrega más opciones de proveedor -->
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="edit-provider-contact" class="block text-gray-700 text-sm font-semibold mb-2">Contacto</label>
+                    <input type="text" id="edit-provider-contact" name="provider-contact" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" value="310 294 7890">
+                </div>
+                <div class="mb-4">
+                    <label for="edit-provider-location" class="block text-gray-700 text-sm font-semibold mb-2">Ubicacion</label>
+                    <div class="relative">
+                        <select id="edit-provider-location" name="provider-location" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione ubicacion</option>
+                            <option value="bogota">Bogotá Colombia</option>
+                            <option value="medellin">Medellín Colombia</option>
+                            <option value="cali">Cali Colombia</option>
+                            <option value="barranquilla">Barranquilla Colombia</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="edit-provider-type" class="block text-gray-700 text-sm font-semibold mb-2">Tipo de proveedor</label>
+                    <div class="relative">
+                        <select id="edit-provider-type" name="provider-type" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            <option value="">Seleccione tipo</option>
+                            <option value="repuestos">Repuestos (RAM SSD Teclados)</option>
+                            <option value="equipos-computo">Equipos de cómputo</option>
+                            <option value="mantenimiento">Mantenimiento técnico</option>
+                            <option value="servidores">Servidores y redes</option>
+                            <option value="software">Software y licencias</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="save-edited-provider-report-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <button type="button" id="cancel-edit-provider-report-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Editar Reporte Proveedores (REUTILIZADO) -->
+    <div id="confirm-edit-provider-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación de Edición</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-edit-provider-action-final" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-edit-provider-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Eliminar Reporte Proveedores (Solicita el nombre) -->
+    <div id="remove-provider-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Eliminar Proveedor</h2>
+            <button id="close-remove-provider-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <form>
+                <div class="mb-6 relative">
+                    <label for="remove-provider-name-input" class="block text-gray-700 text-sm font-semibold mb-2">Escriba el proveedor</label>
+                    <input type="text" id="remove-provider-name-input" name="provider-name" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nombre del proveedor">
+                    <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="perform-remove-provider-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <button type="button" id="cancel-remove-provider-btn" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Eliminar Reporte Proveedores -->
+    <div id="confirm-remove-provider-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-remove-provider-action-final" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                <button type="button" id="cancel-remove-provider-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Dar de Baja Reporte Proveedores (Solicita el nombre) -->
+    <div id="deactivate-provider-report-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Dar de baja proveedor</h2>
+            <button id="close-deactivate-provider-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <form>
+                <div class="mb-6 relative">
+                    <label for="deactivate-provider-name-input" class="block text-gray-700 text-sm font-semibold mb-2">Escriba el proveedor</label>
+                    <input type="text" id="deactivate-provider-name-input" name="provider-name" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nombre del proveedor">
+                    <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="perform-deactivate-provider-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
+                    <button type="button" id="cancel-deactivate-provider-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación para Dar de Baja Reporte Proveedores -->
+    <div id="confirm-deactivate-provider-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm relative">
+            <h2 class="text-xl font-bold mb-6 text-gray-800">Confirmación</h2>
+            <p class="text-gray-700 mb-6">¿Está seguro de la operación?</p>
+            <div class="flex justify-end space-x-4">
+                <button type="button" id="confirm-deactivate-provider-action-final" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
                 <button type="button" id="cancel-deactivate-provider-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Función general para controlar la visibilidad de los modales
+        /**
+         * Función utilitaria para mostrar u ocultar modales.
+         * Utiliza la clase 'hidden' de Tailwind CSS para controlar la visibilidad.
+         * @param {string} modalId - El ID del elemento modal en el DOM.
+         * @param {boolean} show - true para mostrar el modal, false para ocultarlo.
+         */
         function toggleModal(modalId, show) {
             document.getElementById(modalId).classList.toggle('hidden', !show);
         }
 
-        // CONTROLADOR DE MODALES DE DESCARGA (REUTILIZADO)
+        // ==========================================
+        // GESTIÓN DE MODALES DE DESCARGA
+        // ==========================================
         const downloadPdfBtn = document.getElementById('download-pdf-btn');
         const downloadExcelBtn = document.getElementById('download-excel-btn');
         const downloadWordBtn = document.getElementById('download-word-btn');
@@ -363,28 +552,37 @@
         const confirmDownloadActionFinal = document.getElementById('confirm-download-action-final');
         const cancelDownloadActionFinal = document.getElementById('cancel-download-action-final');
 
-        // Abre el modal de descarga al hacer clic en cualquier botón de descarga
+        // Configuración de eventos para abrir el modal de descarga
         [downloadPdfBtn, downloadExcelBtn, downloadWordBtn].forEach(btn => {
             btn.addEventListener('click', () => toggleModal('download-report-modal', true));
         });
+        
+        // Cerrar modal de descarga
         closeDownloadModalBtn.addEventListener('click', () => toggleModal('download-report-modal', false));
         cancelDownloadReportAction.addEventListener('click', () => toggleModal('download-report-modal', false));
 
+        // Transición a confirmación de descarga
         downloadReportAction.addEventListener('click', () => {
             toggleModal('download-report-modal', false);
             toggleModal('confirm-download-modal', true);
         });
+
+        // Acción final de descarga (Simulada)
         confirmDownloadActionFinal.addEventListener('click', () => {
             alert('Reporte descargado! (Simulación de la descarga)');
             toggleModal('confirm-download-modal', false);
         });
+
+        // Cancelar confirmación y volver atrás
         cancelDownloadActionFinal.addEventListener('click', () => {
             toggleModal('confirm-download-modal', false);
             toggleModal('download-report-modal', true);
         });
 
 
-        // CONTROLADOR DE MODAL DE EDICIÓN DE REPORTE PROVEEDORES
+        // ==========================================
+        // GESTIÓN DEL MODAL DE EDICIÓN DE PROVEEDOR
+        // ==========================================
         const editProviderReportBtn = document.getElementById('edit-provider-report-btn');
         const editProviderReportModal = document.getElementById('edit-provider-report-modal');
         const closeEditProviderModalBtn = document.getElementById('close-edit-provider-modal-btn');
@@ -394,24 +592,32 @@
         const confirmEditProviderActionFinal = document.getElementById('confirm-edit-provider-action-final');
         const cancelEditProviderActionFinal = document.getElementById('cancel-edit-provider-action-final');
 
+        // Abrir/Cerrar modal de edición
         editProviderReportBtn.addEventListener('click', () => toggleModal('edit-provider-report-modal', true));
         closeEditProviderModalBtn.addEventListener('click', () => toggleModal('edit-provider-report-modal', false));
         cancelEditProviderReportBtn.addEventListener('click', () => toggleModal('edit-provider-report-modal', false));
 
+        // Guardar cambios (transición a confirmación)
         saveEditedProviderReportBtn.addEventListener('click', () => {
             toggleModal('edit-provider-report-modal', false);
             toggleModal('confirm-edit-provider-report-modal', true);
         });
+
+        // Confirmar cambios (Simulado)
         confirmEditProviderActionFinal.addEventListener('click', () => {
             alert('Datos del proveedor modificados! (Simulación)');
             toggleModal('confirm-edit-provider-report-modal', false);
         });
+
+        // Cancelar confirmación
         cancelEditProviderActionFinal.addEventListener('click', () => {
             toggleModal('confirm-edit-provider-report-modal', false);
             toggleModal('edit-provider-report-modal', true);
         });
 
-        // CONTROLADOR DE MODAL DE ELIMINAR REPORTE PROVEEDORES
+        // ==========================================
+        // GESTIÓN DEL MODAL DE ELIMINACIÓN
+        // ==========================================
         const deleteProviderReportBtn = document.getElementById('delete-provider-report-btn');
         const removeProviderReportModal = document.getElementById('remove-provider-report-modal'); // Primer modal para input de nombre
         const closeRemoveProviderModalBtn = document.getElementById('close-remove-provider-modal-btn');
@@ -421,25 +627,33 @@
         const confirmRemoveProviderActionFinal = document.getElementById('confirm-remove-provider-action-final'); // Botón Aceptar en segundo modal
         const cancelRemoveProviderActionFinal = document.getElementById('cancel-remove-provider-action-final'); // Botón Cancelar en segundo modal
 
+        // Abrir modal de eliminación
         deleteProviderReportBtn.addEventListener('click', () => toggleModal('remove-provider-report-modal', true));
         closeRemoveProviderModalBtn.addEventListener('click', () => toggleModal('remove-provider-report-modal', false));
         cancelRemoveProviderBtn.addEventListener('click', () => toggleModal('remove-provider-report-modal', false));
 
+        // Transición a confirmación de eliminación
         performRemoveProviderBtn.addEventListener('click', () => {
             toggleModal('remove-provider-report-modal', false); // Cierra el primer modal
             toggleModal('confirm-remove-provider-modal', true); // Abre el modal de confirmación
         });
+
+        // Confirmar eliminación (Simulado)
         confirmRemoveProviderActionFinal.addEventListener('click', () => {
             alert('Proveedor eliminado! (Simulación)');
             toggleModal('confirm-remove-provider-modal', false);
         });
+
+        // Cancelar confirmación y volver atrás
         cancelRemoveProviderActionFinal.addEventListener('click', () => {
             toggleModal('confirm-remove-provider-modal', false);
             toggleModal('remove-provider-report-modal', true); // Vuelve al modal de nombre si se cancela la confirmación final
         });
 
 
-        // CONTROLADOR DE MODAL DE DAR DE BAJA REPORTE PROVEEDORES
+        // ==========================================
+        // GESTIÓN DEL MODAL DE DAR DE BAJA
+        // ==========================================
         const deactivateProviderReportBtn = document.getElementById('deactivate-provider-report-btn');
         const deactivateProviderReportModal = document.getElementById('deactivate-provider-report-modal'); // Primer modal para input de nombre
         const closeDeactivateProviderModalBtn = document.getElementById('close-deactivate-provider-modal-btn');
@@ -449,25 +663,30 @@
         const confirmDeactivateProviderActionFinal = document.getElementById('confirm-deactivate-provider-action-final'); // Botón Aceptar en segundo modal
         const cancelDeactivateProviderActionFinal = document.getElementById('cancel-deactivate-provider-action-final'); // Botón Cancelar en segundo modal
 
+        // Abrir modal de dar de baja
         deactivateProviderReportBtn.addEventListener('click', () => toggleModal('deactivate-provider-report-modal', true));
         closeDeactivateProviderModalBtn.addEventListener('click', () => toggleModal('deactivate-provider-report-modal', false));
         cancelDeactivateProviderBtn.addEventListener('click', () => toggleModal('deactivate-provider-report-modal', false));
 
+        // Transición a confirmación de dar de baja
         performDeactivateProviderBtn.addEventListener('click', () => {
             toggleModal('deactivate-provider-report-modal', false);
             toggleModal('confirm-deactivate-provider-modal', true);
         });
+
+        // Confirmar dar de baja (Simulado)
         confirmDeactivateProviderActionFinal.addEventListener('click', () => {
             alert('Proveedor dado de baja! (Simulación)');
             toggleModal('confirm-deactivate-provider-modal', false);
         });
+
+        // Cancelar confirmación y volver atrás
         cancelDeactivateProviderActionFinal.addEventListener('click', () => {
             toggleModal('confirm-deactivate-provider-modal', false);
             toggleModal('deactivate-provider-report-modal', true);
         });
 
     </script>
-</script>
     <script src="/frontend_web/js/app.js"></script>
 </body>
 </html>

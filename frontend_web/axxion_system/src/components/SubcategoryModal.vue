@@ -48,7 +48,18 @@
 import { ref, watch } from 'vue'
 import { FwbButton, FwbModal, FwbInput } from 'flowbite-vue'
 
+/**
+ * Componente SubcategoryModal.
+ * 
+ * Modal para gestionar las subcategorías.
+ * Similar a CategoryModal, permite crear, editar y eliminar subcategorías,
+ * vinculándolas opcionalmente a una categoría padre.
+ */
+
 // props que recibe el modal (el padre controla v-if)
+// mode: Modo de operación ('add', 'edit', 'delete').
+// subcategoria: Objeto subcategoría a editar o eliminar.
+// categoriaId: ID de la categoría padre (para pre-vincular al crear).
 const props = defineProps({
   mode: { type: String, default: 'add' },        // 'add' | 'edit' | 'delete'
   subcategoria: { type: Object, default: null }, // si edit/delete
@@ -65,7 +76,11 @@ const form = ref({
   categorias: props.categoriaId ? [props.categoriaId] : []
 })
 
-// sincronizar cuando cambian props (edit / categoriaId)
+/**
+ * Sincroniza el formulario local con las props recibidas.
+ * - En modo 'edit': Clona los datos de la subcategoría.
+ * - En modo 'add'/'delete': Reinicia el formulario.
+ */
 watch(
   () => [props.subcategoria, props.mode, props.categoriaId],
   () => {
@@ -94,6 +109,10 @@ function onClose() {
   emit('close')
 }
 
+/**
+ * Emite el evento 'save' con los datos del formulario.
+ * Utiliza JSON.parse/stringify para enviar una copia plana y evitar problemas con Proxies.
+ */
 function onSave() {
   // debug: mostrar lo que se intenta emitir (transforma a JSON simple para evitar Proxy log confuso)
   console.log('SubcategoryModal onSave - form (to emit):', JSON.parse(JSON.stringify(form.value)))

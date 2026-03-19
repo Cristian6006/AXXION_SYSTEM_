@@ -57,7 +57,21 @@
 import { computed } from 'vue';
 import { FwbCard } from 'flowbite-vue';
 
+/**
+ * Componente MetricCard.
+ * 
+ * Tarjeta para visualizar una métrica individual en el dashboard.
+ * Soporta:
+ * - Título y valor principal.
+ * - Comparación con un total (barra de progreso).
+ * - Indicador de tendencia (subida/bajada).
+ * - Estilos dinámicos basados en color.
+ */
+
 // Props
+// Props
+// metric: Objeto con los datos de la métrica (title, value, total, color, icon, trend, etc.).
+// loading: Estado de carga (actualmente no utilizado en el template, pero disponible).
 const props = defineProps({
   metric: {
     type: Object,
@@ -70,6 +84,7 @@ const props = defineProps({
 });
 
 // Computed
+// Computed: Genera las clases CSS para el fondo de la tarjeta según el color configurado.
 const cardClasses = computed(() => {
   const colorMap = {
     blue: 'bg-gradient-to-r from-blue-500 to-blue-600 text-white',
@@ -115,6 +130,7 @@ const progressBarClasses = computed(() => {
   return colorMap[props.metric.color] || colorMap.blue;
 });
 
+// Computed: Formatea el valor numérico, añadiendo símbolo de moneda si es necesario.
 const formattedValue = computed(() => {
   if (props.metric.isCurrency) {
     return `$${props.metric.value.toLocaleString()}`;
@@ -127,6 +143,7 @@ const progressPercentage = computed(() => {
   return Math.round((props.metric.value / props.metric.total) * 100);
 });
 
+// Computed: Determina el icono de tendencia (flecha arriba/abajo/guion).
 const trendIcon = computed(() => {
   if (props.metric.trendDirection === 'up') {
     return 'fa-solid fa-arrow-up';

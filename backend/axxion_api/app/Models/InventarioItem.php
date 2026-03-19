@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modelo que representa un Ítem de Inventario.
+ * 
+ * Es una instancia física y única de un producto (ej. 'Taladro #5' con serie 'XYZ-123').
+ */
 class InventarioItem extends Model
 {
     use HasFactory;
@@ -21,16 +26,25 @@ class InventarioItem extends Model
         'notas',
     ];
 
+    /**
+     * Relación: Este ítem es una instancia de un producto del catálogo.
+     */
     public function producto()
     {
         return $this->belongsTo(Producto::class);
     }
 
+    /**
+     * Relación: Este ítem puede tener un historial de mantenimientos.
+     */
     public function mantenimientos()
     {
         return $this->hasMany(Mantenimiento::class);
     }
 
+    /**
+     * Relación: Este ítem puede haber sido rentado muchas veces.
+     */
     public function rentas()
     {
         return $this->belongsToMany(Renta::class, 'renta_inventario_item')

@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXION SYSTEM - Categorías</title>
-    <!-- Incluye Tailwind CSS (versión CDN para este ejemplo rápido) -->
-   <link href="/frontend_web/src/css/main.css" rel="stylesheet">
-    <style>
-        .sidebar-item.active {
-            @apply bg-purple-700;
-        }
-    </style>
-</head>
-<body class="font-sans antialiased text-gray-900 bg-gray-100 min-h-screen flex">
-
     <!-- Barra Lateral (Sidebar) - REUTILIZADO -->
     <aside class="w-64 bg-gray-800 text-white flex-shrink-0">
         <div class="p-6 text-2xl font-bold border-b border-gray-700">AXION SYSTEM</div>
@@ -385,109 +372,6 @@
             <div class="flex justify-end space-x-4">
                 <button type="button" id="confirm-modify-category-action" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Aceptar</button>
                 <button type="button" id="cancel-modify-category-action-final" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Función general para controlar la visibilidad de los modales
-        function toggleModal(modalId, show) {
-            document.getElementById(modalId).classList.toggle('hidden', !show);
-        }
-
-        // AGREGAR CATEGORÍA
-        const addCategoryBtn = document.getElementById('add-category-btn');
-        const addCategoryModal = document.getElementById('add-category-modal');
-        const closeAddModalBtn = document.getElementById('close-add-modal-btn');
-        const saveCategoryBtn = document.getElementById('save-category-btn');
-        const cancelAddCategoryBtn = document.getElementById('cancel-add-category-btn');
-        const addCategoryConfirmModal = document.getElementById('add-category-confirm-modal');
-        const confirmAddCategoryAction = document.getElementById('confirm-add-category-action');
-        const cancelAddCategoryAction = document.getElementById('cancel-add-category-action');
-
-        addCategoryBtn.addEventListener('click', () => toggleModal('add-category-modal', true));
-        closeAddModalBtn.addEventListener('click', () => toggleModal('add-category-modal', false));
-        cancelAddCategoryBtn.addEventListener('click', () => toggleModal('add-category-modal', false));
-        
-        saveCategoryBtn.addEventListener('click', () => {
-            // Aquí iría la validación del formulario de agregar categoría
-            toggleModal('add-category-modal', false);
-            toggleModal('add-category-confirm-modal', true);
-        });
-        confirmAddCategoryAction.addEventListener('click', () => {
-            alert('Categoría agregada! (Simulación)');
-            toggleModal('add-category-confirm-modal', false);
-            // Lógica real para enviar al backend
-        });
-        cancelAddCategoryAction.addEventListener('click', () => {
-            toggleModal('add-category-confirm-modal', false);
-            toggleModal('add-category-modal', true); // Vuelve al modal de entrada de datos
-        });
-
-
-        // ELIMINAR CATEGORÍA
-        const deleteCategoryBtn = document.getElementById('delete-category-btn');
-        const deleteCategoryModal = document.getElementById('delete-category-modal');
-        const closeDeleteModalBtn = document.getElementById('close-delete-modal-btn');
-        const performDeleteBtn = document.getElementById('perform-delete-btn');
-        const cancelDeleteCategoryBtn = document.getElementById('cancel-delete-category-btn');
-        const deleteCategoryConfirmModal = document.getElementById('delete-category-confirm-modal');
-        const confirmDeleteCategoryAction = document.getElementById('confirm-delete-category-action');
-        const cancelDeleteCategoryActionFinal = document.getElementById('cancel-delete-category-action-final');
-
-        deleteCategoryBtn.addEventListener('click', () => toggleModal('delete-category-modal', true));
-        closeDeleteModalBtn.addEventListener('click', () => toggleModal('delete-category-modal', false));
-        cancelDeleteCategoryBtn.addEventListener('click', () => toggleModal('delete-category-modal', false));
-        
-        performDeleteBtn.addEventListener('click', () => {
-            toggleModal('delete-category-modal', false);
-            toggleModal('delete-category-confirm-modal', true);
-        });
-        confirmDeleteCategoryAction.addEventListener('click', () => {
-            alert('Categoría eliminada! (Simulación)');
-            toggleModal('delete-category-confirm-modal', false);
-        });
-        cancelDeleteCategoryActionFinal.addEventListener('click', () => {
-            toggleModal('delete-category-confirm-modal', false);
-            toggleModal('delete-category-modal', true);
-        });
-
-
-        // DAR DE BAJA CATEGORÍA
-        const deactivateCategoryBtn = document.getElementById('deactivate-category-btn');
-        const deactivateCategoryModal = document.getElementById('deactivate-category-modal');
-        const closeDeactivateModalBtn = document.getElementById('close-deactivate-modal-btn');
-        const performDeactivateBtn = document.getElementById('perform-deactivate-btn');
-        const cancelDeactivateCategoryBtn = document.getElementById('cancel-deactivate-category-btn');
-        const deactivateCategoryConfirmModal = document.getElementById('deactivate-category-confirm-modal');
-        const confirmDeactivateCategoryAction = document.getElementById('confirm-deactivate-category-action');
-        const cancelDeactivateCategoryActionFinal = document.getElementById('cancel-deactivate-category-action-final');
-
-        deactivateCategoryBtn.addEventListener('click', () => toggleModal('deactivate-category-modal', true));
-        closeDeactivateModalBtn.addEventListener('click', () => toggleModal('deactivate-category-modal', false));
-        cancelDeactivateCategoryBtn.addEventListener('click', () => toggleModal('deactivate-category-modal', false));
-
-        performDeactivateBtn.addEventListener('click', () => {
-            toggleModal('deactivate-category-modal', false);
-            toggleModal('deactivate-category-confirm-modal', true);
-        });
-        confirmDeactivateCategoryAction.addEventListener('click', () => {
-            alert('Categoría dada de baja! (Simulación)');
-            toggleModal('deactivate-category-confirm-modal', false);
-        });
-        cancelDeactivateCategoryActionFinal.addEventListener('click', () => {
-            toggleModal('deactivate-category-confirm-modal', false);
-            toggleModal('deactivate-category-modal', true);
-        });
-
-        // MODIFICAR CATEGORÍA
-        const editCategoryBtns = document.querySelectorAll('.edit-category-btn'); // Nodos de botón de modificar
-        const modifyCategoryModal = document.getElementById('modify-category-modal');
-        const closeModifyModalBtn = document.getElementById('close-modify-modal-btn');
-        const saveModifiedCategoryBtn = document.getElementById('save-modified-category-btn');
-        const cancelModifyCategoryBtn = document.getElementById('cancel-modify-category-btn');
-        const modifyCategoryConfirmModal = document.getElementById('modify-category-confirm-modal');
-        const confirmModifyCategoryAction = document.getElementById('confirm-modify-category-action');
         const cancelModifyCategoryActionFinal = document.getElementById('cancel-modify-category-action-final');
 
         editCategoryBtns.forEach(btn => {
@@ -513,7 +397,7 @@
             toggleModal('modify-category-modal', true);
         });
     </script>
-</script>
+
     <script src="/frontend_web/js/app.js"></script>
 </body>
 </html>

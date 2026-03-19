@@ -1,4 +1,4 @@
-import apiClient from './axiosConfig';
+import apiClient from '@/plugins/axios';
 
 class ReportService {
   async getMaintenances() {
@@ -18,6 +18,16 @@ class ReportService {
     const response = await apiClient.get('/usuarios')
   return response.data
 }
+  async getMetricsAlq()
+  {
+    try {
+      const response = await apiClient.get('/reportes/metricsAlq')
+      return response.data
+    } catch(error) {
+      console.error('Error al obtener metricas de alquiler: ', error)
+      throw error
+    }
+  }
 }
 
 export default new ReportService();

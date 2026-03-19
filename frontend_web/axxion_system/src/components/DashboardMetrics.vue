@@ -76,8 +76,8 @@
           </div>
         </template>
         <div class="h-64 flex items-center justify-center">
-          <div v-if="isLoading" class="text-center">
-            <font-awesome-icon icon="fa-solid fa-spinner" class="animate-spin text-4xl text-gray-400 mb-2"/>
+          <div v-if="isLoading" class="text-center flex flex-col items-center">
+            <div class="loader mb-2"></div>
             <p class="text-gray-500">Cargando datos...</p>
           </div>
           <div v-else class="w-full">
@@ -204,6 +204,17 @@ import { useInventoryStore } from '@/stores/inventory.js';
 import { FwbCard, FwbButton, FwbAlert } from 'flowbite-vue';
 import MetricCard from './MetricCard.vue';
 
+/**
+ * Componente DashboardMetrics.
+ * 
+ * Este componente visualiza las métricas clave del sistema en el panel de control.
+ * Muestra tarjetas con contadores (disponibles, alquilados, mantenimiento, ingresos),
+ * gráficos de utilización e ingresos, tabla de equipos más rentables y alertas del sistema.
+ * 
+ * Se conecta al store de inventario para obtener los datos en tiempo real y calcular
+ * las estadísticas mostradas.
+ */
+
 // Store
 const inventoryStore = useInventoryStore();
 
@@ -215,6 +226,13 @@ const systemAlerts = ref([]);
 const equipment = computed(() => inventoryStore.equipment);
 const totalEquipment = computed(() => equipment.value.length);
 
+/**
+ * Calcula las métricas principales para las tarjetas superiores.
+ * - Disponibles: Equipos listos para alquilar.
+ * - Alquilados: Equipos actualmente en renta.
+ * - Mantenimiento: Equipos en reparación.
+ * - Ingresos: Estimación de ingresos mensuales basados en equipos alquilados.
+ */
 const mainMetrics = computed(() => [
   {
     id: 'available',
@@ -261,6 +279,10 @@ const mainMetrics = computed(() => [
   }
 ]);
 
+/**
+ * Calcula los porcentajes de utilización por estado para el gráfico circular.
+ * Evita divisiones por cero si no hay equipos.
+ */
 const utilizationData = computed(() => {
   const total = totalEquipment.value;
   if (total === 0) return { available: 0, rented: 0, maintenance: 0, outOfService: 0 };
@@ -273,6 +295,10 @@ const utilizationData = computed(() => {
   };
 });
 
+/**
+ * Datos simulados para el gráfico de ingresos mensuales.
+ * En una implementación real, esto vendría del backend.
+ */
 const revenueData = computed(() => [
   { name: 'Ene', amount: 12500 },
   { name: 'Feb', amount: 15200 },
@@ -284,6 +310,10 @@ const revenueData = computed(() => [
 
 const maxRevenue = computed(() => Math.max(...revenueData.value.map(m => m.amount)));
 
+/**
+ * Identifica los 5 equipos más rentables basándose en sus ingresos totales.
+ * Calcula el ROI (Retorno de Inversión) para cada equipo.
+ */
 const topEquipment = computed(() => {
   return equipment.value
     .filter(e => e.rentalCount > 0)
@@ -296,6 +326,12 @@ const topEquipment = computed(() => {
 });
 
 // Métodos
+
+/**
+ * Traduce el código de categoría a una etiqueta legible.
+ * @param {string} category - Código de la categoría.
+ * @returns {string} Etiqueta formateada.
+ */
 const getCategoryLabel = (category) => {
   const labels = {
     laptop: 'Laptop',
@@ -307,6 +343,12 @@ const getCategoryLabel = (category) => {
   return labels[category] || category;
 };
 
+/**
+ * Determina la clase CSS para el color del ROI según su valor.
+ * - Verde: > 50%
+ * - Amarillo: > 20%
+ * - Rojo: <= 20%
+ */
 const getROIClass = (roi) => {
   if (roi > 50) return 'text-green-600';
   if (roi > 20) return 'text-yellow-600';
@@ -337,6 +379,10 @@ const removeAlert = (alertId) => {
   systemAlerts.value = systemAlerts.value.filter(alert => alert.id !== alertId);
 };
 
+/**
+ * Carga alertas simuladas del sistema.
+ * Estas alertas notifican sobre mantenimientos, devoluciones, etc.
+ */
 const loadSystemAlerts = () => {
   systemAlerts.value = [
     {

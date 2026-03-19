@@ -104,6 +104,17 @@ import UserService from '@/services/UserService'
 import { FwbCard } from 'flowbite-vue'
 import WorksheetUser from '@/components/WorksheetUser.vue'
 
+/**
+ * Vista ReportUsers.
+ * 
+ * Genera reportes sobre los usuarios del sistema.
+ * Funcionalidades:
+ * - KPIs de empleados totales.
+ * - Desglose de empleados por estado (Activo, Inactivo, Bloqueado).
+ * - Tabla detallada de usuarios con información de contacto y departamento.
+ * - Exportación de la lista de usuarios a Excel mediante WorksheetUser.
+ */
+
 const usuario = ref([])
 const empleadosTotales = ref(0)
 const empleadosPorEstado = ref({})

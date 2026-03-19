@@ -86,6 +86,24 @@ import { ref, watch, onMounted } from 'vue';
 import { FwbModal, FwbButton } from 'flowbite-vue';
 import ClienteService from '@/services/ClienteService';
 
+/**
+ * Componente RentalModal.
+ * 
+ * Modal versátil para gestionar operaciones de renta (alquiler).
+ * Soporta tres modos:
+ * - 'add': Crear una nueva renta.
+ * - 'edit': Modificar una renta existente.
+ * - 'delete': Confirmar la eliminación de una renta.
+ * 
+ * Maneja la carga de clientes, conversión de formatos de fecha y validación básica.
+ */
+
+// Props
+// show: Controla la visibilidad del modal.
+// mode: Modo de operación ('add', 'edit', 'delete').
+// targetId: ID de la renta objetivo (para edit/delete).
+// payload: Datos iniciales para el formulario.
+// loading: Estado de carga para deshabilitar botones.
 const props = defineProps({
   show: Boolean,
   mode: String,
@@ -93,11 +111,17 @@ const props = defineProps({
   payload: Object,
   loading: Boolean
 });
-const emit = defineEmits(['close', 'save']);
+const emit = defineEmits(['close', 'save', 'delete']);
 
 const localPayload = ref({});
 const clientes = ref([]);
 
+/**
+ * Convierte una fecha ISO (del backend) al formato requerido por inputs datetime-local.
+ * Elimina microsegundos y la 'Z' de zona horaria si existen.
+ * @param {string} iso - Fecha en formato ISO.
+ * @returns {string} Fecha formateada para input (YYYY-MM-DDTHH:MM).
+ */
 const toInputDateTime = (iso) => {
   if (!iso) return '';
   try {
@@ -117,7 +141,12 @@ const toInputDateTime = (iso) => {
   }
 };
 
-// convierte "YYYY-MM-DDTHH:MM" -> "YYYY-MM-DD HH:MM:00" (formato que usa tu normalize en el padre)
+/**
+ * Convierte el valor del input datetime-local al formato esperado por el servidor.
+ * Reemplaza la 'T' por un espacio y añade segundos (:00).
+ * @param {string} val - Valor del input.
+ * @returns {string} Fecha formateada para SQL (YYYY-MM-DD HH:MM:00).
+ */
 const fromInputToServer = (val) => {
   if (!val) return null;
   // si viene con segundos, cortamos a minutos
@@ -125,7 +154,7 @@ const fromInputToServer = (val) => {
   return v.replace('T', ' ') + ':00';
 };
 
-// cargar clientes al montar
+// Cargar lista de clientes al montar el componente
 onMounted(async () => {
   try {
     const res = await ClienteService.getAll();
@@ -135,11 +164,13 @@ onMounted(async () => {
   }
 });
 
-// sincronizar props.payload → localPayload
+// Sincronizar props.payload con el estado local (localPayload)
+// Se ejecuta cada vez que cambia el payload o al montar.
 watch(
   () => props.payload,
   (newVal) => {
     if (!newVal) {
+      // Valores por defecto para nueva renta
       localPayload.value = {
         cliente_id: '',
         cotizacion_id: null,
@@ -154,6 +185,7 @@ watch(
       return;
     }
 
+    // Mapear valores existentes
     localPayload.value = {
       ...newVal,
       // si vienen como ISO con Z o microsegundos los convertimos al formato que acepta datetime-local
@@ -181,9 +213,16 @@ const normalizePayload = () => ({
   notas: localPayload.value.notas || ""
 });
 
+/**
+ * Maneja la acción de guardar o eliminar.
+ * Emite los eventos correspondientes al componente padre.
+ */
 const save = () => {
-  console.log('Emitendo desde modal (raw):', localPayload.value);
-  emit('save', localPayload.value);
+  console.log('Emitiendo desde modal (raw):', localPayload.value);
+  if (props.mode === 'delete') {
+    emit('delete');
+  } else {
+    emit('save', localPayload.value);
+  }
 }
 </script>
-

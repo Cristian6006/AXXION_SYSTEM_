@@ -31,14 +31,22 @@
 
 <script setup>
 import { FwbButton } from 'flowbite-vue'
+import { useSubcategoryStore } from '@/stores/useSubcategoryStore'
+
+/**
+ * Componente SubcategoryList.
+ * 
+ * Muestra la lista de subcategorías asociadas a una categoría seleccionada.
+ * Permite editar y eliminar subcategorías mediante eventos emitidos al padre.
+ */
+
+// Props
+// categoria: Objeto categoría seleccionado, que contiene sus subcategorías.
 defineProps({
   categoria: {
     type: Object,
     default: null
   }
 })
-import { useSubcategoryStore } from '@/stores/useSubcategoryStore'
-
-
 </script>
 

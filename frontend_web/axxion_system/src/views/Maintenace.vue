@@ -43,12 +43,12 @@
           </div>
 
           <!-- Action Controls -->
-          <div class="flex flex-wrap gap-4 mb-6">
+          <!-- <div class="flex flex-wrap gap-4 mb-6">
             <fwb-button gradient="green-blue" size="lg" @click="showAddModal">
               <font-awesome-icon icon="fa-solid fa-plus" class="mr-2" />
               Programar Tarea
             </fwb-button>
-          </div>
+          </div> -->
 
           <!-- Filters and Search -->
           <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
@@ -63,23 +63,29 @@
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Estado
                 </label>
-                <fwb-select v-model="statusFilter">
+                <select 
+                  v-model="statusFilter"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
                   <option value="">Todos</option>
                   <option v-for="status in statusOptions" :key="status.value" :value="status.value">
                     {{ status.name }}
                   </option>
-                </fwb-select>
+                </select>
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Técnico Asignado
                 </label>
-                <fwb-select v-model="technicianFilter">
+                <select 
+                  v-model="technicianFilter"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
                   <option value="">Todos</option>
                   <option v-for="technician in technicianOptions" :key="technician.value" :value="technician.value">
                     {{ technician.name }}
                   </option>
-                </fwb-select>
+                </select>
               </div>
               <div class="flex items-end">
                 <fwb-button gradient="red-yellow" size="lg" @click="clearFilters" class="w-full">
@@ -128,8 +134,8 @@
                 </fwb-table-row>
                 <fwb-table-row v-if="filteredTasks.length === 0">
                    <fwb-table-cell colspan="6" class="text-center py-8 text-gray-500">
-                     <div v-if="isLoading" class="flex items-center justify-center">
-                       <font-awesome-icon icon="fa-solid fa-spinner" class="mr-2 animate-spin" />
+                     <div v-if="isLoading" class="flex items-center justify-center flex-col">
+                       <span class="loader mb-2"></span>
                        Cargando mantenimientos...
                      </div>
                      <div v-else>
@@ -161,7 +167,7 @@
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Equipo *
             </label>
-            <fwb-select v-model="taskForm.inventario_item_id" required :class="{ 'border-red-500': formErrors.inventario_item_id }">
+            <fwb-select v-model="taskForm.inventario_item_id" required :class="{ 'border-red-500': formErrors.inventario_item_id }" :disabled="isEditMode">
               <option value="">Seleccionar equipo</option>
               <option v-for="item in inventoryOptions" :key="item.value" :value="item.value">
                 {{ item.name }}
@@ -190,6 +196,7 @@
                     label="Fecha de Inicio"
                     type="date"
                     required
+                    :disabled="isEditMode"
                 />
             </div>
             <div>
@@ -205,22 +212,30 @@
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Responsable *
                 </label>
-                <fwb-select v-model="taskForm.responsable" required>
+                <select 
+                  v-model="taskForm.responsable" 
+                  required
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
                   <option value="">Seleccionar responsable</option>
                   <option v-for="technician in technicianOptions" :key="technician.value" :value="technician.value">
                     {{ technician.name }}
                   </option>
-                </fwb-select>
+                </select>
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Estado *
                 </label>
-                <fwb-select v-model="taskForm.estado_mantenimiento" required>
+                <select 
+                  v-model="taskForm.estado_mantenimiento" 
+                  required
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
                   <option v-for="status in statusOptions" :key="status.value" :value="status.value">
                     {{ status.name }}
                   </option>
-                </fwb-select>
+                </select>
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -228,11 +243,15 @@
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Tipo de Mantenimiento *
                 </label>
-                <fwb-select v-model="taskForm.tipo_mantenimiento" required>
+                <select 
+                  v-model="taskForm.tipo_mantenimiento" 
+                  required
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
                   <option v-for="type in typeOptions" :key="type.value" :value="type.value">
                     {{ type.name }}
                   </option>
-                </fwb-select>
+                </select>
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -298,27 +317,7 @@
 
     </div>
     
-    <fwb-footer>
-    <fwb-footer-copyright
-      by="Flowbite™"
-      href="https://flowbite.com/"
-      copyright-message="All Rights Reserved."
-    />
-    <fwb-footer-link-group>
-      <fwb-footer-link href="#">
-        About
-      </fwb-footer-link>
-      <fwb-footer-link href="#">
-        Privacy Policy
-      </fwb-footer-link>
-      <fwb-footer-link href="#">
-        Licensing
-      </fwb-footer-link>
-      <fwb-footer-link href="#">
-        Contact
-      </fwb-footer-link>
-    </fwb-footer-link-group>
-    </fwb-footer>
+    <Footer />
   </div>
 </template>
 
@@ -327,6 +326,7 @@ import { ref, computed, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import SideBar from '@/components/SideBar.vue';
 import headerP from '@/components/headerP.vue';
+import Footer from '@/components/Footer.vue';
 import { useMaintenanceStore } from '@/stores/maintenance.js';
 import { useUserStore } from '@/stores/user.js';
 import { useInventoryStore } from '@/stores/inventory.js';
@@ -341,11 +341,7 @@ import {
   FwbModal,
   FwbInput,
   FwbSelect,
-  FwbTextarea,
-  FwbFooter,
-  FwbFooterCopyright,
-  FwbFooterLink,
-  FwbFooterLinkGroup,
+  FwbTextarea
 } from 'flowbite-vue';
 
 
@@ -353,6 +349,19 @@ import {
 const maintenanceStore = useMaintenanceStore();
 const userStore = useUserStore();
 const inventoryStore = useInventoryStore();
+
+/**
+ * Vista Maintenance.
+ * 
+ * Gestión centralizada de tareas de mantenimiento.
+ * Funcionalidades:
+ * - Tablero de control de mantenimientos (programados, en proceso, completados).
+ * - Filtrado por estado, técnico responsable y búsqueda general.
+ * - CRUD de tareas de mantenimiento (Crear, Editar, Eliminar).
+ * - Asignación de técnicos y equipos a tareas.
+ * - Registro de costos estimados vs reales y descripción del trabajo realizado.
+ * - Detección automática de mantenimientos desde otras vistas (ej. al finalizar renta).
+ */
 
 // Estado reactivo de los stores usando storeToRefs para mantener reactividad
 const { maintenances, isLoading } = storeToRefs(maintenanceStore);
@@ -386,6 +395,7 @@ const defaultFormState = {
 };
 
 // Options for Selects - Computed para reactividad
+// Genera opciones para los selectores de técnicos (filtrados por rol), estados e inventario.
 const technicianOptions = computed(() => {
   return users.value
     .filter(user => user.rol && (user.rol.nombre === 'Técnico' || user.rol.nombre === 'Administrador'))
@@ -415,6 +425,7 @@ const searchQuery = ref('');
 const statusFilter = ref('');
 const technicianFilter = ref('');
 
+// Filtra las tareas de mantenimiento según los criterios seleccionados por el usuario.
 const filteredTasks = computed(() => {
   console.log('filteredTasks computed - maintenances:', maintenances.value);
   console.log('filteredTasks computed - maintenances length:', maintenances.value?.length);
@@ -491,7 +502,8 @@ function getStatusDisplayName(status) {
   const statusNames = {
     'PROGRAMADO': 'Programado',
     'EN_PROCESO': 'En Proceso',
-    'COMPLETADO': 'Completado',
+    'COMPLETADO': 'Completado', // Coincide con trigger
+    'Finalizado': 'Completado', // Alias para compatibilidad
     'CANCELADO': 'Cancelado',
     'PAUSADO': 'Pausado'
   };
@@ -566,26 +578,57 @@ function validateForm() {
 }
 
 // Lifecycle
+// Carga inicial de datos y manejo de apertura automática de modal si hay parámetros en la URL.
 onMounted(async () => {
   try {
     console.log('Starting to load maintenance data...');
     
-    // Cargar datos secuencialmente para evitar problemas de dependencias
-    console.log('Loading users...');
+    // Cargar datos secuencialmente
     await userStore.fetchUsers();
-    console.log('Users loaded:', users.value?.length);
-    
-    console.log('Loading inventory...');
     await inventoryStore.fetchProducts();
-    console.log('Inventory loaded:', inventoryStore.productList?.length);
-    
-    console.log('Loading maintenances...');
     await maintenanceStore.fetchMaintenances();
-    console.log('Maintenances loaded:', maintenances.value?.length);
     
     console.log('All data loaded successfully');
-    console.log('Filtered tasks:', filteredTasks.value);
     addNotification('Datos cargados exitosamente', 'success');
+
+    // Verificar si hay parámetros en la URL para abrir mantenimiento automáticamente
+    const urlParams = new URLSearchParams(window.location.search);
+    const autoOpenItems = urlParams.get('auto_open_items');
+    
+    if (autoOpenItems) {
+        const itemIds = autoOpenItems.split(',');
+        console.log('Auto-opening maintenance for items:', itemIds);
+        
+        // Esperar un poco más para asegurar que los datos se cargaron
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        console.log('Maintenances disponibles:', maintenances.value);
+        
+        // Buscar el primer mantenimiento programado para estos items (el más reciente)
+        const targetMaintenance = maintenances.value.find(m => 
+            itemIds.includes(String(m.inventario_item_id)) && 
+            (m.estado_mantenimiento === 'PROGRAMADO' || m.estado_mantenimiento === 'Programado')
+        );
+
+        if (targetMaintenance) {
+            console.log('Found target maintenance to auto-open:', targetMaintenance);
+            console.log('Inventario item en mantenimiento:', targetMaintenance.inventario_item);
+            
+            // Esperar un tick para que las opciones se rendericen
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            editTask(targetMaintenance);
+            addNotification('Mantenimiento automático detectado. Por favor complete los detalles.', 'success');
+        } else {
+            console.log('No matching maintenance found for auto-open items');
+            console.log('Available maintenances:', maintenances.value.map(m => ({
+                id: m.id,
+                inventario_item_id: m.inventario_item_id,
+                estado: m.estado_mantenimiento
+            })));
+        }
+    }
+
   } catch (error) {
     console.error('Error loading initial data:', error);
     addNotification('Error al cargar los datos iniciales: ' + error.message, 'error');
@@ -594,6 +637,7 @@ onMounted(async () => {
 
 // Modal Functions
 function showAddModal() {
+  // Ya no se usa manualmente, pero por si acaso
   isEditMode.value = false;
   taskForm.value = { ...defaultFormState };
   selectedTask.value = null;
@@ -601,16 +645,55 @@ function showAddModal() {
 }
 
 function editTask(task) {
+  console.log('editTask called with task:', task);
+  
   isEditMode.value = true;
   taskForm.value = { ...task };
+  
+  console.log('taskForm after copy:', taskForm.value);
+  
+  // Asegurar fechas en formato correcto para inputs
+  if(taskForm.value.fecha_inicio) {
+    taskForm.value.fecha_inicio = taskForm.value.fecha_inicio.split('T')[0];
+  }
+  if(taskForm.value.fecha_fin_prevista) {
+    taskForm.value.fecha_fin_prevista = taskForm.value.fecha_fin_prevista.split('T')[0];
+  }
+  
+  // Asegurar que estado_mantenimiento tenga un valor
+  if (!taskForm.value.estado_mantenimiento) {
+    taskForm.value.estado_mantenimiento = 'PROGRAMADO';
+  }
+  
+  // Asegurar que tipo_mantenimiento tenga un valor
+  if (!taskForm.value.tipo_mantenimiento) {
+    taskForm.value.tipo_mantenimiento = 'CORRECTIVO';
+  }
+  
+  // Asegurar que responsable tenga un valor
+  if (!taskForm.value.responsable) {
+    taskForm.value.responsable = 'Sistema';
+  }
+  
+  console.log('taskForm final:', taskForm.value);
+  console.log('Available users:', users.value);
+  console.log('Available statuses:', statusOptions.value);
+  console.log('Available types:', typeOptions.value);
+  
   selectedTask.value = task;
   isShowModal.value = true;
 }
 
 function closeModal() {
   isShowModal.value = false;
+  // Limpiar query params si existen para evitar que se reabra al recargar
+  if (window.history.pushState) {
+      const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+      window.history.pushState({path:newurl},'',newurl);
+  }
 }
 
+// Guarda (crea o actualiza) una tarea de mantenimiento.
 async function saveTask() {
     if (isSaving.value) return;
 
@@ -622,13 +705,19 @@ async function saveTask() {
 
     try {
         isSaving.value = true;
+        
+        // Asegurar que los campos enum estén en mayúsculas para la API
+        const payload = { ...taskForm.value };
+        if (payload.tipo_mantenimiento) payload.tipo_mantenimiento = payload.tipo_mantenimiento.toUpperCase();
+        if (payload.estado_mantenimiento) payload.estado_mantenimiento = payload.estado_mantenimiento.toUpperCase();
+        
         if (isEditMode.value && selectedTask.value) {
             // Update existing task
-            await maintenanceStore.updateMaintenance(selectedTask.value.id, taskForm.value);
+            await maintenanceStore.updateMaintenance(selectedTask.value.id, payload);
             addNotification('Mantenimiento actualizado exitosamente', 'success');
         } else {
             // Add new task
-            await maintenanceStore.createMaintenance(taskForm.value);
+            await maintenanceStore.createMaintenance(payload);
             addNotification('Mantenimiento creado exitosamente', 'success');
         }
         closeModal();

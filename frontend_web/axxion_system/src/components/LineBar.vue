@@ -36,6 +36,17 @@ import ReportService from '@/services/ReportService'
 import { text } from '@fortawesome/fontawesome-svg-core'
 import LineBar from '@/components/LineBar.vue'
 
+/**
+ * Componente LineBar.
+ * 
+ * Visualiza estadísticas de inventario utilizando gráficos de líneas (LineChart) de ECharts.
+ * Similar a BarChart, pero enfocado en tendencias o visualización lineal.
+ * Muestra:
+ * - Equipos por Categoría.
+ * - Valor Total por Categoría.
+ * - Equipos por Condición.
+ */
+
 
 // registrar echarts
 use([
@@ -50,14 +61,17 @@ use([
 ])
 
 // opciones reactivas
+// Estado reactivo para los datos de los gráficos
 const chartByCategory = ref({})
 const chartByValue = ref({})
 const chartByCondition = ref({})
 
+// Métricas generales (aunque no se usan directamente en el template actual, se cargan)
 const itemsTotales = ref(0)
 const valorTotal = ref(0)
 const equiposDisponibles = ref(0)
 // cargar datos
+// Cargar datos al montar el componente
 onMounted(async () => {
     try {
         const data = await ReportService.getMetrics()
@@ -70,12 +84,10 @@ onMounted(async () => {
 
 
   try {
-const items = await InventoryService.getProducts() 
-console.log('Inventario (productos):', items)
-
-
+    const items = await InventoryService.getProducts() 
     console.log('Inventario (productos):', items)
 
+    // Procesar items para generar datos de los gráficos
     const categorias = {}
     const valores = {}
     const condiciones = {}
@@ -87,6 +99,8 @@ console.log('Inventario (productos):', items)
         const condicion = item.condicion || 'No definida'
         condiciones[condicion] = (condiciones[condicion] || 0) + 1
     })
+
+    // Configuración de los gráficos
     chartByCategory.value = {
       tooltip: { trigger: 'axis' },
       xAxis: { type: 'category', data: Object.keys(categorias) },

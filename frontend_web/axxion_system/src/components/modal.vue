@@ -34,6 +34,16 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue';
 
+/**
+ * Componente Modal.
+ * 
+ * Componente modal genérico y reutilizable.
+ * Proporciona slots para header, body y footer, permitiendo una personalización completa.
+ * Incluye transiciones de entrada/salida para una mejor experiencia de usuario.
+ */
+
+// Props
+// show: Controla la visibilidad del modal.
 const props = defineProps({
   show: {
     type: Boolean,
@@ -41,6 +51,8 @@ const props = defineProps({
   },
 });
 
+// Emits
+// close: Evento emitido cuando se debe cerrar el modal (clic en fondo o botón cerrar).
 const emit = defineEmits(['close']);
 
 const close = () => {

@@ -622,22 +622,25 @@ BEGIN
             `updated_at` = NOW()
         WHERE `producto_id` = NEW.id;
         
-        -- Registrar en auditoría
-        INSERT INTO `auditoria_inventario` (
-            `inventario_item_id`, 
-            `accion`, 
-            `campos_cambiados`, 
-            `valores_anteriores`, 
-            `valores_nuevos`, 
-            `usuario`
-        ) VALUES (
-            (SELECT id FROM inventario_item WHERE producto_id = NEW.id LIMIT 1),
-            'UPDATE_SYNC',
-            'Sincronización desde producto',
-            CONCAT('Estado: ', OLD.estado, ', Ubicación: ', OLD.ubicacion),
-            CONCAT('Estado: ', NEW.estado, ', Ubicación: ', NEW.ubicacion),
-            USER()
-        );
+        -- Registrar en auditoría (solo si la tabla existe)
+        BEGIN
+            DECLARE CONTINUE HANDLER FOR SQLSTATE '42S02' BEGIN END;
+            INSERT INTO `auditoria_inventario` (
+                `inventario_item_id`, 
+                `accion`, 
+                `campos_cambiados`, 
+                `valores_anteriores`, 
+                `valores_nuevos`, 
+                `usuario`
+            ) VALUES (
+                (SELECT id FROM inventario_item WHERE producto_id = NEW.id LIMIT 1),
+                'UPDATE_SYNC',
+                'Sincronización desde producto',
+                CONCAT('Estado: ', OLD.estado, ', Ubicación: ', OLD.ubicacion),
+                CONCAT('Estado: ', NEW.estado, ', Ubicación: ', NEW.ubicacion),
+                USER()
+            );
+        END;
     END IF;
 END$$
 DELIMITER ;
@@ -657,21 +660,24 @@ BEGIN
         `updated_at` = NOW()
     WHERE `producto_id` = OLD.id;
     
-    -- Registrar en auditoría
-    INSERT INTO `auditoria_inventario` (
-        `inventario_item_id`, 
-        `accion`, 
-        `campos_cambiados`, 
-        `valores_anteriores`, 
-        `valores_nuevos`, 
-        `usuario`
-    ) VALUES (
-        (SELECT id FROM inventario_item WHERE producto_id = OLD.id LIMIT 1),
-        'DELETE_SYNC',
-        'Producto eliminado',
-        CONCAT('Producto: ', OLD.nombre),
-        'Producto eliminado del sistema',
-        USER()
-    );
+    -- Registrar en auditoría (solo si la tabla existe)
+    BEGIN
+        DECLARE CONTINUE HANDLER FOR SQLSTATE '42S02' BEGIN END;
+        INSERT INTO `auditoria_inventario` (
+            `inventario_item_id`, 
+            `accion`, 
+            `campos_cambiados`, 
+            `valores_anteriores`, 
+            `valores_nuevos`, 
+            `usuario`
+        ) VALUES (
+            (SELECT id FROM inventario_item WHERE producto_id = OLD.id LIMIT 1),
+            'DELETE_SYNC',
+            'Producto eliminado',
+            CONCAT('Producto: ', OLD.nombre),
+            'Producto eliminado del sistema',
+            USER()
+        );
+    END;
 END$$
 DELIMITER ;

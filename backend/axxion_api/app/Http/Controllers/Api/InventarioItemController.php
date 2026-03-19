@@ -12,8 +12,11 @@ use Illuminate\Validation\Rule;
 
 class InventarioItemController extends Controller
 {
+    private const VALIDATION_FAILED_MESSAGE  = 'Validation failed';
+    private const ITEM_MISSING_MESSAGE = 'Item de inventario no encontrado';
     /**
-     * Display a listing of the resource.
+     * Muestra el listado de todos los items del inventario.
+     * Carga relaciones con producto, mantenimientos y rentas.
      */
     public function index()
     {
@@ -33,7 +36,8 @@ class InventarioItemController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Almacena un nuevo item de inventario en la base de datos.
+     * Valida los datos de entrada antes de crear el registro.
      */
     public function store(Request $request)
     {
@@ -50,10 +54,10 @@ class InventarioItemController extends Controller
 
             if ($validator->fails()) {
                 return response()->json([
-                    'message' => 'Validation failed',
+                    'message' => self::VALIDATION_FAILED_MESSAGE,
                     'errors' => $validator->errors(),
-                    'status' => 400
-                ], 400);
+                    'status' => 422
+                ], 422);
             }
 
             DB::beginTransaction();
@@ -80,7 +84,7 @@ class InventarioItemController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra un item específico del inventario por su ID.
      */
     public function show($id)
     {
@@ -89,7 +93,7 @@ class InventarioItemController extends Controller
 
             if (!$inventarioItem) {
                 return response()->json([
-                    'message' => 'Item de inventario no encontrado',
+                    'message' => self::ITEM_MISSING_MESSAGE,
                     'status' => 404
                 ], 404);
             }
@@ -109,7 +113,8 @@ class InventarioItemController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza un item de inventario existente.
+     * Requiere validación completa de los campos enviados.
      */
     public function update(Request $request, $id)
     {
@@ -118,7 +123,7 @@ class InventarioItemController extends Controller
 
             if (!$inventarioItem) {
                 return response()->json([
-                    'message' => 'Item de inventario no encontrado',
+                    'message' => self::ITEM_MISSING_MESSAGE,
                     'status' => 404
                 ], 404);
             }
@@ -135,10 +140,10 @@ class InventarioItemController extends Controller
 
             if ($validator->fails()) {
                 return response()->json([
-                    'message' => 'Validation failed',
+                    'message' => self::VALIDATION_FAILED_MESSAGE,
                     'errors' => $validator->errors(),
-                    'status' => 400
-                ], 400);
+                    'status' => 422
+                ], 422);
             }
 
             DB::beginTransaction();
@@ -165,7 +170,8 @@ class InventarioItemController extends Controller
     }
 
     /**
-     * Update partial resource in storage.
+     * Actualización parcial de un item de inventario (PATCH).
+     * Solo actualiza los campos presentes en la solicitud.
      */
     public function updatePartial(Request $request, $id)
     {
@@ -174,7 +180,7 @@ class InventarioItemController extends Controller
 
             if (!$inventarioItem) {
                 return response()->json([
-                    'message' => 'Item de inventario no encontrado',
+                    'message' => self::ITEM_MISSING_MESSAGE,
                     'status' => 404
                 ], 404);
             }
@@ -191,10 +197,10 @@ class InventarioItemController extends Controller
 
             if ($validator->fails()) {
                 return response()->json([
-                    'message' => 'Validation failed',
+                    'message' => self::VALIDATION_FAILED_MESSAGE,
                     'errors' => $validator->errors(),
-                    'status' => 400
-                ], 400);
+                    'status' => 422
+                ], 422);
             }
 
             DB::beginTransaction();
@@ -221,7 +227,7 @@ class InventarioItemController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un item del inventario.
      */
     public function destroy($id)
     {
@@ -257,7 +263,7 @@ class InventarioItemController extends Controller
     }
 
     /**
-     * Get inventario items by producto
+     * Obtiene todos los items de inventario asociados a un producto específico.
      */
     public function getByProducto($producto_id)
     {
@@ -282,7 +288,7 @@ class InventarioItemController extends Controller
     }
 
     /**
-     * Get inventario items by estado
+     * Filtra los items de inventario por su estado (ej. Disponible, Rentado).
      */
     public function getByEstado($estado)
     {
@@ -310,6 +316,86 @@ class InventarioItemController extends Controller
             Log::error('Error al obtener inventario items por estado: ' . $e->getMessage());
             return response()->json([
                 'error' => 'Error al obtener los items de inventario por estado: ' . $e->getMessage(),
+                'status' => 500
+            ], 500);
+        }
+    }
+
+    /**
+     * Obtiene items de inventario enriquecidos con el estado de su renta actual.
+     * 
+     * ANALOGÍA: Esta función es como un "Bibliotecario Omnisciente" que no solo sabe qué libros (items) 
+     * hay en la biblioteca, sino que tiene una ficha pegada en cada uno diciendo exactamente 
+     * quién lo tiene prestado ahora mismo y cuándo promete devolverlo.
+     */
+    public function getWithRentalStatus()
+    {
+        try {
+            $inventarioItems = InventarioItem::with([
+                'producto',
+                'mantenimientos' => function($query) {
+                    $query->whereIn('estado_mantenimiento', ['Programado', 'EnProceso'])
+                          ->orderBy('fecha_inicio', 'desc');
+                },
+                'rentas' => function($query) {
+                    // Incluir rentas activas: estados específicos O sin fecha de devolución
+                    $query->where(function($q) {
+                        $q->whereIn('estado_renta', ['Programada', 'EnCurso', 'Activa', 'Pendiente'])
+                          ->orWhereNull('fecha_devolucion_real');
+                    })
+                    ->with('cliente')
+                    ->orderBy('fecha_inicio', 'desc');
+                }
+            ])->get();
+
+            // Enriquecer cada item con información de renta activa
+            $inventarioItems->each(function($item) {
+                Log::info('Processing inventory item:', [
+                    'item_id' => $item->id,
+                    'producto' => $item->producto ? $item->producto->nombre : 'null',
+                    'rentas_count' => $item->rentas->count(),
+                    'rentas' => $item->rentas->map(function($r) {
+                        return [
+                            'id' => $r->id,
+                            'estado' => $r->estado_renta,
+                            'cliente_id' => $r->cliente_id,
+                            'fecha_inicio' => $r->fecha_inicio,
+                            'fecha_fin' => $r->fecha_fin_prevista
+                        ];
+                    })
+                ]);
+                
+                $rentaActiva = $item->rentas->first();
+                
+                if ($rentaActiva) {
+                    Log::info('Found active rental for item ' . $item->id, [
+                        'rental_id' => $rentaActiva->id,
+                        'estado' => $rentaActiva->estado_renta,
+                        'cliente' => $rentaActiva->cliente ? $rentaActiva->cliente->nombre : 'null'
+                    ]);
+                }
+                
+                $item->renta_activa = $rentaActiva ? [
+                    'id' => $rentaActiva->id,
+                    'cliente_nombre' => $rentaActiva->cliente ? 
+                        trim($rentaActiva->cliente->nombre . ' ' . ($rentaActiva->cliente->nombre2 ?? '') . ' ' . 
+                             ($rentaActiva->cliente->apellido1 ?? '') . ' ' . ($rentaActiva->cliente->apellido2 ?? '')) : 
+                        'N/A',
+                    'fecha_inicio' => $rentaActiva->fecha_inicio,
+                    'fecha_fin_prevista' => $rentaActiva->fecha_fin_prevista,
+                    'estado_renta' => $rentaActiva->estado_renta
+                ] : null;
+            });
+
+            return response()->json([
+                'inventario_items' => $inventarioItems,
+                'status' => 200
+            ], 200);
+
+        } catch (\Exception $e) {
+            Log::error('Error al obtener inventario items con estado de renta: ' . $e->getMessage());
+            return response()->json([
+                'error' => 'Error al obtener los items de inventario con estado de renta: ' . $e->getMessage(),
                 'status' => 500
             ], 500);
         }

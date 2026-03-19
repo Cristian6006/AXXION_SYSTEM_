@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class rolController extends Controller
     {
+    /**
+     * Lista todos los roles disponibles en el sistema.
+     */
         public function index() 
         {
             $rol = Rol::all();
@@ -21,6 +24,13 @@ class rolController extends Controller
             return response()->json($data, 200);
         }
 
+    /**
+     * Crea un nuevo rol de usuario.
+     * 
+     * ANALOGÍA: Esta función es como crear un nuevo puesto de trabajo en una empresa. 
+     * Se define el título (nombre), el código interno y las responsabilidades (descripción) 
+     * que tendrá quien ocupe ese puesto.
+     */
         public function store(Request $request){
             $validator = Validator::make($request->all(), [
             'codigo' => 'required',
@@ -57,6 +67,9 @@ class rolController extends Controller
             return response()->json($data,200);
         }
 
+    /**
+     * Muestra los detalles de un rol específico.
+     */
         public function show($id)
         {
             $rol = Rol::find($id);
@@ -75,6 +88,9 @@ class rolController extends Controller
             return response()->json($data,200);
         }
 
+    /**
+     * Elimina un rol del sistema.
+     */
         public function destroy($id)
         {
             $rol = Rol::find($id);
@@ -94,6 +110,9 @@ class rolController extends Controller
                 return response()->json($data, 200);
         }
 
+    /**
+     * Actualiza la información de un rol.
+     */
         public function update(Request $request, $id)
         {
             $rol = Rol::find($id);
@@ -136,6 +155,9 @@ class rolController extends Controller
             
         }
 
+    /**
+     * Actualización parcial de un rol.
+     */
         public function updatePartial(Request $request, $id)
         {
             $rol = Rol::find($id);

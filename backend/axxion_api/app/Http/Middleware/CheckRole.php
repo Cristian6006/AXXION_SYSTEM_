@@ -5,58 +5,35 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Illuminate\Support\Facades\Auth; 
 
 class CheckRole
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  string  ...$roles
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        try {
-            $user = JWTAuth::parseToken()->authenticate();
-            
-            if (!$user) {
-                return response()->json(['error' => 'Usuario no autenticado'], 401);
-            }
+        $user = Auth::user(); // Obtenemos el usuario ya autenticado
 
-            // Verificar si el usuario tiene alguno de los roles requeridos
-            $userRoles = $user->roles()->pluck('codigo')->toArray();
-            
-            if (empty($roles)) {
-                // Si no se especifican roles, solo verificar autenticación
-                return $next($request);
-            }
-
-            $hasRole = false;
-            foreach ($roles as $role) {
-                if (in_array($role, $userRoles)) {
-                    $hasRole = true;
-                    break;
-                }
-            }
-
-            if (!$hasRole) {
-                return response()->json([
-                    'error' => 'Acceso denegado. No tienes los permisos necesarios.',
-                    'required_roles' => $roles,
-                    'user_roles' => $userRoles
-                ], 403);
-            }
-
-            return $next($request);
-
-        } catch (TokenExpiredException $e) {
-            return response()->json(['error' => 'Token expirado'], 401);
-        } catch (TokenInvalidException $e) {
-            return response()->json(['error' => 'Token inválido'], 401);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Token no encontrado'], 401);
+        // comprobar si hay un usuario autenticado
+        if (!$user) {
+            return response()->json(['success' => false, 'message' => 'No autenticado'], 401);
         }
+        // lógica para comprobar los roles.
+        foreach ($roles as $role) {
+            if ($user->roles->contains('codigo', $role)) { // Compara por 'codigo' o 'nombre'
+                return $next($request); // Si tiene el rol, permite el paso
+            }
+        }
+        return response()->json([
+            'success' => false, 
+            'message' => 'Acceso denegado. No tienes los permisos necesarios.'
+        ], 403);
     }
 }

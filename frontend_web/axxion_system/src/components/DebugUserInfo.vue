@@ -46,19 +46,29 @@ import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 
 export default {
+  /**
+   * Componente DebugUserInfo.
+   * 
+   * Panel flotante para desarrolladores que muestra el estado actual de la autenticación.
+   * Útil para verificar roles, tokens y datos del usuario en tiempo real.
+   * Solo visible si se activa manualmente (o configurado para dev).
+   */
   name: 'DebugUserInfo',
   setup() {
     const authStore = useAuthStore();
     const showDebug = ref(false);
 
+    // Alternar visibilidad del panel
     const toggleDebug = () => {
       showDebug.value = !showDebug.value;
     };
 
+    // Forzar verificación de autenticación con el backend
     const refreshAuth = () => {
       authStore.checkAuth();
     };
 
+    // Cerrar sesión y limpiar estado local
     const clearAuth = () => {
       authStore.logout();
     };

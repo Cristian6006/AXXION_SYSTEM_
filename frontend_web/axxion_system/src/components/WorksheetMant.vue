@@ -19,7 +19,16 @@
     import MaintenaceService from "@/services/MaintenanceService";
     import { ref, onMounted} from 'vue';
     import { FwbButton } from "flowbite-vue";
+
+    /**
+     * Componente WorksheetMant.
+     * 
+     * Permite exportar el registro de mantenimientos a un archivo Excel (.xlsx).
+     * Utiliza 'xlsx' para la generación del archivo y 'file-saver' para la descarga.
+     */
+
     const mantenimiento = ref([]);
+    // Carga la lista de mantenimientos al montar el componente.
     const loadMantenimiento = async () => {
         try {
             const data = await MaintenaceService.getMaintenances();
@@ -28,6 +37,10 @@
             console.error("Error al cargar mantenimientos:", err);
         }
     };
+    /**
+     * Genera y descarga el reporte de mantenimientos en Excel.
+     * Mapea los campos a encabezados legibles en español.
+     */
     const exportMantenimientoExcel = () => {
         if (!mantenimiento.value.length) {
             alert("No hay datos en mantenimientos");

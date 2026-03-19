@@ -18,6 +18,9 @@ class UsuarioController extends Controller
 {
 
 
+    /**
+     * Lista todos los usuarios del sistema con sus roles.
+     */
     public function index()
     {
         $usuarios = Usuario::with('roles')->get();
@@ -25,7 +28,8 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Registra un nuevo usuario en el sistema.
+     * Encripta la contraseña y asigna roles.
      */
     public function store(Request $request)
     {
@@ -36,14 +40,14 @@ class UsuarioController extends Controller
             'nombre2' => 'nullable',
             'apellido1' => 'required',
             'apellido2' => 'nullable',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
             'email' => 'required|email|unique:usuario,email',
             'telefono' => 'required',
             'departamento' => 'required',
             'estado' => 'required',
             'roles' => 'required|array'
             ]);
-            
+
             if ($validator->fails()) {
             $data = [
             'message' => 'Error en la validacion de los datos',
@@ -51,7 +55,7 @@ class UsuarioController extends Controller
             'status' => 400
             ];
 
-            return response()->json($data, 400);    
+            return response()->json($data, 400);
         }
 
     $usuario = Usuario::create([
@@ -67,7 +71,7 @@ class UsuarioController extends Controller
         'departamento' => $request->departamento,
         'estado' => $request->estado,
     ]);
-        
+
         if ($request->has('roles')) {
             $usuario->roles()->sync($request->roles);
         }
@@ -80,15 +84,22 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra los detalles de un usuario específico.
      */
     public function show(string $id)
     {
         $usuario = Usuario::with('roles')->findOrFail($id);
         return new UsuarioResource($usuario);
     }
-     
 
+
+    /**
+     * Autentica a un usuario y genera un token de acceso.
+     *
+     * ANALOGÍA: Esta función actúa como el guardia de seguridad en la entrada de un edificio exclusivo.
+     * Verifica tu identificación (credenciales) y si es válida, te da un pase temporal (token)
+     * para que puedas moverte por las instalaciones.
+     */
     public function login(Request $request) {
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email',
@@ -110,16 +121,16 @@ class UsuarioController extends Controller
                 if (!$user) {
                     return response()->json(['error' => 'Usuario no encontrado'], 401);
                 }
-                
+
                 return response()->json(['error' => 'Contraseña incorrecta'], 401);
             }
 
             // Si llegamos aquí, la autenticación fue exitosa
             $user = auth('api')->user();
-            
+
             // Cargar los roles completos con sus relaciones
             $user->load('roles');
-            
+
             return response()->json([
                 'token' => $token,
                 'user' => [
@@ -152,7 +163,7 @@ class UsuarioController extends Controller
      */
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un usuario del sistema.
      */
     public function destroy(string $id)
     {
@@ -162,6 +173,10 @@ class UsuarioController extends Controller
         return response()->json(status: 204);
     }
 
+    /**
+     * Actualiza la información de un usuario.
+     * Permite cambiar contraseña y roles.
+     */
     public function update(Request $request, string $id)
     {
         $usuario = Usuario::findOrFail($id);
@@ -222,6 +237,9 @@ class UsuarioController extends Controller
 
     }
 
+    /**
+     * Cierra la sesión del usuario invalidando su token.
+     */
     public function logout(){
         JWTAuth::invalidate(JWTAuth::getToken());
         return response()->json(['message' => 'Logged out successfully'], 200);

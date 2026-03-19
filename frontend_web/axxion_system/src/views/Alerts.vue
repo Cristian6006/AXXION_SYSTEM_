@@ -52,11 +52,21 @@ import { useAlertStore } from "@/stores/alertStore";
 import SideBar from "@/components/SideBar.vue";
 import headerP from "@/components/headerP.vue";
 
+/**
+ * Vista Alerts.
+ * 
+ * Muestra el panel de alertas del sistema.
+ * Permite filtrar las alertas por nivel (Crítica, Advertencia, Informativa)
+ * y visualizarlas con códigos de colores correspondientes.
+ */
+
 const alertStore = useAlertStore();
 
+// Formatea la fecha de la alerta para mostrarla en formato local.
 const formatDate = (date) => new Date(date).toLocaleString();
 
 onMounted(() => {
+  // Carga las alertas al montar la vista.
   alertStore.fetchAlerts();
 });
 </script>

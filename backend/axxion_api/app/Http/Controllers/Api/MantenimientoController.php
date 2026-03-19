@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class MantenimientoController extends Controller
 {
+    private const INCORRECT_DATA_MESSAJE = 'Datos de validación incorrectos';
+    private const MAINTENANCE_NOT_FOUND_MESSAJE = 'Mantenimiento no encontrado';
     /**
-     * Display a listing of the resource.
+     * Lista todos los mantenimientos registrados.
      */
     public function index()
     {
@@ -25,27 +27,39 @@ class MantenimientoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Registra un nuevo mantenimiento en el sistema.
+     * 
+     * ANALOGÍA: Es como abrir una "Orden de Trabajo" en un taller mecánico. 
+     * Se anotan los datos del vehículo (item), qué se le va a hacer, quién lo hará y cuándo.
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        // Normalizar a mayúsculas para permitir flexibilidad en el input
+        $data = $request->all();
+        if (isset($data['tipo_mantenimiento'])) {
+            $data['tipo_mantenimiento'] = strtoupper($data['tipo_mantenimiento']);
+        }
+        if (isset($data['estado_mantenimiento'])) {
+            $data['estado_mantenimiento'] = strtoupper($data['estado_mantenimiento']);
+        }
+
+        $validator = Validator::make($data, [
             'inventario_item_id' => 'required|exists:inventario_item,id',
             'fecha_inicio' => 'required|date',
             'fecha_fin_prevista' => 'required|date|after_or_equal:fecha_inicio',
             'fecha_fin_real' => 'nullable|date',
-            'tipo_mantenimiento' => 'required|string|in:PREVENTIVO,CORRECTIVO,PREDICTIVO,EMERGENCIA',
+            'tipo_mantenimiento' => 'required|string|in:PREVENTIVO,CORRECTIVO,MEJORA,PREDICTIVO,EMERGENCIA',
             'descripcion_problema' => 'required|string|max:1000',
             'descripcion_trabajo_realizado' => 'nullable|string|max:1000',
             'costo_estimado' => 'nullable|numeric|min:0',
             'costo_real' => 'nullable|numeric|min:0',
-            'estado_mantenimiento' => 'required|string|in:PROGRAMADO,EN_PROCESO,COMPLETADO,CANCELADO,PAUSADO',
+            'estado_mantenimiento' => 'required|string|in:PROGRAMADO,EN_PROCESO,FINALIZADO,COMPLETADO,CANCELADO,PAUSADO',
             'responsable' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'error' => 'Datos de validación incorrectos',
+                'error' => self::INCORRECT_DATA_MESSAJE,
                 'messages' => $validator->errors()
             ], 422);
         }
@@ -53,7 +67,7 @@ class MantenimientoController extends Controller
         try {
             DB::beginTransaction();
 
-            $mantenimiento = Mantenimiento::create($request->all());
+            $mantenimiento = Mantenimiento::create($data);
             $mantenimiento->load('inventarioItem');
 
             DB::commit();
@@ -72,15 +86,14 @@ class MantenimientoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Muestra los detalles de un mantenimiento específico.
      */
     public function show($id)
     {
         try {
             $mantenimiento = Mantenimiento::with('inventarioItem')->find($id);
-
             if (!$mantenimiento) {
-                return response()->json(['error' => 'Mantenimiento no encontrado'], 404);
+                return response()->json(['error' => self::MAINTENANCE_NOT_FOUND_MESSAJE], 404);
             }
 
             return response()->json($mantenimiento);
@@ -91,27 +104,36 @@ class MantenimientoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza la información de un mantenimiento completo.
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        // Normalizar a mayúsculas para permitir flexibilidad en el input
+        $data = $request->all();
+        if (isset($data['tipo_mantenimiento'])) {
+            $data['tipo_mantenimiento'] = strtoupper($data['tipo_mantenimiento']);
+        }
+        if (isset($data['estado_mantenimiento'])) {
+            $data['estado_mantenimiento'] = strtoupper($data['estado_mantenimiento']);
+        }
+
+        $validator = Validator::make($data, [
             'inventario_item_id' => 'sometimes|required|exists:inventario_item,id',
             'fecha_inicio' => 'sometimes|required|date',
             'fecha_fin_prevista' => 'sometimes|required|date|after_or_equal:fecha_inicio',
             'fecha_fin_real' => 'nullable|date',
-            'tipo_mantenimiento' => 'sometimes|required|string|in:PREVENTIVO,CORRECTIVO,PREDICTIVO,EMERGENCIA',
+            'tipo_mantenimiento' => 'sometimes|required|string|in:PREVENTIVO,CORRECTIVO,MEJORA,PREDICTIVO,EMERGENCIA',
             'descripcion_problema' => 'sometimes|required|string|max:1000',
             'descripcion_trabajo_realizado' => 'nullable|string|max:1000',
             'costo_estimado' => 'nullable|numeric|min:0',
             'costo_real' => 'nullable|numeric|min:0',
-            'estado_mantenimiento' => 'sometimes|required|string|in:PROGRAMADO,EN_PROCESO,COMPLETADO,CANCELADO,PAUSADO',
+            'estado_mantenimiento' => 'sometimes|required|string|in:PROGRAMADO,EN_PROCESO,FINALIZADO,COMPLETADO,CANCELADO,PAUSADO',
             'responsable' => 'sometimes|required|string|max:255',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
-                'error' => 'Datos de validación incorrectos',
+                'error' => self::INCORRECT_DATA_MESSAJE,
                 'messages' => $validator->errors()
             ], 422);
         }
@@ -120,12 +142,12 @@ class MantenimientoController extends Controller
             $mantenimiento = Mantenimiento::find($id);
 
             if (!$mantenimiento) {
-                return response()->json(['error' => 'Mantenimiento no encontrado'], 404);
+                return response()->json(['error' => self::MAINTENANCE_NOT_FOUND_MESSAJE], 404);
             }
 
             DB::beginTransaction();
 
-            $mantenimiento->update($request->all());
+            $mantenimiento->update($data);
             $mantenimiento->load('inventarioItem');
 
             DB::commit();
@@ -144,7 +166,8 @@ class MantenimientoController extends Controller
     }
 
     /**
-     * Update partial resource in storage.
+     * Actualiza parcialmente un registro de mantenimiento.
+     * Útil para cambiar solo el estado o agregar costos finales sin re-enviar todo.
      */
     public function updatePartial(Request $request, $id)
     {
@@ -164,7 +187,7 @@ class MantenimientoController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'error' => 'Datos de validación incorrectos',
+                'error' => self::INCORRECT_DATA_MESSAJE,
                 'messages' => $validator->errors()
             ], 422);
         }
@@ -173,7 +196,7 @@ class MantenimientoController extends Controller
             $mantenimiento = Mantenimiento::find($id);
 
             if (!$mantenimiento) {
-                return response()->json(['error' => 'Mantenimiento no encontrado'], 404);
+                return response()->json(['error' => self::MAINTENANCE_NOT_FOUND_MESSAJE], 404);
             }
 
             DB::beginTransaction();
@@ -197,7 +220,7 @@ class MantenimientoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina un registro de mantenimiento.
      */
     public function destroy($id)
     {
@@ -205,7 +228,7 @@ class MantenimientoController extends Controller
             $mantenimiento = Mantenimiento::find($id);
 
             if (!$mantenimiento) {
-                return response()->json(['error' => 'Mantenimiento no encontrado'], 404);
+                return response()->json(['error' => self::MAINTENANCE_NOT_FOUND_MESSAJE], 404);
             }
 
             DB::beginTransaction();
@@ -227,7 +250,7 @@ class MantenimientoController extends Controller
     }
 
     /**
-     * Get mantenimientos by inventario item
+     * Obtiene el historial de mantenimientos de un item específico.
      */
     public function getByInventarioItem($inventario_item_id)
     {
@@ -247,7 +270,7 @@ class MantenimientoController extends Controller
     }
 
     /**
-     * Get mantenimientos by estado
+     * Filtra mantenimientos por su estado actual (ej. PROGRAMADO, EN_PROCESO).
      */
     public function getByEstado($estado)
     {
@@ -273,7 +296,7 @@ class MantenimientoController extends Controller
     }
 
     /**
-     * Get mantenimientos by tipo
+     * Filtra mantenimientos por tipo (ej. PREVENTIVO, CORRECTIVO).
      */
     public function getByTipo($tipo)
     {

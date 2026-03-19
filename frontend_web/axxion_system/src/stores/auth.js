@@ -1,90 +1,89 @@
+// stores/auth.js
 import { defineStore } from 'pinia';
-import ServiceLogin from '@/services/ServiceLogin';
-import axios from 'axios';
+import axios from '@/plugins/axios';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    token: localStorage.getItem('token') || null,
-    user: JSON.parse(localStorage.getItem('user')) || null,
-    error: null,
+    accessToken: null,
+    user: null,
+    isRefreshing: false,
+    refreshSubscribers: [],
+    authReady: false,
   }),
   getters: {
-    isAuthenticated: (state) => !!state.token,
-    getUser: (state) => state.user,
+    isAuthenticated: (state) => !!state.accessToken,
   },
   actions: {
-    async login(credentials) {
-      const service = new ServiceLogin();
+    async tryToRefresh() {
+      if (this.authReady) return;
       try {
-        const response = await service.login(credentials);
-        const { token, user } = response.data;
-        
-        this.token = token;
-        this.user = user;
-        this.error = null;
-
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
-
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        
-        return true;
+        await this.refreshAccessToken();
       } catch (error) {
-        this.error = 'Credenciales incorrectas. Por favor, inténtalo de nuevo.';
-        console.error('Error de login:', error);
-        return false;
+        this.accessToken = null;
+      } finally {
+        this.authReady = true;
       }
     },
-    logout() {
-      this.token = null;
-      this.user = null;
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      delete axios.defaults.headers.common['Authorization'];
+
+    async login(email, password) {
+      try {
+        const response = await axios.post('/auth/login', { email, password });
+        const authData = response.data.data;
+        // Usamos el objeto authData para asignar los valores
+        this.accessToken = authData.access_token;
+        this.user = authData.user;
+
+      } catch (error) {
+        console.log(`[Store Action - UID: ${this.$id}] Limpiando estado por error.`);
+        this.accessToken = null;
+        this.user = null;
+        throw error;
+      }
     },
-    checkAuth() {
-        const token = localStorage.getItem('token');
-        const user = localStorage.getItem('user');
-        
-        if (token && user) {
-            try {
-                this.token = token;
-                this.user = JSON.parse(user);
-                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                console.log('Auth restored from localStorage:', {
-                    hasToken: !!token,
-                    user: this.user
-                });
-            } catch (error) {
-                console.error('Error parsing user data from localStorage:', error);
-                this.logout();
-            }
-        } else {
-            console.log('No auth data found in localStorage');
-        }
+
+
+    async logout() {
+      try {
+        await axios.post('/auth/logout');
+      } catch (error) {
+        console.error('El logout en el servidor falló, pero se limpiará la sesión localmente.', error);
+      } finally {
+        this.accessToken = null;
+        this.user = null;
+        this.authReady = false;
+      }
     },
-    
-    // Método para verificar si el usuario tiene un rol específico
-    hasRole(roleName) {
-        if (!this.user || !this.user.roles) return false;
-        
-        // Si roles es un array de strings (formato anterior)
-        if (typeof this.user.roles[0] === 'string') {
-            return this.user.roles.includes(roleName);
-        }
-        
-        // Si roles es un array de objetos (formato nuevo)
-        return this.user.roles.some(role => 
-            role.codigo === roleName || 
-            role.name === roleName ||
-            role.nombre === roleName
-        );
+
+    async refreshAccessToken() {
+      if (this.isRefreshing) {
+        return new Promise((resolve) => {
+          this.refreshSubscribers.push((token) => resolve(token));
+        });
+      }
+      this.isRefreshing = true;
+
+      try {
+        const response = await axios.post('/auth/refresh');
+        const authData = response.data.data || response.data;
+
+        this.accessToken = authData.access_token;
+        // Actualizamos el usuario con los datos que nos llegan.
+        this.user = authData.user;
+
+        this.refreshSubscribers.forEach(callback => callback(this.accessToken));
+        return this.accessToken;
+
+      } catch (error) {
+
+        this.accessToken = null;
+        this.user = null;
+        this.authReady = false;
+        throw new Error('No se pudo refrescar el token');
+
+      } finally {
+        this.isRefreshing = false;
+        this.refreshSubscribers = [];
+      }
     },
-    
-    // Método para verificar si el usuario tiene alguno de los roles especificados
-    hasAnyRole(roleNames) {
-        if (!Array.isArray(roleNames)) return false;
-        return roleNames.some(roleName => this.hasRole(roleName));
-    }
   },
 });

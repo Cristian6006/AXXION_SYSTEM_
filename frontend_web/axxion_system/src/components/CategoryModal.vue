@@ -1,55 +1,47 @@
 <template>
-  <FwbModal class="text-amber-50" @close="onClose">
-    <template #header>
-      <div class="text-lg text-amber-50">
-        {{ mode === 'add' ? 'Agregar Categoría' : mode === 'edit' ? 'Editar Categoría' : 'Eliminar Categoría' }}
+  <!-- Saca este html del componente y lo pone al final del body -->
+  <Teleport to="body">
+    <!-- Para que el fondo y la caja aparezcan suavemente -->
+    <Transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <!-- Capa de fondo -->
+      <div
+        v-if="show"
+        class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+        @click="emit('close')"
+      >
+        <!-- Contenido del modal -->
+        <!-- @click.stop evita que al dar click dentro del modal, se cierre -->
+        <div
+          class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden transform transition-all"
+          @click.stop
+        >
+          <!-- Header -->
+          <div v-if="$slots.header" class="bg-gray-100 px-6 py-4 border-b border-gray-200 font-bold text-gray-700">
+            <slot name="header"></slot>
+          </div>
+          <!-- Body -->
+          <div class="p-6">
+            <slot></slot>
+          </div>
+        </div>
       </div>
-    </template>
-
-    <template #body>
-      <div v-if="mode !== 'delete'">
-        <fwb-input v-model="local.nombre" label="Nombre" />
-        <br />
-        <fwb-input v-model="local.descripcion" label="Descripción" />
-        <br />
-        <fwb-input v-model="local.tipo_categoria" label="Tipo" />
-      </div>
-      <div v-else>
-        <p class="text-amber-50">¿Eliminar la categoría <b>{{ category?.nombre }}</b>?</p>
-      </div>
-    </template>
-
-    <template #footer>
-      <div class="flex justify-between w-full">
-        <FwbButton @click="onClose" color="alternative">Cancelar</FwbButton>
-        <FwbButton v-if="mode !== 'delete'" @click="onSave" color="green">Guardar</FwbButton>
-        <FwbButton v-else @click="onDelete" color="red">Eliminar</FwbButton>
-      </div>
-    </template>
-  </FwbModal>
+    </Transition>
+  </Teleport>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import { FwbModal, FwbButton, FwbInput } from 'flowbite-vue'
-
-const props = defineProps({
-  mode: { type: String, default: 'add' }, // 'add' | 'edit' | 'delete'
-  category: { type: Object, default: null }
-})
-const emit = defineEmits(['close','save','delete'])
-
-const local = ref({ nombre: '', descripcion: '', tipo_categoria: '' })
-
-watch(() => [props.category, props.mode], () => {
-  if (props.mode === 'edit' && props.category) {
-    local.value = { ...props.category }
-  } else {
-    local.value = { nombre: '', descripcion: '', tipo_categoria: '' }
-  }
-}, { immediate: true })
-
-function onClose(){ emit('close') }
-function onSave(){ emit('save', { ...local.value }) }
-function onDelete(){ if(props.category?.id) emit('delete', props.category.id); else emit('close') }
+// Recibimos la prop para saber si se muestra o no
+  defineProps({
+    show: Boolean
+  });
+  // Definimos eventos para decirle al padre que cierre
+  const emit = defineEmits(['close']);
 </script>
+

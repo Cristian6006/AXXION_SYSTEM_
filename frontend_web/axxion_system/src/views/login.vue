@@ -13,22 +13,30 @@
       </div>
       <div class="form-panel">
         <h2 class="form-title">Iniciar Sesión</h2>
+        <!-- El mensaje de error solo se muestra si la variable 'error' tiene contenido -->
         <div v-if="error" class="error-message">{{ error }}</div>
+        
         <form @submit.prevent="handleLogin">
           <div class="input-group">
             <label for="email">Email</label>
-            <input id="email" type="email" v-model="email" required>
+            <!-- Conectamos el input a nuestra variable reactiva 'email' -->
+            <input id="email" type="email" v-model="email" required autocomplete="username">
           </div>
           <div class="input-group">
             <label for="password">Password</label>
-            <input id="password" type="password" v-model="password" required>
+            <!-- Conectamos el input a nuestra variable reactiva 'password' -->
+            <input id="password" type="password" v-model="password" required autocomplete="current-password">
           </div>
-          <button type="submit" class="login-button">Acceder</button>
+          <!-- El botón se deshabilita mientras 'loading' sea true -->
+          <button type="submit" class="login-button" :disabled="loading">
+            <span v-if="!loading">Acceder</span>
+            <span v-else>Accediendo...</span>
+          </button>
         </form>
          <div class="demo-users">
-          <p>admin@demo.com / admin123</p>
-          <p>aux@demo.com / aux123</p>
-          <p>asesor@demo.com / asesor123</p>
+          <p @click="fillDemoCredentials('admin@demo.com', 'admin123')" class="clickable">admin@demo.com / admin123</p>
+          <p @click="fillDemoCredentials('aux@demo.com', 'aux123')" class="clickable">aux@demo.com / aux123</p>
+          <p @click="fillDemoCredentials('asesor@demo.com', 'asesor123')" class="clickable">asesor@demo.com / asesor123</p>
       </div>
       </div>
     </div>
@@ -37,30 +45,55 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '../stores/auth';
+import { useAuthStore } from '@/stores/auth'; 
+import { useRouter, useRoute } from 'vue-router';
 
-const router = useRouter();
+// 1. Hooks de Vue y Pinia
 const authStore = useAuthStore();
+const router = useRouter();
+const route = useRoute();
+
+// 2. Estado del componente (reactivo)
 const email = ref('');
 const password = ref('');
-const error = ref(null);
+const error = ref('');
+const loading = ref(false);
 
+// 3. Función que maneja el envío del formulario
 const handleLogin = async () => {
-  error.value = null;
-  if (email.value && password.value) {
-    const success = await authStore.login({
-      email: email.value,
-      password: password.value,
-    });
-    if (success) {
-      router.push({ path: '/home' });
-    } else {
-      error.value = authStore.error;
-    }
+  // Inicia el estado de carga y limpia errores previos
+  loading.value = true;
+  error.value = '';
+
+  try {
+    // Llama a la acción 'login' de nuestro store de Pinia
+    await authStore.login(email.value, password.value);
+
+    // Si la acción anterior tiene éxito (no lanza error), procedemos a redirigir
+
+    const redirectPath = route.query.redirect || { name: 'Home' }; 
+
+
+    router.push(redirectPath);
+
+  } catch (err) {
+
+
+    error.value = err.response?.data?.message || 'Las credenciales son incorrectas.';
+  } finally {
+
+    loading.value = false;
   }
 };
+
+
+const fillDemoCredentials = (demoEmail, demoPassword) => {
+  email.value = demoEmail;
+  password.value = demoPassword;
+};
 </script>
+
+
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
@@ -257,4 +290,4 @@ const handleLogin = async () => {
   text-align: center;
 }
 
-</style>
+</style> 

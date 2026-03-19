@@ -71,8 +71,13 @@
 <script setup>
 import { ref } from "vue";
 
+// Estado reactivo para controlar si la barra lateral está expandida o colapsada.
+// Se inicializa leyendo el valor guardado en localStorage.
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true");
 
+/**
+ * Alterna el estado de expansión del menú y guarda la preferencia en localStorage.
+ */
 const ToggleMenu = () => {
   is_expanded.value = !is_expanded.value;
 

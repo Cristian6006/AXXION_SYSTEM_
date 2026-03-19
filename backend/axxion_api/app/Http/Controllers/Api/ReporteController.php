@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 
 class ReporteController extends Controller
 {
+    /**
+     * Genera un reporte simple del inventario (lista de productos).
+     */
     public function inventario()
     {
         try {
@@ -23,7 +26,10 @@ class ReporteController extends Controller
     }
 
 
-        public function usuarios()
+    /**
+     * Genera un reporte de usuarios y sus roles.
+     */
+    public function usuarios()
     {
         $usuarios = Usuario::with('roles')->get();
         return response()->json([
@@ -32,6 +38,9 @@ class ReporteController extends Controller
         ]);
     }
 
+    /**
+     * Genera un reporte de rentas con clientes y equipos.
+     */
     public function rentas()
     {
         $rentas = Renta::with(['cliente','equipos'])->get();
@@ -41,6 +50,12 @@ class ReporteController extends Controller
         ]);
     }
 
+    /**
+     * Calcula métricas generales del inventario.
+     * 
+     * ANALOGÍA: Esta función es como un contador rápido que hace un inventario visual 
+     * para decirte cuántos equipos tienes y cuánto valen en total, sin entrar en detalles de cada uno.
+     */
     public function metrics()
 {
     $totalItems = Producto::count();
@@ -51,6 +66,19 @@ class ReporteController extends Controller
         'items_totales' => $totalItems,
         'valor_total' => $valorTotal,
         'equipos_disponibles' => $equiposDisponibles,
+    ]);
+}
+
+    /**
+     * Calcula métricas financieras de las rentas.
+     */
+    public function metricsAlq()
+{
+    $totalItems = Renta::count();
+    $valorTotal = Renta::sum('monto_total_renta');
+    return response()->json([
+        'items_totales' => $totalItems,
+        'valor_total' => $valorTotal
     ]);
 }
 }

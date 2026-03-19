@@ -9,6 +9,11 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
 
+/**
+ * Modelo que representa un Usuario del sistema.
+ * 
+ * Gestiona el acceso, autenticación (JWT) y perfil de los empleados o administradores.
+ */
 class Usuario extends Authenticatable implements JWTSubject
 {
     use HasFactory;
@@ -57,8 +62,18 @@ class Usuario extends Authenticatable implements JWTSubject
         return $this->password_hash;
     }
 
+    /**
+     * Relación: Un usuario puede tener múltiples roles asignados.
+     */
     public function roles()
     {
         return $this->belongsToMany(Rol::class, 'usuario_rol');
     }
+
+    public function refreshTokens()
+{
+    return $this->hasMany(RefreshToken::class);
 }
+}
+
+

@@ -18,9 +18,18 @@
     import { saveAs } from "file-saver";
     import InventoryService from "@/services/InventoryService";
     import { ref, onMounted} from 'vue';
+    import { FwbButton } from 'flowbite-vue'
+
+    /**
+     * Componente ExportWorksheet.
+     * 
+     * Permite exportar el inventario completo a un archivo Excel (.xlsx).
+     * Utiliza las librerías 'xlsx' para generar el archivo y 'file-saver' para descargarlo.
+     */
 
     const inventario = ref([]);
 
+    // Carga los datos del inventario al montar el componente.
     const loadinventario = async () => {
         try {
             const data = await InventoryService.getProducts();
@@ -29,6 +38,10 @@
             console.error("Error al cargar inventarios:", err);
         }
     };
+    /**
+     * Genera y descarga el archivo Excel con los datos del inventario.
+     * Mapea los campos a nombres de columnas legibles en español.
+     */
     const exportInventarioExcel = () => {
         if (!inventario.value.length) {
             alert("No hay datos en inventarios");

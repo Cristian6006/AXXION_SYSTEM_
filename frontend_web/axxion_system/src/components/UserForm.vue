@@ -482,7 +482,22 @@ import {
   FwbInput
 } from 'flowbite-vue';
 
+/**
+ * Componente UserForm.
+ * 
+ * Este componente gestiona el formulario para la administración de usuarios del sistema.
+ * Permite crear nuevos usuarios, actualizar información existente y eliminar usuarios.
+ * Maneja la asignación de roles, validación de campos y confirmación de acciones destructivas.
+ * 
+ * Modos soportados:
+ * - 'add': Formulario para crear un nuevo usuario.
+ * - 'update': Formulario para editar un usuario existente.
+ * - 'delete': Vista de confirmación para eliminar un usuario.
+ */
+
 // Props y Emits
+// mode: Define la operación actual ('add', 'update', 'delete').
+// selectedUser: Objeto con los datos del usuario a editar o eliminar.
 const props = defineProps({
   mode: {
     type: String,
@@ -523,6 +538,13 @@ const availableRoles = ref([]);
 const confirmDelete = ref(false);
 
 // Computed
+/**
+ * Verifica si el formulario es válido basándose en el modo actual.
+ * - En 'add': Todos los campos obligatorios deben estar llenos.
+ * - En 'update': Similar a 'add', pero la contraseña es opcional.
+ * - En 'delete': Se requiere confirmación explícita.
+ * @returns {boolean} True si es válido.
+ */
 const isFormValid = computed(() => {
   if (props.mode === 'add') {
     return formData.value.nombre &&
@@ -550,6 +572,10 @@ const isFormValid = computed(() => {
 });
 
 // Función para obtener el nombre completo
+/**
+ * Construye el nombre completo del usuario concatenando sus nombres y apellidos.
+ * Filtra valores nulos o vacíos.
+ */
 const getFullName = (user) => {
   if (!user) return '';
   return [user.nombre, user.nombre2, user.apellido1, user.apellido2]
@@ -581,6 +607,10 @@ const resetForm = () => {
   successMessage.value = '';
 };
 
+/**
+ * Maneja el envío del formulario según el modo (crear, actualizar, eliminar).
+ * Realiza llamadas al store correspondiente y gestiona mensajes de éxito/error.
+ */
 const handleSubmit = async () => {
   try {
     isLoading.value = true;
@@ -641,6 +671,10 @@ const handleSubmit = async () => {
 };
 
 // Cargar roles al montar el componente
+/**
+ * Carga la lista de roles disponibles desde el backend.
+ * Si falla, carga roles por defecto para evitar bloqueo de la UI.
+ */
 onMounted(async () => {
   try {
     await userStore.fetchRoles();
@@ -658,6 +692,10 @@ onMounted(async () => {
 });
 
 // Watch para poblar el formulario cuando se selecciona un usuario para actualizar
+/**
+ * Observa cambios en `selectedUser` para rellenar el formulario cuando se entra en modo edición.
+ * Mapea los datos del usuario seleccionado a la estructura del formulario.
+ */
 watch(() => props.selectedUser, (newUser) => {
   if (newUser && props.mode === 'update') {
     console.log('Selected user for update:', newUser);

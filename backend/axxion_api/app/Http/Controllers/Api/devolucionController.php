@@ -10,6 +10,9 @@ use Illuminate\Validation\Rule;
 
 class devolucionController extends Controller
     {
+    /**
+     * Lista todas las devoluciones registradas.
+     */
         public function index(){
         $devoluciones = Devolucion::all();
         $data = [
@@ -18,6 +21,13 @@ class devolucionController extends Controller
         ];
         return response()->json($data, 200);
         }
+    /**
+     * Registra una nueva devolución de renta.
+     * 
+     * ANALOGÍA: Esta función es como el proceso de 'Check-out' en un hotel o alquiler de autos. 
+     * Se registra cuándo se devolvió el ítem, quién lo recibió y en qué estado se encuentra 
+     * (si hay daños o faltantes).
+     */
         public function store(Request $request){
             $validator = Validator::make($request->all(),[
                 'renta_id' => [ 'required', Rule::exists('renta', 'id')],
@@ -31,9 +41,9 @@ class devolucionController extends Controller
                 $data = [
                     'message' => 'Validation failed',
                     'errors' => $validator->errors(),
-                    'status' => 201
+                    'status' => 422
                 ];
-                return response()->json($data, 201);
+                return response()->json($data, 422);
             }
             $devolucion = Devolucion::create([
                 'renta_id' => $request->renta_id,
@@ -53,10 +63,13 @@ class devolucionController extends Controller
             $devolucion->load('renta');
             $data = [
                 'devolucion' => $devolucion,
-                'status' => 200
+                'status' => 201
             ];
-            return response()->json($data, 200);
+            return response()->json($data, 201);
         }
+    /**
+     * Muestra los detalles de una devolución específica.
+     */
         public function show($id){
             $devolucion = Devolucion::find($id);
             if(!$devolucion){
@@ -72,6 +85,9 @@ class devolucionController extends Controller
             ];
             return response()->json($data, 200);
         }
+    /**
+     * Elimina un registro de devolución.
+     */
         public function destroy($id){
             $devolucion = Devolucion::find($id);
             if(!$devolucion){
@@ -88,6 +104,9 @@ class devolucionController extends Controller
             ];
             return response()->json($data, 200);
         }
+    /**
+     * Actualiza la información de una devolución.
+     */
         public function update(Request $request, $id){
             $devolucion = Devolucion::find($id);
             if(!$devolucion){
@@ -109,9 +128,9 @@ class devolucionController extends Controller
                 $data = [
                     'message' => 'Validator failed',
                     'errors' => $validator->errors(),
-                    'status' => 201
+                    'status' => 422
                 ];
-                return response()->json($data, 201);
+                return response()->json($data, 422);
             }
             $devolucion->renta_id = $request->renta_id;
             $devolucion->fecha_devolucion_programada = $request->fecha_devolucion_programada;
@@ -128,6 +147,9 @@ class devolucionController extends Controller
             ];
             return response()->json($data, 200);
         }
+    /**
+     * Actualización parcial de una devolución.
+     */
         public function updatePartial(Request $request, $id){
             $devolucion = Devolucion::find($id);
             if(!$devolucion){
@@ -149,9 +171,9 @@ class devolucionController extends Controller
                 $data = [
                     'message' => 'Error en la Validacion',
                     'errors' => $validator->errors(),
-                    'status' => 201
+                    'status' => 422
                 ];
-                return response()->json($data, 201);
+                return response()->json($data, 422);
             }
 
             if($request->has('renta_id')){
