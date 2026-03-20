@@ -1,4 +1,9 @@
-package com.example.axxionsystem.data.repository
+package com.example.axxionsystem.data.repository.auth
+
+import com.example.axxionsystem.data.api.ApiService
+import com.example.axxionsystem.data.model.auth.AuthResponse
+import com.example.axxionsystem.data.model.auth.LoginRequest
+import retrofit2.Response
 
 /**
  * Repositorio de autenticacion.
@@ -6,10 +11,6 @@ package com.example.axxionsystem.data.repository
  * Centraliza el acceso a [ApiService] para que el ViewModel consuma un API
  * simple y testable (login, perfil y logout).
  */
-import com.example.axxionsystem.data.api.ApiService
-import com.example.axxionsystem.data.model.AuthResponse
-import com.example.axxionsystem.data.model.LoginRequest
-import retrofit2.Response
 
 class AuthRepository(private val apiService: ApiService) {
 

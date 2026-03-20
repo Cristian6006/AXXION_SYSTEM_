@@ -68,6 +68,7 @@
 			
 			<com.google.android.material.textfield.TextInputLayout
 					style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+					android:id="@+id/tilEmail"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:hint="Correo electrónico"
@@ -92,6 +93,7 @@
 			
 			<com.google.android.material.textfield.TextInputLayout
 					style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+					android:id="@+id/tilPassword"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="16dp"
@@ -135,7 +137,7 @@
 						app:cornerRadius="12dp"/>
 				
 				
-				<com.google.android.material.loadingindicator.LoadingIndicator
+				<com.google.android.material.progressindicator.CircularProgressIndicator
 						android:id="@+id/progressLogin"
 						android:layout_width="35dp"
 						android:layout_height="35dp"
@@ -143,7 +145,11 @@
 						android:indeterminate="true"
 						android:visibility="gone"
 						android:elevation="8dp"
-						android:indeterminateTint="@color/white"/>
+						app:indicatorColor="@color/white"
+						app:trackColor="@android:color/transparent"
+						app:waveAmplitude="1.6dp"
+						app:wavelengthIndeterminate="15dp"
+						app:waveSpeed="3dp" />
 			</FrameLayout>
 			
 			

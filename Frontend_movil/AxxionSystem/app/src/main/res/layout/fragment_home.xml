@@ -1,70 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="@color/axxion_background"
-		android:padding="24dp">
+		android:background="@color/axxion_background">
 	
 	
-	<com.google.android.material.appbar.MaterialToolbar
-			android:id="@+id/toolbar"
+	<androidx.core.widget.NestedScrollView
 			android:layout_width="match_parent"
-			android:layout_height="?attr/actionBarSize"
-			android:background="@color/axxion_card"
-			app:title="Axxion System"
-			app:titleTextColor="@color/white"
-			app:layout_constraintTop_toTopOf="parent"/>
-	
-	
-	<TextView
-			android:id="@+id/tvWelcome"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="32dp"
-			android:text="Cargando perfil..."
-			android:textColor="@color/white"
-			android:textSize="22sp"
-			android:textStyle="bold"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/toolbar"/>
-	
-	
-	<com.google.android.material.chip.Chip
-			android:id="@+id/chipRole"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="8dp"
-			android:text="Rol: Desconocido"
-			android:textColor="@color/axxion_background"
-			app:chipBackgroundColor="@color/axxion_secondary"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/tvWelcome"/>
-	
-	
-	<com.google.android.material.loadingindicator.LoadingIndicator
-			style="@style/Widget.Material3.LoadingIndicator.Contained"
-			android:id="@+id/progressBarHome"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:indeterminate="true"
-			android:visibility="gone"
-			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"/>
-	
-	<com.google.android.material.button.MaterialButton
-			android:id="@+id/btnLogout"
-			style="@style/Widget.Material3.Button.OutlinedButton"
-			android:layout_width="match_parent"
-			android:layout_height="56dp"
-			android:layout_marginBottom="24dp"
-			android:text="CERRAR SESIÓN"
-			android:textColor="@color/axxion_secondary"
-			app:cornerRadius="12dp"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:strokeColor="@color/axxion_secondary"/>
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:paddingBottom="100dp">
+		
+		<androidx.constraintlayout.widget.ConstraintLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="24dp">
+			
+			
+			<TextView
+					android:id="@+id/tvAppName"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:text="AXXION SYSTEM"
+					android:textColor="@color/white"
+					android:textSize="22sp"
+					android:textStyle="bold"
+					android:letterSpacing="0.05"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintEnd_toStartOf="@id/btnLogout"
+					app:layout_constraintTop_toTopOf="parent" />
+			
+			
+			<TextView
+					android:id="@+id/tvSubtitle"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="4dp"
+					android:text="Cargando tus datos..."
+					android:textColor="@color/axxion_text_muted"
+					android:textSize="14sp"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintEnd_toStartOf="@id/btnLogout"
+					app:layout_constraintTop_toBottomOf="@id/tvAppName" />
+			
+			
+			<com.google.android.material.button.MaterialButton
+					android:id="@+id/btnLogout"
+					style="@style/Widget.Material3.Button.IconButton"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					app:icon="@drawable/ic_logout"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintBottom_toBottomOf="@id/tvSubtitle"
+					app:iconTint="@android:color/holo_red_dark"/>
+			
+			
+			<GridLayout
+					android:id="@+id/gridModules"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="32dp"
+					android:columnCount="2"
+					android:rowCount="2"
+					android:alignmentMode="alignMargins"
+					android:columnOrderPreserved="false"
+					app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
+				
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+				<com.google.android.material.card.MaterialCardView
+						android:layout_width="0dp"
+						android:layout_height="120dp"
+						android:layout_columnWeight="1"
+						android:layout_margin="8dp"
+						app:cardBackgroundColor="@color/axxion_card"
+						app:cardCornerRadius="16dp"
+						app:cardElevation="0dp"
+						app:strokeColor="@color/axxion_input_stroke"
+						app:strokeWidth="1dp">
+					
+					
+					<LinearLayout
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:orientation="vertical">
+						<ImageView
+								android:layout_width="32dp"
+								android:layout_height="32dp"
+								android:src="@drawable/ic_android"
+								app:tint="@color/axxion_primary" />
+						<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="8dp"
+								android:text="Módulo 1"
+								android:textColor="@color/white"
+								android:textStyle="bold"/>
+					</LinearLayout>
+				</com.google.android.material.card.MaterialCardView>
+				
+				<!-- TARJETA DE EJEMPLO 2 -->
+				<com.google.android.material.card.MaterialCardView
+						android:layout_width="0dp"
+						android:layout_height="120dp"
+						android:layout_columnWeight="1"
+						android:layout_margin="8dp"
+						app:cardBackgroundColor="@color/axxion_card"
+						app:cardCornerRadius="16dp"
+						app:cardElevation="0dp"
+						app:strokeColor="@color/axxion_input_stroke"
+						app:strokeWidth="1dp">
+					<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center"
+							android:text="Módulo 2"
+							android:textColor="@color/white"/>
+				</com.google.android.material.card.MaterialCardView>
+			</GridLayout>
+		
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	</androidx.core.widget.NestedScrollView>
+	
+	
+	<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:clipChildren="false">
+		
+		
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+				android:id="@+id/fabMenu"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="bottom|center_horizontal"
+				android:layout_marginBottom="32dp"
+				android:contentDescription="Menú Expandible"
+				android:transitionName="morph_transition"
+				app:backgroundTint="@color/axxion_primary"
+				app:tint="@color/white"
+				app:srcCompat="@drawable/ic_plus" />
+		
+
+		<com.google.android.material.card.MaterialCardView
+				android:id="@+id/cardFloatingMenu"
+				android:layout_width="wrap_content"
+				android:layout_height="64dp"
+				android:layout_gravity="bottom|center_horizontal"
+				android:layout_marginBottom="32dp"
+				android:visibility="gone"
+				android:transitionName="morph_transition"
+		app:cardBackgroundColor="@color/axxion_card"
+		app:cardCornerRadius="32dp"
+		app:cardElevation="12dp"
+		app:strokeColor="@color/axxion_input_stroke"
+		app:strokeWidth="1dp">
+		
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:orientation="horizontal"
+				android:gravity="center"
+				android:paddingHorizontal="16dp">
+			
+			<com.google.android.material.button.MaterialButton
+					android:id="@+id/btnCloseMenu"
+					style="@style/Widget.Material3.Button.IconButton"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					app:icon="@drawable/ic_android"
+			app:iconTint="@color/axxion_text_muted" />
+			
+			
+			<View
+					android:layout_width="1dp"
+					android:layout_height="32dp"
+					android:layout_marginHorizontal="8dp"
+					android:background="@color/axxion_input_stroke"/>
+			
+			<!-- Opción 1 -->
+			<com.google.android.material.button.MaterialButton
+					android:id="@+id/btnOption1"
+					style="@style/Widget.Material3.Button.IconButton"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					app:icon="@drawable/ic_email"
+					app:iconTint="@color/axxion_secondary" />
+			
+			<!-- Opción 2 -->
+			<com.google.android.material.button.MaterialButton
+					android:id="@+id/btnOption2"
+					style="@style/Widget.Material3.Button.IconButton"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					app:icon="@drawable/ic_lock"
+					app:iconTint="@color/axxion_secondary" />
+		
+		</LinearLayout>
+	</com.google.android.material.card.MaterialCardView>
+	
+</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
