@@ -1,4 +1,4 @@
-package com.example.axxionsystem.data.model
+package com.example.axxionsystem.data.model.auth
 
 /**
  * Modelos (DTOs) usados por la capa de red/autenticacion.

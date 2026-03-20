@@ -12,23 +12,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
-import com.example.axxionsystem.R
+import androidx.transition.TransitionManager
 import com.example.axxionsystem.data.api.RetrofitClient
-import com.example.axxionsystem.data.repository.AuthRepository
+import com.example.axxionsystem.data.repository.auth.AuthRepository
 import com.example.axxionsystem.databinding.FragmentHomeBinding
-import com.example.axxionsystem.ui.auth.AuthViewModel
-import com.example.axxionsystem.ui.auth.AuthViewModelFactory
 import com.example.axxionsystem.util.SessionManager
+import com.google.android.material.transition.MaterialContainerTransform
 
 class HomeFragment: Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var authViewModel: AuthViewModel
     private lateinit var sessionManager: SessionManager
+
+    private lateinit var homeViewModel: HomeViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -44,39 +42,56 @@ class HomeFragment: Fragment() {
 
         val apiService = RetrofitClient.getApiService(requireContext())
         val repository = AuthRepository(apiService)
-        val factory = AuthViewModelFactory(repository)
-        authViewModel = ViewModelProvider(this, factory)[AuthViewModel::class.java]
+        val factory = HomeViewModelFactory(repository)
+        homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
+        homeViewModel.fetchUserProfile()
+        setupMorphingMenu()
+    }
 
-        authViewModel.isLoading.observe(viewLifecycleOwner) { cargando ->
-            binding.progressBarHome.visibility = if (cargando) View.VISIBLE else View.GONE
-            binding.tvWelcome.visibility = if (cargando) View.GONE else View.VISIBLE
-            binding.chipRole.visibility = if (cargando) View.GONE else View.VISIBLE
-        }
-
-
-
-        authViewModel.perfilResult.observe(viewLifecycleOwner) { result ->
-            result.onSuccess { perfil ->
-                binding.tvWelcome.text = "Hola, ${perfil.nombre}"
-
-                val rolPrincipal = perfil.roles.firstOrNull()?.replace("ROLE_", "") ?: "USUARIO"
-                binding.chipRole.text = "Rol: $rolPrincipal"
-
-                sessionManager.saveUserRole(rolPrincipal)
-            }.onFailure { error ->
-                Snackbar.make(binding.root, "Error al cargar perfil: ${error.message}", Snackbar.LENGTH_LONG).show()
+    private fun setupMorphingMenu() {
+        // 1. Cuando el usuario toca el FAB Redondo (Abrir Menú)
+        binding.fabMenu.setOnClickListener {
+            // Preparamos la animación Morph
+            val transform = MaterialContainerTransform().apply {
+                startView = binding.fabMenu
+                endView = binding.cardFloatingMenu
+                addTarget(binding.cardFloatingMenu) // Hacia dónde vamos
+                scrimColor = android.graphics.Color.TRANSPARENT // Sin fondo oscuro detrás
+                duration = 350L // 350 milisegundos se ve muy fluido
             }
+
+            // Iniciamos la transición en el contenedor principal
+            TransitionManager.beginDelayedTransition(binding.root as ViewGroup, transform)
+
+            // Intercambiamos la visibilidad (Esto dispara la animación automáticamente)
+            binding.fabMenu.visibility = View.GONE
+            binding.cardFloatingMenu.visibility = View.VISIBLE
         }
 
-        binding.btnLogout.setOnClickListener {
-            authViewModel.logoutBackend()
-            sessionManager.clearSession()
-            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+        // 2. Cuando el usuario toca la "X" dentro de la barra (Cerrar Menú)
+        binding.btnCloseMenu.setOnClickListener {
+            // Preparamos la animación Inversa
+            val transform = MaterialContainerTransform().apply {
+                startView = binding.cardFloatingMenu
+                endView = binding.fabMenu
+                addTarget(binding.fabMenu) // Hacia dónde volvemos
+                scrimColor = android.graphics.Color.TRANSPARENT
+                duration = 300L
+            }
+
+            // Iniciamos la transición
+            TransitionManager.beginDelayedTransition(binding.root as ViewGroup, transform)
+
+            // Intercambiamos la visibilidad al revés
+            binding.cardFloatingMenu.visibility = View.GONE
+            binding.fabMenu.visibility = View.VISIBLE
         }
 
-        authViewModel.fetchUserProfile()
-
+        binding.btnOption1.setOnClickListener {
+            // Hacer algo y luego cerrar el menú
+            binding.btnCloseMenu.performClick()
+        }
     }
 
     override fun onDestroyView() {

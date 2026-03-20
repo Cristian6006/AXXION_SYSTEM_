@@ -8,7 +8,7 @@ package com.example.axxionsystem.ui.auth
  */
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.axxionsystem.data.repository.AuthRepository
+import com.example.axxionsystem.data.repository.auth.AuthRepository
 
 class AuthViewModelFactory(private val repository: AuthRepository): ViewModelProvider.Factory {
     override fun <T: ViewModel> create(modelClass: Class<T>): T {

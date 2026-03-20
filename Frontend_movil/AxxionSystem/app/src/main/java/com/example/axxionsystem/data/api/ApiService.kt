@@ -6,9 +6,9 @@ package com.example.axxionsystem.data.api
  * Define endpoints de autenticacion: login, perfil del usuario, refresh de token
  * (sincrono para el Authenticator) y logout.
  */
-import com.example.axxionsystem.data.model.AuthResponse
-import com.example.axxionsystem.data.model.LoginRequest
-import com.example.axxionsystem.data.model.UserProfileResponse
+import com.example.axxionsystem.data.model.auth.AuthResponse
+import com.example.axxionsystem.data.model.auth.LoginRequest
+import com.example.axxionsystem.data.model.auth.UserProfileResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body

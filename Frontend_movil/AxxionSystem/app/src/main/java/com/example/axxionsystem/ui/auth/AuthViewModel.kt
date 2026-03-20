@@ -9,67 +9,64 @@ package com.example.axxionsystem.ui.auth
  * - resultado de login
  * - datos del perfil del usuario
  */
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.axxionsystem.data.model.AuthResponse  
-import com.example.axxionsystem.data.model.LoginRequest
-import com.example.axxionsystem.data.model.UserProfileResponse
-import com.example.axxionsystem.data.repository.AuthRepository
+import com.example.axxionsystem.data.model.auth.LoginRequest
+import com.example.axxionsystem.data.repository.auth.AuthRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import retrofit2.Response
+
+sealed class LoginUiState {
+    object Idle: LoginUiState()
+    object Loading: LoginUiState()
+    data class Success(val token: String): LoginUiState()
+    data class Error(val message: String, val isNetworkError: Boolean): LoginUiState()
+    data class ValidationError(val emailError: String?, val passwordError: String?): LoginUiState()
+}
 
 class AuthViewModel(private val repository: AuthRepository): ViewModel() {
 
-    private val _loginResult = MutableLiveData<Result<AuthResponse>>()
-    val loginResult: LiveData<Result<AuthResponse>> = _loginResult
-
-    private val _perfilResult = MutableLiveData<Result<UserProfileResponse>>()
-    val perfilResult: LiveData<Result<UserProfileResponse>> = _perfilResult
-
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+    private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Idle)
+    val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
 
     fun login(email: String, password: String) {
-        if (email.isBlank() || password.isBlank()) {
-            _loginResult.value = Result.failure(Exception("Campos vacios"))
+
+        val emailError = if (email.isBlank()) "El correo no puede estar vacio"
+                            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) "Formato de correo invalido"
+                                else null
+
+        val passwordError = if (password.isBlank()) "La contraseña no puede estar vacia" else null
+
+        if (emailError != null || passwordError != null) {
+            _uiState.value = LoginUiState.ValidationError(emailError, passwordError)
             return
         }
 
+        _uiState.value = LoginUiState.Loading
+
         viewModelScope.launch {
-            _isLoading.value = true
             try {
                 val request = LoginRequest(email, password)
-                val response: Response<AuthResponse> = repository.login(request)
+                val response = repository.login(request)
 
                 if (response.isSuccessful && response.body() != null) {
-                    _loginResult.value = Result.success(response.body()!!)
+                    _uiState.value = LoginUiState.Success(response.body()!!.accessToken)
                 } else {
-                    _loginResult.value = Result.failure(Exception("Credenciales invalidas"))
+                    val code = response.code()
+                    val msg = if (code == 401) "Credenciales incorrectas" else "Error del servidor ($code)"
+                    _uiState.value = LoginUiState.Error(msg,  false)
                 }
             } catch(e: Exception) {
-                _loginResult.value = Result.failure(Exception("Error de conexion: ${e.message}"))
-            } finally {
-                _isLoading.value = false
+                _uiState.value = LoginUiState.Error("Fallo de conexion. Verifica tu internet", true)
             }
         }
     }
 
-    fun fetchUserProfile() {
-        viewModelScope.launch {
-            try {
-                _isLoading.value = true
-                val response = repository.getPerfil()
-                if (response.isSuccessful && response.body() != null) {
-                    _perfilResult.value = Result.success(response.body()!!)
-                }
-            } catch(e: Exception) {
-                _perfilResult.value = Result.failure(e)
-            } finally {
-                _isLoading.value = false
-            }
-        }
+    fun resetState() {
+        _uiState.value = LoginUiState.Idle
     }
 
     fun logoutBackend() {
