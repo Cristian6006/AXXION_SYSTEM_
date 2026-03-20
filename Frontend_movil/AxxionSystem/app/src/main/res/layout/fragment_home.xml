@@ -102,7 +102,7 @@
 					</LinearLayout>
 				</com.google.android.material.card.MaterialCardView>
 				
-				<!-- TARJETA DE EJEMPLO 2 -->
+				
 				<com.google.android.material.card.MaterialCardView
 						android:layout_width="0dp"
 						android:layout_height="120dp"
@@ -187,7 +187,7 @@
 					style="@style/Widget.Material3.Button.IconButton"
 					android:layout_width="48dp"
 					android:layout_height="48dp"
-					app:icon="@drawable/ic_email"
+					app:icon="@drawable/ic_user"
 					app:iconTint="@color/axxion_secondary" />
 			
 			<!-- Opción 2 -->

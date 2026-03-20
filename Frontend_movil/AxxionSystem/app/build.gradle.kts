@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -31,15 +32,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
     }
 }
 
 dependencies {
 
     implementation("androidx.core:core-ktx:1.18.0")
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.core:core-splashscreen:1.2.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("com.google.android.material:material:1.13.0")
     implementation("androidx.activity:activity:1.13.0")
@@ -62,7 +66,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     // SEGURIDAD (Para encriptar el Token JWT en el celular)
-    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+    implementation("androidx.security:security-crypto:1.1.0")
 
     // BIOMETRÍA (Para leer la huella y usar la criptografía del hardware)
     implementation("androidx.biometric:biometric:1.1.0")
@@ -73,4 +77,13 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+
+    // ROOM DATABASE (Para Offline-First)
+    val roomVersion = "2.6.1"
+    //noinspection GradleDependency
+    implementation("androidx.room:room-runtime:$roomVersion")
+    //noinspection GradleDependency
+    implementation("androidx.room:room-ktx:$roomVersion") // Soporte para Corrutinas y Flow
+    //noinspection GradleDependency
+    ksp("androidx.room:room-compiler:$roomVersion")
 }
