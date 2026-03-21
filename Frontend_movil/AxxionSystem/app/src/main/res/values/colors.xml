@@ -8,4 +8,11 @@
 	<color name="axxion_secondary">#7DB3E1</color>
 	<color name="axxion_text_muted">#8A96A8</color>
 	<color name="white">#FFFFFFFF</color>
+
+	<!-- Alias para compatibilidad -->
+	<color name="background">#111823</color>
+	<color name="primary">#1C64D1</color>
+	<color name="secondary">#7DB3E1</color>
+	<color name="text_primary">#FFFFFFFF</color>
+	<color name="text_secondary">#8A96A8</color>
 </resources>
