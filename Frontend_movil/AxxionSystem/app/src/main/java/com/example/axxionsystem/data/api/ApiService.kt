@@ -7,6 +7,14 @@ package com.example.axxionsystem.data.api
  * - Autenticación: login, perfil, refresh token, logout
  * - Alquiler: solicitudes, rentas, firmas de entrega y devolución
  */
+import com.example.axxionsystem.data.model.Alquiler.DevolucionFirmaRequest
+import com.example.axxionsystem.data.model.Alquiler.DevolucionResponse
+import com.example.axxionsystem.data.model.Alquiler.EntregaFirmaRequest
+import com.example.axxionsystem.data.model.Alquiler.EntregaResponse
+import com.example.axxionsystem.data.model.Alquiler.RentaCreateRequest
+import com.example.axxionsystem.data.model.Alquiler.RentaResponse
+import com.example.axxionsystem.data.model.Alquiler.SolicitudCreateRequest
+import com.example.axxionsystem.data.model.Alquiler.SolicitudResponse
 import com.example.axxionsystem.data.model.auth.AuthResponse
 import com.example.axxionsystem.data.model.auth.ForgotPasswordRequest
 import com.example.axxionsystem.data.model.auth.LoginRequest
@@ -21,6 +29,7 @@ import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 

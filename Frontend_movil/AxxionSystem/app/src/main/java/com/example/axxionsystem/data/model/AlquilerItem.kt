@@ -1,5 +1,7 @@
 package com.example.axxionsystem.data.model
 
+import com.example.axxionsystem.data.model.Alquiler.AlquilerItem
+
 /**
  * Modelo unificado para mostrar items de alquiler (solicitudes o rentas)
  * en el RecyclerView con diseño mejorado.
@@ -39,9 +41,9 @@ data class AlquilerItem(
 
     companion object {
         /**
-         * Convierte un [SolicitudResponse] a [AlquilerItem] para visualización.
+         * Convierte un [com.example.axxionsystem.data.model.Alquiler.SolicitudResponse] a [com.example.axxionsystem.data.model.Alquiler.AlquilerItem] para visualización.
          */
-        fun fromSolicitud(response: SolicitudResponse): AlquilerItem {
+        fun fromSolicitud(response: com.example.axxionsystem.data.model.Alquiler.SolicitudResponse): com.example.axxionsystem.data.model.AlquilerItem {
             val estadoStr = response.estado?.name?.replace("_", " ") ?: "SIN ESTADO"
             return AlquilerItem(
                 id = response.id,
@@ -55,9 +57,9 @@ data class AlquilerItem(
         }
 
         /**
-         * Convierte un [RentaResponse] a [AlquilerItem] para visualización.
+         * Convierte un [com.example.axxionsystem.data.model.Alquiler.RentaResponse] a [com.example.axxionsystem.data.model.Alquiler.AlquilerItem] para visualización.
          */
-        fun fromRenta(response: RentaResponse): AlquilerItem {
+        fun fromRenta(response: com.example.axxionsystem.data.model.Alquiler.RentaResponse): com.example.axxionsystem.data.model.AlquilerItem {
             val estadoStr = response.estado?.name?.replace("_", " ") ?: "SIN ESTADO"
             return AlquilerItem(
                 id = response.id,

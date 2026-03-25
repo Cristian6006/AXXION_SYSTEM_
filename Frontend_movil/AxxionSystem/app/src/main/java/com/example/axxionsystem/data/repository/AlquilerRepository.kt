@@ -1,14 +1,14 @@
 package com.example.axxionsystem.data.repository
 
 import com.example.axxionsystem.data.api.ApiService
-import com.example.axxionsystem.data.model.AlquilerItem
-import com.example.axxionsystem.data.model.SolicitudCreateRequest
-import com.example.axxionsystem.data.model.SolicitudResponse
-import com.example.axxionsystem.data.model.RentaResponse
-import com.example.axxionsystem.data.model.EntregaFirmaRequest
-import com.example.axxionsystem.data.model.EntregaResponse
-import com.example.axxionsystem.data.model.DevolucionFirmaRequest
-import com.example.axxionsystem.data.model.DevolucionResponse
+import com.example.axxionsystem.data.model.Alquiler.AlquilerItem
+import com.example.axxionsystem.data.model.Alquiler.SolicitudCreateRequest
+import com.example.axxionsystem.data.model.Alquiler.SolicitudResponse
+import com.example.axxionsystem.data.model.Alquiler.RentaResponse
+import com.example.axxionsystem.data.model.Alquiler.EntregaFirmaRequest
+import com.example.axxionsystem.data.model.Alquiler.EntregaResponse
+import com.example.axxionsystem.data.model.Alquiler.DevolucionFirmaRequest
+import com.example.axxionsystem.data.model.Alquiler.DevolucionResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

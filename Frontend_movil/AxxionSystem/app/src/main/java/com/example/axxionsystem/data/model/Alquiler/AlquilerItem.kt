@@ -1,4 +1,4 @@
-package com.example.axxionsystem.data.model
+package com.example.axxionsystem.data.model.Alquiler
 
 /**
  * Modelo unificado para mostrar items de alquiler (solicitudes o rentas)

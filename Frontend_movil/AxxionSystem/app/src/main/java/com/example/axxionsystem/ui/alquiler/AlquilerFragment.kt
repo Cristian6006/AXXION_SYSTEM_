@@ -14,8 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.axxionsystem.R
-import com.example.axxionsystem.data.model.AlquilerItem
-import com.example.axxionsystem.data.model.RentaResponse
+import com.example.axxionsystem.data.model.Alquiler.AlquilerItem
+import com.example.axxionsystem.data.model.Alquiler.RentaResponse
 import com.google.android.material.textfield.TextInputEditText
 import com.example.axxionsystem.ui.alquiler.adapter.AlquilerAdapter
 
