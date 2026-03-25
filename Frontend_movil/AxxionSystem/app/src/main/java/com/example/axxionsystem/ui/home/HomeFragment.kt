@@ -95,6 +95,10 @@ class HomeFragment: Fragment() {
             binding.btnCloseMenu.performClick()
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
+
+        binding.cardInventory.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_productoList)
+        }
     }
 
     override fun onDestroyView() {

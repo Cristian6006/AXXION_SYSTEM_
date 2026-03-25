@@ -11,11 +11,15 @@ import com.example.axxionsystem.data.model.auth.ForgotPasswordRequest
 import com.example.axxionsystem.data.model.auth.LoginRequest
 import com.example.axxionsystem.data.model.auth.ResetPasswordRequest
 import com.example.axxionsystem.data.model.auth.UserProfileResponse
+import com.example.axxionsystem.data.model.producto.ProductoEntity
+import com.example.axxionsystem.data.model.producto.UpdateEstadoRequest
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -36,4 +40,13 @@ interface ApiService {
 
     @POST("/api/auth/resetear-contraseña")
     suspend fun resetPassword(@Body request: ResetPasswordRequest): Response<Unit>
+
+    @GET("api/productos")
+    suspend fun getProductos(): Response<List<ProductoEntity>>
+
+    @PATCH("api/productos/{id}/estado")
+    suspend fun updateEstadoProducto(
+        @Path("id") id: Int,
+        @Body request: UpdateEstadoRequest
+    ): Response<ProductoEntity>
 }

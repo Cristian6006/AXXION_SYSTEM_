@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs.kotlin")
+
 }
 
 android {
@@ -86,4 +88,6 @@ dependencies {
     implementation("androidx.room:room-ktx:$roomVersion") // Soporte para Corrutinas y Flow
     //noinspection GradleDependency
     ksp("androidx.room:room-compiler:$roomVersion")
+
+
 }

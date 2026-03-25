@@ -1,3 +1,10 @@
 <resources>
 	<string name="app_name">AxxionSystem</string>
+
+	<string-array name="estados_producto">
+		<item>DISPONIBLE</item>
+		<item>RENTADO</item>
+		<item>EN_REPARACION</item>
+		<item>FUERA_DE_SERVICIO</item>
+	</string-array>
 </resources>
