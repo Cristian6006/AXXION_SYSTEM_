@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.axxionsystem.R
-import com.example.axxionsystem.data.model.AlquilerItem
+import com.example.axxionsystem.data.model.Alquiler.AlquilerItem
 
 /**
  * Adapter personalizado para mostrar solicitudes y rentas de alquiler

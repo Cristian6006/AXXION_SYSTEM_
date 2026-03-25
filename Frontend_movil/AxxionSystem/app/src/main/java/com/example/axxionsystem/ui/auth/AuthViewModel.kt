@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 
 sealed class LoginUiState {
     object Idle: LoginUiState()
@@ -38,7 +39,13 @@ class AuthViewModel(private val repository: AuthRepository): ViewModel() {
                             else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) "Formato de correo invalido"
                                 else null
 
-        val passwordError = if (password.isBlank()) "La contraseña no puede estar vacia" else null
+        val passwordError = when {
+            password.isBlank() -> "La contraseña no puede estar vacia"
+            password.length < 8 -> "La contraseña debe tener al menos 8 caracteres"
+            !password.any { it.isLowerCase() } -> "La contraseña debe tener al menos una minuscula"
+            !password.any { it.isUpperCase() } -> "La contraseña debe tener al menos una mayuscula"
+            else -> null
+        }
 
         if (emailError != null || passwordError != null) {
             _uiState.value = LoginUiState.ValidationError(emailError, passwordError)
@@ -55,9 +62,17 @@ class AuthViewModel(private val repository: AuthRepository): ViewModel() {
                 if (response.isSuccessful && response.body() != null) {
                     _uiState.value = LoginUiState.Success(response.body()!!.accessToken)
                 } else {
-                    val code = response.code()
-                    val msg = if (code == 401) "Credenciales incorrectas" else "Error del servidor ($code)"
-                    _uiState.value = LoginUiState.Error(msg,  false)
+                    val errorMsg = try {
+                        val errorBody = response.errorBody()?.string()
+                        if (errorBody != null) {
+                            JSONObject(errorBody).optString("error", "Error desconocido")
+                        } else {
+                            "Error del servidor (${response.code()})"
+                        }
+                    } catch (e: Exception) {
+                        "Error del servidor (${response.code()})"
+                    }
+                    _uiState.value = LoginUiState.Error(errorMsg, false)
                 }
             } catch(e: Exception) {
                 _uiState.value = LoginUiState.Error("Fallo de conexion. Verifica tu internet", true)
@@ -69,12 +84,4 @@ class AuthViewModel(private val repository: AuthRepository): ViewModel() {
         _uiState.value = LoginUiState.Idle
     }
 
-    fun logoutBackend() {
-        viewModelScope.launch {
-            try {
-                repository.logout()
-            } catch (e: Exception) {
-            }
-        }
-    }
 }

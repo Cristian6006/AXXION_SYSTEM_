@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.core.AuthenticationException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.AuthenticationEntryPoint
@@ -74,7 +75,7 @@ class SecurityConfig {
     fun corsConfigurationSource(): org.springframework.web.cors.CorsConfigurationSource {
         val configuration = CorsConfiguration()
         configuration.allowedOriginPatterns = listOf("*")
-        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
         configuration.allowedHeaders = listOf("Authorization", "Content-Type", "Cache-Control")
         configuration.exposedHeaders = listOf("Authorization")
         configuration.allowCredentials = true
@@ -86,8 +87,12 @@ class SecurityConfig {
 
     @Bean
     fun customAuthenticationEntryPoint(): AuthenticationEntryPoint {
-        return AuthenticationEntryPoint { request: HttpServletRequest, response: HttpServletResponse, authException ->
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido o expirado")
+        return AuthenticationEntryPoint { request: HttpServletRequest, response: HttpServletResponse, authException: AuthenticationException ->
+            response.contentType = "aplication/json"
+            response.status = HttpServletResponse.SC_UNAUTHORIZED
+
+            val jsonResponse = """{"error": "Acceso denegado. Token faltante, invalido o expirado."}"""
+            response.writer.write(jsonResponse)
         }
     }
 }

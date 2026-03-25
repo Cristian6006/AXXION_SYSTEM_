@@ -8,18 +8,17 @@ package com.example.axxionsystem.ui.auth
  * - navega a Home al autenticar
  * - muestra feedback (loading/snackbar) en caso de error
  */
-import com.example.axxionsystem.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.example.axxionsystem.R
 import com.example.axxionsystem.data.api.RetrofitClient
 import com.example.axxionsystem.data.repository.auth.AuthRepository
 import com.example.axxionsystem.databinding.FragmentLoginBinding
@@ -69,8 +68,7 @@ class LoginFragment: Fragment() {
         }
 
         binding.btnRecoverPassword.setOnClickListener {
-            Toast.makeText(requireContext(), "Ir a pantalla recuperar contraseña", Toast.LENGTH_SHORT).show()
-            // findNavController().navigate(R.id.action_loginFragment_to_recoverFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_recoverPasswordBottomSheet)
         }
     }
 
@@ -126,6 +124,8 @@ class LoginFragment: Fragment() {
                 binding.btnLogin.performClick()
             }
         }
+
+        snackbar.show()
     }
 
     override fun onDestroyView() {
