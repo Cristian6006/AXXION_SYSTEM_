@@ -57,6 +57,12 @@ class HomeFragment: Fragment() {
             homeViewModel.logoutBackend()
             sessionManager.clearSession()
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+        setupNavigation()
+    }
+
+    private fun setupNavigation() {
+        binding.cardAlquiler.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_alquilerFragment)
         }
     }
 

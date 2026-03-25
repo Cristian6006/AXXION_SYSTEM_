@@ -74,6 +74,23 @@
 		<argument
 				android:name="productoId"
 				app:argType="integer" />
+
+		<action
+				android:id="@+id/action_homeFragment_to_alquilerFragment"
+				app:destination="@id/alquilerFragment"/>
+	</fragment>
+
+	<fragment
+			android:id="@+id/alquilerFragment"
+			android:name="com.example.axxionsystem.ui.alquiler.AlquilerFragment"
+			android:label="Alquiler"
+			tools:layout="@layout/fragment_alquiler">
+
+		<action
+				android:id="@+id/action_alquilerFragment_to_homeFragment"
+				app:destination="@id/homeFragment"
+				app:popUpTo="@id/homeFragment"
+				app:popUpToInclusive="false"/>
 	</fragment>
 
 </navigation>

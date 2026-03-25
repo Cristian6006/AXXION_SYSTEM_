@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    app:cardBackgroundColor="@color/axxion_card"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/axxion_input_stroke"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header: Tipo y Estado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvTipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SOLICITUD"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/axxion_primary" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/axxion_primary"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+                <TextView
+                    android:id="@+id/tvEstado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PENDIENTE"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp" />
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- ID -->
+        <TextView
+            android:id="@+id/tvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Solicitud #123"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="12dp" />
+
+        <!-- Layout para Solicitud -->
+        <LinearLayout
+            android:id="@+id/layoutSolicitud"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cliente: "
+                    android:textSize="14sp"
+                    android:textColor="@color/axxion_text_muted" />
+
+                <TextView
+                    android:id="@+id/tvClienteId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#1"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cantidad: "
+                    android:textSize="14sp"
+                    android:textColor="@color/axxion_text_muted" />
+
+                <TextView
+                    android:id="@+id/tvCantidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 unidad"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <!-- Descripción -->
+            <LinearLayout
+                android:id="@+id/layoutDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Descripción:"
+                    android:textSize="12sp"
+                    android:textColor="@color/axxion_text_muted" />
+
+                <TextView
+                    android:id="@+id/tvDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Descripción de la necesidad..."
+                    android:textSize="14sp"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Layout para Renta -->
+        <LinearLayout
+            android:id="@+id/layoutRenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Desde: "
+                    android:textSize="14sp"
+                    android:textColor="@color/axxion_text_muted" />
+
+                <TextView
+                    android:id="@+id/tvFechaInicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2025-01-01"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  Hasta: "
+                    android:textSize="14sp"
+                    android:textColor="@color/axxion_text_muted" />
+
+                <TextView
+                    android:id="@+id/tvFechaFin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2025-01-15"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <!-- Items count -->
+            <LinearLayout
+                android:id="@+id/layoutItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvItemsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3 items en rental"
+                    android:textSize="14sp"
+                    android:textColor="@color/axxion_secondary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Acciones (solo para Rentas) -->
+        <LinearLayout
+            android:id="@+id/layoutAcciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:visibility="gone"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Toca para acciones"
+                android:textSize="12sp"
+                android:textColor="@color/axxion_secondary"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

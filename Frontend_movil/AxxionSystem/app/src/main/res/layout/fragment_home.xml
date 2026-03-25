@@ -103,8 +103,9 @@
 					</LinearLayout>
 				</com.google.android.material.card.MaterialCardView>
 				
-				
+				<!-- TARJETA DE ALQUILER -->
 				<com.google.android.material.card.MaterialCardView
+						android:id="@+id/cardAlquiler"
 						android:layout_width="0dp"
 						android:layout_height="120dp"
 						android:layout_columnWeight="1"
@@ -114,12 +115,25 @@
 						app:cardElevation="0dp"
 						app:strokeColor="@color/axxion_input_stroke"
 						app:strokeWidth="1dp">
-					<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_gravity="center"
-							android:text="Módulo 2"
-							android:textColor="@color/white"/>
+					
+					<LinearLayout
+							android:layout_width="match_parent"
+							android:layout_height="match_parent"
+							android:gravity="center"
+							android:orientation="vertical">
+						<ImageView
+								android:layout_width="32dp"
+								android:layout_height="32dp"
+								android:src="@drawable/ic_android"
+								app:tint="@color/axxion_primary" />
+						<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="8dp"
+								android:text="Alquiler"
+								android:textColor="@color/white"
+								android:textStyle="bold"/>
+					</LinearLayout>
 				</com.google.android.material.card.MaterialCardView>
 			</GridLayout>
 		
