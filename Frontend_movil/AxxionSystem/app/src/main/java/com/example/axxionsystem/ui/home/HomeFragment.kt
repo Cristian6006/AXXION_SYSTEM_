@@ -49,6 +49,15 @@ class HomeFragment: Fragment() {
 
         homeViewModel.fetchUserProfile()
         setupMorphingMenu()
+        setupLogout()
+    }
+
+    private fun setupLogout() {
+        binding.btnLogout.setOnClickListener {
+            homeViewModel.logoutBackend()
+            sessionManager.clearSession()
+            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+        }
     }
 
     private fun setupMorphingMenu() {

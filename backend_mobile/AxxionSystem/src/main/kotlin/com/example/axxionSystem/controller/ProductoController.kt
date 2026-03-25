@@ -1,7 +1,9 @@
 package com.example.axxionSystem.controller
 
+import com.example.axxionSystem.dto.ActualizarEstadoRequest
 import com.example.axxionSystem.model.Producto
 import com.example.axxionSystem.service.ProductoService
+import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -26,5 +28,16 @@ class ProductoController {
     @PostMapping
     fun create(@RequestBody producto: Producto): ResponseEntity<Producto> {
         return ResponseEntity.ok(productoService.saveProducto(producto))
+    }
+
+    @PatchMapping("/{id}/estado")
+    fun actualizarEstado(
+        @PathVariable id: Int,
+        @Valid @RequestBody request: ActualizarEstadoRequest
+    ): ResponseEntity<Producto> {
+
+        val productoActualizado = productoService.actualizarEstado(id, request)
+
+        return ResponseEntity.ok(productoActualizado)
     }
 }

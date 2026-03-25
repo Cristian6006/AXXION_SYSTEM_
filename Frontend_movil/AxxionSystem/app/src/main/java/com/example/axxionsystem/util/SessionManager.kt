@@ -13,6 +13,7 @@ package com.example.axxionsystem.util
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import androidx.core.content.edit
 
 class SessionManager(context: Context) {
 
@@ -31,15 +32,15 @@ class SessionManager(context: Context) {
     )
 
     fun saveAuthToken(token: String) {
-        sharedPreferences.edit().putString("JWT_TOKEN", token).apply()
+        sharedPreferences.edit { putString("JWT_TOKEN", token) }
     }
 
     fun saveUserRole(role: String) {
-        sharedPreferences.edit().putString("USER_ROLE", role).apply()
+        sharedPreferences.edit { putString("USER_ROLE", role) }
     }
 
     fun saveDeviceid(deviceId: String) {
-        sharedPreferences.edit().putString("DEVICE_ID", deviceId).apply()
+        sharedPreferences.edit { putString("DEVICE_ID", deviceId) }
     }
 
 
@@ -57,6 +58,6 @@ class SessionManager(context: Context) {
 
 
     fun clearSession() {
-        sharedPreferences.edit().clear().apply()
+        sharedPreferences.edit { clear() }
     }
 }

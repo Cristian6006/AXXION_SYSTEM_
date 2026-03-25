@@ -7,7 +7,9 @@ package com.example.axxionsystem.data.api
  * (sincrono para el Authenticator) y logout.
  */
 import com.example.axxionsystem.data.model.auth.AuthResponse
+import com.example.axxionsystem.data.model.auth.ForgotPasswordRequest
 import com.example.axxionsystem.data.model.auth.LoginRequest
+import com.example.axxionsystem.data.model.auth.ResetPasswordRequest
 import com.example.axxionsystem.data.model.auth.UserProfileResponse
 import retrofit2.Call
 import retrofit2.Response
@@ -28,4 +30,10 @@ interface ApiService {
 
     @POST("api/auth/logout")
     suspend fun logout(): Response<Any>
+
+    @POST("/api/auth/olvido-contraseña")
+    suspend fun requestPasswordRecovery(@Body request: ForgotPasswordRequest): Response<Unit>
+
+    @POST("/api/auth/resetear-contraseña")
+    suspend fun resetPassword(@Body request: ResetPasswordRequest): Response<Unit>
 }
