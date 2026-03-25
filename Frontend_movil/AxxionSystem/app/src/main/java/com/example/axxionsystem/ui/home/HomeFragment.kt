@@ -12,7 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionManager
+import com.example.axxionsystem.R
 import com.example.axxionsystem.data.api.RetrofitClient
 import com.example.axxionsystem.data.repository.auth.AuthRepository
 import com.example.axxionsystem.databinding.FragmentHomeBinding
@@ -47,6 +49,13 @@ class HomeFragment: Fragment() {
 
         homeViewModel.fetchUserProfile()
         setupMorphingMenu()
+        setupNavigation()
+    }
+
+    private fun setupNavigation() {
+        binding.cardAlquiler.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_alquilerFragment)
+        }
     }
 
     private fun setupMorphingMenu() {
