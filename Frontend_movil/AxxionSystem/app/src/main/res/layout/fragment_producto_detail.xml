@@ -72,7 +72,7 @@
                 android:background="@drawable/bg_axxion_input"
                 app:layout_constraintTop_toBottomOf="@id/lblEstado"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         <EditText
                 android:id="@+id/etNotas"

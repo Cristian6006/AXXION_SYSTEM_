@@ -43,6 +43,10 @@
 		<action
 				android:id="@+id/action_home_to_productoList"
 				app:destination="@id/productoListFragment" />
+
+		<action
+				android:id="@+id/action_homeFragment_to_alquilerFragment"
+				app:destination="@id/alquilerFragment"/>
 	</fragment>
 	
 	<fragment
@@ -75,9 +79,6 @@
 				android:name="productoId"
 				app:argType="integer" />
 
-		<action
-				android:id="@+id/action_homeFragment_to_alquilerFragment"
-				app:destination="@id/alquilerFragment"/>
 	</fragment>
 
 	<fragment
