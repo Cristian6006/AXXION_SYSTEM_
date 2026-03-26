@@ -16,6 +16,12 @@
 				app:destination="@id/homeFragment"
 				app:popUpTo="@id/loginFragment"
 				app:popUpToInclusive="true"/>
+		
+		<action
+				android:id="@+id/action_loginFragment_to_recoverPasswordBottomSheet"
+				app:destination="@id/recoverPasswordBottomSheet" />
+
+
 	</fragment>
 	
 	<fragment
@@ -29,10 +35,50 @@
 				app:destination="@id/loginFragment"
 				app:popUpTo="@id/homeFragment"
 				app:popUpToInclusive="true"/>
+		
+		<action
+				android:id="@+id/action_homeFragment_to_profileFragment"
+				app:destination="@id/profileFragment" />
+
+		<action
+				android:id="@+id/action_home_to_productoList"
+				app:destination="@id/productoListFragment" />
 
 		<action
 				android:id="@+id/action_homeFragment_to_alquilerFragment"
 				app:destination="@id/alquilerFragment"/>
+	</fragment>
+	
+	<fragment
+			android:id="@+id/profileFragment"
+			android:name="com.example.axxionsystem.ui.profile.ProfileFragment"
+			android:label="Mi Perfil"
+			tools:layout="@layout/fragment_profile"/>
+	
+
+	
+	<dialog
+			android:id="@+id/recoverPasswordBottomSheet"
+			android:name="com.example.axxionsystem.ui.auth.recovery.RecoverPasswordBottomSheetFragment"
+			android:label="Recover Password" />
+
+	<fragment
+			android:id="@+id/productoListFragment"
+			android:name="com.example.axxionsystem.ui.product.list.ProductoListFragment"
+			tools:layout="@layout/fragment_producto_list">
+		<action
+				android:id="@+id/action_list_to_detail"
+				app:destination="@id/productoDetailFragment" />
+	</fragment>
+
+	<fragment
+			android:id="@+id/productoDetailFragment"
+			android:name="com.example.axxionsystem.ui.product.detail.ProductoDetailFragment"
+			tools:layout="@layout/fragment_producto_detail">
+		<argument
+				android:name="productoId"
+				app:argType="integer" />
+
 	</fragment>
 
 	<fragment

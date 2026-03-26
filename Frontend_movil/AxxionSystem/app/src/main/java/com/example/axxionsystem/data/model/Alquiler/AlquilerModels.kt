@@ -1,4 +1,4 @@
-package com.example.axxionsystem.data.model
+package com.example.axxionsystem.data.model.Alquiler
 
 import java.math.BigDecimal
 
@@ -44,7 +44,7 @@ data class SolicitudResponse(
     val id: Int,
     val clienteId: Int,
     val fechaSolicitud: String?,
-    val estado: EstadoSolicitud,
+    val estado: com.example.axxionsystem.data.model.EstadoSolicitud,
     val productos: List<Int>,
     val nombreProductoAlternativo: String?,
     val cantidadSolicitada: Int?,
@@ -95,11 +95,11 @@ data class RentaItemResponse(
 data class RentaResponse(
     val id: Int,
     val clienteId: Int,
-    val estado: EstadoRenta,
+    val estado: com.example.axxionsystem.data.model.EstadoRenta,
     val fechaInicio: String?,
     val fechaFinPrevista: String?,
     val fechaDevolucionReal: String?,
-    val items: List<RentaItemResponse>
+    val items: List<com.example.axxionsystem.data.model.RentaItemResponse>
 )
 
 // ─── Entrega ─────────────────────────────────────────
@@ -122,10 +122,10 @@ data class EntregaFirmaRequest(
     val fechaEnvio: String? = null,
     val companiaEnvio: String? = null,
     val numeroGuia: String? = null,
-    val estadoEntrega: EstadoEntrega? = null,
+    val estadoEntrega: com.example.axxionsystem.data.model.EstadoEntrega? = null,
     val firmaDigital: String? = null,
     val notas: String? = null,
-    val condicionesSalida: List<CondicionItemRequest>? = emptyList()
+    val condicionesSalida: List<com.example.axxionsystem.data.model.CondicionItemRequest>? = emptyList()
 )
 
 /**
@@ -135,7 +135,7 @@ data class EntregaResponse(
     val id: Int,
     val rentaId: Int,
     val direccionId: Int,
-    val estado: EstadoEntrega,
+    val estado: com.example.axxionsystem.data.model.EstadoEntrega,
     val fechaEnvio: String?,
     val notas: String?
 )
@@ -149,11 +149,11 @@ data class DevolucionFirmaRequest(
     val rentaId: Int,
     val fechaDevolucionProgramada: String? = null,
     val fechaDevolucionReal: String? = null,
-    val estadoDevolucion: EstadoDevolucion? = null,
+    val estadoDevolucion: com.example.axxionsystem.data.model.EstadoDevolucion? = null,
     val personaRecibe: String? = null,
     val firmaDigital: String? = null,
     val notasGenerales: String? = null,
-    val condicionesRegreso: List<CondicionItemRequest>? = emptyList()
+    val condicionesRegreso: List<com.example.axxionsystem.data.model.CondicionItemRequest>? = emptyList()
 )
 
 /**
@@ -162,7 +162,7 @@ data class DevolucionFirmaRequest(
 data class DevolucionResponse(
     val id: Int,
     val rentaId: Int,
-    val estado: EstadoDevolucion,
+    val estado: com.example.axxionsystem.data.model.EstadoDevolucion,
     val fechaDevolucionReal: String?,
     val notasGenerales: String?
 )

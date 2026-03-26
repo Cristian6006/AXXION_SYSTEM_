@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.axxionsystem.data.model.AlquilerItem
-import com.example.axxionsystem.data.model.RentaResponse
-import com.example.axxionsystem.data.model.SolicitudCreateRequest
-import com.example.axxionsystem.data.model.EntregaFirmaRequest
-import com.example.axxionsystem.data.model.DevolucionFirmaRequest
+import com.example.axxionsystem.data.model.Alquiler.AlquilerItem
+import com.example.axxionsystem.data.model.Alquiler.RentaResponse
+import com.example.axxionsystem.data.model.Alquiler.SolicitudCreateRequest
+import com.example.axxionsystem.data.model.Alquiler.EntregaFirmaRequest
+import com.example.axxionsystem.data.model.Alquiler.DevolucionFirmaRequest
 import com.example.axxionsystem.data.repository.AlquilerRepository
 import kotlinx.coroutines.launch
 

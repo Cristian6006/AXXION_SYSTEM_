@@ -49,57 +49,59 @@ class HomeFragment: Fragment() {
 
         homeViewModel.fetchUserProfile()
         setupMorphingMenu()
-        setupNavigation()
+        setupLogout()
     }
 
-    private fun setupNavigation() {
-        binding.cardAlquiler.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_alquilerFragment)
+    private fun setupLogout() {
+        binding.btnLogout.setOnClickListener {
+            homeViewModel.logoutBackend()
+            sessionManager.clearSession()
+            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
     }
 
     private fun setupMorphingMenu() {
-        // 1. Cuando el usuario toca el FAB Redondo (Abrir Menú)
         binding.fabMenu.setOnClickListener {
-            // Preparamos la animación Morph
             val transform = MaterialContainerTransform().apply {
                 startView = binding.fabMenu
                 endView = binding.cardFloatingMenu
-                addTarget(binding.cardFloatingMenu) // Hacia dónde vamos
-                scrimColor = android.graphics.Color.TRANSPARENT // Sin fondo oscuro detrás
-                duration = 350L // 350 milisegundos se ve muy fluido
+                addTarget(binding.cardFloatingMenu)
+                scrimColor = android.graphics.Color.TRANSPARENT
+                duration = 350L
             }
 
-            // Iniciamos la transición en el contenedor principal
             TransitionManager.beginDelayedTransition(binding.root as ViewGroup, transform)
 
-            // Intercambiamos la visibilidad (Esto dispara la animación automáticamente)
             binding.fabMenu.visibility = View.GONE
             binding.cardFloatingMenu.visibility = View.VISIBLE
         }
 
-        // 2. Cuando el usuario toca la "X" dentro de la barra (Cerrar Menú)
         binding.btnCloseMenu.setOnClickListener {
-            // Preparamos la animación Inversa
             val transform = MaterialContainerTransform().apply {
                 startView = binding.cardFloatingMenu
                 endView = binding.fabMenu
-                addTarget(binding.fabMenu) // Hacia dónde volvemos
+                addTarget(binding.fabMenu)
                 scrimColor = android.graphics.Color.TRANSPARENT
                 duration = 300L
             }
 
-            // Iniciamos la transición
             TransitionManager.beginDelayedTransition(binding.root as ViewGroup, transform)
 
-            // Intercambiamos la visibilidad al revés
             binding.cardFloatingMenu.visibility = View.GONE
             binding.fabMenu.visibility = View.VISIBLE
         }
 
         binding.btnOption1.setOnClickListener {
-            // Hacer algo y luego cerrar el menú
             binding.btnCloseMenu.performClick()
+            findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+        }
+
+        binding.cardInventory.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_productoList)
+        }
+
+        binding.cardAlquiler.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_alquilerFragment)
         }
     }
 

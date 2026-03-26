@@ -1,5 +1,7 @@
 package com.example.axxionsystem.data.model.auth
 
+import com.example.axxionsystem.data.local.entity.UserEntity
+
 /**
  * Modelos (DTOs) usados por la capa de red/autenticacion.
  *
@@ -25,3 +27,15 @@ data class UserProfileResponse(
     val email: String,
     val roles: List<String>
 )
+
+fun UserProfileResponse.toEntity(): UserEntity {
+    val rolLimpio = this.roles.firstOrNull()?.replace("ROLE_", "") ?: "USUARIO"
+
+    return UserEntity(
+        localId = 1,
+        serverId = this.id,
+        nombre = this.nombre,
+        email = this.email,
+        rol = rolLimpio
+    )
+}

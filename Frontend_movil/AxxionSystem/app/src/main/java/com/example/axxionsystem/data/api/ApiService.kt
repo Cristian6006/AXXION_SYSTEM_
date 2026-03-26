@@ -7,10 +7,29 @@ package com.example.axxionsystem.data.api
  * - Autenticación: login, perfil, refresh token, logout
  * - Alquiler: solicitudes, rentas, firmas de entrega y devolución
  */
-import com.example.axxionsystem.data.model.*
+import com.example.axxionsystem.data.model.Alquiler.DevolucionFirmaRequest
+import com.example.axxionsystem.data.model.Alquiler.DevolucionResponse
+import com.example.axxionsystem.data.model.Alquiler.EntregaFirmaRequest
+import com.example.axxionsystem.data.model.Alquiler.EntregaResponse
+import com.example.axxionsystem.data.model.Alquiler.RentaCreateRequest
+import com.example.axxionsystem.data.model.Alquiler.RentaResponse
+import com.example.axxionsystem.data.model.Alquiler.SolicitudCreateRequest
+import com.example.axxionsystem.data.model.Alquiler.SolicitudResponse
+import com.example.axxionsystem.data.model.auth.AuthResponse
+import com.example.axxionsystem.data.model.auth.ForgotPasswordRequest
+import com.example.axxionsystem.data.model.auth.LoginRequest
+import com.example.axxionsystem.data.model.auth.ResetPasswordRequest
+import com.example.axxionsystem.data.model.auth.UserProfileResponse
+import com.example.axxionsystem.data.model.producto.ProductoEntity
+import com.example.axxionsystem.data.model.producto.UpdateEstadoRequest
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.PATCH
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -30,6 +49,20 @@ interface ApiService {
     @POST("api/auth/logout")
     suspend fun logout(): Response<Any>
 
+    @POST("/api/auth/olvido-contraseña")
+    suspend fun requestPasswordRecovery(@Body request: ForgotPasswordRequest): Response<Unit>
+
+    @POST("/api/auth/resetear-contraseña")
+    suspend fun resetPassword(@Body request: ResetPasswordRequest): Response<Unit>
+
+    @GET("api/productos")
+    suspend fun getProductos(): Response<List<ProductoEntity>>
+
+    @PATCH("api/productos/{id}/estado")
+    suspend fun updateEstadoProducto(
+        @Path("id") id: Int,
+        @Body request: UpdateEstadoRequest
+    ): Response<ProductoEntity>
     // ═══════════════════════════════════════════════════════
     // ALQUILER - SOLICITUDES
     // ═══════════════════════════════════════════════════════
