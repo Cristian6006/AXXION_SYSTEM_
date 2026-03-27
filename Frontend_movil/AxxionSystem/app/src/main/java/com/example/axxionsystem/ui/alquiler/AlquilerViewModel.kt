@@ -12,75 +12,57 @@ import com.example.axxionsystem.data.model.Alquiler.DevolucionFirmaRequest
 import com.example.axxionsystem.data.repository.AlquilerRepository
 import kotlinx.coroutines.launch
 
-/**
- * ViewModel de Alquiler.
- *
- * Orquesta llamadas al [AlquilerRepository] usando coroutines, y expone resultados
- * via LiveData para que la UI (Fragment) reaccione a:
- * - Estados de carga (isLoading)
- * - Listas de solicitudes y rentas
- * - Resultados de operaciones (crear, firmar)
- * - Errores para mostrar al usuario
- *
- * Mantiene el estado de la vista independientes de la rotación de pantalla.
- */
 class AlquilerViewModel(private val repository: AlquilerRepository) : ViewModel() {
 
-    // ═══════════════════════════════════════════════════════
-    // ESTADO DE CARGA
-    // ═══════════════════════════════════════════════════════
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    // ═══════════════════════════════════════════════════════
-    // SOLICITUDES
-    // ═══════════════════════════════════════════════════════
-    private val _solicitudes = MutableLiveData<List<AlquilerItem>>()
-    val solicitudes: LiveData<List<AlquilerItem>> = _solicitudes
+    private val _items = MutableLiveData<List<AlquilerItem>>()
+    val items: LiveData<List<AlquilerItem>> = _items
+
+    private var originalItems = listOf<AlquilerItem>()
+    private var listaRentasCompleta = mutableListOf<RentaResponse>()
 
     private val _solicitudCreateResult = MutableLiveData<Result<Int>>()
     val solicitudCreateResult: LiveData<Result<Int>> = _solicitudCreateResult
 
-    // ═══════════════════════════════════════════════════════
-    // RENTAS
-    // ═══════════════════════════════════════════════════════
-    private val _rentas = MutableLiveData<List<AlquilerItem>>()
-    val rentas: LiveData<List<AlquilerItem>> = _rentas
-
-    // Almacena las rentas originales para acceder a datos completos
-    private var listaRentasCompleta = mutableListOf<RentaResponse>()
-
-    // ═══════════════════════════════════════════════════════
-    // FIRMAS (ENTREGA/DEVOLUCIÓN)
-    // ═══════════════════════════════════════════════════════
     private val _entregaFirmaResult = MutableLiveData<Result<String>>()
     val entregaFirmaResult: LiveData<Result<String>> = _entregaFirmaResult
 
     private val _devolucionFirmaResult = MutableLiveData<Result<String>>()
     val devolucionFirmaResult: LiveData<Result<String>> = _devolucionFirmaResult
 
-    // ═══════════════════════════════════════════════════════
-    // ERRORES
-    // ═══════════════════════════════════════════════════════
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
 
-    // ═══════════════════════════════════════════════════════
-    // MODO DE VISUALIZACIÓN
-    // ═══════════════════════════════════════════════════════
-    // true = mostrando Rentas, false = mostrando Solicitudes
     private val _mostrandoRentas = MutableLiveData<Boolean>(false)
     val mostrandoRentas: LiveData<Boolean> = _mostrandoRentas
 
-    // ═══════════════════════════════════════════════════════
-    // CLIENTE ID ACTUAL
-    // ═══════════════════════════════════════════════════════
-    private var clienteIdActual: Int = 1 // Por defecto
+    private var clienteIdActual: Int = 1
 
     /**
-     * Carga las solicitudes de alquiler del servidor.
+     * Aplica filtros locales a la lista cargada actualmente.
      */
-    fun cargarSolicitudes() {
+    fun aplicarFiltros(query: String?, fecha: String?) {
+        var filtrados = originalItems
+
+        if (!query.isNullOrBlank()) {
+            val q = query.lowercase()
+            filtrados = filtrados.filter {
+                it.nombreProducto?.lowercase()?.contains(q) == true ||
+                it.descripcion?.lowercase()?.contains(q) == true ||
+                it.id.toString().contains(q)
+            }
+        }
+
+        if (!fecha.isNullOrBlank()) {
+            filtrados = filtrados.filter { it.fechaReferencia == fecha }
+        }
+
+        _items.value = filtrados
+    }
+
+    fun cargarSolicitudes(fecha: String? = null) {
         _mostrandoRentas.value = false
         _isLoading.value = true
         _error.value = null
@@ -88,7 +70,8 @@ class AlquilerViewModel(private val repository: AlquilerRepository) : ViewModel(
         viewModelScope.launch {
             val result = repository.getSolicitudes()
             result.onSuccess { lista ->
-                _solicitudes.value = repository.mapSolicitudesToItems(lista)
+                originalItems = repository.mapSolicitudesToItems(lista)
+                _items.value = originalItems
             }.onFailure { exception ->
                 _error.value = exception.message
             }
@@ -96,9 +79,6 @@ class AlquilerViewModel(private val repository: AlquilerRepository) : ViewModel(
         }
     }
 
-    /**
-     * Carga las rentas de un cliente específico.
-     */
     fun cargarRentas(clienteId: Int) {
         clienteIdActual = clienteId
         _mostrandoRentas.value = true
@@ -109,7 +89,8 @@ class AlquilerViewModel(private val repository: AlquilerRepository) : ViewModel(
             val result = repository.getRentasPorCliente(clienteId)
             result.onSuccess { lista ->
                 listaRentasCompleta = lista.toMutableList()
-                _rentas.value = repository.mapRentasToItems(lista)
+                originalItems = repository.mapRentasToItems(lista)
+                _items.value = originalItems
             }.onFailure { exception ->
                 _error.value = exception.message
             }
@@ -117,9 +98,6 @@ class AlquilerViewModel(private val repository: AlquilerRepository) : ViewModel(
         }
     }
 
-    /**
-     * Alterna entre vista de solicitudes y vista de rentas.
-     */
     fun toggleVista(clienteId: Int = clienteIdActual) {
         if (_mostrandoRentas.value == true) {
             cargarSolicitudes()
@@ -128,135 +106,56 @@ class AlquilerViewModel(private val repository: AlquilerRepository) : ViewModel(
         }
     }
 
-    /**
-     * Crea una nueva solicitud de alquiler.
-     */
-    fun crearSolicitud(request: SolicitudCreateRequest) {
-        if (request.clienteId <= 0) {
-            _solicitudCreateResult.value = Result.failure(Exception("El ID de cliente debe ser un número válido"))
-            return
-        }
-
-        _isLoading.value = true
-        _error.value = null
-
-        viewModelScope.launch {
-            val result = repository.crearSolicitud(request)
-            result.onSuccess { response ->
-                _solicitudCreateResult.value = Result.success(response.id)
-                cargarSolicitudes()
-            }.onFailure { exception ->
-                _solicitudCreateResult.value = Result.failure(exception)
-            }
-            _isLoading.value = false
-        }
-    }
-
-    /**
-     * Crea una solicitud con parámetros simples.
-     */
-    fun crearSolicitudSimple(
-        clienteId: Int,
-        cantidad: Int,
-        descripcion: String?,
-        productoAlt: String?
-    ) {
+    fun crearSolicitudSimple(clienteId: Int, cantidad: Int, descripcion: String?, productoAlt: String?) {
         val request = SolicitudCreateRequest(
             clienteId = clienteId,
             cantidadSolicitada = cantidad,
             descripcionNecesidad = descripcion,
             nombreProductoAlternativo = productoAlt
         )
-        crearSolicitud(request)
+        _isLoading.value = true
+        viewModelScope.launch {
+            repository.crearSolicitud(request).onSuccess {
+                _solicitudCreateResult.value = Result.success(it.id)
+                cargarSolicitudes()
+            }.onFailure { _solicitudCreateResult.value = Result.failure(it) }
+            _isLoading.value = false
+        }
     }
 
-    /**
-     * Firma la entrega de una renta.
-     */
     fun firmarEntrega(rentaId: Int, direccionId: Int, firmaDigital: String, notas: String?) {
         _isLoading.value = true
-        _error.value = null
-
-        val request = EntregaFirmaRequest(
-            rentaId = rentaId,
-            direccionId = direccionId,
-            firmaDigital = firmaDigital,
-            notas = notas
-        )
-
+        val request = EntregaFirmaRequest(rentaId = rentaId, direccionId = direccionId, firmaDigital = firmaDigital, notas = notas)
         viewModelScope.launch {
-            val result = repository.firmarEntrega(request)
-            result.onSuccess {
-                _entregaFirmaResult.value = Result.success("Entrega firmada correctamente")
+            repository.firmarEntrega(request).onSuccess {
+                _entregaFirmaResult.value = Result.success("Entrega firmada")
                 cargarRentas(clienteIdActual)
-            }.onFailure { exception ->
-                _entregaFirmaResult.value = Result.failure(exception)
-            }
+            }.onFailure { _entregaFirmaResult.value = Result.failure(it) }
             _isLoading.value = false
         }
     }
 
-    /**
-     * Firma la devolución de una renta.
-     */
-    fun firmarDevolucion(
-        rentaId: Int,
-        firmaDigital: String,
-        personaRecibe: String?,
-        notas: String?
-    ) {
+    fun firmarDevolucion(rentaId: Int, firmaDigital: String, personaRecibe: String?, notas: String?) {
         _isLoading.value = true
-        _error.value = null
-
-        val request = DevolucionFirmaRequest(
-            rentaId = rentaId,
-            firmaDigital = firmaDigital,
-            personaRecibe = personaRecibe,
-            notasGenerales = notas
-        )
-
+        val request = DevolucionFirmaRequest(rentaId = rentaId, firmaDigital = firmaDigital, personaRecibe = personaRecibe, notasGenerales = notas)
         viewModelScope.launch {
-            val result = repository.firmarDevolucion(request)
-            result.onSuccess {
-                _devolucionFirmaResult.value = Result.success("Devolución firmada correctamente")
+            repository.firmarDevolucion(request).onSuccess {
+                _devolucionFirmaResult.value = Result.success("Devolución firmada")
                 cargarRentas(clienteIdActual)
-            }.onFailure { exception ->
-                _devolucionFirmaResult.value = Result.failure(exception)
-            }
+            }.onFailure { _devolucionFirmaResult.value = Result.failure(it) }
             _isLoading.value = false
         }
     }
 
-    /**
-     * Obtiene los datos completos de una renta por posición.
-     */
     fun getRentaPorPosicion(position: Int): RentaResponse? {
-        return if (position >= 0 && position < listaRentasCompleta.size) {
-            listaRentasCompleta[position]
-        } else {
-            null
-        }
+        val currentItems = _items.value ?: return null
+        if (position < 0 || position >= currentItems.size) return null
+        val item = currentItems[position]
+        return listaRentasCompleta.find { it.id == item.id }
     }
 
-    /**
-     * Limpia el mensaje de error después de ser mostrado.
-     */
-    fun clearError() {
-        _error.value = null
-    }
-
-    /**
-     * Limpia los resultados de operaciones.
-     */
-    fun clearCreateResult() {
-        _solicitudCreateResult.value = Result.failure(Exception(""))
-    }
-
-    fun clearEntregaResult() {
-        _entregaFirmaResult.value = Result.failure(Exception(""))
-    }
-
-    fun clearDevolucionResult() {
-        _devolucionFirmaResult.value = Result.failure(Exception(""))
-    }
+    fun clearError() { _error.value = null }
+    fun clearCreateResult() { _solicitudCreateResult.value = Result.failure(Exception("")) }
+    fun clearEntregaResult() { _entregaFirmaResult.value = Result.failure(Exception("")) }
+    fun clearDevolucionResult() { _devolucionFirmaResult.value = Result.failure(Exception("")) }
 }
