@@ -50,14 +50,11 @@ dependencies {
     implementation("com.google.android.material:material:1.13.0")
     implementation("androidx.activity:activity:1.13.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.1")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.9.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.9.7")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
-    implementation("androidx.biometric:biometric:1.1.0")
-    implementation("com.facebook.shimmer:shimmer:0.5.0")
 
     // RETROFIT & OKHTTP
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
@@ -94,10 +91,5 @@ dependencies {
     //noinspection GradleDependency
     ksp("androidx.room:room-compiler:$roomVersion")
 
-}
 
-configurations.all {
-    resolutionStrategy {
-        force("com.google.android.material:material:1.13.0")
-    }
 }

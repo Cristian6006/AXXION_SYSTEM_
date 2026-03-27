@@ -53,7 +53,7 @@ class AlquilerFragment : Fragment() {
         configurarBotones()
         observarEstados()
         viewModel.cargarSolicitudes()
-    }
+    }p
 
     private fun inicializarVistas(view: View) {
         progressBar = view.findViewById(R.id.progressBarAlquiler)
