@@ -38,18 +38,84 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitulo" />
 
-        <!-- Botones de acción en una tarjeta Material -->
+        <!-- Barra de Filtros -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardFiltros"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/axxion_card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/axxion_input_stroke"
+            app:strokeWidth="1dp"
+            app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilFiltroNombre"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Filtrar por nombre o categoría"
+                    app:startIconDrawable="@drawable/ic_search"
+                    app:endIconMode="clear_text">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFiltroNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/white" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFiltroFecha"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Por Fecha"
+                        app:icon="@drawable/ic_calendar"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="4dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnLimpiarFiltros"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Limpiar"
+                        android:textColor="@color/axxion_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botones de acción -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardBotones"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="12dp"
             app:cardBackgroundColor="@color/axxion_card"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:strokeColor="@color/axxion_input_stroke"
             app:strokeWidth="1dp"
-            app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+            app:layout_constraintTop_toBottomOf="@id/cardFiltros"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
             
@@ -57,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="12dp">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnNuevaSolicitud"
@@ -110,7 +176,7 @@
             android:id="@+id/tvEmptyAlquiler"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📋 No hay solicitudes de alquiler"
+            android:text="📋 No hay resultados con los filtros aplicados"
             android:textSize="16sp"
             android:textColor="@color/axxion_text_muted"
             android:visibility="gone"

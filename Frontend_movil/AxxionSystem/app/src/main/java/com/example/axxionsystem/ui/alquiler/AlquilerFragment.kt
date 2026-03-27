@@ -1,7 +1,10 @@
 package com.example.axxionsystem.ui.alquiler
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,79 +21,40 @@ import com.example.axxionsystem.data.model.Alquiler.AlquilerItem
 import com.example.axxionsystem.data.model.Alquiler.RentaResponse
 import com.google.android.material.textfield.TextInputEditText
 import com.example.axxionsystem.ui.alquiler.adapter.AlquilerAdapter
+import com.google.android.material.textfield.TextInputLayout
+import java.util.Calendar
 
-/**
- * Fragment de Alquiler - VERSIÓN MVVM.
- *
- * Este fragment gestiona las operaciones relacionadas con el alquiler de maquinaria.
- * Implementa el patrón MVVM separando la lógica de negocio en [AlquilerViewModel]
- * y el acceso a datos en el repositorio.
- *
- * Funcionalidades:
- * - Creación y visualización de solicitudes de alquiler
- * - Visualización de las rentas activas de un cliente
- * - Firma digital de procesos de Entrega y Devolución
- *
- * El Fragment ahora es solo "vista": observa el estado del ViewModel y responde a cambios.
- */
 class AlquilerFragment : Fragment() {
 
-    // ═══════════════════════════════════════════════════════
-    // VISTAS
-    // ═══════════════════════════════════════════════════════
     private lateinit var progressBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnVolver: Button
     private lateinit var btnNueva: Button
     private lateinit var btnMisRentas: Button
     private lateinit var tvEmpty: TextView
+    private lateinit var etFiltroNombre: TextInputEditText
+    private lateinit var btnFiltroFecha: Button
+    private lateinit var btnLimpiarFiltros: Button
 
-    // ═══════════════════════════════════════════════════════
-    // VIEWMODEL
-    // ═══════════════════════════════════════════════════════
     private lateinit var viewModel: AlquilerViewModel
-
-    // ═══════════════════════════════════════════════════════
-    // ADAPTER
-    // ═══════════════════════════════════════════════════════
     private var adapter: AlquilerAdapter? = null
-
-    // ID del cliente (hardcoded para compatibilidad)
     private val clienteIdDefault = 1
+    private var fechaFiltro: String? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_alquiler, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Inicializar vistas
         inicializarVistas(view)
-
-        // Inicializar ViewModel
         inicializarViewModel()
-
-        // Configurar RecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        // Configurar listeners
+        configurarFiltros()
         configurarBotones()
-
-        // Observar estados del ViewModel
         observarEstados()
-
-        // Cargar datos iniciales
         viewModel.cargarSolicitudes()
-    }
+    }p
 
-    /**
-     * Inicializa las referencias a las vistas del layout.
-     */
     private fun inicializarVistas(view: View) {
         progressBar = view.findViewById(R.id.progressBarAlquiler)
         recyclerView = view.findViewById(R.id.recyclerAlquiler)
@@ -98,177 +62,103 @@ class AlquilerFragment : Fragment() {
         btnNueva = view.findViewById(R.id.btnNuevaSolicitud)
         btnMisRentas = view.findViewById(R.id.btnMisRentas)
         tvEmpty = view.findViewById(R.id.tvEmptyAlquiler)
+        etFiltroNombre = view.findViewById(R.id.etFiltroNombre)
+        btnFiltroFecha = view.findViewById(R.id.btnFiltroFecha)
+        btnLimpiarFiltros = view.findViewById(R.id.btnLimpiarFiltros)
+        
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    /**
-     * Inicializa el ViewModel usando la Factory.
-     */
     private fun inicializarViewModel() {
         val factory = AlquilerViewModelFactory(requireContext())
         viewModel = ViewModelProvider(this, factory)[AlquilerViewModel::class.java]
     }
 
-    /**
-     * Configura los listeners de los botones.
-     */
-    private fun configurarBotones() {
-        // Botón volver - navega al fragment anterior
-        btnVolver.setOnClickListener {
-            parentFragmentManager.popBackStack()
+    private fun configurarFiltros() {
+        etFiltroNombre.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.aplicarFiltros(s?.toString(), fechaFiltro)
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        btnFiltroFecha.setOnClickListener {
+            val c = Calendar.getInstance()
+            DatePickerDialog(requireContext(), { _, year, month, day ->
+                val mes = String.format("%02d", month + 1)
+                val dia = String.format("%02d", day)
+                fechaFiltro = "$year-$mes-$dia"
+                btnFiltroFecha.text = "📅 $fechaFiltro"
+                viewModel.aplicarFiltros(etFiltroNombre.text?.toString(), fechaFiltro)
+            }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH)).show()
         }
 
-        // Botón nueva solicitud
-        btnNueva.setOnClickListener {
-            mostrarDialogoNuevaSolicitud()
-        }
-
-        // Botón mis rentas - alterna entre vistas
-        btnMisRentas.setOnClickListener {
-            viewModel.toggleVista(clienteIdDefault)
+        btnLimpiarFiltros.setOnClickListener {
+            etFiltroNombre.setText("")
+            fechaFiltro = null
+            btnFiltroFecha.text = "Por Fecha"
+            viewModel.aplicarFiltros(null, null)
         }
     }
 
-    /**
-     * Observa los estados del ViewModel y actualiza la UI.
-     */
+    private fun configurarBotones() {
+        btnVolver.setOnClickListener { parentFragmentManager.popBackStack() }
+        btnNueva.setOnClickListener { mostrarDialogoNuevaSolicitud() }
+        btnMisRentas.setOnClickListener { viewModel.toggleVista(clienteIdDefault) }
+    }
+
     private fun observarEstados() {
-        // Estado de carga
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
-
-        // Errores
-        viewModel.error.observe(viewLifecycleOwner) { mensajeError ->
-            mensajeError?.let {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
-                viewModel.clearError()
-            }
+        viewModel.error.observe(viewLifecycleOwner) { msg ->
+            msg?.let { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show(); viewModel.clearError() }
         }
-
-        // Modo de visualización
-        viewModel.mostrandoRentas.observe(viewLifecycleOwner) { mostrandoRentas ->
-            btnMisRentas.text = if (mostrandoRentas) {
-                "📋 Ver Solicitudes"
+        viewModel.mostrandoRentas.observe(viewLifecycleOwner) { rentas ->
+            btnMisRentas.text = if (rentas) "📋 Ver Solicitudes" else "📦 Ver mis Rentas"
+        }
+        viewModel.items.observe(viewLifecycleOwner) { items ->
+            if (items.isEmpty()) {
+                tvEmpty.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
             } else {
-                "📦 Ver mis Rentas"
-            }
-        }
-
-        // Lista de Solicitudes
-        viewModel.solicitudes.observe(viewLifecycleOwner) { solicitudes ->
-            mostrarLista(solicitudes, emptyList())
-        }
-
-        // Lista de Rentas
-        viewModel.rentas.observe(viewLifecycleOwner) { rentas ->
-            mostrarLista(rentas, rentas)
-        }
-
-        // Resultado de crear solicitud
-        viewModel.solicitudCreateResult.observe(viewLifecycleOwner) { result ->
-            result.onSuccess { id ->
-                Toast.makeText(requireContext(), "✅ Solicitud creada: #$id", Toast.LENGTH_SHORT).show()
-                viewModel.clearCreateResult()
-            }.onFailure { error ->
-                if (error.message?.isNotEmpty() == true) {
-                    Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+                tvEmpty.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+                if (adapter == null) {
+                    adapter = AlquilerAdapter(items) { pos ->
+                        if (viewModel.mostrandoRentas.value == true) {
+                            viewModel.getRentaPorPosicion(pos)?.let { mostrarOpcionesRenta(it) }
+                        }
+                    }
+                    recyclerView.adapter = adapter
+                } else {
+                    adapter?.updateData(items)
                 }
-                viewModel.clearCreateResult()
             }
         }
-
-        // Resultado de firma de entrega
-        viewModel.entregaFirmaResult.observe(viewLifecycleOwner) { result ->
-            result.onSuccess { mensaje ->
-                Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show()
-                viewModel.clearEntregaResult()
-            }.onFailure { error ->
-                if (error.message?.isNotEmpty() == true) {
-                    Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_SHORT).show()
-                }
-                viewModel.clearEntregaResult()
-            }
-        }
-
-        // Resultado de firma de devolución
-        viewModel.devolucionFirmaResult.observe(viewLifecycleOwner) { result ->
-            result.onSuccess { mensaje ->
-                Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show()
-                viewModel.clearDevolucionResult()
-            }.onFailure { error ->
-                if (error.message?.isNotEmpty() == true) {
-                    Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_SHORT).show()
-                }
-                viewModel.clearDevolucionResult()
-            }
-        }
+        viewModel.solicitudCreateResult.observe(viewLifecycleOwner) { it.onSuccess {
+            Toast.makeText(requireContext(), "✅ Creada: #$it", Toast.LENGTH_SHORT).show()
+            viewModel.clearCreateResult()
+        } }
     }
 
-    /**
-     * Muestra la lista de items en el RecyclerView.
-     */
-    private fun mostrarLista(items: List<AlquilerItem>, listaRentas: List<AlquilerItem>) {
-        if (items.isEmpty()) {
-            tvEmpty.visibility = View.VISIBLE
-            tvEmpty.text = if (viewModel.mostrandoRentas.value == true) {
-                "📦 No hay rentals activos"
-            } else {
-                "📋 No hay solicitudes de alquiler"
-            }
-            recyclerView.visibility = View.GONE
-        } else {
-            tvEmpty.visibility = View.GONE
-            recyclerView.visibility = View.VISIBLE
-
-            adapter = AlquilerAdapter(items) { position ->
-                if (viewModel.mostrandoRentas.value == true) {
-                    val renta = viewModel.getRentaPorPosicion(position)
-                    renta?.let { mostrarOpcionesRenta(it) }
-                }
-            }
-            recyclerView.adapter = adapter
-        }
-    }
-
-    /**
-     * Muestra el diálogo para crear una nueva solicitud.
-     */
     private fun mostrarDialogoNuevaSolicitud() {
-        val dialogView = LayoutInflater.from(requireContext())
-            .inflate(R.layout.dialog_nueva_solicitud, null)
-
-        val inputClienteId = dialogView.findViewById<TextInputEditText>(R.id.inputClienteId)
-        val inputCantidad = dialogView.findViewById<TextInputEditText>(R.id.inputCantidad)
-        val inputDescripcion = dialogView.findViewById<TextInputEditText>(R.id.inputDescripcion)
-        val inputProductoAlt = dialogView.findViewById<TextInputEditText>(R.id.inputProductoAlt)
-
-        inputCantidad.setText("1")
-        inputClienteId.setText(clienteIdDefault.toString())
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_nueva_solicitud, null)
+        val inCant = dialogView.findViewById<TextInputEditText>(R.id.inputCantidad)
+        val inDesc = dialogView.findViewById<TextInputEditText>(R.id.inputDescripcion)
+        val inProd = dialogView.findViewById<TextInputEditText>(R.id.inputProductoAlt)
+        inCant.setText("1")
 
         AlertDialog.Builder(requireContext(), R.style.Theme_AxxionSystem_Dialog)
-            .setTitle("Nueva Solicitud de Alquiler")
+            .setTitle("Nueva Solicitud")
             .setView(dialogView)
-            .setPositiveButton("Crear Solicitud") { _, _ ->
-                val clienteId = inputClienteId.text.toString().toIntOrNull()
-                if (clienteId == null || clienteId <= 0) {
-                    Toast.makeText(requireContext(), "ID de cliente inválido", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-
-                viewModel.crearSolicitudSimple(
-                    clienteId = clienteId,
-                    cantidad = inputCantidad.text.toString().toIntOrNull() ?: 1,
-                    descripcion = inputDescripcion.text.toString().ifBlank { null },
-                    productoAlt = inputProductoAlt.text.toString().ifBlank { null }
-                )
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
+            .setPositiveButton("Crear") { _, _ ->
+                viewModel.crearSolicitudSimple(clienteIdDefault, inCant.text.toString().toIntOrNull() ?: 1,
+                    inDesc.text.toString(), inProd.text.toString())
+            }.setNegativeButton("Cancelar", null).show()
     }
 
-    /**
-     * Muestra las opciones disponibles para una renta.
-     */
     private fun mostrarOpcionesRenta(renta: RentaResponse) {
         val opciones = arrayOf("✍️ Firmar Entrega", "↩️ Firmar Devolución", "Cerrar")
         AlertDialog.Builder(requireContext(), R.style.Theme_AxxionSystem_Dialog)
@@ -278,74 +168,28 @@ class AlquilerFragment : Fragment() {
                     0 -> mostrarDialogoFirmaEntrega(renta)
                     1 -> mostrarDialogoFirmaDevolucion(renta)
                 }
-            }
-            .show()
+            }.show()
     }
 
-    /**
-     * Muestra el diálogo para firmar la entrega.
-     */
     private fun mostrarDialogoFirmaEntrega(renta: RentaResponse) {
-        val dialogView = LayoutInflater.from(requireContext())
-            .inflate(R.layout.dialog_firma_entrega, null)
-
-        val tvRentaId = dialogView.findViewById<TextView>(R.id.tvRentaId)
-        val inputDireccionId = dialogView.findViewById<TextInputEditText>(R.id.inputDireccionId)
-        val inputFirma = dialogView.findViewById<TextInputEditText>(R.id.inputFirma)
-        val inputNotas = dialogView.findViewById<TextInputEditText>(R.id.inputNotas)
-
-        tvRentaId.text = "Renta #${renta.id}"
-        inputDireccionId.setText("1")
-
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_firma_entrega, null)
+        val inFirma = view.findViewById<TextInputEditText>(R.id.inputFirma)
         AlertDialog.Builder(requireContext(), R.style.Theme_AxxionSystem_Dialog)
             .setTitle("Firmar Entrega")
-            .setView(dialogView)
+            .setView(view)
             .setPositiveButton("Firmar") { _, _ ->
-                val dirId = inputDireccionId.text.toString().toIntOrNull() ?: 1
-                val firma = inputFirma.text.toString()
-                val notas = inputNotas.text.toString().ifBlank { null }
-
-                if (firma.isBlank()) {
-                    Toast.makeText(requireContext(), "La firma es obligatoria", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-
-                viewModel.firmarEntrega(renta.id, dirId, firma, notas)
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
+                viewModel.firmarEntrega(renta.id, 1, inFirma.text.toString(), null)
+            }.setNegativeButton("Cancelar", null).show()
     }
 
-    /**
-     * Muestra el diálogo para firmar la devolución.
-     */
     private fun mostrarDialogoFirmaDevolucion(renta: RentaResponse) {
-        val dialogView = LayoutInflater.from(requireContext())
-            .inflate(R.layout.dialog_firma_devolucion, null)
-
-        val tvRentaId = dialogView.findViewById<TextView>(R.id.tvRentaId)
-        val inputFirma = dialogView.findViewById<TextInputEditText>(R.id.inputFirma)
-        val inputRecibe = dialogView.findViewById<TextInputEditText>(R.id.inputRecibe)
-        val inputNotas = dialogView.findViewById<TextInputEditText>(R.id.inputNotas)
-
-        tvRentaId.text = "Renta #${renta.id}"
-
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_firma_devolucion, null)
+        val inFirma = view.findViewById<TextInputEditText>(R.id.inputFirma)
         AlertDialog.Builder(requireContext(), R.style.Theme_AxxionSystem_Dialog)
             .setTitle("Firmar Devolución")
-            .setView(dialogView)
+            .setView(view)
             .setPositiveButton("Firmar") { _, _ ->
-                val firma = inputFirma.text.toString()
-                val recibe = inputRecibe.text.toString().ifBlank { null }
-                val notas = inputNotas.text.toString().ifBlank { null }
-
-                if (firma.isBlank()) {
-                    Toast.makeText(requireContext(), "La firma es obligatoria", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-
-                viewModel.firmarDevolucion(renta.id, firma, recibe, notas)
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
+                viewModel.firmarDevolucion(renta.id, inFirma.text.toString(), null, null)
+            }.setNegativeButton("Cancelar", null).show()
     }
 }
