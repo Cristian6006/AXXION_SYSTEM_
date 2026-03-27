@@ -47,15 +47,14 @@ class ProductosAdapter(
             val context = binding.root.context
 
             val colorRes = when (estado) {
-                "DISPONIBLE" -> R.color.axxion_secondary // Azul claro
-                "RENTADO" -> R.color.axxion_primary // Azul fuerte
-                "EN_REPARACION" -> R.color.axxion_text_muted // Gris/Muted
-                else -> R.color.axxion_input_stroke // Borde neutro
+                "DISPONIBLE" -> R.color.axxion_secondary
+                "RENTADO" -> R.color.axxion_primary
+                "EN_REPARACION" -> R.color.axxion_text_muted
+                else -> R.color.axxion_input_stroke
             }
 
             binding.tvEstado.setBackgroundColor(ContextCompat.getColor(context, colorRes))
 
-            // Si el fondo es muy claro, ponemos el texto oscuro para contraste
             if (estado == "DISPONIBLE") {
                 binding.tvEstado.setTextColor(ContextCompat.getColor(context, R.color.axxion_background))
             } else {
@@ -67,12 +66,10 @@ class ProductosAdapter(
 
     companion object DiffCallback : DiffUtil.ItemCallback<ProductoEntity>() {
         override fun areItemsTheSame(oldItem: ProductoEntity, newItem: ProductoEntity): Boolean {
-            // Comparamos por ID único (Referencia)
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: ProductoEntity, newItem: ProductoEntity): Boolean {
-            // Comparamos todo el contenido del Data Class (Contenido)
             return oldItem == newItem
         }
     }

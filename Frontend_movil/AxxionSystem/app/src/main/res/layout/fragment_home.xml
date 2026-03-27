@@ -91,13 +91,13 @@
 						<ImageView
 								android:layout_width="32dp"
 								android:layout_height="32dp"
-								android:src="@drawable/ic_android"
+								android:src="@drawable/ic_product"
 								app:tint="@color/axxion_primary" />
 						<TextView
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_marginTop="8dp"
-								android:text="Módulo 1"
+								android:text="Productos"
 								android:textColor="@color/white"
 								android:textStyle="bold"/>
 					</LinearLayout>
@@ -184,9 +184,9 @@
 			<com.google.android.material.button.MaterialButton
 					android:id="@+id/btnCloseMenu"
 					style="@style/Widget.Material3.Button.IconButton"
-					android:layout_width="48dp"
-					android:layout_height="48dp"
-					app:icon="@drawable/ic_android"
+					android:layout_width="68dp"
+					android:layout_height="68dp"
+					app:icon="@drawable/ic_close"
 			app:iconTint="@color/axxion_text_muted" />
 			
 			

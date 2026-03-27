@@ -99,6 +99,10 @@ class HomeFragment: Fragment() {
         binding.cardInventory.setOnClickListener {
             findNavController().navigate(R.id.action_home_to_productoList)
         }
+
+        binding.cardAlquiler.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_alquilerFragment)
+        }
     }
 
     override fun onDestroyView() {
