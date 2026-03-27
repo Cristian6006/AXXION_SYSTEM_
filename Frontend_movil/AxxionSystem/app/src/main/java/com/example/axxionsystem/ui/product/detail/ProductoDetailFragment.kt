@@ -44,6 +44,10 @@ class ProductoDetailFragment : Fragment(R.layout.fragment_producto_detail) {
         setupListeners()
         observeUiState()
         viewModel.getProductoById(args.productoId)
+
+        binding.btnVolverDetail.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     private fun setupViewModel() {
@@ -99,7 +103,10 @@ class ProductoDetailFragment : Fragment(R.layout.fragment_producto_detail) {
                 binding.progressBar.visibility = View.GONE
                 val p = state.producto
                 binding.tvNombre.text = p.nombre
-                binding.tvMarcaModelo.text = "${p.marca} ${p.modelo}"
+                binding.tvMarcaModelo.text = p.marca
+                binding.tvModelo.text = p.modelo
+                binding.tvNumeroSerie.text = p.numeroSerie
+                binding.tvValor.text = p.valorActual.toString()
                 binding.etNotas.setText(p.notas)
             }
             is ProductoDetailUiState.Error -> {
