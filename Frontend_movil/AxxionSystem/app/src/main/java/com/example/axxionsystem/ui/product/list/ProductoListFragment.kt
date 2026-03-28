@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -41,6 +42,10 @@ class ProductoListFragment : Fragment(R.layout.fragment_producto_list) {
         setupRecyclerView()
         setupListeners()
         observeUiState()
+
+        binding.btnVolverProducto.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     private fun setupViewModel() {

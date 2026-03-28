@@ -69,6 +69,13 @@
 		<action
 				android:id="@+id/action_list_to_detail"
 				app:destination="@id/productoDetailFragment" />
+
+		<action
+				android:id="@+id/action_list_to_home"
+				app:destination="@id/homeFragment"
+				app:popUpTo="@id/homeFragment"
+				app:popUpToInclusive="false"/>/>
+
 	</fragment>
 
 	<fragment
@@ -78,6 +85,10 @@
 		<argument
 				android:name="productoId"
 				app:argType="integer" />
+
+		<action
+				android:id="@+id/action_detail_to_list"
+				app:destination="@id/productoListFragment" />
 
 	</fragment>
 
