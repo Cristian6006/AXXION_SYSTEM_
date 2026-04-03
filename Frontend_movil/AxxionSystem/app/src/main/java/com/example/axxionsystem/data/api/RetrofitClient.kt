@@ -37,7 +37,7 @@ object RetrofitClient {
             }
 
             val delayInterceptor = Interceptor { chain ->
-                Thread.sleep(2000) // Retrasa la petición 2 segundos
+                Thread.sleep(1000)
                 chain.proceed(chain.request())
             }
 

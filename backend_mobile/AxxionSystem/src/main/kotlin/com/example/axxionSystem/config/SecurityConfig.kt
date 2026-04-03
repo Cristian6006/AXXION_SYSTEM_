@@ -62,9 +62,8 @@ class SecurityConfig {
     }
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
+    fun passwordEncoder(): PasswordEncoder =
+        BCryptPasswordEncoder(BCryptPasswordEncoder.BCryptVersion.`$2Y`)
 
     @Bean
     fun authenticationManager(config: AuthenticationConfiguration): AuthenticationManager {
