@@ -34,7 +34,7 @@ class HomeViewModel(private val repository: AuthRepository) : ViewModel() {
                     _uiState.value = HomeUiState.Error("No se pudo cargar el perfil (${response.code()})")
                 }
             } catch (e: Exception) {
-                _uiState.value = HomeUiState.Error("Error de red: Verifica tu conexión")
+                _uiState.value = HomeUiState.Error("Error de red: Verifica tu conexion")
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.axxionSystem.service
 
+import com.example.axxionSystem.dto.BiometricDeviceStatusResponse
 import com.example.axxionSystem.dto.BiometricRegisterRequest
 import com.example.axxionSystem.model.DispositivoBiometrico
 import com.example.axxionSystem.repository.DispositivoBiometricoRepository
@@ -14,6 +15,14 @@ class BiometriaService {
 
     @Autowired lateinit var dispositivoRepository: DispositivoBiometricoRepository
     @Autowired lateinit var userRepository: UserRepository
+
+    fun verificarDispositivoRegistrado(deviceId: String): BiometricDeviceStatusResponse {
+        val registered = dispositivoRepository.existsByDeviceId(deviceId)
+        return BiometricDeviceStatusResponse(
+            registered = registered,
+            deviceId = deviceId
+        )
+    }
 
     fun registrarDispositivo(request: BiometricRegisterRequest) {
 

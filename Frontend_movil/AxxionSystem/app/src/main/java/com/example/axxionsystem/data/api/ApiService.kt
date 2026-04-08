@@ -16,6 +16,10 @@ import com.example.axxionsystem.data.model.Alquiler.RentaResponse
 import com.example.axxionsystem.data.model.Alquiler.SolicitudCreateRequest
 import com.example.axxionsystem.data.model.Alquiler.SolicitudResponse
 import com.example.axxionsystem.data.model.auth.AuthResponse
+import com.example.axxionsystem.data.model.auth.BiometricLoginRequest
+import com.example.axxionsystem.data.model.auth.BiometricRegisterRequest
+import com.example.axxionsystem.data.model.auth.BiometricVerifyRequest
+import com.example.axxionsystem.data.model.auth.BiometricVerifyResponse
 import com.example.axxionsystem.data.model.auth.ForgotPasswordRequest
 import com.example.axxionsystem.data.model.auth.LoginRequest
 import com.example.axxionsystem.data.model.auth.ResetPasswordRequest
@@ -55,6 +59,19 @@ interface ApiService {
     @POST("/api/auth/resetear-contraseña")
     suspend fun resetPassword(@Body request: ResetPasswordRequest): Response<Unit>
 
+    @POST("api/auth/verificar")
+    suspend fun verifyDevice(@Body request: BiometricVerifyRequest): BiometricVerifyResponse
+
+    @POST("api/biometria/registrar")
+    suspend fun registerBiometric(@Body request: BiometricRegisterRequest)
+
+    @POST("api/auth/login-biometrico")
+    suspend fun loginBiometric(@Body request: BiometricLoginRequest): Response<AuthResponse>
+
+    // ═══════════════════════════════════════════════════════
+    // Productos
+    // ═══════════════════════════════════════════════════════
+
     @GET("api/productos")
     suspend fun getProductos(): Response<List<ProductoEntity>>
 
@@ -63,6 +80,7 @@ interface ApiService {
         @Path("id") id: Int,
         @Body request: UpdateEstadoRequest
     ): Response<ProductoEntity>
+
     // ═══════════════════════════════════════════════════════
     // ALQUILER - SOLICITUDES
     // ═══════════════════════════════════════════════════════

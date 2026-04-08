@@ -12,13 +12,13 @@
 			android:layout_height="match_parent"
 			android:clipToPadding="false"
 			android:paddingBottom="100dp">
-		
+
 		<androidx.constraintlayout.widget.ConstraintLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:padding="24dp">
-			
-			
+				android:padding="24dp" android:layout_marginTop="22dp">
+
+
 			<TextView
 					android:id="@+id/tvAppName"
 					android:layout_width="0dp"
@@ -30,9 +30,9 @@
 					android:letterSpacing="0.05"
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintEnd_toStartOf="@id/btnLogout"
-					app:layout_constraintTop_toTopOf="parent" />
-			
-			
+					app:layout_constraintTop_toTopOf="parent"/>
+
+
 			<TextView
 					android:id="@+id/tvSubtitle"
 					android:layout_width="0dp"
@@ -43,9 +43,9 @@
 					android:textSize="14sp"
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintEnd_toStartOf="@id/btnLogout"
-					app:layout_constraintTop_toBottomOf="@id/tvAppName" />
-			
-			
+					app:layout_constraintTop_toBottomOf="@id/tvAppName"/>
+
+
 			<com.google.android.material.button.MaterialButton
 					android:id="@+id/btnLogout"
 					style="@style/Widget.Material3.Button.IconButton"
@@ -56,8 +56,8 @@
 					app:layout_constraintTop_toTopOf="parent"
 					app:layout_constraintBottom_toBottomOf="@id/tvSubtitle"
 					app:iconTint="@android:color/holo_red_dark"/>
-			
-			
+
+
 			<GridLayout
 					android:id="@+id/gridModules"
 					android:layout_width="match_parent"
@@ -68,7 +68,7 @@
 					android:alignmentMode="alignMargins"
 					android:columnOrderPreserved="false"
 					app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
-				
+
 
 				<com.google.android.material.card.MaterialCardView
 						android:id="@+id/cardInventory"
@@ -81,8 +81,8 @@
 						app:cardElevation="0dp"
 						app:strokeColor="@color/axxion_input_stroke"
 						app:strokeWidth="1dp">
-					
-					
+
+
 					<LinearLayout
 							android:layout_width="match_parent"
 							android:layout_height="match_parent"
@@ -92,7 +92,7 @@
 								android:layout_width="32dp"
 								android:layout_height="32dp"
 								android:src="@drawable/ic_product"
-								app:tint="@color/axxion_primary" />
+								app:tint="@color/axxion_primary"/>
 						<TextView
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
 								android:textStyle="bold"/>
 					</LinearLayout>
 				</com.google.android.material.card.MaterialCardView>
-				
+
 				<!-- TARJETA DE ALQUILER -->
 				<com.google.android.material.card.MaterialCardView
 						android:id="@+id/cardAlquiler"
@@ -115,7 +115,7 @@
 						app:cardElevation="0dp"
 						app:strokeColor="@color/axxion_input_stroke"
 						app:strokeWidth="1dp">
-					
+
 					<LinearLayout
 							android:layout_width="match_parent"
 							android:layout_height="match_parent"
@@ -125,7 +125,7 @@
 								android:layout_width="32dp"
 								android:layout_height="32dp"
 								android:src="@drawable/ic_android"
-								app:tint="@color/axxion_primary" />
+								app:tint="@color/axxion_primary"/>
 						<TextView
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
 					</LinearLayout>
 				</com.google.android.material.card.MaterialCardView>
 			</GridLayout>
-		
+
 		</androidx.constraintlayout.widget.ConstraintLayout>
 	</androidx.core.widget.NestedScrollView>
 	

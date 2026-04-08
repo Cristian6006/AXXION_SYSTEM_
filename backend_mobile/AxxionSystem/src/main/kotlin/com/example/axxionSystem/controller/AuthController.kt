@@ -1,5 +1,8 @@
 package com.example.axxionSystem.controller
 
+import com.example.axxionSystem.dto.BiometricDeviceStatusRequest
+import com.example.axxionSystem.dto.BiometricDeviceStatusResponse
+import com.example.axxionSystem.service.BiometriaService
 import com.example.axxionSystem.dto.BiometricLoginRequest
 import com.example.axxionSystem.dto.ForgotPasswordRequest
 import com.example.axxionSystem.dto.LoginRequest
@@ -27,6 +30,7 @@ class AuthController {
 
     @Autowired lateinit var authService: AuthService
     @Autowired lateinit var userRepository: UserRepository
+    @Autowired lateinit var biometriaService: BiometriaService
 
     @PostMapping("/olvido-contraseña")
     fun forgotPassword(@Valid @RequestBody request: ForgotPasswordRequest): ResponseEntity<Any> {
@@ -138,5 +142,11 @@ class AuthController {
         response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString())
 
         return ResponseEntity.ok(mapOf("mensaje" to "Sesion cerrada exitosamente"))
+    }
+
+    @PostMapping("/verificar")
+    fun verificarDispositivo(@Valid @RequestBody request: BiometricDeviceStatusRequest): ResponseEntity<BiometricDeviceStatusResponse> {
+        val result = biometriaService.verificarDispositivoRegistrado(request.deviceId)
+        return ResponseEntity.ok(result)
     }
 }
