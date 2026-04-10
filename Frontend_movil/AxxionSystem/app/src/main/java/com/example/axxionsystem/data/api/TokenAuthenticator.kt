@@ -3,7 +3,7 @@ package com.example.axxionsystem.data.api
 /**
  * Authenticator de OkHttp para renovar el token automaticamente.
  *
- * Cuando el servidor responde 401/403 (dependiendo del backend), intenta llamar
+ * Cuando el servidor responde 401, intenta llamar
  * al endpoint de refresh de forma sincrona. Si obtiene un nuevo access token,
  * lo guarda en [SessionManager] y reintenta el request original con el header
  * `Authorization` actualizado. Si falla, limpia la sesion.

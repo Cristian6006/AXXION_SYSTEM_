@@ -54,7 +54,7 @@ export const useMaintenanceStore = defineStore('maintenance', () => {
       if (!maintenance.fecha_inicio) return false;
       const maintenanceDate = new Date(maintenance.fecha_inicio);
       return maintenanceDate >= today && maintenanceDate <= nextWeek &&
-             (maintenance.estado_mantenimiento === 'Programado' || maintenance.estado_mantenimiento === 'EnProceso');
+            (maintenance.estado_mantenimiento === 'Programado' || maintenance.estado_mantenimiento === 'EnProceso');
     });
   });
 

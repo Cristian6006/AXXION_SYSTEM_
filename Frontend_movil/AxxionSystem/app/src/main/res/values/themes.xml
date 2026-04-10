@@ -17,7 +17,7 @@
 	<style name="Theme.AxxionSystem" parent="Base.Theme.AxxionSystem"/>
 
 	<!-- Dialog theme for Alquiler -->
-	<style name="Theme.AxxionSystem.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+	<style name="Theme.AxxionSystem.Dialog">
 		<item name="colorPrimary">@color/axxion_primary</item>
 		<item name="colorOnPrimary">@color/white</item>
 		<item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.AxxionSystem.Body.Text</item>

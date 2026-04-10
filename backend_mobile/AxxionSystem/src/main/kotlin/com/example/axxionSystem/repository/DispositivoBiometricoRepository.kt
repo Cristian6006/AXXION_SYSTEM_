@@ -9,4 +9,6 @@ import java.util.Optional
 interface DispositivoBiometricoRepository: JpaRepository<DispositivoBiometrico, Long> {
 
     fun findByDeviceId(deviceId: String): Optional<DispositivoBiometrico>
+
+    fun existsByDeviceId(deviceId: String): Boolean
 }

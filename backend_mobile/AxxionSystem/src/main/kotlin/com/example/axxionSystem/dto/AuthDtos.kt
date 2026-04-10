@@ -106,3 +106,13 @@ data class BiometricLoginRequest(
 
     val timestamp: Long
 )
+
+data class BiometricDeviceStatusRequest(
+    @field:NotBlank(message = "El ID del dispositivo es obligatorio")
+    val deviceId: String
+)
+
+data class BiometricDeviceStatusResponse(
+    val registered: Boolean,
+    val deviceId: String
+)

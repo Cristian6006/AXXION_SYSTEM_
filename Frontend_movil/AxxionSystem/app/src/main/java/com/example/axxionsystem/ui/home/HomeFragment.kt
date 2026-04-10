@@ -6,12 +6,16 @@ package com.example.axxionsystem.ui.home
  * Carga el perfil del usuario para mostrar saludo y rol, y permite cerrar
  * sesion (logout en backend + limpieza local + navegacion a Login).
  */
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionManager
 import com.example.axxionsystem.R
@@ -20,6 +24,8 @@ import com.example.axxionsystem.data.repository.auth.AuthRepository
 import com.example.axxionsystem.databinding.FragmentHomeBinding
 import com.example.axxionsystem.util.SessionManager
 import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class HomeFragment: Fragment() {
 
@@ -28,6 +34,7 @@ class HomeFragment: Fragment() {
     private lateinit var sessionManager: SessionManager
 
     private lateinit var homeViewModel: HomeViewModel
+    private var lastErrorMessage: String? = null
 
 
     override fun onCreateView(
@@ -37,6 +44,7 @@ class HomeFragment: Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,6 +54,33 @@ class HomeFragment: Fragment() {
         val repository = AuthRepository(apiService)
         val factory = HomeViewModelFactory(repository)
         homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.uiState.collect { state ->
+                    when (state) {
+                        is HomeUiState.Loading -> {
+                            binding.tvSubtitle.text = "Cargando tus datos..."
+                        }
+
+                        is HomeUiState.Success -> {
+                            val perfil = state.perfil
+                            val rol = perfil.roles.firstOrNull()?.replace("ROLE_", "") ?: "USUARIO"
+                            binding.tvSubtitle.text = "Hola, ${perfil.nombre} ($rol)"
+                            lastErrorMessage = null
+                        }
+
+                        is HomeUiState.Error -> {
+                            binding.tvSubtitle.text = state.message
+                            if (lastErrorMessage != state.message) {
+                                Snackbar.make(binding.root, state.message, Snackbar.LENGTH_LONG).show()
+                                lastErrorMessage = state.message
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         homeViewModel.fetchUserProfile()
         setupMorphingMenu()

@@ -28,8 +28,20 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Registra un nuevo usuario en el sistema.
-     * Encripta la contraseña y asigna roles.
+     * Registro
+     *
+     * Crea un nuevo usuario en el sistema.
+     *
+     * @unauthenticated
+     *
+     * @bodyParam nombre            string required Nombre completo. Example: Juan Pérez
+     * @bodyParam email             string required Email único. Example: juan@correo.com
+     * @bodyParam password          string required Mínimo 8 caracteres. Example: secret123
+     *
+     * @response 201 {
+     *   'message' => 'Usuario creado correctamente',
+            'data' => $usuario
+     * }
      */
     public function store(Request $request)
     {
@@ -126,10 +138,7 @@ class UsuarioController extends Controller
             }
 
             // Si llegamos aquí, la autenticación fue exitosa
-            $user = auth('api')->user();
-
-            // Cargar los roles completos con sus relaciones
-            $user->load('roles');
+            $user = Usuario::with('roles')->findOrFail(auth('api')->id());
 
             return response()->json([
                 'token' => $token,
@@ -238,7 +247,13 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Cierra la sesión del usuario invalidando su token.
+     * Logout
+     *
+     * Revoca el token actual del usuario autenticado.
+     *
+     * @response 200 {
+     *   "message": "Logged out successfully"
+     * }
      */
     public function logout(){
         JWTAuth::invalidate(JWTAuth::getToken());

@@ -10,12 +10,16 @@ package com.example.axxionsystem.util
  *
  * Tambien permite limpiar toda la sesion con [clearSession].
  */
+import android.annotation.SuppressLint
 import android.content.Context
+import android.provider.Settings
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import androidx.core.content.edit
 
 class SessionManager(context: Context) {
+
+    private val KEY_BIOMETRIC_ENABLED = "IS_BIOMETRIC_ENABLED"
 
     // Crear una llave maestra en el hardware del celular (Keystore)
     private val masterKey = MasterKey.Builder(context)
@@ -52,12 +56,23 @@ class SessionManager(context: Context) {
         return sharedPreferences.getString("USER_ROLE", null)
     }
 
-    fun getDeviceId(): String? {
-        return sharedPreferences.getString("DEVICE_ID", null)
-    }
 
 
     fun clearSession() {
         sharedPreferences.edit { clear() }
+    }
+
+
+    @SuppressLint("HardwareIds")
+    fun getDeviceId(context: Context): String {
+        return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+    }
+
+    fun setBiometricEnabled(isEnabled: Boolean) {
+        sharedPreferences.edit().putBoolean(KEY_BIOMETRIC_ENABLED, isEnabled).apply()
+    }
+
+    fun isBiometricEnabled(): Boolean {
+        return sharedPreferences.getBoolean(KEY_BIOMETRIC_ENABLED, false)
     }
 }

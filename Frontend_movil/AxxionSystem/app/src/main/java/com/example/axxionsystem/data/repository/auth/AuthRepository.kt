@@ -2,9 +2,14 @@ package com.example.axxionsystem.data.repository.auth
 
 import com.example.axxionsystem.data.api.ApiService
 import com.example.axxionsystem.data.model.auth.AuthResponse
+import com.example.axxionsystem.data.model.auth.BiometricLoginRequest
+import com.example.axxionsystem.data.model.auth.BiometricRegisterRequest
+import com.example.axxionsystem.data.model.auth.BiometricVerifyRequest
+import com.example.axxionsystem.data.model.auth.BiometricVerifyResponse
 import com.example.axxionsystem.data.model.auth.ForgotPasswordRequest
 import com.example.axxionsystem.data.model.auth.LoginRequest
 import com.example.axxionsystem.data.model.auth.ResetPasswordRequest
+import com.example.axxionsystem.util.SessionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -18,6 +23,8 @@ import java.io.IOException
  */
 
 class AuthRepository(private val apiService: ApiService) {
+
+    private lateinit var sessionManager: SessionManager
 
     suspend fun login(request: LoginRequest): Response<AuthResponse> {
         return apiService.login(request)
@@ -56,6 +63,33 @@ class AuthRepository(private val apiService: ApiService) {
             } catch(e: Exception) {
                 Result.failure(Exception("Ocurrio un error"))
             }
+        }
+    }
+
+    suspend fun verifyBiometricStatus(deviceId: String): Result<BiometricVerifyResponse> {
+        return try {
+            val response = apiService.verifyDevice(BiometricVerifyRequest(deviceId))
+            Result.success(response)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun registerBiometric(deviceId: String, publicKey: String): Result<Unit> {
+        return try {
+            apiService.registerBiometric(BiometricRegisterRequest(deviceId, publicKey))
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun loginBiometric(deviceId: String, timestamp: Long, signature: String): Result<Response<AuthResponse>> {
+        return try {
+            val response = apiService.loginBiometric(BiometricLoginRequest(deviceId, timestamp, signature))
+            Result.success(response)
+        } catch (e: Exception) {
+            Result.failure(e)
         }
     }
 }
