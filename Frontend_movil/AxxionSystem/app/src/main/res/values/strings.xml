@@ -16,6 +16,19 @@
 	<string name="estado_finalizado">Finalizado</string>
 	<string name="estado_cancelado">Cancelado</string>
 
+	<!-- Strings para Mantenimiento -->
+	<string name="actualizar_mantenimiento">Actualizar mantenimiento</string>
+	<string name="eliminar_mantenimiento">Eliminar/Cancelar mantenimiento</string>
+	<string name="mantenimiento_title">Mantenimiento</string>
+	<string name="mantenimiento_subtitle">Gestión de solicitudes de mantenimiento</string>
+	<string name="nueva_solicitud">Nueva Solicitud</string>
+	<string name="no_hay_mantenimientos">No hay solicitudes de mantenimiento</string>
+	<string name="mantenimiento_id">Mantenimiento #</string>
+	<string name="estado_en_revision">En Revisión</string>
+	<string name="estado_en_proceso">En Proceso</string>
+	<string name="estado_finalizado">Finalizado</string>
+	<string name="estado_cancelado">Cancelado</string>
+
 	<string-array name="estados_producto">
 		<item>DISPONIBLE</item>
 		<item>RENTADO</item>
