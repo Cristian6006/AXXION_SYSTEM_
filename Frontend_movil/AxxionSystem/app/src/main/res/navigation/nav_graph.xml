@@ -94,4 +94,18 @@
 				app:popUpToInclusive="false"/>
 	</fragment>
 
+	<!-- Fragment para Gestión de Mantenimientos -->
+	<fragment
+			android:id="@+id/mantenimientoFragment"
+			android:name="com.example.axxionsystem.ui.mantenimiento.MantenimientoFragment"
+			android:label="Mantenimiento"
+			tools:layout="@layout/fragment_mantenimiento">
+
+		<action
+				android:id="@+id/action_mantenimientoFragment_to_homeFragment"
+				app:destination="@id/homeFragment"
+				app:popUpTo="@id/homeFragment"
+				app:popUpToInclusive="false"/>
+	</fragment>
+
 </navigation>

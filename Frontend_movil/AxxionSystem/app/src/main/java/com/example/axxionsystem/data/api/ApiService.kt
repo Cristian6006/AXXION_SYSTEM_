@@ -26,6 +26,7 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -129,4 +130,34 @@ interface ApiService {
     suspend fun firmarDevolucion(
         @Body request: DevolucionFirmaRequest
     ): Response<DevolucionResponse>
+
+    // ═══════════════════════════════════════════════════════
+    // MANTENIMIENTO
+    // ═══════════════════════════════════════════════════════
+
+    /**
+     * Crea una nueva solicitud de mantenimiento.
+     */
+    @POST("/api/mantenimiento/solicitudes")
+    suspend fun crearSolicitudMantenimiento(
+        @Body request: com.example.axxionsystem.data.model.mantenimiento.MantenimientoCreateRequest
+    ): Response<com.example.axxionsystem.data.model.mantenimiento.MantenimientoResponse>
+
+    /**
+     * Consulta las solicitudes de mantenimiento.
+     * @param responsable Filtrar por responsable (opcional)
+     */
+    @GET("/api/mantenimiento/solicitudes")
+    suspend fun consultarSolicitudesMantenimiento(
+        @Query("responsable") responsable: String? = null
+    ): Response<List<com.example.axxionsystem.data.model.mantenimiento.MantenimientoResponse>>
+
+    /**
+     * Actualiza una solicitud de mantenimiento.
+     */
+    @PUT("/api/mantenimiento/solicitudes/{id}")
+    suspend fun actualizarSolicitudMantenimiento(
+        @Path("id") id: Int,
+        @Body request: com.example.axxionsystem.data.model.mantenimiento.MantenimientoUpdateRequest
+    ): Response<com.example.axxionsystem.data.model.mantenimiento.MantenimientoResponse>
 }
