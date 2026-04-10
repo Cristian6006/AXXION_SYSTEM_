@@ -4,6 +4,8 @@ import com.example.axxionsystem.data.model.auth.UserProfileResponse
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.axxionsystem.data.repository.auth.AuthRepository
+import com.example.axxionsystem.data.repository.home.DashboardRepository
+import com.example.axxionsystem.ui.home.summary.KpiUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,11 +17,16 @@ sealed class HomeUiState {
     data class Error(val message: String) : HomeUiState()
 }
 
-class HomeViewModel(private val repository: AuthRepository) : ViewModel() {
+class HomeViewModel(private val repository: AuthRepository, private val repositoryKpi: DashboardRepository) : ViewModel() {
 
-
+    private val _uiStateKpi = MutableStateFlow<KpiUiState>(KpiUiState.Loading)
+    val uiStateKpi: StateFlow<KpiUiState> = _uiStateKpi.asStateFlow()
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+
+    init {
+        fetchKpis()
+    }
 
     fun fetchUserProfile() {
         _uiState.value = HomeUiState.Loading
@@ -47,4 +54,18 @@ class HomeViewModel(private val repository: AuthRepository) : ViewModel() {
             }
         }
     }
+
+    private fun fetchKpis() {
+        viewModelScope.launch {
+            _uiStateKpi.value = KpiUiState.Loading
+
+            try {
+                val result = repositoryKpi.getDashboardKpis()
+                _uiStateKpi.value = KpiUiState.Success(result)
+            } catch (e: Exception) {
+                _uiStateKpi.value = KpiUiState.Error("Error al cargar datos")
+            }
+        }
+    }
+
 }

@@ -56,6 +56,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
     implementation("androidx.biometric:biometric:1.1.0")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 
     // RETROFIT & OKHTTP
     implementation("com.squareup.retrofit2:retrofit:3.0.0")

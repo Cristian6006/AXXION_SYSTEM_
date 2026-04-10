@@ -26,6 +26,7 @@ import com.example.axxionsystem.data.model.auth.ResetPasswordRequest
 import com.example.axxionsystem.data.model.auth.UserProfileResponse
 import com.example.axxionsystem.data.model.producto.ProductoEntity
 import com.example.axxionsystem.data.model.producto.UpdateEstadoRequest
+import com.example.axxionsystem.data.model.resumen.ResumenResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -36,6 +37,13 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+
+    // ═══════════════════════════════════════════════════════
+    // Resumen
+    // ═══════════════════════════════════════════════════════
+
+    @GET("/api/resumen")
+    suspend fun getResumen(): Response<ResumenResponse>
 
     // ═══════════════════════════════════════════════════════
     // AUTENTICACIÓN
