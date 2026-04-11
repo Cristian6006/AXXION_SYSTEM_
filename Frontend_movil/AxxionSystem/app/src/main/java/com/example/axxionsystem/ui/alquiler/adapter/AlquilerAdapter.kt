@@ -13,10 +13,9 @@ import com.example.axxionsystem.data.model.Alquiler.AlquilerItem
 
 /**
  * Adapter personalizado para mostrar solicitudes y rentas de alquiler
- * con un diseño UI/UX mejorado usando tarjetas Material Design.
  */
 class AlquilerAdapter(
-    private val items: List<AlquilerItem>,
+    private var items: List<AlquilerItem>,
     private val onItemClick: ((Int) -> Unit)? = null
 ) : RecyclerView.Adapter<AlquilerAdapter.VH>() {
 
@@ -24,9 +23,11 @@ class AlquilerAdapter(
         val tvTipo: TextView = view.findViewById(R.id.tvTipo)
         val tvEstado: TextView = view.findViewById(R.id.tvEstado)
         val tvId: TextView = view.findViewById(R.id.tvId)
+        val tvFechaItem: TextView = view.findViewById(R.id.tvFechaItem)
         val layoutSolicitud: LinearLayout = view.findViewById(R.id.layoutSolicitud)
         val tvClienteId: TextView = view.findViewById(R.id.tvClienteId)
         val tvCantidad: TextView = view.findViewById(R.id.tvCantidad)
+        val tvProductoNombre: TextView = view.findViewById(R.id.tvProductoNombre)
         val layoutRenta: LinearLayout = view.findViewById(R.id.layoutRenta)
         val tvFechaInicio: TextView = view.findViewById(R.id.tvFechaInicio)
         val tvFechaFin: TextView = view.findViewById(R.id.tvFechaFin)
@@ -43,21 +44,21 @@ class AlquilerAdapter(
         return VH(view)
     }
 
+    fun updateData(newItems: List<AlquilerItem>) {
+        this.items = newItems
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = items[position]
 
-        // Configurar tipo (Solicitud o Renta)
         holder.tvTipo.text = if (item.tipo == AlquilerItem.TipoItem.SOLICITUD) "SOLICITUD" else "RENTA"
+        holder.tvId.text = if (item.tipo == AlquilerItem.TipoItem.SOLICITUD) "Solicitud #${item.id}" else "Renta #${item.id}"
+        holder.tvFechaItem.text = item.fechaReferencia ?: ""
 
-        // Configurar ID
-        val tipoPrefix = if (item.tipo == AlquilerItem.TipoItem.SOLICITUD) "Solicitud" else "Renta"
-        holder.tvId.text = "$tipoPrefix #${item.id}"
-
-        // Configurar estado con color dinámico
         holder.tvEstado.text = item.estado
         holder.tvEstado.background = createEstadoBackground(item.estado)
 
-        // Mostrar según tipo
         when (item.tipo) {
             AlquilerItem.TipoItem.SOLICITUD -> {
                 holder.layoutSolicitud.visibility = View.VISIBLE
@@ -66,8 +67,8 @@ class AlquilerAdapter(
 
                 holder.tvClienteId.text = "#${item.clienteId}"
                 holder.tvCantidad.text = "${item.cantidad ?: 1} unidad${if ((item.cantidad ?: 1) > 1) "es" else ""}"
+                holder.tvProductoNombre.text = item.nombreProducto ?: "Producto genérico"
 
-                // Mostrar descripción si existe
                 if (!item.descripcion.isNullOrBlank()) {
                     holder.layoutDescripcion.visibility = View.VISIBLE
                     holder.tvDescripcion.text = item.descripcion
@@ -87,30 +88,20 @@ class AlquilerAdapter(
             }
         }
 
-        // Mostrar acciones solo para rentas
         holder.layoutAcciones.visibility = if (item.mostrarAcciones) View.VISIBLE else View.GONE
-
-        // Click listener
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(position)
-        }
+        holder.itemView.setOnClickListener { onItemClick?.invoke(position) }
     }
 
     override fun getItemCount() = items.size
 
-    /**
-     * Crea un background con color basado en el estado.
-     */
     private fun createEstadoBackground(estado: String): GradientDrawable {
         val color = when (estado.uppercase()) {
-            "PENDIENTE", "EN_PROCESO", "EN_REVISION" -> Color.parseColor("#FF9800") // Naranja
-            "APROBADA", "APROBADO", "ACTIVA", "CONFIRMADA" -> Color.parseColor("#4CAF50") // Verde
-            "RECHAZADA", "RECHAZADO", "CANCELADA", "CANCELADO" -> Color.parseColor("#F44336") // Rojo
-            "COMPLETADA", "FINALIZADA" -> Color.parseColor("#2196F3") // Azul
-            "ENTREGADA" -> Color.parseColor("#9C27B0") // Púrpura
-            else -> Color.parseColor("#607D8B") // Gris por defecto
+            "PENDIENTE", "EN_PROCESO", "NUEVA" -> Color.parseColor("#FF9800")
+            "APROBADA", "ACTIVA", "EN_CURSO" -> Color.parseColor("#4CAF50")
+            "RECHAZADA", "CANCELADA" -> Color.parseColor("#F44336")
+            "COMPLETADA", "FINALIZADA" -> Color.parseColor("#2196F3")
+            else -> Color.parseColor("#607D8B")
         }
-
         return GradientDrawable().apply {
             setColor(color)
             cornerRadius = 12f
