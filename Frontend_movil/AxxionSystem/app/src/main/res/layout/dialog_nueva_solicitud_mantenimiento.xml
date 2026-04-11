@@ -6,6 +6,26 @@
     android:orientation="vertical"
     android:padding="24dp">
 
+    <!-- Selector de Productos -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilProducto"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Seleccionar Producto *"
+        app:boxStrokeColor="@color/axxion_primary"
+        app:hintTextColor="@color/axxion_primary"
+        app:endIconMode="dropdown_menu">
+
+        <AutoCompleteTextView
+            android:id="@+id/inputProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:completionThreshold="0" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <!-- ID del Inventario (Requerido) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilInventarioId"

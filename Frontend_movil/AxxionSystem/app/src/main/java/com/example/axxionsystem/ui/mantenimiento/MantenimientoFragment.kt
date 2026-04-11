@@ -102,7 +102,7 @@ class MantenimientoFragment : Fragment() {
 
     private fun setupListeners() {
         binding.btnNuevaSolicitud.setOnClickListener {
-            val dialog = NuevaSolicitudMantenimientoDialogFragment { desc, fecha, estado, resp ->
+            val dialog = NuevaSolicitudMantenimientoDialogFragment { desc, fecha, estado, resp, productoId ->
                 viewModel.crearMantenimiento(desc, fecha, estado, resp)
             }
             dialog.show(parentFragmentManager, "NuevaSolicitudDialog")

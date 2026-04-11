@@ -10,7 +10,7 @@ import java.security.Key
 import java.util.Date
 
 @Component
-class JwtUtil {
+class -JwtUtil {
 
     @Value("\${jwt.secret}")
     lateinit var secretKey: String

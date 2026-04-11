@@ -1,20 +1,17 @@
 <resources>
 	<string name="app_name">AxxionSystem</string>
-    <string name="axxion_system">AXXION SYSTEM</string>
-	<string name="cargando_tus_datos">Cargando tus datos...</string>
+	<string name="app_name_display">AXXION SYSTEM</string>
+	<string name="loading_data">Cargando tus datos...</string>
 
-	<!-- Strings para Mantenimiento -->
-	<string name="actualizar_mantenimiento">Actualizar mantenimiento</string>
-	<string name="eliminar_mantenimiento">Eliminar/Cancelar mantenimiento</string>
-	<string name="mantenimiento_title">Mantenimiento</string>
-	<string name="mantenimiento_subtitle">Gestión de solicitudes de mantenimiento</string>
-	<string name="nueva_solicitud">Nueva Solicitud</string>
-	<string name="no_hay_mantenimientos">No hay solicitudes de mantenimiento</string>
-	<string name="mantenimiento_id">Mantenimiento #</string>
-	<string name="estado_en_revision">En Revisión</string>
-	<string name="estado_en_proceso">En Proceso</string>
-	<string name="estado_finalizado">Finalizado</string>
-	<string name="estado_cancelado">Cancelado</string>
+	<!-- Módulos -->
+	<string name="module_products">Productos</string>
+	<string name="module_rentals">Alquileres</string>
+	<string name="module_maintenance">Mantenimiento</string>
+
+	<!-- Accesibilidad -->
+	<string name="desc_logout">Cerrar sesión</string>
+	<string name="desc_expand_menu">Menú Expandible</string>
+	<string name="desc_close_menu">Cerrar menú</string>
 
 	<!-- Strings para Mantenimiento -->
 	<string name="actualizar_mantenimiento">Actualizar mantenimiento</string>
