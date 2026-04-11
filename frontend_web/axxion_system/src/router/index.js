@@ -14,6 +14,7 @@ import ReportMaintenances from '@/views/ReportMaintenances.vue'
 import ReportAlquiler from '@/views/ReportAlquiler.vue'
 import Rental from '@/views/Rental.vue'
 import Alerts from '@/views/Alerts.vue'
+import Solicitudes from '@/views/Solicitudes.vue'
 
 const routes = [
   {
@@ -131,6 +132,15 @@ const routes = [
     meta: {
       requiresAuth: true,
       title: 'Reporte de Alertas',
+    },
+  },
+  {
+    path: '/Solicitudes',
+    name: 'Solicitudes',
+    component: Solicitudes,
+    meta: {
+      requiresAuth: true,
+      title: 'Gestión de Solicitudes',
     },
   },
   {

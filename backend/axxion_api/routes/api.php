@@ -21,10 +21,11 @@ use App\Http\Controllers\Api\InventarioItemController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ReporteMantController;
 use App\Http\Controllers\Api\ReportUserController;
+use App\Http\Controllers\Api\SolicitudController;
 
 
 /**
- * ANALOGÍA: Este archivo actúa como el 'Mapa de Rutas' o el 'Directorio Telefónico' de la API. 
+ * ANALOGÍA: Este archivo actúa como el 'Mapa de Rutas' o el 'Directorio Telefónico' de la API.
  * Define qué URLs están disponibles y a qué controlador (operador) se debe dirigir cada llamada.
  */
 
@@ -272,9 +273,10 @@ Route::middleware(['jwt'])->group(function () {
     // SOLICITUDES (requiere autenticación)
     // Gestión de solicitudes iniciales de clientes.
     // ============================================
-    Route::get('/solicitud', [App\Http\Controllers\Api\SolicitudController::class, 'index']);
-    Route::get('/solicitud/{id}', [App\Http\Controllers\Api\SolicitudController::class, 'show']);
-    Route::post('/solicitud', [App\Http\Controllers\Api\SolicitudController::class, 'store']);
+    Route::get('/solicitud', [SolicitudController::class, 'index']);
+    Route::get('/solicitud/{id}', [SolicitudController::class, 'show']);
+    Route::post('/solicitud', [SolicitudController::class, 'store']);
+    Route::post('/solicitud/{id}/convert-to-rental', [SolicitudController::class, 'convertToRental']);
 
 
 });

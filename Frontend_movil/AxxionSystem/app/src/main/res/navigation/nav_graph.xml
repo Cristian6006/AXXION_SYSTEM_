@@ -47,6 +47,10 @@
 		<action
 				android:id="@+id/action_homeFragment_to_alquilerFragment"
 				app:destination="@id/alquilerFragment"/>
+
+		<action
+				android:id="@+id/action_homeFragment_to_mantenimientoFragment"
+				app:destination="@id/mantenimientoFragment"/>
 	</fragment>
 	
 	<fragment

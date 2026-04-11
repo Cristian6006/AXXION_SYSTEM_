@@ -6,6 +6,31 @@
   <component name="ChangeListManager">
     <list default="true" id="3329dcbe-dd5f-400c-a53c-6661a39554b5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/9.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/java/com/example/axxionsystem/ui/home/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/java/com/example/axxionsystem/ui/home/HomeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/java/com/example/axxionsystem/ui/mantenimiento/MantenimientoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/java/com/example/axxionsystem/ui/mantenimiento/MantenimientoFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/java/com/example/axxionsystem/ui/mantenimiento/NuevaSolicitudMantenimientoDialogFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/java/com/example/axxionsystem/ui/mantenimiento/NuevaSolicitudMantenimientoDialogFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/layout/dialog_nueva_solicitud.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/layout/dialog_nueva_solicitud.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/layout/dialog_nueva_solicitud_mantenimiento.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/layout/dialog_nueva_solicitud_mantenimiento.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/navigation/nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/navigation/nav_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend_movil/AxxionSystem/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/axxion_api/app/Http/Controllers/Api/SolicitudController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/axxion_api/app/Http/Controllers/Api/SolicitudController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/axxion_api/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/axxion_api/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/util/JwtUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/kotlin/com/example/axxionSystem/util/JwtUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend_mobile/AxxionSystem/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/src/components/SideBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/src/components/SideBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/src/services/SolicitudService.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/src/services/SolicitudService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/src/views/Inventory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/src/views/Inventory.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend_web/axxion_system/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend_web/axxion_system/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +41,9 @@
     <persistenceIdMap>
       <entry key="_/etc/apache2/sites-available/axxion/AXXION_SYSTEM_" value="3AFqP2U1YsRK6N30vFiEVWcw49K" />
     </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedChatMode">
+    <option name="chatModeId" value="Agent" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -52,32 +80,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;Spring Boot.AxxionSystemApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;DEV__julian&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/etc/apache2/sites-available/axxion/AXXION_SYSTEM_&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.AxxionSystemApplication.executor": "Run",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "DEV__julian",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/etc/apache2/sites-available/axxion/AXXION_SYSTEM_",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.android.studio.ml.templates",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="AxxionSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="AxxionSystem" />
@@ -90,8 +120,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.32098.37" />
       </set>
     </attachedChunks>
   </component>

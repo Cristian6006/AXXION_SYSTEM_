@@ -1,5 +1,17 @@
 <resources>
 	<string name="app_name">AxxionSystem</string>
+	<string name="app_name_display">AXXION SYSTEM</string>
+	<string name="loading_data">Cargando tus datos...</string>
+
+	<!-- Módulos -->
+	<string name="module_products">Productos</string>
+	<string name="module_rentals">Alquileres</string>
+	<string name="module_maintenance">Mantenimiento</string>
+
+	<!-- Accesibilidad -->
+	<string name="desc_logout">Cerrar sesión</string>
+	<string name="desc_expand_menu">Menú Expandible</string>
+	<string name="desc_close_menu">Cerrar menú</string>
 
 	<!-- Strings para Mantenimiento -->
 	<string name="actualizar_mantenimiento">Actualizar mantenimiento</string>

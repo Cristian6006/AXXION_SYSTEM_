@@ -23,8 +23,8 @@ import com.example.axxionsystem.data.api.RetrofitClient
 import com.example.axxionsystem.data.repository.auth.AuthRepository
 import com.example.axxionsystem.databinding.FragmentHomeBinding
 import com.example.axxionsystem.util.SessionManager
-import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialContainerTransform
 import kotlinx.coroutines.launch
 
 class HomeFragment: Fragment() {
@@ -60,7 +60,7 @@ class HomeFragment: Fragment() {
                 homeViewModel.uiState.collect { state ->
                     when (state) {
                         is HomeUiState.Loading -> {
-                            binding.tvSubtitle.text = "Cargando tus datos..."
+                            binding.tvSubtitle.text = getString(R.string.loading_data)
                         }
 
                         is HomeUiState.Success -> {
@@ -83,6 +83,7 @@ class HomeFragment: Fragment() {
         }
 
         homeViewModel.fetchUserProfile()
+        setupModuleCards()
         setupMorphingMenu()
         setupLogout()
     }
@@ -95,6 +96,30 @@ class HomeFragment: Fragment() {
         }
     }
 
+    /**
+     * Configura la navegación para cada tarjeta de módulo en el Home.
+     * Se utilizan las acciones definidas en nav_graph.xml.
+     */
+    private fun setupModuleCards() {
+        // Módulo de Inventario / Productos
+        binding.cardInventory.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_productoList)
+        }
+
+        // Módulo de Alquileres (Referencia corregida al ID cardRentals del XML)
+        binding.cardRentals.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_alquilerFragment)
+        }
+
+        // Módulo de Mantenimiento (Referencia corregida al ID cardMaintenance del XML)
+        binding.cardMaintenance.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_mantenimientoFragment)
+        }
+    }
+
+    /**
+     * Implementación de Morphing Animation para el menú flotante usando Material Design 3.
+     */
     private fun setupMorphingMenu() {
         binding.fabMenu.setOnClickListener {
             val transform = MaterialContainerTransform().apply {
@@ -126,17 +151,16 @@ class HomeFragment: Fragment() {
             binding.fabMenu.visibility = View.VISIBLE
         }
 
+        // Opción 1: Navegar al perfil de usuario
         binding.btnOption1.setOnClickListener {
             binding.btnCloseMenu.performClick()
             findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
         }
 
-        binding.cardInventory.setOnClickListener {
-            findNavController().navigate(R.id.action_home_to_productoList)
-        }
-
-        binding.cardAlquiler.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_alquilerFragment)
+        // Opción 2: Placeholder para futuras funcionalidades (ej: Ajustes o Notificaciones)
+        binding.btnOption2.setOnClickListener {
+            binding.btnCloseMenu.performClick()
+            Snackbar.make(binding.root, "Funcionalidad en desarrollo", Snackbar.LENGTH_SHORT).show()
         }
     }
 
