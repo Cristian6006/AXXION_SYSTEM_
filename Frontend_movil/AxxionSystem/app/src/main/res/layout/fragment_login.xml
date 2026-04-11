@@ -166,8 +166,20 @@
 					app:cornerRadius="12dp"
 					app:strokeColor="@color/axxion_secondary"
 					app:strokeWidth="1dp"/>
+
+			<ImageView
+					android:id="@+id/btn_biometric_login"
+					android:layout_width="match_parent"
+					android:layout_height="56dp"
+					android:src="@drawable/ic_fingerprint"
+					android:background="@drawable/bg_axxion_input"
+					android:visibility="gone"
+					android:layout_marginTop="12dp"
+					app:cornerRadius="12dp"
+					app:strokeColor="@color/axxion_secondary"
+					app:strokeWidth="1dp"
+					app:tint="@color/axxion_primary"/>
 		
 		</LinearLayout>
 	</com.google.android.material.card.MaterialCardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

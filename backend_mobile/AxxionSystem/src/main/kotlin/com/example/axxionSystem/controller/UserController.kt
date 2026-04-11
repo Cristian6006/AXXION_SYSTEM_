@@ -1,10 +1,15 @@
 package com.example.axxionSystem.controller
 
+import com.example.axxionSystem.dto.RegisterRequest
 import com.example.axxionSystem.dto.UserProfileResponse
 import com.example.axxionSystem.service.UserService
+import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,6 +24,12 @@ class UserController {
     fun verPerfil(): ResponseEntity<UserProfileResponse> {
         val perfil = userService.obtenerPerfilActual()
         return ResponseEntity.ok(perfil)
+    }
+
+    @PostMapping("/registro")
+    fun register(@Valid @RequestBody request: RegisterRequest): ResponseEntity<Any> {
+        userService.register(request)
+        return ResponseEntity.status(HttpStatus.CREATED).body(request)
     }
 
 }

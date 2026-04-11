@@ -146,8 +146,8 @@ class ProductoController extends Controller
             }
             
             // Log para debugging
-            \Log::info('Actualizando producto ID: ' . $id);
-            \Log::info('Datos recibidos: ' . json_encode($request->all()));
+            Log::info('Actualizando producto ID: ' . $id);
+            Log::info('Datos recibidos: ' . json_encode($request->all()));
             
             $validator = Validator::make($request->all(), [
                 'nombre' => 'sometimes|required|string|max:255',
@@ -172,23 +172,23 @@ class ProductoController extends Controller
             ]);
 
             if ($validator->fails()) {
-                \Log::error('Validación falló: ' . json_encode($validator->errors()));
+                Log::error('Validación falló: ' . json_encode($validator->errors()));
                 return response()->json(['errors' => $validator->errors()], 422);
             }
 
             // Actualizar el producto
             $updated = $producto->update($request->all());
-            \Log::info('Resultado de actualización: ' . ($updated ? 'exitoso' : 'falló'));
+            Log::info('Resultado de actualización: ' . ($updated ? 'exitoso' : 'falló'));
             
             // Recargar el producto para obtener los datos actualizados
             $producto->refresh();
-            \Log::info('Producto actualizado: ' . json_encode($producto->toArray()));
+            Log::info('Producto actualizado: ' . json_encode($producto->toArray()));
             
             return response()->json($producto, 200);
             
         } catch (\Exception $e) {
-            \Log::error('Error al actualizar producto: ' . $e->getMessage());
-            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            Log::error('Error al actualizar producto: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
             return response()->json(['error' => 'Error al actualizar el producto: ' . $e->getMessage()], 500);
         }
     }
@@ -207,12 +207,12 @@ class ProductoController extends Controller
             }
             
             // Log para debugging
-            \Log::info('Intentando eliminar producto ID: ' . $id . ', Nombre: ' . $producto->nombre);
+            Log::info('Intentando eliminar producto ID: ' . $id . ', Nombre: ' . $producto->nombre);
             
             // Eliminar directamente con query builder
             $deleted = DB::table('producto')->where('id', $id)->delete();
             
-            \Log::info('Filas eliminadas: ' . $deleted);
+            Log::info('Filas eliminadas: ' . $deleted);
             
             if ($deleted > 0) {
                 return response()->json([
@@ -224,8 +224,8 @@ class ProductoController extends Controller
             }
             
         } catch (\Exception $e) {
-            \Log::error('Error al eliminar producto: ' . $e->getMessage());
-            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            Log::error('Error al eliminar producto: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
             return response()->json([
                 'error' => 'Error al eliminar el producto: ' . $e->getMessage()
             ], 500);

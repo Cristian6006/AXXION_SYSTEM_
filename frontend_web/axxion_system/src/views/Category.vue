@@ -7,8 +7,8 @@
         <headerP/>
         <section class="grid grid-cols-2 gap-5 justify-between">
           <h1 class="font-bold text-gray-800 text-2xl">Categorias</h1>
-          <fwb-button 
-            @click="openCreate" 
+          <fwb-button
+            @click="openCreate"
             class="w-auto col-start-3 cursor-pointer transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110" gradient="green-blue" outline
           >
             <font-awesome-icon icon="fa-solid fa-plus" />
@@ -20,17 +20,24 @@
           <!-- Input buscador -->
           <div class=" relative flex-1">
             <MagnifyingGlassIcon class="size-6 text-gray-600 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"/>
-            <input 
+            <input
               v-model="busqueda"
               type="text"
               placeholder="Buscar Categorias"
-              class="w-full pl-12 pr-4 py-2 bg-gray-800 text-white rounded-lg border-gray-700 focus:outline-none focus:border-blue-500 transition-colors placeholder-gray-500" 
+              class="w-full pl-12 pr-4 py-2 bg-gray-800 text-white rounded-lg border-gray-700 focus:outline-none focus:border-blue-500 transition-colors placeholder-gray-500"
             />
           </div>
-          <!-- Boton de filtrar -->
-          <button class="flex items-center gap-2 px-4 py-2 bg-white text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors shadow-sm font-medium">
-            <FunnelIcon class="size-4 text-gray-600"/> Filtrar
-          </button>
+          <!-- Filtro de Fecha -->
+          <div class="relative flex items-center bg-white border border-gray-200 rounded-lg shadow-sm focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-colors">
+            <input
+              v-model="fechaFiltro"
+              type="date"
+              class="px-4 py-2 bg-transparent text-gray-700 outline-none w-full md:w-auto"
+            />
+            <button v-if="fechaFiltro" @click="fechaFiltro = ''" class="pr-3 text-gray-400 hover:text-gray-600" title="Limpiar fecha">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+          </div>>
         </section>
         <br>
         <!-- Contenedor de lista vertical -->
@@ -54,7 +61,7 @@
                   </div>
                   <!-- Caja icono azul -->
                   <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center font-bold text-lg">
-                    &lt;/&gt;
+                    <TagIcon class="size-6" />
                   </div>
                   <div>
                     <h3 class="font-bold text-gray-800 text-lg flex items-center gap-2">
@@ -96,7 +103,7 @@
                 enter-active-class="transition-all duration-900 ease-out overflow-hidden"
                 enter-from-class="transform opacity-0 -translate-y-2 max-h-0"
                 enter-to-class="transform opacity-100 translate-y-0 max-h-[1000px]"
-                
+
                 leave-active-class="transition-all duration-200 ease-in overflow-hidden"
                 leave-from-class="transform opacity-100 translate-y-0 max-h-[1000px]"
                 leave-to-class="transform opacity-0 -translate-y-2 max-h-0"
@@ -115,7 +122,7 @@
                         class="bg-white border border-gray-200 p-3 rounded-lg flex flex-col md:flex-row items-center gap-3 shadow-sm justify-between"
                       >
                         <div class="w-2 h-2 rounded-full bg-blue-400"></div>
-                        <div class="flex-1">  
+                        <div class="flex-1">
                           <span class="text-gray-700 font-medium">{{ sub.nombre }}</span>
                           <p class="text-gray-500 text-sm mt-0.5">{{ sub.descripcion }}</p>
                         </div>
@@ -133,9 +140,9 @@
                     <p v-if="!cat.subcategorias?.length" class="text-sm text-gray-400 italic">
                       No hay categorias registradas.
                     </p>
-                    <button 
+                    <button
                       @click="openCreateSub(cat.id)"
-                      class="text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded hover:bg-indigo-100 transition" 
+                      class="text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded hover:bg-indigo-100 transition"
                     >
                       + Añadir Nueva
                     </button>
@@ -157,63 +164,63 @@
               </span>
             </template>
             <!-- CONTENIDO DINAMICO -->
-            
+
             <!-- Formulario (Para Crear o Editar) -->
             <div v-if="modal.mode !== 'delete'" class="space-y-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700">Nombre</label>
-                <input 
-                  v-model="modal.data.nombre" 
-                  type="text" 
-                  class="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" 
+                <input
+                  v-model="modal.data.nombre"
+                  type="text"
+                  class="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
-              
+
               <div v-if="modal.type === 'category'" class="space-y-4">
                 <div>
                   <label class="block text-sm font-medium text-gray-700">Tipo de categoria</label>
-                    <input 
-                      v-model="modal.data.tipo_categoria" 
-                      type="text" 
+                    <input
+                      v-model="modal.data.tipo_categoria"
+                      type="text"
                       class="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                     />
                   </div>
               </div>
-                
+
                 <div>
                   <label class="block text-sm font-medium text-gray-700">Descripción</label>
-                  <textarea 
-                  v-model="modal.data.descripcion" 
+                  <textarea
+                  v-model="modal.data.descripcion"
                   class="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                 ></textarea>
                 </div>
               </div>
-              
+
               <!-- Confirmación de Borrado -->
               <div v-else class="text-center">
                 <div class="text-5xl mb-4 justify-items-center-safe"><TrashIcon class="size-14 text-black"/></div>
                 <h3 class="text-lg font-medium text-gray-900">¿Estás seguro?</h3>
                 <p class="text-sm text-gray-500 mt-2">
-                  Vas a eliminar la categoría <strong>"{{ modal.data.nombre }}"</strong>. 
+                  Vas a eliminar la categoría <strong>"{{ modal.data.nombre }}"</strong>.
                   Esta acción no se puede deshacer.
                 </p>
               </div>
-              
+
               <!-- FOOTER CON BOTONES -->
               <div class="mt-6 flex justify-end gap-3">
-                <button 
+                <button
                   @click="modal.open = false"
                   class="px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg"
                   :disabled="isSaving"
                 >
                   Cancelar
                 </button>
-                
-                <button 
+
+                <button
                   @click="handleAction"
                   class="px-4 py-2 text-white rounded-lg shadow-sm"
                   :class="modal.mode === 'delete' ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700'"
-                  :disabled="isSaving" 
+                  :disabled="isSaving"
                 >
                   <span v-if="isSaving" class="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
                   <span v-if="isSaving">Procesando...</span>
@@ -239,17 +246,18 @@ import { useCategoryStore } from '@/stores/category.js';
 import HeaderP from '@/components/headerP.vue';
 import { storeToRefs } from 'pinia';
 import { ref, computed, reactive } from 'vue';
-import { PencilIcon, TrashIcon, ChevronDownIcon, HashtagIcon, FunnelIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
+import { PencilIcon, TrashIcon, ChevronDownIcon, HashtagIcon, MagnifyingGlassIcon, TagIcon } from '@heroicons/vue/24/outline'
 import CategoryModal from '@/components/CategoryModal.vue';
 import Swal from 'sweetalert2';
 
 
 const store = useCategoryStore();
-const { categories, loading } = storeToRefs(store);
+const { categories } = storeToRefs(store);
 const isSaving = ref(false);
 
 // Control de acordeon
 const busqueda = ref('');
+const fechaFiltro = ref('');
 const abiertos = ref(new Set());
 
 const toggleAcordeon = (id) => {
@@ -271,13 +279,32 @@ const formatearFecha = (fecha) => {
 
 // Filtrado
 const listaFiltrada = computed(() => {
-  if (!busqueda.value) return categories.value;
-// Si hay texto filtramos
-  const texto = busqueda.value.toLowerCase();
-  return categories.value.filter(cat => 
-    cat.nombre.toLowerCase().includes(texto) || 
-    cat.descripcion.toLowerCase().includes(texto) 
-  );
+  let filtradas = categories.value || [];
+
+  // Filtro por de búsqueda de texto
+  if (busqueda.value) {
+    const texto = busqueda.value.toLowerCase();
+    filtradas = filtradas.filter(cat => {
+      const nombreMatch = cat.nombre ? cat.nombre.toLowerCase().includes(texto) : false;
+      const descMatch = cat.descripcion ? cat.descripcion.toLowerCase().includes(texto) : false;
+      const nombreSubMatch = sub.nombre ? sub.nombre.toLowerCase().includes(texto) : false;
+      const descSubMatch = sub.descripcion ? sub.descripcion.toLowerCase().includes(texto) : false;
+      return nombreMatch || descMatch || nombreSubMatch || descSubMatch;
+    });
+  }
+
+  // Filtro por fecha seleccionada
+  if (fechaFiltro.value) {
+    filtradas = filtradas.filter(cat => {
+      if (!cat.created_at) return false;
+      const d = new Date(cat.created_at);
+      const localDateFormated = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, '0') + "-" + String(d.getDate()).padStart(2, '0');
+
+      return localDateFormated === fechaFiltro.value;
+    });
+  }
+
+  return filtradas;
 });
 
 // Estado del modal
@@ -367,15 +394,15 @@ const handleAction = async () => {
       };
       if (modal.mode === 'delete') {
         store.deleteCategory(modal.data.id)
-        
+
       } else if (modal.mode === 'create'){
         await store.addCategory(payload);
-        
+
       } else if (modal.mode == 'edit') {
         await store.updateCategory(modal.data.id, payload);
-        
+
       }
-    } 
+    }
     Swal.fire({
       icon: 'success',
       title: '¡Guardado!',
@@ -455,7 +482,7 @@ onMounted(() => {
       opacity: 1;
     }
   }
-      
+
 </style>
 
 
