@@ -7,6 +7,7 @@ package com.example.axxionsystem.ui.home
  * sesion (logout en backend + limpieza local + navegacion a Login).
  */
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionManager
 import com.example.axxionsystem.R
 import com.example.axxionsystem.data.api.RetrofitClient
+import com.example.axxionsystem.data.model.resumen.ResumenResponse
 import com.example.axxionsystem.data.repository.auth.AuthRepository
+import com.example.axxionsystem.data.repository.home.DashboardRepository
 import com.example.axxionsystem.databinding.FragmentHomeBinding
+import com.example.axxionsystem.ui.home.summary.KpiUiState
 import com.example.axxionsystem.util.SessionManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialContainerTransform
@@ -35,6 +39,7 @@ class HomeFragment: Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var lastErrorMessage: String? = null
+    private var lastKpiErrorMessage: String? = null
 
 
     override fun onCreateView(
@@ -51,10 +56,22 @@ class HomeFragment: Fragment() {
         sessionManager = SessionManager(requireContext())
 
         val apiService = RetrofitClient.getApiService(requireContext())
-        val repository = AuthRepository(apiService)
-        val factory = HomeViewModelFactory(repository)
+        val repositoryAuth = AuthRepository(apiService)
+        val repositoryDashboard = DashboardRepository(apiService)
+        
+        val factory = HomeViewModelFactory(repositoryAuth, repositoryDashboard)
         homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
+        setupProfileObserver()
+        setupKpiObserver()
+        
+        homeViewModel.fetchUserProfile()
+        setupModuleCards()
+        setupMorphingMenu()
+        setupLogout()
+    }
+
+    private fun setupProfileObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 homeViewModel.uiState.collect { state ->
@@ -81,11 +98,55 @@ class HomeFragment: Fragment() {
                 }
             }
         }
+    }
 
-        homeViewModel.fetchUserProfile()
-        setupModuleCards()
-        setupMorphingMenu()
-        setupLogout()
+    private fun setupKpiObserver() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.uiStateKpi.collect { state ->
+                    when (state) {
+                        is KpiUiState.Loading -> showSkeletonLoading()
+                        is KpiUiState.Success -> {
+                            showKpiData(state.data)
+                            lastKpiErrorMessage = null
+                        }
+                        is KpiUiState.Error -> {
+                            handleKpiError(state.message)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handleKpiError(message: String) {
+        binding.shimmerKpi.stopShimmer()
+        binding.shimmerKpi.hideShimmer()
+
+        binding.tvTotalProductos.text = "-"
+        binding.tvTotalAlquileres.text = "-"
+        binding.tvTotalMantenimientos.text = "-"
+
+        if (lastKpiErrorMessage != message) {
+            Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+            lastKpiErrorMessage = message
+        }
+    }
+
+    private fun showSkeletonLoading() {
+        binding.shimmerKpi.startShimmer()
+        binding.tvTotalProductos.text = ""
+        binding.tvTotalAlquileres.text = ""
+        binding.tvTotalMantenimientos.text = ""
+    }
+
+    private fun showKpiData(data: ResumenResponse) {
+        binding.shimmerKpi.stopShimmer()
+        binding.shimmerKpi.hideShimmer()
+
+        binding.tvTotalProductos.text = data.totalProductos.toString()
+        binding.tvTotalAlquileres.text = data.totalAlquileres.toString()
+        binding.tvTotalMantenimientos.text = data.totalMantenimientos.toString()
     }
 
     private fun setupLogout() {
@@ -106,12 +167,12 @@ class HomeFragment: Fragment() {
             findNavController().navigate(R.id.action_home_to_productoList)
         }
 
-        // Módulo de Alquileres (Referencia corregida al ID cardRentals del XML)
-        binding.cardRentals.setOnClickListener {
+        // Módulo de Alquileres
+        binding.cardAlquiler.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_alquilerFragment)
         }
 
-        // Módulo de Mantenimiento (Referencia corregida al ID cardMaintenance del XML)
+        // Módulo de Mantenimiento
         binding.cardMaintenance.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_mantenimientoFragment)
         }
@@ -126,7 +187,7 @@ class HomeFragment: Fragment() {
                 startView = binding.fabMenu
                 endView = binding.cardFloatingMenu
                 addTarget(binding.cardFloatingMenu)
-                scrimColor = android.graphics.Color.TRANSPARENT
+                scrimColor = Color.TRANSPARENT
                 duration = 350L
             }
 
@@ -141,7 +202,7 @@ class HomeFragment: Fragment() {
                 startView = binding.cardFloatingMenu
                 endView = binding.fabMenu
                 addTarget(binding.fabMenu)
-                scrimColor = android.graphics.Color.TRANSPARENT
+                scrimColor = Color.TRANSPARENT
                 duration = 300L
             }
 

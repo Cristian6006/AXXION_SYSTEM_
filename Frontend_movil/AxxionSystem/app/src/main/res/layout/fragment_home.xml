@@ -55,19 +55,162 @@
 					app:layout_constraintBottom_toBottomOf="@id/tvSubtitle"
 					app:iconTint="@android:color/holo_red_dark"/>
 
+			<TextView
+					android:id="@+id/tvSummaryTitle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="24dp"
+					android:text="@string/summary_title"
+					android:textColor="@color/white"
+					android:textSize="16sp"
+					android:textStyle="bold"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
+
+			<com.facebook.shimmer.ShimmerFrameLayout
+					android:id="@+id/shimmerKpi"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="12dp"
+					app:shimmer_auto_start="true"
+					app:layout_constraintTop_toBottomOf="@id/tvSummaryTitle"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintEnd_toEndOf="parent">
+
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:baselineAligned="false">
+
+					<com.google.android.material.card.MaterialCardView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:layout_marginEnd="4dp"
+							app:cardBackgroundColor="@color/axxion_card"
+							app:cardCornerRadius="12dp"
+							app:cardElevation="0dp"
+							app:strokeColor="@color/axxion_input_stroke"
+							app:strokeWidth="1dp">
+
+						<LinearLayout
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:orientation="vertical"
+								android:gravity="center"
+								android:padding="12dp">
+
+							<TextView
+									android:id="@+id/tvTotalProductos"
+									android:layout_width="40dp"
+									android:layout_height="24dp"
+									android:background="#33FFFFFF"
+									android:gravity="center"
+									android:textColor="@color/white"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+							<TextView
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginTop="6dp"
+									android:text="@string/total_products"
+									android:textColor="@color/axxion_text_muted"
+									android:textSize="11sp" />
+						</LinearLayout>
+					</com.google.android.material.card.MaterialCardView>
+
+					<com.google.android.material.card.MaterialCardView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:layout_marginHorizontal="4dp"
+							app:cardBackgroundColor="@color/axxion_card"
+							app:cardCornerRadius="12dp"
+							app:cardElevation="0dp"
+							app:strokeColor="@color/axxion_input_stroke"
+							app:strokeWidth="1dp">
+
+						<LinearLayout
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:orientation="vertical"
+								android:gravity="center"
+								android:padding="12dp">
+
+							<TextView
+									android:id="@+id/tvTotalAlquileres"
+									android:layout_width="40dp"
+									android:layout_height="24dp"
+									android:background="#33FFFFFF"
+									android:gravity="center"
+									android:textColor="@color/white"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+							<TextView
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginTop="6dp"
+									android:text="@string/total_rentals"
+									android:textColor="@color/axxion_text_muted"
+									android:textSize="11sp" />
+						</LinearLayout>
+					</com.google.android.material.card.MaterialCardView>
+
+					<com.google.android.material.card.MaterialCardView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:layout_marginStart="4dp"
+							app:cardBackgroundColor="@color/axxion_card"
+							app:cardCornerRadius="12dp"
+							app:cardElevation="0dp"
+							app:strokeColor="@color/axxion_input_stroke"
+							app:strokeWidth="1dp">
+
+						<LinearLayout
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:orientation="vertical"
+								android:gravity="center"
+								android:padding="12dp">
+
+							<TextView
+									android:id="@+id/tvTotalMantenimientos"
+									android:layout_width="40dp"
+									android:layout_height="24dp"
+									android:background="#33FFFFFF"
+									android:gravity="center"
+									android:textColor="@color/white"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+							<TextView
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginTop="6dp"
+									android:text="@string/total_maintenance"
+									android:textColor="@color/axxion_text_muted"
+									android:textSize="11sp" />
+						</LinearLayout>
+					</com.google.android.material.card.MaterialCardView>
+				</LinearLayout>
+			</com.facebook.shimmer.ShimmerFrameLayout>
+
 			<GridLayout
 					android:id="@+id/gridModules"
-					android:layout_width="0dp"
+					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="32dp"
 					android:columnCount="2"
 					android:alignmentMode="alignMargins"
 					android:columnOrderPreserved="false"
-					app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+					app:layout_constraintTop_toBottomOf="@id/shimmerKpi"
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintEnd_toEndOf="parent">
 
-				<!-- MODULO PRODUCTOS -->
 				<com.google.android.material.card.MaterialCardView
 						android:id="@+id/cardInventory"
 						android:layout_width="0dp"
@@ -101,9 +244,8 @@
 					</LinearLayout>
 				</com.google.android.material.card.MaterialCardView>
 
-				<!-- MODULO ALQUILERES -->
 				<com.google.android.material.card.MaterialCardView
-						android:id="@+id/cardRentals"
+						android:id="@+id/cardAlquiler"
 						android:layout_width="0dp"
 						android:layout_height="120dp"
 						android:layout_columnWeight="1"
@@ -135,7 +277,7 @@
 					</LinearLayout>
 				</com.google.android.material.card.MaterialCardView>
 
-				<!-- MODULO MANTENIMIENTO -->
+				<!-- MÓDULO MANTENIMIENTO -->
 				<com.google.android.material.card.MaterialCardView
 						android:id="@+id/cardMaintenance"
 						android:layout_width="0dp"
@@ -186,6 +328,7 @@
 				android:layout_gravity="bottom|center_horizontal"
 				android:layout_marginBottom="32dp"
 				android:contentDescription="@string/desc_expand_menu"
+				android:transitionName="morph_transition"
 				app:backgroundTint="@color/axxion_primary"
 				app:tint="@color/white"
 				app:srcCompat="@drawable/ic_plus" />
@@ -197,6 +340,7 @@
 				android:layout_gravity="bottom|center_horizontal"
 				android:layout_marginBottom="32dp"
 				android:visibility="gone"
+				android:transitionName="morph_transition"
 				app:cardBackgroundColor="@color/axxion_card"
 				app:cardCornerRadius="32dp"
 				app:cardElevation="12dp"
@@ -213,8 +357,8 @@
 				<com.google.android.material.button.MaterialButton
 						android:id="@+id/btnCloseMenu"
 						style="@style/Widget.Material3.Button.IconButton"
-						android:layout_width="48dp"
-						android:layout_height="48dp"
+						android:layout_width="68dp"
+						android:layout_height="68dp"
 						android:contentDescription="@string/desc_close_menu"
 						app:icon="@drawable/ic_close"
 						app:iconTint="@color/axxion_text_muted" />

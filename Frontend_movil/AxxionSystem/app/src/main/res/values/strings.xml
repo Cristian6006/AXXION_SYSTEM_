@@ -8,6 +8,12 @@
 	<string name="module_rentals">Alquileres</string>
 	<string name="module_maintenance">Mantenimiento</string>
 
+	<!-- Dashboard -->
+	<string name="summary_title">Resumen General</string>
+	<string name="total_products">Productos</string>
+	<string name="total_rentals">Alquileres</string>
+	<string name="total_maintenance">Mantenim.</string>
+
 	<!-- Accesibilidad -->
 	<string name="desc_logout">Cerrar sesión</string>
 	<string name="desc_expand_menu">Menú Expandible</string>
