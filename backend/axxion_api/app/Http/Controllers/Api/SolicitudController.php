@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Solicitud;
+use App\Models\Renta;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -33,10 +34,6 @@ class SolicitudController extends Controller
 
     /**
      * Crea una nueva solicitud de productos.
-     * 
-     * ANALOGÍA: Esta función es como llenar un formulario de pedido en un restaurante: 
-     * el cliente (usuario) dice qué quiere comer (productos) y el mesero (sistema) 
-     * anota todo para pasarlo a la cocina.
      */
     public function store(Request $request)
     {
@@ -72,13 +69,6 @@ class SolicitudController extends Controller
 
             if ($request->has('productos')) {
                 foreach ($request->productos as $prod) {
-                    // Assuming a pivot table or related table exists. 
-                    // Based on SQL dump: solicitud_producto (solicitud_id, producto_id)
-                    // Note: The SQL dump shows a table `solicitud_producto` with just IDs.
-                    // If quantity is needed per product in the request, the table structure might need check.
-                    // The SQL dump `solicitud_producto` has no extra columns.
-                    // However, `detalle_cotizacion` has quantity.
-                    // For now, we just attach the product.
                     DB::table('solicitud_producto')->insert([
                         'solicitud_id' => $solicitud->id,
                         'producto_id' => $prod['producto_id']
@@ -101,6 +91,75 @@ class SolicitudController extends Controller
                 'error' => $e->getMessage(),
                 'status' => 500
             ], 500);
+        }
+    }
+
+    /**
+     * Convierte una solicitud en una renta activa.
+     *
+     * ANALOGÍA: Es como cuando una reservación de mesa se convierte en una cuenta activa
+     * porque los comensales ya llegaron. Los productos solicitados se vinculan a la renta.
+     */
+    public function convertToRental(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'fecha_inicio' => 'required|date',
+            'fecha_fin_prevista' => 'required|date|after:fecha_inicio',
+            'monto_total_renta' => 'required|numeric|min:0',
+            'deposito_garantia' => 'required|numeric|min:0',
+            'inventario_items' => 'required|array|min:1',
+            'inventario_items.*' => 'exists:inventario_item,id'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $solicitud = Solicitud::findOrFail($id);
+
+            // 1. Crear la Renta
+            $renta = Renta::create([
+                'cliente_id' => $solicitud->cliente_id,
+                'fecha_inicio' => $request->fecha_inicio,
+                'fecha_fin_prevista' => $request->fecha_fin_prevista,
+                'estado_renta' => 'Programada',
+                'monto_total_renta' => $request->monto_total_renta,
+                'deposito_garantia' => $request->deposito_garantia,
+                'notas' => "Generada desde Solicitud #$id. " . ($request->notas ?? '')
+            ]);
+
+            // 2. Vincular Items de Inventario y cambiar su estado
+            foreach ($request->inventario_items as $itemId) {
+                // Vincular a la tabla pivote renta_inventario_item
+                DB::table('renta_inventario_item')->insert([
+                    'renta_id' => $renta->id,
+                    'inventario_item_id' => $itemId
+                ]);
+
+                // Actualizar estado del item a 'Rentado'
+                DB::table('inventario_item')->where('id', $itemId)->update([
+                    'estado_item' => 'Rentado'
+                ]);
+            }
+
+            // 3. Marcar Solicitud como Atendida
+            $solicitud->update(['estado_solicitud' => 'Atendida']);
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Solicitud convertida a Renta exitosamente',
+                'renta' => $renta,
+                'status' => 201
+            ], 201);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error al convertir Solicitud a Renta: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 

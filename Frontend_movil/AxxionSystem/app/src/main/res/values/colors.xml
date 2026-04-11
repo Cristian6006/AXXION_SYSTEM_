@@ -2,11 +2,17 @@
 <resources>
 	<color name="axxion_background">#111823</color>
 	<color name="axxion_card">#1A2234</color>
+	<color name="axxion_card_background">#1E293B</color>
 	<color name="axxion_input">#111823</color>
 	<color name="axxion_input_stroke">#243249</color>
 	<color name="axxion_primary">#1C64D1</color>
+	<color name="axxion_primary_light">#2563EB33</color>
 	<color name="axxion_secondary">#7DB3E1</color>
 	<color name="axxion_text_muted">#8A96A8</color>
+	<color name="axxion_success">#10B981</color>
+	<color name="axxion_error">#EF4444</color>
+	<color name="axxion_warning">#F59E0B</color>
+	<color name="axxion_border">#374151</color>
 	<color name="white">#FFFFFFFF</color>
 
 	<!-- Alias para compatibilidad -->

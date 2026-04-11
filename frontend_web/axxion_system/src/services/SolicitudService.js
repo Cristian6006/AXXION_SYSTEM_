@@ -37,6 +37,17 @@ class SolicitudService {
             throw error;
         }
     }
+
+    // Convertir solicitud a renta
+    async convertToRental(id, data) {
+        try {
+            const response = await this.api.post(`/solicitud/${id}/convert-to-rental`, data);
+            return response.data;
+        } catch (error) {
+            console.error('Error converting solicitud to rental:', error.response?.data || error.message);
+            throw error;
+        }
+    }
 }
 
 export default new SolicitudService();
