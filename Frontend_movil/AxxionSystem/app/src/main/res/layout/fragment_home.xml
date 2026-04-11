@@ -23,7 +23,7 @@
 					android:id="@+id/tvAppName"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
-					android:text="AXXION SYSTEM"
+					android:text="@string/axxion_system"
 					android:textColor="@color/white"
 					android:textSize="22sp"
 					android:textStyle="bold"
@@ -38,7 +38,7 @@
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="4dp"
-					android:text="Cargando tus datos..."
+					android:text="@string/cargando_tus_datos"
 					android:textColor="@color/axxion_text_muted"
 					android:textSize="14sp"
 					app:layout_constraintStart_toStartOf="parent"
@@ -57,6 +57,150 @@
 					app:layout_constraintBottom_toBottomOf="@id/tvSubtitle"
 					app:iconTint="@android:color/holo_red_dark"/>
 
+			<TextView
+					android:id="@+id/tvSummaryTitle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="24dp"
+					android:text="Resumen General"
+					android:textColor="@color/white"
+					android:textSize="16sp"
+					android:textStyle="bold"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
+
+			<com.facebook.shimmer.ShimmerFrameLayout
+					android:id="@+id/shimmerKpi"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="12dp"
+					app:shimmer_auto_start="true"
+					app:layout_constraintTop_toBottomOf="@id/tvSummaryTitle"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintEnd_toEndOf="parent">
+
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:baselineAligned="false">
+
+				<com.google.android.material.card.MaterialCardView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:layout_marginEnd="4dp"
+						app:cardBackgroundColor="@color/axxion_card"
+						app:cardCornerRadius="12dp"
+						app:cardElevation="0dp"
+						app:strokeColor="@color/axxion_input_stroke"
+						app:strokeWidth="1dp">
+
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:padding="12dp">
+
+					<TextView
+							android:id="@+id/tvTotalProductos"
+							android:layout_width="40dp"
+							android:layout_height="24dp"
+							android:background="#33FFFFFF"
+							android:gravity="center"
+							android:textColor="@color/white"
+							android:textSize="18sp"
+							android:textStyle="bold" />
+
+					<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="6dp"
+							android:text="Productos"
+							android:textColor="@color/axxion_text_muted"
+							android:textSize="11sp" />
+				</LinearLayout>
+				</com.google.android.material.card.MaterialCardView>
+
+				<com.google.android.material.card.MaterialCardView
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:layout_marginHorizontal="4dp"
+						app:cardBackgroundColor="@color/axxion_card"
+						app:cardCornerRadius="12dp"
+						app:cardElevation="0dp"
+						app:strokeColor="@color/axxion_input_stroke"
+						app:strokeWidth="1dp">
+
+					<LinearLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:orientation="vertical"
+							android:gravity="center"
+							android:padding="12dp">
+
+						<TextView
+								android:id="@+id/tvTotalAlquileres"
+								android:layout_width="40dp"
+								android:layout_height="24dp"
+								android:background="#33FFFFFF"
+								android:gravity="center"
+								android:textColor="@color/white"
+								android:textSize="18sp"
+								android:textStyle="bold" />
+
+						<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginTop="6dp"
+								android:text="Alquileres"
+								android:textColor="@color/axxion_text_muted"
+								android:textSize="11sp" />
+					</LinearLayout>
+				</com.google.android.material.card.MaterialCardView>
+
+					<com.google.android.material.card.MaterialCardView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:layout_marginStart="4dp"
+							app:cardBackgroundColor="@color/axxion_card"
+							app:cardCornerRadius="12dp"
+							app:cardElevation="0dp"
+							app:strokeColor="@color/axxion_input_stroke"
+							app:strokeWidth="1dp">
+
+						<LinearLayout
+								android:layout_width="match_parent"
+								android:layout_height="wrap_content"
+								android:orientation="vertical"
+								android:gravity="center"
+								android:padding="12dp">
+
+							<TextView
+									android:id="@+id/tvTotalMantenimientos"
+									android:layout_width="40dp"
+									android:layout_height="24dp"
+									android:background="#33FFFFFF"
+									android:gravity="center"
+									android:textColor="@color/white"
+									android:textSize="18sp"
+									android:textStyle="bold" />
+
+							<TextView
+									android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginTop="6dp"
+									android:text="Mantenim."
+									android:textColor="@color/axxion_text_muted"
+									android:textSize="11sp" />
+						</LinearLayout>
+					</com.google.android.material.card.MaterialCardView>
+				</LinearLayout>
+			</com.facebook.shimmer.ShimmerFrameLayout>
+
 
 			<GridLayout
 					android:id="@+id/gridModules"
@@ -67,7 +211,7 @@
 					android:rowCount="2"
 					android:alignmentMode="alignMargins"
 					android:columnOrderPreserved="false"
-					app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
+					app:layout_constraintTop_toBottomOf="@id/shimmerKpi">
 
 
 				<com.google.android.material.card.MaterialCardView

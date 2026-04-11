@@ -1,5 +1,7 @@
 <resources>
 	<string name="app_name">AxxionSystem</string>
+    <string name="axxion_system">AXXION SYSTEM</string>
+	<string name="cargando_tus_datos">Cargando tus datos...</string>
 
 	<string-array name="estados_producto">
 		<item>DISPONIBLE</item>

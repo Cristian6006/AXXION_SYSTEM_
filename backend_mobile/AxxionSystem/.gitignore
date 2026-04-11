@@ -33,4 +33,4 @@ build/
 .vscode/
 
 # Secretos Locales
-application-dev.properties
+application*.properties

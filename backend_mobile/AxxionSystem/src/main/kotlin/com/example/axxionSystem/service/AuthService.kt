@@ -3,16 +3,10 @@ package com.example.axxionSystem.service
 import com.example.axxionSystem.dto.BiometricLoginRequest
 import com.example.axxionSystem.dto.ForgotPasswordRequest
 import com.example.axxionSystem.dto.LoginRequest
-import com.example.axxionSystem.dto.RegisterRequest
 import com.example.axxionSystem.dto.ResetPasswordRequest
 import com.example.axxionSystem.model.PasswordResetToken
 import com.example.axxionSystem.model.RefreshToken
-import com.example.axxionSystem.model.User
-import com.example.axxionSystem.repository.DispositivoBiometricoRepository
-import com.example.axxionSystem.repository.PasswordResetTokenRepository
-import com.example.axxionSystem.repository.RefreshTokenRepository
-import com.example.axxionSystem.repository.UserRepository
-import com.example.axxionSystem.repository.RolRepository
+import com.example.axxionSystem.repository.*
 import com.example.axxionSystem.util.CryptoUtil
 import com.example.axxionSystem.util.JwtUtil
 import jakarta.transaction.Transactional
@@ -20,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.security.MessageDigest
 import java.time.Instant
 import java.util.*
-import java.security.MessageDigest
 import kotlin.math.abs
 
 @Service
@@ -30,7 +24,6 @@ class AuthService {
 
     @Autowired lateinit var userRepository: UserRepository
     @Autowired lateinit var refreshTokenRepository: RefreshTokenRepository
-    @Autowired lateinit var rolRepository: RolRepository
     @Autowired lateinit var passwordEncoder: PasswordEncoder
     @Autowired lateinit var jwtUtil: JwtUtil
     @Autowired lateinit var emailService: EmailService
@@ -82,32 +75,6 @@ class AuthService {
     @Transactional
     fun logout(usuarioId: Int) {
         refreshTokenRepository.deleteByUsuario_Id(usuarioId)
-    }
-
-    fun register(request: RegisterRequest): User {
-        if (userRepository.existsByEmail(request.email)) {
-            throw IllegalArgumentException("El correo ya esta registrado")
-        }
-        val user = User(
-            userName = request.nombreUsuario,
-            firstName = request.nombre,
-            secondName = request.nombre2,
-            surName = request.apellido1,
-            surName2 = request.apellido2,
-            password = passwordEncoder.encode(request.password),
-            email = request.email,
-            phone = request.telefono,
-            department = request.departamento,
-            state = request.estado
-        )
-
-        val rolBasico = rolRepository.findByCode("OPER")
-            .orElseThrow {RuntimeException("Error Critico: El rol OPER no existe en la BD")}
-
-        user.roles
-            .add(rolBasico)
-
-        return userRepository.save(user)
     }
 
     fun login(request: LoginRequest): AuthResponse {

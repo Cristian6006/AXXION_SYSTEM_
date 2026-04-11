@@ -44,11 +44,6 @@ class AuthController {
         return ResponseEntity.ok(mapOf("mensaje" to "Contraseña actualizada exitosamente"))
     }
 
-    @PostMapping("/registro")
-    fun register(@Valid @RequestBody request: RegisterRequest): ResponseEntity<Any> {
-        authService.register(request)
-        return ResponseEntity.status(HttpStatus.CREATED).body(request)
-    }
 
     @PostMapping("/login")
     fun login(@Valid @RequestBody request: LoginRequest, response: HttpServletResponse): ResponseEntity<Any> {
