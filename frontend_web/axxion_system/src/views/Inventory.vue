@@ -730,6 +730,22 @@ function showAddModal() {
 }
 
 function showDeleteModal(product) {
+  // Validación: si el producto está alquilado/renta en curso, no permitir eliminar y mostrar alerta
+  if (
+    product.estado === 'alquilado' || 
+    product.estado_item === 'Rentado' || 
+    (product.renta_activa && product.renta_activa.estado_renta === 'EnCurso')
+  ) {
+    manualAlerts.value.unshift({
+      id: Date.now(),
+      type: 'warning',
+      icon: true,
+      title: 'Eliminación Denegada',
+      message: `El equipo "${product.nombre || 'seleccionado'}" no se puede eliminar porque actualmente tiene una renta en curso.`
+    });
+    return;
+  }
+
   modalMode.value = 'delete';
   selectedProduct.value = product;
   isShowModal.value = true;
