@@ -287,9 +287,7 @@ const listaFiltrada = computed(() => {
     filtradas = filtradas.filter(cat => {
       const nombreMatch = cat.nombre ? cat.nombre.toLowerCase().includes(texto) : false;
       const descMatch = cat.descripcion ? cat.descripcion.toLowerCase().includes(texto) : false;
-      const nombreSubMatch = sub.nombre ? sub.nombre.toLowerCase().includes(texto) : false;
-      const descSubMatch = sub.descripcion ? sub.descripcion.toLowerCase().includes(texto) : false;
-      return nombreMatch || descMatch || nombreSubMatch || descSubMatch;
+      return nombreMatch || descMatch;
     });
   }
 
