@@ -8,6 +8,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -137,25 +139,41 @@ class AlquilerFragment : Fragment() {
                 }
             }
         }
-        viewModel.solicitudCreateResult.observe(viewLifecycleOwner) { it.onSuccess {
-            Toast.makeText(requireContext(), "✅ Creada: #$it", Toast.LENGTH_SHORT).show()
-            viewModel.clearCreateResult()
-        } }
+        viewModel.solicitudCreateResult.observe(viewLifecycleOwner) { result -> 
+            result.onSuccess {
+                Toast.makeText(requireContext(), "✅ Creada: #$it", Toast.LENGTH_SHORT).show()
+                viewModel.clearCreateResult()
+            }
+        }
     }
 
     private fun mostrarDialogoNuevaSolicitud() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_nueva_solicitud, null)
         val inCant = dialogView.findViewById<TextInputEditText>(R.id.inputCantidad)
         val inDesc = dialogView.findViewById<TextInputEditText>(R.id.inputDescripcion)
-        val inProd = dialogView.findViewById<TextInputEditText>(R.id.inputProductoAlt)
+        val autoProducto = dialogView.findViewById<AutoCompleteTextView>(R.id.inputProducto)
+        val inCliente = dialogView.findViewById<TextInputEditText>(R.id.inputClienteId)
+        
         inCant.setText("1")
+        inCliente.setText(clienteIdDefault.toString())
+
+        // Observar productos para el dropdown
+        viewModel.productos.observe(viewLifecycleOwner) { productos ->
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, productos.map { it.nombre })
+            autoProducto.setAdapter(adapter)
+        }
+        viewModel.cargarProductos()
 
         AlertDialog.Builder(requireContext(), R.style.Theme_AxxionSystem_Dialog)
-            .setTitle("Nueva Solicitud")
+            .setTitle("Nueva Solicitud de Alquiler")
             .setView(dialogView)
             .setPositiveButton("Crear") { _, _ ->
-                viewModel.crearSolicitudSimple(clienteIdDefault, inCant.text.toString().toIntOrNull() ?: 1,
-                    inDesc.text.toString(), inProd.text.toString())
+                val clienteId = inCliente.text.toString().toIntOrNull() ?: clienteIdDefault
+                val cantidad = inCant.text.toString().toIntOrNull() ?: 1
+                val descripcion = inDesc.text.toString()
+                val productoSeleccionado = autoProducto.text.toString()
+                
+                viewModel.crearSolicitudSimple(clienteId, cantidad, descripcion, productoSeleccionado)
             }.setNegativeButton("Cancelar", null).show()
     }
 
