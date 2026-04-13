@@ -9,6 +9,7 @@ import com.example.axxionsystem.data.model.Alquiler.RentaResponse
 import com.example.axxionsystem.data.model.Alquiler.SolicitudCreateRequest
 import com.example.axxionsystem.data.model.Alquiler.EntregaFirmaRequest
 import com.example.axxionsystem.data.model.Alquiler.DevolucionFirmaRequest
+import com.example.axxionsystem.data.model.producto.ProductoEntity
 import com.example.axxionsystem.data.repository.AlquilerRepository
 import kotlinx.coroutines.launch
 
@@ -19,6 +20,9 @@ class AlquilerViewModel(private val repository: AlquilerRepository) : ViewModel(
 
     private val _items = MutableLiveData<List<AlquilerItem>>()
     val items: LiveData<List<AlquilerItem>> = _items
+
+    private val _productos = MutableLiveData<List<ProductoEntity>>()
+    val productos: LiveData<List<ProductoEntity>> = _productos
 
     private var originalItems = listOf<AlquilerItem>()
     private var listaRentasCompleta = mutableListOf<RentaResponse>()
@@ -76,6 +80,16 @@ class AlquilerViewModel(private val repository: AlquilerRepository) : ViewModel(
                 _error.value = exception.message
             }
             _isLoading.value = false
+        }
+    }
+
+    fun cargarProductos() {
+        viewModelScope.launch {
+            repository.getProductos().onSuccess {
+                _productos.value = it
+            }.onFailure {
+                _error.value = "Error al cargar productos: ${it.message}"
+            }
         }
     }
 

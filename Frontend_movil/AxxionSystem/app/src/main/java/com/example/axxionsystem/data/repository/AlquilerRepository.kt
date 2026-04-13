@@ -9,6 +9,7 @@ import com.example.axxionsystem.data.model.Alquiler.EntregaFirmaRequest
 import com.example.axxionsystem.data.model.Alquiler.EntregaResponse
 import com.example.axxionsystem.data.model.Alquiler.DevolucionFirmaRequest
 import com.example.axxionsystem.data.model.Alquiler.DevolucionResponse
+import com.example.axxionsystem.data.model.producto.ProductoEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -37,6 +38,24 @@ class AlquilerRepository(private val apiService: ApiService) {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.consultarSolicitudes(estado)
+                if (response.isSuccessful) {
+                    Result.success(response.body() ?: emptyList())
+                } else {
+                    Result.failure(Exception("Error ${response.code()}: ${response.message()}"))
+                }
+            } catch (e: Exception) {
+                Result.failure(Exception("Error de conexión: ${e.message}"))
+            }
+        }
+    }
+
+    /**
+     * Obtiene la lista de productos disponibles.
+     */
+    suspend fun getProductos(): Result<List<ProductoEntity>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.getProductos()
                 if (response.isSuccessful) {
                     Result.success(response.body() ?: emptyList())
                 } else {
