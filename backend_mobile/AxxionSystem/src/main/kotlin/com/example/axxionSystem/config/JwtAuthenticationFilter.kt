@@ -18,6 +18,12 @@ class JwtAuthenticationFilter: OncePerRequestFilter(){
     @Autowired lateinit var jwtUtil: JwtUtil
     @Autowired lateinit var userDetailsService: CustomUserDetailsService
 
+    override fun shouldNotFilter(request: HttpServletRequest): Boolean {
+        val path = request.servletPath
+        return path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs") || 
+               path.startsWith("/swagger-resources") || path.startsWith("/webjars")
+    }
+
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
