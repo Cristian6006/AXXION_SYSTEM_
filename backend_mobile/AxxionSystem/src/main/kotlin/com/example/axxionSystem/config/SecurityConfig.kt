@@ -36,7 +36,7 @@ class SecurityConfig {
             .csrf {it.disable()}
             .authorizeHttpRequests { auth ->
                 auth
-                    .requestMatchers("/api/auth/**", "/api/biometria/**").permitAll()
+                    .requestMatchers("/api/auth/**", "/api/biometria/**", "/api/usuario/**").permitAll()
                     .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-resources/**", "/webjars/**").permitAll()
                     .anyRequest().authenticated()
             }

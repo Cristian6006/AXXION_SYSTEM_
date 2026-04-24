@@ -3,7 +3,6 @@
     <SideBar />
 
     <main class="container mx-auto h-screen p-6 md:p-8 flex-1 overflow-y-auto text-slate-800 relative z-0">
-      <!-- Decorative background elements (Light mode adapted) -->
       <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-pulse pointer-events-none -z-10"></div>
       <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-60 pointer-events-none -z-10"></div>
 
@@ -24,7 +23,6 @@
             </div>
           </div>
 
-          <!-- Filtros as Segmented Controls (Light Mode) -->
           <div class="flex flex-wrap lg:inline-flex bg-white/80 backdrop-blur-md p-1.5 rounded-xl border border-slate-200 shadow-sm gap-1">
             <button
               v-for="filtro in alertStore.filtros"
@@ -41,15 +39,12 @@
           </div>
         </header>
 
-        <!-- Dynamic Content Area -->
         <div class="min-h-[400px]">
-          <!-- Loading State -->
           <div v-if="alertStore.isLoading" class="flex flex-col items-center justify-center h-64 space-y-4">
             <ArrowPathIcon class="w-10 h-10 text-emerald-500/90 animate-spin" />
             <p class="text-slate-500 font-medium animate-pulse">Sincronizando alertas...</p>
           </div>
 
-          <!-- Error State -->
           <div v-else-if="alertStore.error" class="bg-red-50 border border-red-200 rounded-2xl p-6 flex items-start gap-4 backdrop-blur-sm">
             <ExclamationTriangleIcon class="w-8 h-8 text-red-600 shrink-0" />
             <div>

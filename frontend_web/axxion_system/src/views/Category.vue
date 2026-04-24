@@ -6,17 +6,20 @@
       <main class="container h-screen p-4 flex-1 overflow-y-auto">
         <headerP/>
         <section class="grid grid-cols-2 gap-5 justify-between">
-          <h1 class="font-bold text-gray-800 text-2xl">Categorias</h1>
+          <div>
+            <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Categorias</h1>
+            <p class="text-sm text-slate-500 mt-1 font-medium">Organiza tus categorías en un solo lugar</p>
+          </div>
           <fwb-button
             @click="openCreate"
-            class="w-auto col-start-3 cursor-pointer transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110" gradient="green-blue" outline
+            class="w-auto h-10 col-start-3 cursor-pointer transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110" gradient="green-blue" outline
           >
             <font-awesome-icon icon="fa-solid fa-plus" />
             Agregar Categoria
           </fwb-button>
         </section>
         <br>
-        <section class="mb-6 flex gap-4 p-8 rounded-4xl h-auto">
+        <section class="mb-6 flex gap-4 p-8 rounded-4xl h-auto  bg-[#1e2838]">
           <!-- Input buscador -->
           <div class=" relative flex-1">
             <MagnifyingGlassIcon class="size-6 text-gray-600 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"/>
@@ -24,15 +27,15 @@
               v-model="busqueda"
               type="text"
               placeholder="Buscar Categorias"
-              class="w-full pl-12 pr-4 py-2 bg-gray-800 text-white rounded-lg border-gray-700 focus:outline-none focus:border-blue-500 transition-colors placeholder-gray-500"
+              class="w-full pl-12 pr-4 py-2 bg-[#364153] text-[#828983] rounded-lg border-[#465263] focus:outline-none focus:border-emerald-500 transition-colors placeholder-gray-500"
             />
           </div>
           <!-- Filtro de Fecha -->
-          <div class="relative flex items-center bg-white border border-gray-200 rounded-lg shadow-sm focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-colors">
+          <div class="relative flex items-center bg-[#364153] border border-gray-200  rounded-lg shadow-sm focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 transition-colors">
             <input
               v-model="fechaFiltro"
               type="date"
-              class="px-4 py-2 bg-transparent text-gray-700 outline-none w-full md:w-auto"
+              class="px-4 py-2 bg-transparent text-[#828983]  outline-none w-full md:w-auto"
             />
             <button v-if="fechaFiltro" @click="fechaFiltro = ''" class="pr-3 text-gray-400 hover:text-gray-600" title="Limpiar fecha">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
@@ -41,30 +44,30 @@
         </section>
         <br>
         <!-- Contenedor de lista vertical -->
-        <section class="p-8 bg-gray-100 rounded-4xl h-auto">
+        <section class="p-8 bg-[#364153] rounded-4xl h-auto">
           <div class="space-y-4">
             <div
               v-for="cat in listaFiltrada"
               :key="cat?.id"
-              class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden grid"
+              class="bg-[#1e2838] rounded-xl shadow-sm border border-gray-200 overflow-hidden grid"
             >
             <!-- Cabecera -->
               <div
                 @click="toggleAcordeon(cat.id)"
-                class="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors"
+                class="p-4 flex items-center justify-between cursor-pointer hover:bg-[#364153] transition-colors"
               >
               <!-- Lado Izquierdo Icono + Titulos -->
                 <div class="flex items-center gap-4">
-                  <!-- Icono (Gira si esta abierto) -->
+                  <!-- Icono  -->
                   <div class="text-gray-400 transition-transform duration-500" :class="{'rotate-180': abiertos.has(cat.id)}">
                     <ChevronDownIcon class="w-4 h-4 text-gray-600"/>
                   </div>
-                  <!-- Caja icono azul -->
-                  <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center font-bold text-lg">
+                  <!-- Caja icono  -->
+                  <div class="w-12 h-12 bg-[#364153] text-emerald-500 rounded-lg flex items-center justify-center font-bold text-lg">
                     <TagIcon class="size-6" />
                   </div>
                   <div>
-                    <h3 class="font-bold text-gray-800 text-lg flex items-center gap-2">
+                    <h3 class="font-bold text-gray-100 text-lg flex items-center gap-2">
                       {{ cat.nombre }}
                       <!-- insignia gris pequeña -->
                       <span class="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full border border-gray-200 font-normal">
@@ -90,10 +93,10 @@
                   <!-- Botones CRUD -->
                   <div class="flex items-center gap-2">
                     <button @click.stop="openEdit(cat)" class="p-2 text-gray-400 hover:bg-blue-50 rounded-lg transition">
-                      <PencilIcon class="w-4 h-4 text-gray-600 hover:text-blue-600" />
+                      <PencilIcon class="w-4 h-4 text-white hover:text-emerald-500" />
                     </button>
                     <button @click.stop="openDelete(cat)" class="p-2 text-gray-400 hover:bg-red-50 rounded-lg transition">
-                      <TrashIcon class="w-4 h-4 text-gray-600 hover:text-red-600" />
+                      <TrashIcon class="w-4 h-4 text-white hover:text-red-600" />
                     </button>
                   </div>
                 </div>
@@ -110,39 +113,40 @@
               >
                 <div
                   v-if="abiertos.has(cat.id)"
-                  class="bg-gray-50 border-t border-gray-100 p-6"
+                  class="bg-[#1e2838] border-t border-gray-100 p-6"
                 >
-                  <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
+                  <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
                     Subcategorias
                   </h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div
                         v-for="sub in (cat.subcategorias)"
                         :key="sub.id"
-                        class="bg-white border border-gray-200 p-3 rounded-lg flex flex-col md:flex-row items-center gap-3 shadow-sm justify-between"
+                        class="bg-[#364153] border border-gray-200 p-3 rounded-lg flex flex-col md:flex-row items-center gap-3 shadow-sm justify-between"
                       >
-                        <div class="w-2 h-2 rounded-full bg-blue-400"></div>
+                        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
                         <div class="flex-1">
-                          <span class="text-gray-700 font-medium">{{ sub.nombre }}</span>
-                          <p class="text-gray-500 text-sm mt-0.5">{{ sub.descripcion }}</p>
+                          <span class="text-white font-medium">{{ sub.nombre }}</span>
+                          <p class="text-gray-400 text-sm mt-0.5">{{ sub.descripcion }}</p>
                         </div>
                         <div class="flex items-center gap-2">
                           <button @click.stop="openEditSub(cat.id, sub)" class="p-2 text-gray-400 hover:bg-blue-50 rounded-lg transition">
-                            <PencilIcon class="size-4 text-gray-600 hover:text-blue-600"/>
+                            <PencilIcon class="size-4 text-white hover:text-emerald-500"/>
                           </button>
                           <button @click.stop="openDeleteSub(cat.id, sub)" class="p-2 text-gray-400 hover:bg-red-50 rounded-lg transition">
-                            <TrashIcon class="size-4 text-gray-600 hover:text-red-600"/>
+                            <TrashIcon class="size-4 text-white hover:text-red-600"/>
                           </button>
                         </div>
                       </div>
                     </div>
                     <!-- Mensaje si esta vacio -->
-                    <p v-if="!cat.subcategorias?.length" class="text-sm text-gray-400 italic">
+                    <p v-if="!cat.subcategorias?.length" class="text-sm text-gray-300 italic">
                       No hay categorias registradas.
                     </p>
+                    <br>
                     <button
                       @click="openCreateSub(cat.id)"
-                      class="text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded hover:bg-indigo-100 transition"
+                      class="text-xs bg-[#364153] text-white px-2 py-1 rounded hover:bg-indigo-100 hover:text-black transition"
                     >
                       + Añadir Nueva
                     </button>
@@ -153,13 +157,12 @@
         </section>
         <!-- componente modal -->
           <CategoryModal :show="modal.open" @close="modal.open = false">
-            <!-- SLOT DE CABECERA -->
             <template #header>
               <!-- TITULOS DINAMICOS -->
               <span v-if="modal.type === 'category'">
-                {{ modal.mode === 'create' ? 'Nueva Categoria' : 'Gestion Categoria' }}
+                Categoria ({{ modal.mode === 'create' ? 'Nueva Categoria' : 'Gestion Categoria' }})
               </span>
-              <span v-else class="text-indigo-600">
+              <span v-else class="text-black">
                 Subcategoria ({{ modal.mode === 'create' ? 'Crear' : 'Editar' }})
               </span>
             </template>
@@ -219,7 +222,7 @@
                 <button
                   @click="handleAction"
                   class="px-4 py-2 text-white rounded-lg shadow-sm"
-                  :class="modal.mode === 'delete' ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700'"
+                  :class="modal.mode === 'delete' ? 'bg-red-600 hover:bg-red-700' : 'bg-emerald-500 hover:bg-emerald-700'"
                   :disabled="isSaving"
                 >
                   <span v-if="isSaving" class="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
