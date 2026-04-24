@@ -9,7 +9,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  const devApiTarget = process.env.VITE_API_PROXY_TARGET || 'http://localhost:8001'
+  const devApiTarget = process.env.VITE_API_PROXY_TARGET || 'http://localhost:8000'
 
   return {
     plugins: [
