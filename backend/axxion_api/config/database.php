@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
+use Predis\Configuration\Options;
 
 return [
 
@@ -143,25 +144,31 @@ return [
 
     'redis' => [
 
-        'client' => env('REDIS_CLIENT', 'phpredis'),
+        'client' => env('REDIS_CLIENT', 'predis'),
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => '',
         ],
 
-        'default' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
-            'database' => env('REDIS_DB', '0'),
-        ],
+        'default' =>  array_merge(
+            explode(',', env('REDIS_SENTINEL_HOSTS', '100.113.218.94:26379')),
+            [
+                'options' => 
+                [
+                    'replication' => 'sentinel',
+                    'service'     => env('REDIS_SENTINEL_SERVICE', 'mymaster'),
+                    'parameters'  => [
+                        'password' => env('REDIS_PASSWORD', null),
+                        'database' => env('REDIS_DB', '0'),
+                    ],
+                ],
+            ]
+        ),
 
         'cache' => [
             'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host' => env('REDIS_HOST', '100.113.218.94'),
             'username' => env('REDIS_USERNAME'),
             'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT', '6379'),
