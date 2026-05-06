@@ -151,24 +151,18 @@ return [
             'prefix' => '',
         ],
 
-        'default' =>  array_merge(
-            explode(',', env('REDIS_SENTINEL_HOSTS', '100.113.218.94:26379')),
-            [
-                'options' => 
-                [
-                    'replication' => 'sentinel',
-                    'service'     => env('REDIS_SENTINEL_SERVICE', 'mymaster'),
-                    'parameters'  => [
-                        'password' => env('REDIS_PASSWORD', null),
-                        'database' => env('REDIS_DB', '0'),
-                    ],
-                ],
-            ]
-        ),
+        'default' =>  [
+            'url' => env('REDIS_URL'),
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'username' => env('REDIS_USERNAME'),
+            'password' => env('REDIS_PASSWORD'),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_DB', '0'),
+        ],
 
         'cache' => [
             'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '100.113.218.94'),
+            'host' => env('REDIS_HOST', '127.0.0.1'),
             'username' => env('REDIS_USERNAME'),
             'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT', '6379'),
