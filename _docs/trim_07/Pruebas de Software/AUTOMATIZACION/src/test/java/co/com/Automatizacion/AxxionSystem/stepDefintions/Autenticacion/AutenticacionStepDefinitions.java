@@ -1,37 +1,38 @@
 package co.com.Automatizacion.AxxionSystem.stepDefintions.Autenticacion;
 
-import co.com.Automatizacion.AxxionSystem.pages.LoginPage;
-import co.com.Automatizacion.AxxionSystem.pages.PaginaPrincipal;
+import co.com.Automatizacion.AxxionSystem.questions.Autenticacion.urlCorrecta;
+import co.com.Automatizacion.AxxionSystem.questions.Autenticacion.MensajeBienvenida;
+import co.com.Automatizacion.AxxionSystem.tasks.IniciarSesion;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
-import net.serenitybdd.annotations.Steps;
-
-import static org.junit.Assert.assertTrue;
+import net.serenitybdd.screenplay.GivenWhenThen;
+import net.serenitybdd.screenplay.actions.Open;
+import net.serenitybdd.screenplay.actors.OnStage;
+import static org.hamcrest.Matchers.containsString;
 
 public class AutenticacionStepDefinitions {
 
-    @Steps
-    LoginPage loginPage;
-    PaginaPrincipal paginaPrincipal;
-
     @Dado("que el usuario se encuentra en la pagina de inicio de sesion de Axxion System")
     public void queElUsuarioSeEncuentraEnLaPaginaDeInicioDeSesionDeAxxionSystem() {
-        loginPage.openUrl("http://localhost:5173/login");
+        OnStage.theActorCalled("Juan").wasAbleTo(Open.url("http://localhost:5173/login"));
     }
     @Cuando("ingrese las credenciales correctas {string} y {string}")
     public void ingreseLasCredencialesCorrectasY(String string, String string2, io.cucumber.datatable.DataTable dataTable) {
-        loginPage.iniciarSesion("p@example.com", "Us123456");
+        OnStage.theActorInTheSpotlight().attemptsTo(IniciarSesion.conCredenciales("p@example.com", "Us123456"));
     }
     @Entonces("se deberia verificar que el usuario haya sido autenticado correctamente")
     public void seDeberiaVerificarQueElUsuarioHayaSidoAutenticadoCorrectamente() {
-        assertTrue("ERROR: No se encontró el mensaje de bienvenida de Axxion System",
-                paginaPrincipal.mensajeBienvenidaEsVisible());
+        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat("Mensaje de bienvenida", MensajeBienvenida.esVisible()));
     }
     @Entonces("redirigido a la pagina prinncipal de Axxion System")
     public void redirigidoALaPaginaPrinncipalDeAxxionSystem() {
-        String urlActual = paginaPrincipal.obtenerUrlActual();
-        assertTrue("No se redirigió a la página principal", urlActual.contains("Home"));
+        OnStage.theActorInTheSpotlight().should(
+                GivenWhenThen.seeThat("La url del navegador",
+                        urlCorrecta.actual(),
+                        containsString("Home")
+                )
+        );
     }
 
 }

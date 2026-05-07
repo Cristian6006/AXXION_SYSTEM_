@@ -108,7 +108,7 @@
         <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
         <div id="projectname-banner" style="float:right">
             <span class="projectname">
-                <span class="projecttitle">Axxion System Automation</span>
+                <span class="projecttitle">Serenity BDD Report</span>
                 <span class="projectsubtitle"></span>
             </span>
         </div>
@@ -121,10 +121,6 @@
         <span class="breadcrumbs">
             <a href="index.html" class="breadcrumbs">Home</a>
 
- <!-- inflection.of(breadcrumb.displayName).asATitle()-->
-            > <a href="54fd5f1ce58d8ab00fcdadc0f3267dd23de699485c62d56c3b7a4d12fb846589.html">Categorias</a>
- <!-- inflection.of(breadcrumb.displayName).asATitle()-->
-            > <a href="c251390f272f5d79724a63f97799aadec0742101a6e523a7489b4c35d9fc94dd.html">Editar Categor&iacute;as</a>
         > Editar una categor&iacute;a correctamente
         </span>
         </div>
@@ -142,14 +138,8 @@
         <li >
             <a href="capabilities.html"><i class="bi bi-journal-text"></i> Requirements</a>
         </li>
-        <li >
-            <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
-        </li>
-        <li >
-            <a href="2a4631d87648e59c428d4cf0e9247f9d286e4679f436ca2ce872e931eb4dfd58.html"><i class="bi bi-chat-text"></i> Stories</a>
-        </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 04-05-2026 14:29</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 06-05-2026 18:56</span>
     <br style="clear:left"/>
 </div>
     <div class="clr"></div>
@@ -163,10 +153,9 @@
                         <td>
                                 <div>
                                     <h3 class="discreet-story-header">
-                                        <i class="fs-2 bi bi-chat-left-quote title-icon"></i>
-                                        <span class="story-header-title">Editar Categorías </span>
+                                        <i class="fs-2 bi bi-chat-left-quote large-icon"></i>
+                                        <span class="story-header-title">Editar Categorías</span>
                                     </h3>
-
                                 </div>
 
                         </td>
@@ -219,7 +208,7 @@
     <div class="story-title">
         <h3 class="story-header">Scenario Outline</h3>
 
-        <div class="scenario">Given que estoy en la página de gestión de categorías<br>When selecciono la categoría "&lt;categoria&gt;" y hago clic en el icono de edición<br>Then debería abrirse un modal con los datos actuales de la categoría<br>When edito el nombre a "&lt;nuevo_nombre&gt;"<br>And edito el tipo de categoría a "&lt;tipo_categoria&gt;"<br>And edito la descripción a "&lt;descripcion&gt;"<br>And presiono el botón "Guardar"<br>Then debería ver un mensaje de éxito indicando que la categoría fue editada correctamente<br>And el modal debería cerrarse<br>And la categoría "&lt;nuevo_nombre&gt;" debería reflejar los cambios en la lista</div>
+        <div class="scenario">Dado que estoy en la sección de gestión de categorías<br>Cuando selecciono la categoría "&lt;categoria&gt;" y hago clic en el icono de edición<br>Y ingreso los detalles de la categoría editada<br><table class='embedded'><thead><th>nombre</th><th>Tipo Categoria</th><th>descripción</th></thead><tbody><tr><td>&lt;nuevo_nombre&gt;</td><td>&lt;tipo_categoria&gt;</td><td>&lt;descripcion&gt;</td></tr></tbody></table><br>Y confirmo la edición de la categoría<br>Entonces debería ver un mensaje de éxito "Guardado"<br>Y la categoría "&lt;nuevo_nombre&gt;" debería reflejar los cambios en la lista</div>
 
     </div>
 
@@ -321,7 +310,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">PENDING</span></td>
-                    <td width="100"><span class="top-level-step">008ms</span></td>
+                    <td width="100"><span class="top-level-step">005ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -338,7 +327,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Given que estoy en la página de gestión de categorías
+                                                Dado que el administrador ha iniciado sesión en la aplicación<br><table class='embedded'><thead><th>usuario</th><th>clave</th></thead><tbody><tr><td>p@example.com</td><td>contraseña12</td></tr></tbody></table>
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -346,7 +335,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">PENDING</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                    <td width="100"><span class="nested-group-step">002ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -360,7 +349,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                When selecciono la categoría "Electrónicos" y hago clic en el icono de edición
+                                                Dado que estoy en la sección de gestión de categorías
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -382,7 +371,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Then debería abrirse un modal con los datos actuales de la categoría
+                                                Cuando selecciono la categoría "Electrónicos" y hago clic en el icono de edición
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -390,7 +379,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                    <td width="100"><span class="nested-group-step"></span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -404,7 +393,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                When edito el nombre a "Video"
+                                                Y ingreso los detalles de la categoría editada<br><table class='embedded'><thead><th>nombre</th><th>Tipo Categoria</th><th>descripción</th></thead><tbody><tr><td>Video</td><td>Pantallas</td><td>pantalla modular de gran resolución</td></tr></tbody></table>
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -412,7 +401,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                    <td width="100"><span class="nested-group-step"></span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -426,7 +415,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                And edito el tipo de categoría a "Pantallas"
+                                                Y confirmo la edición de la categoría
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -448,7 +437,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                And edito la descripción a "pantalla modular de gran resolución"
+                                                Entonces debería ver un mensaje de éxito "Guardado"
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -470,7 +459,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                And presiono el botón "Guardar"
+                                                Y la categoría "Video" debería reflejar los cambios en la lista
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -478,73 +467,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="0-7"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                Then debería ver un mensaje de éxito indicando que la categoría fue editada correctamente
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="0-8"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                And el modal debería cerrarse
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="0-9"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                And la categoría "Video" debería reflejar los cambios en la lista
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
                 </tr>
 
                             </table>
@@ -575,7 +498,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">PENDING</span></td>
-                    <td width="100"><span class="top-level-step">003ms</span></td>
+                    <td width="100"><span class="top-level-step">006ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -592,7 +515,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Given que estoy en la página de gestión de categorías
+                                                Dado que el administrador ha iniciado sesión en la aplicación<br><table class='embedded'><thead><th>usuario</th><th>clave</th></thead><tbody><tr><td>p@example.com</td><td>contraseña12</td></tr></tbody></table>
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -600,7 +523,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">PENDING</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -614,7 +537,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                When selecciono la categoría "Hogar" y hago clic en el icono de edición
+                                                Dado que estoy en la sección de gestión de categorías
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -622,7 +545,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -636,7 +559,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Then debería abrirse un modal con los datos actuales de la categoría
+                                                Cuando selecciono la categoría "Hogar" y hago clic en el icono de edición
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -658,7 +581,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                When edito el nombre a "Muebles"
+                                                Y ingreso los detalles de la categoría editada<br><table class='embedded'><thead><th>nombre</th><th>Tipo Categoria</th><th>descripción</th></thead><tbody><tr><td>Muebles</td><td>Oficina</td><td>muebles ergonómicos de oficina</td></tr></tbody></table>
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -680,7 +603,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                And edito el tipo de categoría a "Oficina"
+                                                Y confirmo la edición de la categoría
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -702,7 +625,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                And edito la descripción a "muebles ergonómicos de oficina"
+                                                Entonces debería ver un mensaje de éxito "Guardado"
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -724,73 +647,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                And presiono el botón "Guardar"
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="1-7"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                Then debería ver un mensaje de éxito indicando que la categoría fue editada correctamente
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="1-8"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                And el modal debería cerrarse
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="1-9"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                And la categoría "Muebles" debería reflejar los cambios en la lista
+                                                Y la categoría "Muebles" debería reflejar los cambios en la lista
                                         </span>
                             <span class="evidence">
                                 </span>

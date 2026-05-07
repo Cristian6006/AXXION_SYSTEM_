@@ -1,4 +1,5 @@
 # language: es
+  # Author: Cristian
 
 Característica: Consultar Categorías
   Como administrador del sistema

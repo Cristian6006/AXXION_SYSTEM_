@@ -108,7 +108,7 @@
         <div id="logo"><a href="index.html"><img src="images/serenity-logo.png" border="0"/></a></div>
         <div id="projectname-banner" style="float:right">
             <span class="projectname">
-                <span class="projecttitle">Axxion System Automation</span>
+                <span class="projecttitle">Serenity BDD Report</span>
                 <span class="projectsubtitle"></span>
             </span>
         </div>
@@ -121,10 +121,6 @@
         <span class="breadcrumbs">
             <a href="index.html" class="breadcrumbs">Home</a>
 
- <!-- inflection.of(breadcrumb.displayName).asATitle()-->
-            > <a href="54fd5f1ce58d8ab00fcdadc0f3267dd23de699485c62d56c3b7a4d12fb846589.html">Categorias</a>
- <!-- inflection.of(breadcrumb.displayName).asATitle()-->
-            > <a href="876510e763bc70eb0ee17bcc115dd53e24ed9bda9d7ecee9957187eaa0fd9784.html">Consultar Categor&iacute;as</a>
         > Consultar categor&iacute;as con filtros y b&uacute;squeda
         </span>
         </div>
@@ -142,14 +138,8 @@
         <li >
             <a href="capabilities.html"><i class="bi bi-journal-text"></i> Requirements</a>
         </li>
-        <li >
-            <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
-        </li>
-        <li >
-            <a href="2a4631d87648e59c428d4cf0e9247f9d286e4679f436ca2ce872e931eb4dfd58.html"><i class="bi bi-chat-text"></i> Stories</a>
-        </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 04-05-2026 14:29</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 06-05-2026 18:56</span>
     <br style="clear:left"/>
 </div>
     <div class="clr"></div>
@@ -163,10 +153,9 @@
                         <td>
                                 <div>
                                     <h3 class="discreet-story-header">
-                                        <i class="fs-2 bi bi-chat-left-quote title-icon"></i>
-                                        <span class="story-header-title">Consultar Categorías </span>
+                                        <i class="fs-2 bi bi-chat-left-quote large-icon"></i>
+                                        <span class="story-header-title">Consultar Categorías</span>
                                     </h3>
-
                                 </div>
 
                         </td>
@@ -219,7 +208,7 @@
     <div class="story-title">
         <h3 class="story-header">Scenario Outline</h3>
 
-        <div class="scenario">Given que he ingresado correctamente a la aplicación con un usuario válido<br>And estoy en la página de categorías<br>When hago clic en la opción "Categorías"<br>Then debería ver la lista de categorías<br>When ingreso "&lt;buscar_categoria&gt;" en el campo de búsqueda<br>Then debería visualizar la categoría específica "&lt;buscar_categoria&gt;"<br>When selecciono la fecha "&lt;fecha&gt;" en el filtro de fechas<br>Then debería visualizar la categoría específica filtrada por la fecha "&lt;fecha&gt;"</div>
+        <div class="scenario">Dado que estoy en la sección de gestión de categorías<br>Cuando ingreso "&lt;buscar_categoria&gt;" en el campo de búsqueda<br>Entonces debería visualizar la categoría específica "&lt;buscar_categoria&gt;" en la lista de categorías<br>Cuando selecciono la fecha "&lt;fecha&gt;" en el filtro de fechas<br>Entonces debería visualizar la categoría específica filtrada por la fecha "&lt;fecha&gt;"</div>
 
     </div>
 
@@ -307,7 +296,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">PENDING</span></td>
-                    <td width="100"><span class="top-level-step">004ms</span></td>
+                    <td width="100"><span class="top-level-step">003ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -324,7 +313,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Given que he ingresado correctamente a la aplicación con un usuario válido
+                                                Dado que el administrador ha iniciado sesión en la aplicación<br><table class='embedded'><thead><th>usuario</th><th>clave</th></thead><tbody><tr><td>p@example.com</td><td>contraseña12</td></tr></tbody></table>
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -346,7 +335,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                And estoy en la página de categorías
+                                                Dado que estoy en la sección de gestión de categorías
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -368,7 +357,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                When hago clic en la opción "Categorías"
+                                                Cuando ingreso "Iluminación" en el campo de búsqueda
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -390,7 +379,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Then debería ver la lista de categorías
+                                                Entonces debería visualizar la categoría específica "Iluminación" en la lista de categorías
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -412,7 +401,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                When ingreso "Iluminación" en el campo de búsqueda
+                                                Cuando selecciono la fecha "21/02/2026" en el filtro de fechas
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -420,7 +409,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -434,51 +423,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Then debería visualizar la categoría específica "Iluminación"
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="0-6"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                When selecciono la fecha "21/02/2026" en el filtro de fechas
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="0-7"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                Then debería visualizar la categoría específica filtrada por la fecha "21/02/2026"
+                                                Entonces debería visualizar la categoría específica filtrada por la fecha "21/02/2026"
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -517,7 +462,7 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">PENDING</span></td>
-                    <td width="100"><span class="top-level-step">008ms</span></td>
+                    <td width="100"><span class="top-level-step">004ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
@@ -534,7 +479,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Given que he ingresado correctamente a la aplicación con un usuario válido
+                                                Dado que el administrador ha iniciado sesión en la aplicación<br><table class='embedded'><thead><th>usuario</th><th>clave</th></thead><tbody><tr><td>p@example.com</td><td>contraseña12</td></tr></tbody></table>
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -542,7 +487,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">PENDING</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
+                    <td width="100"><span class="nested-group-step">002ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -556,7 +501,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                And estoy en la página de categorías
+                                                Dado que estoy en la sección de gestión de categorías
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -564,7 +509,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                    <td width="100"><span class="nested-group-step"></span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -578,7 +523,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                When hago clic en la opción "Categorías"
+                                                Cuando ingreso "Electrónicos" en el campo de búsqueda
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -586,7 +531,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                    <td width="100"><span class="nested-group-step"></span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -600,7 +545,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Then debería ver la lista de categorías
+                                                Entonces debería visualizar la categoría específica "Electrónicos" en la lista de categorías
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -622,7 +567,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                When ingreso "Electrónicos" en el campo de búsqueda
+                                                Cuando selecciono la fecha "15/03/2026" en el filtro de fechas
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -630,7 +575,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -644,51 +589,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Then debería visualizar la categoría específica "Electrónicos"
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="1-6"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                When selecciono la fecha "15/03/2026" en el filtro de fechas
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="1-7"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                Then debería visualizar la categoría específica filtrada por la fecha "15/03/2026"
+                                                Entonces debería visualizar la categoría específica filtrada por la fecha "15/03/2026"
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -705,7 +606,7 @@
             <tr class="test-PENDING">
                     <td colspan="2"></td>
                 <td width="130"><span class="top-level-step"><em>PENDING</em></span></td>
-                <td width="100"><span class="top-level-step"><em>0.01s</em></span></td>
+                <td width="100"><span class="top-level-step"><em>0s</em></span></td>
             </tr>
 
         </table>

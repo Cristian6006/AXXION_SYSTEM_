@@ -1,4 +1,5 @@
 # language: es
+  # Author: Cristian
 
 Característica: Gestión de Categorías
   Como administrador del sistema

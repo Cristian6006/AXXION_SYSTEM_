@@ -1,4 +1,5 @@
 # language: es
+  # Author: Cristian
 
 Característica: Borrar Categorías
   Como administrador del sistema

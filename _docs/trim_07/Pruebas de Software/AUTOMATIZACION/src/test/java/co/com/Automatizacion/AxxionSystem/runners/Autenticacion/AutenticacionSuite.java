@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = "src/test/resources/features/Autenticacion",
-        glue = "co/com/Automatizacion/AxxionSystem/stepDefintions/Autenticacion",
+        features = "classpath:features",
+        glue = "co.com.Automatizacion.AxxionSystem",
         snippets = CucumberOptions.SnippetType.CAMELCASE
 )
 

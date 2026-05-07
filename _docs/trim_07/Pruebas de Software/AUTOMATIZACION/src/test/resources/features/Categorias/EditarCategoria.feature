@@ -1,4 +1,5 @@
 # language: es
+  # Author: Cristian
 
 Característica: Editar Categorías
   Como administrador del sistema
