@@ -149,7 +149,7 @@
             <a href="capabilities.html"><i class="bi bi-journal-text"></i> Requirements</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 06-05-2026 18:35</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 07-05-2026 16:08</span>
     <br style="clear:left"/>
 </div>
 
@@ -217,9 +217,9 @@ Para gestionar, procesar y acceder a datos de forma eficiente a través de inter
                 <table class="outcome-header">
                     <tr>
                         <td colspan="2" class="test-title-bar">
-                            <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon fa-2x' title='SUCCESS'></i></a></span>
+                            <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-exclamation-triangle-fill error-icon fa-2x' title='ERROR'></i></a></span>
                             <span class="test-case-title">
-                                <span class="success-color">Iniciar sesion correctamente
+                                <span class="error-color">Iniciar sesion correctamente
                                     <span class="related-issue-title"></span>
                                 </span>
                             </span>
@@ -236,33 +236,44 @@ Para gestionar, procesar y acceder a datos de forma eficiente a través de inter
 
     <div id="beforetable"></div>
     <div id="contenttilttle">
+            <div class="screenshotFailure panel panel-danger">
+    <div style="display:block">
+        <div class="table">
+            <div class="row">
+                <div class="col-sm-10" style="padding-left:1.5em; padding-top:0.5em; padding-bottom:0.5em;">
+                    <span class="error-message error-message-title">Web driver exception: The following error occurred: unknown error: net::ERR_CONNECTION_REFUSED</span>
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-warning details-button" data-toggle="collapse" href="#stacktraceModal-overall"
+                       role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="bi bi-eye"></i> More details</a>
+                </div>
+             </div>
+        </div>
+    <div>
+
+    <!-- Details Section -->
+    <div class="row stacktrace-details">
+      <div class="col">
+        <div class="collapse multi-collapse" id="stacktraceModal-overall">
+            <div class="card">
+                <div class="card-header">
+                    <h4>org.openqa.selenium.WebDriverException </h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <pre>co.com.Automatizacion.AxxionSystem.stepDefintions.Autenticacion.AutenticacionStepDefinitions.queElUsuarioSeEncuentraEnLaPaginaDeInicioDeSesionDeAxxionSystem(AutenticacionStepDefinitions.java:18)<br />worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)<br />worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)<br /></pre>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+            </div>
         <div class="slider-wrapper theme-default">
             <div id="slider">
-                <img src="bed23032d1f5a311b28a5f24aa830dbd0e1df99d38aa0f41dcba932a5f47ee9a.png" title=" Dado que el usuario se encuentra en la pagina de inicio de sesion de Axxion System" width="0"/>
-                <img src="bed23032d1f5a311b28a5f24aa830dbd0e1df99d38aa0f41dcba932a5f47ee9a.png" title=" Juan opens the browser at http://localhost:5173/login" width="0"/>
-                <img src="bed23032d1f5a311b28a5f24aa830dbd0e1df99d38aa0f41dcba932a5f47ee9a.png" title=" Dado que el usuario se encuentra en la pagina de inicio de sesion de Axxion System (completed)" width="0"/>
-                <img src="0c4df4ed0d47d4492f60643debdbea8f7e59eeabd73ef10296e536451ac12c18.png" title=" Cuando ingrese las credenciales correctas &quot;&lt;usuario&gt;&quot; y &quot;&lt;contrase&ntilde;a&gt;&quot;
-| usuario |  | contrase&ntilde;a |
-| p@example.com |  | Us123456 |" width="0"/>
-                <img src="0c4df4ed0d47d4492f60643debdbea8f7e59eeabd73ef10296e536451ac12c18.png" title=" Juan iniciar sesion" width="0"/>
-                <img src="5e149ab1cab3cd7f1c75a072bbaf867076c2921e42a9556ae54c6976a24aa7e7.png" title=" Juan enters 'p@example.com' into Campo de correo" width="0"/>
-                <img src="3103b084d7a2086033099041f1d16d327ebab4cd273c351bc56791d1de573395.png" title=" Juan enters 'p@example.com' into Campo de correo (completed)" width="0"/>
-                <img src="3103b084d7a2086033099041f1d16d327ebab4cd273c351bc56791d1de573395.png" title=" Juan enters 'Us123456' into Campo de contrase&ntilde;a" width="0"/>
-                <img src="cd3a2e1cfdddcb51795a46e34f6c001676222672f5a82ede5ae52d938ca8e754.png" title=" Juan enters 'Us123456' into Campo de contrase&ntilde;a (completed)" width="0"/>
-                <img src="cd3a2e1cfdddcb51795a46e34f6c001676222672f5a82ede5ae52d938ca8e754.png" title=" Juan clicks on Bot&oacute;n para acceder" width="0"/>
-                <img src="7ca16f4794bb3e4b599e1b07ebff7d2a52acd0eaabba9a38e0a638875ece7992.png" title=" Juan clicks on Bot&oacute;n para acceder (completed)" width="0"/>
-                <img src="7ca16f4794bb3e4b599e1b07ebff7d2a52acd0eaabba9a38e0a638875ece7992.png" title=" Juan iniciar sesion (completed)" width="0"/>
-                <img src="7ca16f4794bb3e4b599e1b07ebff7d2a52acd0eaabba9a38e0a638875ece7992.png" title=" Cuando ingrese las credenciales correctas &quot;&lt;usuario&gt;&quot; y &quot;&lt;contrase&ntilde;a&gt;&quot;
-| usuario |  | contrase&ntilde;a |
-| p@example.com |  | Us123456 | (completed)" width="0"/>
-                <img src="d374e1ffabee1460c9943479c7ab7d1524f6f7fd074eb7c4da7b1e518d37251c.png" title=" Entonces se deberia verificar que el usuario haya sido autenticado correctamente" width="0"/>
-                <img src="c6ae63b26d4fac3996cd42c54f195660a8f96de68d971eee66b1c672d7551832.png" title=" Then Mensaje de bienvenida" width="0"/>
-                <img src="290cab4a4cabf37723a81eaf2f84d085d0b3425a431ec602361ffda1b2f18477.png" title=" Then Mensaje de bienvenida (completed)" width="0"/>
-                <img src="290cab4a4cabf37723a81eaf2f84d085d0b3425a431ec602361ffda1b2f18477.png" title=" Entonces se deberia verificar que el usuario haya sido autenticado correctamente (completed)" width="0"/>
-                <img src="8a358c93f3d51f3efae4541305034ea873528b67fbd8c257b004074faa2f79e1.png" title=" Y redirigido a la pagina prinncipal de Axxion System" width="0"/>
-                <img src="8a358c93f3d51f3efae4541305034ea873528b67fbd8c257b004074faa2f79e1.png" title=" Then La url del navegador should be a string containing 'Home'" width="0"/>
+                <img src="3abbb7b17231cc91492b4af358c590e7be5f65986a886e8ba2cc9e2fdb1e41bf.png" title=" Dado que el usuario se encuentra en la pagina de inicio de sesion de Axxion System" width="0"/>
 
-                <img src="8a358c93f3d51f3efae4541305034ea873528b67fbd8c257b004074faa2f79e1.png" title=" Y redirigido a la pagina prinncipal de Axxion System (completed): <span class='success-color'>SUCCESS</span>" width="0"/>
+                <img src="3abbb7b17231cc91492b4af358c590e7be5f65986a886e8ba2cc9e2fdb1e41bf.png" title=" Juan opens the browser at http://localhost:5173/login: <span class='error-color'>ERROR</span>" width="0"/>
             </div>
         </div>
 

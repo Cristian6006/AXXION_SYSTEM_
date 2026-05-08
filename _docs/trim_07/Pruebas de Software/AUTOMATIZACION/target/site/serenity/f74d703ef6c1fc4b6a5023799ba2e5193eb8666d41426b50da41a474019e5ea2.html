@@ -139,7 +139,7 @@
             <a href="capabilities.html"><i class="bi bi-journal-text"></i> Requirements</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 06-05-2026 19:00</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 07-05-2026 23:38</span>
     <br style="clear:left"/>
 </div>
     <div class="clr"></div>
@@ -208,7 +208,7 @@
     <div class="story-title">
         <h3 class="story-header">Scenario Outline</h3>
 
-        <div class="scenario">Dado que estoy en la sección de gestión de categorías<br>Cuando selecciono la categoría "&lt;categoria&gt;" y hago clic en el icono de borrado<br>Y confirmo el borrado de la categoría<br>Entonces debería ver un mensaje de éxito "Guardado"<br>Y la categoría "&lt;categoria&gt;" debería reflejar los cambios en la lista</div>
+        <div class="scenario">Cuando el usuario selecciona la categoría "&lt;categoria&gt;" y hace click en el icono de borrado<br>Y confirma el borrado de la categoría<br>Entonces debería ver un mensaje de éxito "Guardado"<br>Y la categoría "&lt;categoria&gt;" debería haber desaparecido de la lista</div>
 
     </div>
 
@@ -289,15 +289,59 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">PENDING</span></td>
-                    <td width="100"><span class="top-level-step">070ms</span></td>
+                    <td width="100"><span class="top-level-step">091ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
                             <table id="stepSection0" class="step-table-nested" style="display:none;">
-                <tr class="test-PENDING">
+                <tr class="test-SUCCESS">
 
                     <td width="70" class="step-icon">
                         <a name="0-0"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                Dado que se muestra la pagina de gestión de categorías
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">004ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="0-1"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                Y que el usuario ha iniciado sesión en la aplicación correctamente
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
+                </tr>
+                <tr class="test-PENDING">
+
+                    <td width="70" class="step-icon">
+                        <a name="0-2"></a>
                             <span style="margin-left: 40px;"
                                   class="nested-group-icon"><a href='##beforetable'><i class='bi bi-hourglass-top pending-icon ' title='PENDING'></i></a>
                                 </span>
@@ -306,7 +350,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Dado que el administrador ha iniciado sesión en la aplicación<br><table class='embedded'><thead><th>usuario</th><th>clave</th></thead><tbody><tr><td>p@example.com</td><td>contraseña12</td></tr></tbody></table>
+                                                Cuando el usuario selecciona la categoría "Electrónicos" y hace click en el icono de borrado
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -314,51 +358,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">PENDING</span></td>
-                    <td width="100"><span class="nested-group-step">026ms</span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="0-1"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                Dado que estoy en la sección de gestión de categorías
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step">002ms</span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="0-2"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                Cuando selecciono la categoría "Electrónicos" y hago clic en el icono de borrado
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -372,7 +372,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Y confirmo el borrado de la categoría
+                                                Y confirma el borrado de la categoría
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -380,7 +380,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -416,7 +416,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Y la categoría "Electrónicos" debería reflejar los cambios en la lista
+                                                Y la categoría "Electrónicos" debería haber desaparecido de la lista
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -455,15 +455,59 @@
                     </td>
 
                     <td width="130"><span class="top-level-step">PENDING</span></td>
-                    <td width="100"><span class="top-level-step">007ms</span></td>
+                    <td width="100"><span class="top-level-step">019ms</span></td>
                 </tr>
                     <tr>
                         <td colspan="5">
                             <table id="stepSection1" class="step-table-nested" style="display:none;">
-                <tr class="test-PENDING">
+                <tr class="test-SUCCESS">
 
                     <td width="70" class="step-icon">
                         <a name="1-0"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                Dado que se muestra la pagina de gestión de categorías
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
+                </tr>
+                <tr class="test-SUCCESS">
+
+                    <td width="70" class="step-icon">
+                        <a name="1-1"></a>
+                            <span style="margin-left: 40px;"
+                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a>
+                                </span>
+                    </td>
+
+                    <td class="step-description-column">
+                        <div class="step-description">
+                                <span class="nested-group-step">
+                                                Y que el usuario ha iniciado sesión en la aplicación correctamente
+                                        </span>
+                            <span class="evidence">
+                                </span>
+                        </div>
+                    </td>
+
+                    <td width="130"><span class="nested-group-step">SUCCESS</span></td>
+                    <td width="100"><span class="nested-group-step">005ms</span></td>
+                </tr>
+                <tr class="test-PENDING">
+
+                    <td width="70" class="step-icon">
+                        <a name="1-2"></a>
                             <span style="margin-left: 40px;"
                                   class="nested-group-icon"><a href='##beforetable'><i class='bi bi-hourglass-top pending-icon ' title='PENDING'></i></a>
                                 </span>
@@ -472,7 +516,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Dado que el administrador ha iniciado sesión en la aplicación<br><table class='embedded'><thead><th>usuario</th><th>clave</th></thead><tbody><tr><td>p@example.com</td><td>contraseña12</td></tr></tbody></table>
+                                                Cuando el usuario selecciona la categoría "Hogar" y hace click en el icono de borrado
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -480,51 +524,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">PENDING</span></td>
-                    <td width="100"><span class="nested-group-step">004ms</span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="1-1"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                Dado que estoy en la sección de gestión de categorías
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
-                </tr>
-                <tr class="test-IGNORED">
-
-                    <td width="70" class="step-icon">
-                        <a name="1-2"></a>
-                            <span style="margin-left: 40px;"
-                                  class="nested-group-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
-                                </span>
-                    </td>
-
-                    <td class="step-description-column">
-                        <div class="step-description">
-                                <span class="nested-group-step">
-                                                Cuando selecciono la categoría "Hogar" y hago clic en el icono de borrado
-                                        </span>
-                            <span class="evidence">
-                                </span>
-                        </div>
-                    </td>
-
-                    <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
+                    <td width="100"><span class="nested-group-step">003ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -538,7 +538,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Y confirmo el borrado de la categoría
+                                                Y confirma el borrado de la categoría
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -546,7 +546,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step">001ms</span></td>
+                    <td width="100"><span class="nested-group-step"></span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -568,7 +568,7 @@
                     </td>
 
                     <td width="130"><span class="nested-group-step">IGNORED</span></td>
-                    <td width="100"><span class="nested-group-step"></span></td>
+                    <td width="100"><span class="nested-group-step">001ms</span></td>
                 </tr>
                 <tr class="test-IGNORED">
 
@@ -582,7 +582,7 @@
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="nested-group-step">
-                                                Y la categoría "Hogar" debería reflejar los cambios en la lista
+                                                Y la categoría "Hogar" debería haber desaparecido de la lista
                                         </span>
                             <span class="evidence">
                                 </span>
@@ -599,7 +599,7 @@
             <tr class="test-PENDING">
                     <td colspan="2"></td>
                 <td width="130"><span class="top-level-step"><em>PENDING</em></span></td>
-                <td width="100"><span class="top-level-step"><em>0.08s</em></span></td>
+                <td width="100"><span class="top-level-step"><em>0.09s</em></span></td>
             </tr>
 
         </table>
