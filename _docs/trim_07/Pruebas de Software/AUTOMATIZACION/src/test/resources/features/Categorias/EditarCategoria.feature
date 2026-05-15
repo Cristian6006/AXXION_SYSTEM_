@@ -12,17 +12,10 @@ Característica: Editar Categorías
 
   @EditarCategoria
 
-  Esquema del escenario: Editar una categoría correctamente
-    Cuando el usuario selecciona la categoría "<categoria>" y hace click en el icono de edición
-    Y ingresa los detalles de la categoría editada
-      | nombre         | Tipo Categoria   | descripción   |
-      | <nuevo_nombre> | <tipo_categoria> | <descripcion> |
-    Y confirma la edición de la categoría
+  Escenario: Editar una categoría correctamente
+    Cuando el usuario actualiza la categoría "Tecnología" al nuevo nombre "Electrónica"
     Entonces debería ver un mensaje de éxito "Guardado"
-    Y la categoría "<nuevo_nombre>" debería evidenciar cambios en la lista
+    Y que la categoría "Electrónica" debería estar visible en la tabla
 
-    Ejemplos:
-      | categoria     | nuevo_nombre | tipo_categoria | descripcion                              |
-      | Electrónicos  | Video        | Pantallas      | pantalla modular de gran resolución      |
-      | Hogar         | Muebles      | Oficina        | muebles ergonómicos de oficina           |
+
 

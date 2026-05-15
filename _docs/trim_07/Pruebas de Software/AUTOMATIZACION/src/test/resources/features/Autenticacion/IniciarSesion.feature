@@ -9,8 +9,12 @@
 
   @IniciarSesion
 
-  Escenario: Iniciar sesion correctamente
+  Esquema del escenario: Iniciar sesion correctamente
     Dado que el usuario se encuentra en la pagina de inicio de sesion de Axxion System
     Cuando ingrese las credenciales correctas "<usuario>" y "<contraseña>"
     Entonces se deberia verificar que el usuario haya sido autenticado correctamente
     Y redirigido a la pagina prinncipal de Axxion System
+
+    Ejemplos:
+      | usuario            | contraseña |
+      | p@example.com     | Us123456   |

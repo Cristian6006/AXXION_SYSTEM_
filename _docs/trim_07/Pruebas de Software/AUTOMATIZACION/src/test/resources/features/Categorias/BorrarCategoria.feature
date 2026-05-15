@@ -12,13 +12,7 @@ Característica: Borrar Categorías
 
     @BorrarCategoria
 
-    Esquema del escenario: Borrar una categoría correctamente
-      Cuando el usuario selecciona la categoría "<categoria>" y hace click en el icono de borrado
-      Y confirma el borrado de la categoría
+    Escenario: Borrar una categoría correctamente
+      Cuando el usuario elimina la categoría "Electrónica"
       Entonces debería ver un mensaje de éxito "Guardado"
-      Y la categoría "<categoria>" debería haber desaparecido de la lista
-
-      Ejemplos:
-        | categoria     |
-        | Electrónicos  |
-        | Hogar         |
+      Y que la categoría "Electrónica" ya no debería existir en el sistema

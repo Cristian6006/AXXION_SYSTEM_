@@ -14,16 +14,14 @@ Característica: Gestión de Categorías
   @AgregarCategorias
 
   Esquema del escenario: Agregar una categoría válida con éxito
-    Cuando el usuario de click a la opcion "Agregar Categoria"
-    Y ingrese los detalles de la nueva categoría
+    Cuando el usuario crea una nueva categoría
       | nombre   | Tipo Categoria | descripción   |
       | <nombre> | <tipoCategoria> | <descripcion> |
-    Y confirme la creación de la categoría
     Entonces debería ver un mensaje de éxito "Guardado"
     Y la categoría "<nombre>" debería estar visible en la lista de categorías
 
     Ejemplos:
       | nombre       | tipoCategoria | descripcion                             |
-      | Electronicos | Pantalla      | Dispositivos electronicos y gadgets     |
-      | Video        | Equipos       | Pantalla protectores y equipos de video |
+      | Electronicos | Equipos      | Dispositivos electronicos y gadgets     |
+      | Video        | Pantalla      | Pantalla protectores y equipos de video |
 
