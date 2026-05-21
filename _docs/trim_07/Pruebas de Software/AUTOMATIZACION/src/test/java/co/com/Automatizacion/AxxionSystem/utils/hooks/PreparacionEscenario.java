@@ -1,4 +1,4 @@
-package co.com.Automatizacion.AxxionSystem.hooks;
+package co.com.Automatizacion.AxxionSystem.utils.hooks;
 
 import io.cucumber.java.Before;
 import net.serenitybdd.screenplay.actors.OnStage;
