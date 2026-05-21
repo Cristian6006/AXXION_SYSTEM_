@@ -2,26 +2,31 @@
   # Author: Cristian
 
 Característica: Consultar Categorías
-  Como administrador del sistema
+  Como usuario del sistema
   Quiero visualizar y buscar categorías
   Para encontrar información específica de manera rápida
 
   Antecedentes:
-    Dado que el administrador ha iniciado sesión en la aplicación
-      | usuario       | clave        |
-      | p@example.com | contraseña12 |
+    Dado que se muestra la pagina de gestión de categorías
+    Y que el usuario ha iniciado sesión en la aplicación correctamente
 
-  @consultarCategoria
+  @ConsultarCategoria @Busqueda
 
-  Esquema del escenario: Consultar categorías con filtros y búsqueda
-    Dado que estoy en la sección de gestión de categorías
-    Cuando ingreso "<buscar_categoria>" en el campo de búsqueda
-    Entonces debería visualizar la categoría específica "<buscar_categoria>" en la lista de categorías
-
-    Cuando selecciono la fecha "<fecha>" en el filtro de fechas
-    Entonces debería visualizar la categoría específica filtrada por la fecha "<fecha>"
-
+  Esquema del escenario: Buscar categoria por Nombre
+    Cuando el usuario ingresa "<buscar_categoria>" en el campo de búsqueda
+    Entonces debería ver unicamente resultados que contengan "<buscar_categoria>" en la lista
     Ejemplos:
-      | buscar_categoria | fecha       |
-      | Iluminación      | 21/02/2026  |
-      | Electrónicos     | 15/03/2026  |
+    | buscar_categoria |
+    | Iluminación |
+    | Electrónicos |
+
+
+  @ConsultarCategoria @FiltroPorFecha
+
+    Esquema del escenario: Filtrar las categorias por fechas de creacion
+    Cuando el usuario selecciona la fecha "<fecha>" en el filtro de fechas
+    Entonces debería ver solo las categorias creadas en "<fecha>"
+    Ejemplos:
+      | fecha       |
+      | 21/02/2026  |
+      | 15/03/2026  |

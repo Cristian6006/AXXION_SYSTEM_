@@ -6,9 +6,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = "src/test/resources/features/Categorias/BorrarCategoria.feature",
-        glue = "co/com/Automatizacion/AxxionSystem/stepDefintions/Categorias",
+        features = "classpath:features",
+        glue = "co.com.Automatizacion.AxxionSystem",
+        tags = "@AgregarCategorias",
         snippets = CucumberOptions.SnippetType.CAMELCASE
 )
-
 public class AgregarCategoriasSuite {}
