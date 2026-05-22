@@ -7,10 +7,12 @@ import co.com.Automatizacion.AxxionSystem.tasks.IniciarSesion;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
-import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
 
+import java.util.List;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.Matchers.containsString;
 
 public class AutenticacionStepDefinitions {
@@ -19,32 +21,24 @@ public class AutenticacionStepDefinitions {
     public void queElUsuarioSeEncuentraEnLaPaginaDeInicioDeSesionDeAxxionSystem() {
         OnStage.theActorInTheSpotlight().wasAbleTo(Open.url("http://localhost:5173/login"));
     }
-    @Cuando("ingrese las credenciales correctas {string} y {string}")
-    public void ingreseLasCredencialesCorrectasY(String correo, String password) {
-        Usuario usuarioActual = new Usuario(correo, password);
-        OnStage.theActorInTheSpotlight().remember("UsuarioAutenticado", usuarioActual);
+    @Cuando("inicie sesion con las credenciales \\(usuario y contraseña)")
+    public void inicieSesionConLasCredencialesUsuarioYContraseña(List<Usuario> credenciales) {
         OnStage.theActorInTheSpotlight().attemptsTo(
-                IniciarSesion.con(usuarioActual)
+                IniciarSesion.aute(credenciales)
         );
     }
     @Entonces("se deberia verificar que el usuario haya sido autenticado correctamente")
     public void seDeberiaVerificarQueElUsuarioHayaSidoAutenticadoCorrectamente() {
-        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat("Mensaje de bienvenida", MensajeBienvenida.esVisible()));
+        OnStage.theActorInTheSpotlight()
+                .should(seeThat(MensajeBienvenida.mensajeBienvenida()));
     }
-    @Entonces("redirigido a la pagina prinncipal de Axxion System")
-    public void redirigidoALaPaginaPrinncipalDeAxxionSystem() {
+    @Entonces("redirigido a la pagina principal de Axxion System")
+    public void redirigidoALaPaginaPrincipalDeAxxionSystem() {
         OnStage.theActorInTheSpotlight().should(
-                GivenWhenThen.seeThat("La url del navegador",
+                seeThat("La url del navegador",
                         UrlActual.actual(),
                         containsString("Home")
                 )
         );
     }
-
-    @Dado("que el usuario ha iniciado sesión en la aplicación correctamente")
-    public void queElUsuarioHaIniciadoSesiónEnLaAplicaciónCorrectamente() {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new io.cucumber.java.PendingException();
-    }
-
 }

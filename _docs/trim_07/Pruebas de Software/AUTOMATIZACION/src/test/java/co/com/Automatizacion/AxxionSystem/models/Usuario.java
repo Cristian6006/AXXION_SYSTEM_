@@ -1,14 +1,12 @@
 package co.com.Automatizacion.AxxionSystem.models;
 
 public class Usuario {
-    private final String correo;
-    private final String clave;
+    private  String usuario;
+    private  String contraseña;
 
-    public Usuario(String correo, String clave) {
-        this.correo = correo;
-        this.clave = clave;
-    }
+    public String getUsuario() { return usuario; }
+    public void setUsuario(String usuario) { this.usuario = usuario; }
 
-    public String getCorreo() { return correo; }
-    public String getClave() { return clave; }
+    public String getContraseña() { return contraseña; }
+    public void setContraseña(String contraseña) { this.contraseña = contraseña; }
 }
