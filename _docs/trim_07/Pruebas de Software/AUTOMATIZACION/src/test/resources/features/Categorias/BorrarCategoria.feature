@@ -2,25 +2,17 @@
   # Author: Cristian
 
 Característica: Borrar Categorías
-  Como administrador del sistema
+  Como usuario del sistema
   Quiero poder borrar categorías existentes
   Para reorganizar la información cuando sea necesario
 
   Antecedentes:
-    Dado que el administrador ha iniciado sesión en la aplicación
-      | usuario       | clave        |
-      | p@example.com | contraseña12 |
+    Dado que se muestra la pagina de gestión de categorías
+    Y que el usuario ha iniciado sesión en la aplicación correctamente
 
-    @borrarCategoria
+    @BorrarCategoria
 
-    Esquema del escenario: Borrar una categoría correctamente
-      Dado que estoy en la sección de gestión de categorías
-      Cuando selecciono la categoría "<categoria>" y hago clic en el icono de borrado
-      Y confirmo el borrado de la categoría
+    Escenario: Borrar una categoría correctamente
+      Cuando el usuario elimina la categoría "Electrónica"
       Entonces debería ver un mensaje de éxito "Guardado"
-      Y la categoría "<categoria>" debería reflejar los cambios en la lista
-
-      Ejemplos:
-        | categoria     |
-        | Electrónicos  |
-        | Hogar         |
+      Y que la categoría "Electrónica" ya no debería existir en el sistema

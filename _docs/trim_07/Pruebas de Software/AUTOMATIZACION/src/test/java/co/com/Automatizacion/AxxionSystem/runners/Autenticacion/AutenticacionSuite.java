@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "classpath:features",
         glue = "co.com.Automatizacion.AxxionSystem",
+        tags = "@IniciarSesion",
         snippets = CucumberOptions.SnippetType.CAMELCASE
 )
 

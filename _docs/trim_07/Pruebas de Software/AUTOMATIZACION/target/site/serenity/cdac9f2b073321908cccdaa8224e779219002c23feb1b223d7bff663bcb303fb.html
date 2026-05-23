@@ -139,7 +139,7 @@
             <a href="capabilities.html"><i class="bi bi-journal-text"></i> Requirements</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 06-05-2026 14:13</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 22-05-2026 14:34</span>
     <br style="clear:left"/>
 </div>
     <div class="clr"></div>
@@ -184,9 +184,9 @@
                 <table class="outcome-header">
                     <tr>
                         <td colspan="2" class="test-title-bar">
-                            <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-exclamation-triangle-fill error-icon fa-2x' title='ERROR'></i></a></span>
+                            <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-hourglass-top pending-icon fa-2x' title='PENDING'></i></a></span>
                             <span class="test-case-title">
-                                <span class="error-color">
+                                <span class="pending-color">
                                     Iniciar sesion correctamente
                                         <span class="related-issue-title"></span>
                                 </span>
@@ -198,6 +198,48 @@
                 </table>
             </div>
 
+
+            <!-- CAST MEMBERS -->
+            <div>&nbsp;</div>
+            <div>
+                <h3 class="discreet-story-header">
+                    <i class="fs-2 bi bi-people large-icon"></i>
+                    <span class="story-header-title">
+                        <a class="btn btn-primary" data-toggle="collapse" href="#castDetails"
+                           role="button" aria-expanded="true" aria-controls="castDetails">Cast</a>
+                    </span>
+                </h3>
+            </div>
+            <div class="collapse multi-collapse" id="castDetails">
+                <table class="cast">
+                    <tr>
+                            <td width="100%">
+                                <h4>
+                                    <i class="fs-2 bi bi-person"></i>&nbsp;
+                                    <span>
+                                        <a data-toggle="collapse" href="#abilities-usuario"
+                                           aria-expanded="false" aria-controls="abilities">usuario</a>
+                                        
+                                    </span>
+                                </h4>
+                                <div class="collapse multi-collapse" id="abilities-usuario">
+                                        <div>
+                                            <span class="cast-description">usuario can:</span>
+                                            <ul>
+                                                    <li>browse the web</li>
+                                            </ul>
+                                        </div>
+                                </div>
+                            </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </td>
+        </tr>
+        </table>
+    </div>
+    <!-- END CAST MEMBERS -->
 
 
 </div>
@@ -226,12 +268,12 @@
                 <td colspan="5"></td>
             </tr>
 
-                <tr class="test-ERROR">
+                <tr class="test-PENDING">
 
                     <td width="50" class="step-icon">
                         <a name="0"></a>
                             <span style="margin-left: 20px;"
-                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-exclamation-triangle-fill error-icon ' title='ERROR'></i></a>
+                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-hourglass-top pending-icon ' title='PENDING'></i></a>
                                 </span>
                     </td>
 
@@ -245,75 +287,37 @@
                         </div>
                     </td>
 
-                    <td width="130"><span class="top-level-step">ERROR</span></td>
-                    <td width="100"><span class="top-level-step">062ms</span></td>
+                    <td width="130"><span class="top-level-step">PENDING</span></td>
+                    <td width="100"><span class="top-level-step">032ms</span></td>
                 </tr>
-                    <tr class="test-ERROR">
-                        <td width="40">&nbsp</td>
-                        <td width="%" colspan="3" class="error-message-cell">
-
-
-    <div style="display:block">
-        <div class="table">
-            <div class="row">
-                <div class="col-sm-10" style="padding-left:1.5em; padding-top:0.5em; padding-bottom:0.5em;">
-                    <span class="error-message error-message-title">net.serenitybdd.screenplay.actors.NoStageException: No stage available - it looks like you haven&#39;t called the setTheStage() method before calling this one.</span>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-warning details-button" data-toggle="collapse" href="#stacktraceModal-1"
-                       role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="bi bi-eye"></i> More details</a>
-                </div>
-             </div>
-        </div>
-    <div>
-
-    <!-- Details Section -->
-    <div class="row stacktrace-details">
-      <div class="col">
-        <div class="collapse multi-collapse" id="stacktraceModal-1">
-            <div class="card">
-                <div class="card-header">
-                    <h4>net.serenitybdd.screenplay.actors.NoStageException </h4>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <pre>co.com.Automatizacion.AxxionSystem.stepDefintions.Autenticacion.AutenticacionStepDefinitions.queElUsuarioSeEncuentraEnLaPaginaDeInicioDeSesionDeAxxionSystem(AutenticacionStepDefinitions.java:18)<br />✽.que el usuario se encuentra en la pagina de inicio de sesion de Axxion System(file:///C:/xampp/htdocs/AXXION_SYSTEM_/_docs/trim_07/Pruebas%20de%20Software/AUTOMATIZACION/src/test/resources/features/Autenticacion/IniciarSesion.feature:12)<br /></pre>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-                        </td>
-                    </tr>
-                <tr class="test-SKIPPED">
+                <tr class="test-IGNORED">
 
                     <td width="50" class="step-icon">
                         <a name="1"></a>
                             <span style="margin-left: 20px;"
-                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-skip-forward skipped-icon ' title='SKIPPED'></i></a>
+                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
                                 </span>
                     </td>
 
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="top-level-step">
-                                                Cuando ingrese las credenciales correctas "&lt;usuario&gt;" y "&lt;contraseña&gt;"<br><table class='embedded'><thead><th>usuario</th><th></th><th>contraseña</th></thead><tbody><tr><td>p@example.com</td><td></td><td>Us123456</td></tr></tbody></table>
+                                                Cuando inicie sesion con las credenciales (usuario y contraseña)<br><table class='embedded'><thead><th>usuario</th><th></th><th>contraseña</th></thead><tbody><tr><td>p@example.com</td><td></td><td>Us123456</td></tr></tbody></table>
                                         </span>
                             <span class="evidence">
                                 </span>
                         </div>
                     </td>
 
-                    <td width="130"><span class="top-level-step">SKIPPED</span></td>
-                    <td width="100"><span class="top-level-step"></span></td>
+                    <td width="130"><span class="top-level-step">IGNORED</span></td>
+                    <td width="100"><span class="top-level-step">002ms</span></td>
                 </tr>
-                <tr class="test-SKIPPED">
+                <tr class="test-IGNORED">
 
                     <td width="50" class="step-icon">
                         <a name="2"></a>
                             <span style="margin-left: 20px;"
-                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-skip-forward skipped-icon ' title='SKIPPED'></i></a>
+                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
                                 </span>
                     </td>
 
@@ -327,35 +331,35 @@
                         </div>
                     </td>
 
-                    <td width="130"><span class="top-level-step">SKIPPED</span></td>
+                    <td width="130"><span class="top-level-step">IGNORED</span></td>
                     <td width="100"><span class="top-level-step"></span></td>
                 </tr>
-                <tr class="test-SKIPPED">
+                <tr class="test-IGNORED">
 
                     <td width="50" class="step-icon">
                         <a name="3"></a>
                             <span style="margin-left: 20px;"
-                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-skip-forward skipped-icon ' title='SKIPPED'></i></a>
+                                  class="top-level-icon"><a href='##beforetable'><i class='bi bi-slash-circle ignored-icon ' title='IGNORED'></i></a>
                                 </span>
                     </td>
 
                     <td class="step-description-column">
                         <div class="step-description">
                                 <span class="top-level-step">
-                                                Y redirigido a la pagina prinncipal de Axxion System
+                                                Y redirigido a la pagina principal de Axxion System
                                         </span>
                             <span class="evidence">
                                 </span>
                         </div>
                     </td>
 
-                    <td width="130"><span class="top-level-step">SKIPPED</span></td>
+                    <td width="130"><span class="top-level-step">IGNORED</span></td>
                     <td width="100"><span class="top-level-step"></span></td>
                 </tr>
-            <tr class="test-ERROR">
+            <tr class="test-PENDING">
                     <td colspan="2"></td>
-                <td width="130"><span class="top-level-step"><em>ERROR</em></span></td>
-                <td width="100"><span class="top-level-step"><em>0.08s</em></span></td>
+                <td width="130"><span class="top-level-step"><em>PENDING</em></span></td>
+                <td width="100"><span class="top-level-step"><em>0.11s</em></span></td>
             </tr>
 
         </table>

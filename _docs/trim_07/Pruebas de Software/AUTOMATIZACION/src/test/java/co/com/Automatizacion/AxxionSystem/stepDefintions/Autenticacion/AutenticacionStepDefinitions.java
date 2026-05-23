@@ -1,38 +1,44 @@
 package co.com.Automatizacion.AxxionSystem.stepDefintions.Autenticacion;
 
-import co.com.Automatizacion.AxxionSystem.questions.Autenticacion.urlCorrecta;
+import co.com.Automatizacion.AxxionSystem.models.Usuario;
+import co.com.Automatizacion.AxxionSystem.questions.Autenticacion.UrlActual;
 import co.com.Automatizacion.AxxionSystem.questions.Autenticacion.MensajeBienvenida;
 import co.com.Automatizacion.AxxionSystem.tasks.IniciarSesion;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
-import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
+
+import java.util.List;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static org.hamcrest.Matchers.containsString;
 
 public class AutenticacionStepDefinitions {
 
     @Dado("que el usuario se encuentra en la pagina de inicio de sesion de Axxion System")
     public void queElUsuarioSeEncuentraEnLaPaginaDeInicioDeSesionDeAxxionSystem() {
-        OnStage.theActorCalled("Juan").wasAbleTo(Open.url("http://localhost:5173/login"));
+        OnStage.theActorInTheSpotlight().wasAbleTo(Open.url("http://localhost:5173/login"));
     }
-    @Cuando("ingrese las credenciales correctas {string} y {string}")
-    public void ingreseLasCredencialesCorrectasY(String string, String string2, io.cucumber.datatable.DataTable dataTable) {
-        OnStage.theActorInTheSpotlight().attemptsTo(IniciarSesion.conCredenciales("p@example.com", "Us123456"));
+    @Cuando("inicie sesion con las credenciales \\(usuario y contraseña)")
+    public void inicieSesionConLasCredencialesUsuarioYContraseña(List<Usuario> credenciales) {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                IniciarSesion.aute(credenciales)
+        );
     }
     @Entonces("se deberia verificar que el usuario haya sido autenticado correctamente")
     public void seDeberiaVerificarQueElUsuarioHayaSidoAutenticadoCorrectamente() {
-        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat("Mensaje de bienvenida", MensajeBienvenida.esVisible()));
+        OnStage.theActorInTheSpotlight()
+                .should(seeThat(MensajeBienvenida.mensajeBienvenida()));
     }
-    @Entonces("redirigido a la pagina prinncipal de Axxion System")
-    public void redirigidoALaPaginaPrinncipalDeAxxionSystem() {
+    @Entonces("redirigido a la pagina principal de Axxion System")
+    public void redirigidoALaPaginaPrincipalDeAxxionSystem() {
         OnStage.theActorInTheSpotlight().should(
-                GivenWhenThen.seeThat("La url del navegador",
-                        urlCorrecta.actual(),
+                seeThat("La url del navegador",
+                        UrlActual.actual(),
                         containsString("Home")
                 )
         );
     }
-
 }
