@@ -25,7 +25,6 @@ val serenityVersion = "4.0.1"
 val serenityCucumberVersion = "5.3.1"
 
 dependencies {
-    implementation("org.slf4j:slf4j-simple:1.7.30")
     implementation("org.hamcrest:hamcrest:2.2")
     implementation("net.serenity-bdd:serenity-cucumber:$serenityCucumberVersion")
     implementation("net.serenity-bdd:serenity-core:$serenityVersion")
@@ -34,6 +33,7 @@ dependencies {
     implementation("net.serenity-bdd:serenity-screenplay-webdriver:$serenityVersion")
     implementation("net.serenity-bdd:serenity-screenplay-rest:$serenityVersion")
     implementation("net.serenity-bdd:serenity-ensure:2.0.49")
+    implementation("org.slf4j:slf4j-simple:2.0.18")
     
     implementation("com.jcraft:jsch:0.1.55")
     implementation("log4j:log4j:1.2.17")

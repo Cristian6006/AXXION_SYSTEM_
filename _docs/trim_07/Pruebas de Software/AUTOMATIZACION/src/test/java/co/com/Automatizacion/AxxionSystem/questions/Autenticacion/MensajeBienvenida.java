@@ -13,7 +13,7 @@ public class MensajeBienvenida implements Question<Boolean> {
     private static final Logger logger =
             LoggerFactory.getLogger(MensajeBienvenida.class);
 
-    private static final String MENSAJE_ESPERADO = "Bienvenido";
+    private static final String MENSAJE_ESPERADO = "¡Bienvenido a AXION SYSTEM!";
 
     public static MensajeBienvenida mensajeBienvenida() {
         return new MensajeBienvenida();
@@ -23,8 +23,8 @@ public class MensajeBienvenida implements Question<Boolean> {
     public Boolean answeredBy(Actor actor) {
         try {
             String texto = Text.of(MENSAJE_BIENVENIDA).answeredBy(actor).trim();
-            logger.info("Texto capturado: " + texto);
-            return texto.toLowerCase().contains(MENSAJE_ESPERADO.toLowerCase());
+            logger.info("Texto capturado: {}", texto);
+            return texto.equalsIgnoreCase(MENSAJE_ESPERADO);
         } catch (Exception e){
             logger.error("El mensaje de bienvenida no fue encontrado: {}", e.getMessage());
             return false;
