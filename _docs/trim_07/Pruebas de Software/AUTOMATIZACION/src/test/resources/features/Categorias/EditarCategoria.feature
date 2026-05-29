@@ -16,7 +16,9 @@ Característica: Editar Categorías
   @EditarCategoria
 
   Escenario: Editar una categoría correctamente
-    Cuando el usuario actualiza la categoría "Tecnología" al nuevo nombre "Electrónica"
+    Cuando el usuario actualiza el nombre de la categoría por el nuevo nombre
+      | nombre || nuevoNombre |
+      | TestAutomatizacion || TestAutomatizacion2 |
     Entonces debería ver un mensaje de éxito "Guardado"
     Y que la categoría "Electrónica" debería estar visible en la tabla
 
