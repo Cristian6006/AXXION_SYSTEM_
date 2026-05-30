@@ -408,7 +408,7 @@ const handleAction = async () => {
       icon: 'success',
       title: '¡Guardado!',
       showConfirmButton: false,
-      timer: 1500
+      timer: 2000
     });
     modal.open = false;
   } catch (error) {

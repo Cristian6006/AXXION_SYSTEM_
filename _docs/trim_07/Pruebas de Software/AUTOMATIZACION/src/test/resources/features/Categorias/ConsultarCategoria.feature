@@ -7,8 +7,11 @@ Característica: Consultar Categorías
   Para encontrar información específica de manera rápida
 
   Antecedentes:
-    Dado que se muestra la pagina de gestión de categorías
-    Y que el usuario ha iniciado sesión en la aplicación correctamente
+    Dado que el usuario se encuentra en la pagina de inicio de sesion de Axxion System
+    Y inicie sesion con las credenciales (usuario y contraseña)
+      | usuario || contraseña |
+      | p@example.com || Us123456   |
+    Y que se muestra la pagina de gestión de categorías
 
   @ConsultarCategoria @Busqueda
 
