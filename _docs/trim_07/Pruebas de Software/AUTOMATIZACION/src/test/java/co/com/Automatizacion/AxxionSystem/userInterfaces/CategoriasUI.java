@@ -22,4 +22,9 @@ public class CategoriasUI {
     public static final Target BOTON_BORRAR_CATEGORIA = Target.the("Botón Borrar de la categoría {0}")
             .locatedBy("//div[contains(@class, 'justify-between') and .//h3[contains(., '{0}')]]//button[2]");
     public static final Target BOTON_CONFIRMAR_BORRAR = Target.the("Boton Confirmacion Borrado").locatedBy("//button[contains(., 'Sí, Eliminar')]");
+
+    //Editar Categoria
+    public static final Target BOTON_EDITAR_CATEGORIA = Target.the("Botón Borrar de la categoría {0}")
+            .locatedBy("//div[contains(@class, 'justify-between') and .//h3[contains(., '{0}')]]//button[1]");
+    public static final Target BOTON_CONFIRMAR_EDITAR = Target.the("Boton Confirmacion Edicion").locatedBy("//button[contains(., 'Guardar Cambios')]");
 }
