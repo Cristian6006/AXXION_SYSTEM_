@@ -20,7 +20,6 @@ public class CategoriasStepDefinition {
     }
     @Entonces("debería ver un mensaje de éxito {string}")
     public void deberíaVerUnMensajeDeÉxito(String guardado) {
-
         OnStage.theActorInTheSpotlight()
                 .should(seeThat(MensajeGuardado.mensajeGuardado()));
     }

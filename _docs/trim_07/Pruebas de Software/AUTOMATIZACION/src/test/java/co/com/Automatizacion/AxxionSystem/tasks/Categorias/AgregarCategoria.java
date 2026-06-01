@@ -1,4 +1,4 @@
-package co.com.Automatizacion.AxxionSystem.tasks;
+package co.com.Automatizacion.AxxionSystem.tasks.Categorias;
 
 import co.com.Automatizacion.AxxionSystem.models.Categoria;
 import co.com.Automatizacion.AxxionSystem.userInterfaces.CategoriasUI;

@@ -16,20 +16,22 @@ Característica: Consultar Categorías
   @ConsultarCategoria @Busqueda
 
   Esquema del escenario: Buscar categoria por Nombre
-    Cuando el usuario ingresa "<buscar_categoria>" en el campo de búsqueda
-    Entonces debería ver unicamente resultados que contengan "<buscar_categoria>" en la lista
+    Cuando el usuario ingresa el nombre de la categoria "<palabra_buscada>"
+      | nombre |
+      | Iluminación |
+    Entonces debería ver unicamente resultados que contengan "<palabra_buscada>"
+
     Ejemplos:
-    | buscar_categoria |
-    | Iluminación |
-    | Electrónicos |
+      | palabra_buscada |
+      | Iluminación     |
+
 
 
   @ConsultarCategoria @FiltroPorFecha
 
-    Esquema del escenario: Filtrar las categorias por fechas de creacion
-    Cuando el usuario selecciona la fecha "<fecha>" en el filtro de fechas
-    Entonces debería ver solo las categorias creadas en "<fecha>"
-    Ejemplos:
+    Escenario: Filtrar las categorias por fechas de creacion
+    Cuando el usuario selecciona la fecha en el filtro de fechas
       | fecha       |
       | 21/02/2026  |
-      | 15/03/2026  |
+    Entonces debería ver solo las categorias creadas en la fecha seleccionada
+

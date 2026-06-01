@@ -1,7 +1,7 @@
 package co.com.Automatizacion.AxxionSystem.stepDefintions.Categorias;
 
 import co.com.Automatizacion.AxxionSystem.models.Categoria;
-import co.com.Automatizacion.AxxionSystem.tasks.AgregarCategoria;
+import co.com.Automatizacion.AxxionSystem.tasks.Categorias.AgregarCategoria;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;
 import net.serenitybdd.screenplay.actors.OnStage;
