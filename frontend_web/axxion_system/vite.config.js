@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
+import path from 'node:path'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -10,6 +11,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const devApiTarget = process.env.VITE_API_PROXY_TARGET || 'http://localhost:8000'
+  const projectRoot = fileURLToPath(new URL('.', import.meta.url))
+  const monorepoRoot = path.resolve(projectRoot, '../..')
 
   return {
     plugins: [
@@ -49,6 +52,20 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      watch: {
+        // Evita EMFILE / agotar inotify en monorepos con varios IDEs abiertos
+        ignored: [
+          '**/.git/**',
+          '**/node_modules/**',
+          '**/dist/**',
+          '**/target/**',
+          '**/.idea/**',
+          path.join(monorepoRoot, '_docs/**'),
+          path.join(monorepoRoot, 'backend/**'),
+        ],
+        // Alternativa si persiste el error: VITE_USE_POLLING=1 npm run dev
+        usePolling: process.env.VITE_USE_POLLING === '1',
+      },
       proxy: {
         '/api': {
           target: devApiTarget,
