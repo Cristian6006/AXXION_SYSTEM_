@@ -23,8 +23,13 @@ public class CategoriasUI {
             .locatedBy("//div[contains(@class, 'justify-between') and .//h3[contains(., '{0}')]]//button[2]");
     public static final Target BOTON_CONFIRMAR_BORRAR = Target.the("Boton Confirmacion Borrado").locatedBy("//button[contains(., 'Sí, Eliminar')]");
 
-    //Editar Categoria
+    // Editar Categoria
     public static final Target BOTON_EDITAR_CATEGORIA = Target.the("Botón Borrar de la categoría {0}")
             .locatedBy("//div[contains(@class, 'justify-between') and .//h3[contains(., '{0}')]]//button[1]");
     public static final Target BOTON_CONFIRMAR_EDITAR = Target.the("Boton Confirmacion Edicion").locatedBy("//button[contains(., 'Guardar Cambios')]");
+
+    // Consultar Categoria
+    public static final Target INPUT_BUSQUEDA_NOMBRE = Target.the("Buscador de categoria por nombre").locatedBy("//input[@placeholder='Buscar Categorias']");
+    public static final Target INPUT_BUSQUEDA_FECHA = Target.the("Buscador de categoria por fecha").locatedBy("//div[descendant::input[@type='date']]");
+    public static final Target CATEGORIA_BUSQUEDA = Target.the("categoria buscada").locatedBy("//div[contains(@class, 'bg-[#364153]') and contains(., 'Iluminación')]");
 }

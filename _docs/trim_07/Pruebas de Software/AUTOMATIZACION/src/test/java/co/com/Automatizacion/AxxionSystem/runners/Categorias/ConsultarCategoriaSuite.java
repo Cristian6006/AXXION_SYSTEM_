@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "classpath:features",
         glue = "co.com.Automatizacion.AxxionSystem",
-        tags = "@ConsultarCategoria",
+        tags = "@Busqueda",
         snippets = CucumberOptions.SnippetType.CAMELCASE
 )
 
-public class ConsultarCategoriaSuite {}
+public class  ConsultarCategoriaSuite {}

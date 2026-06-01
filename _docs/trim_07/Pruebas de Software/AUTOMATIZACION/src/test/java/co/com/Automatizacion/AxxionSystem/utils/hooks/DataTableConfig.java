@@ -26,6 +26,7 @@ public class DataTableConfig {
         categoria.setTipoCategoria(fila.get("tipoCategoria"));
         categoria.setDescripcion(fila.get("descripcion"));
         categoria.setNuevoNombre(fila.get("nuevoNombre"));
+        categoria.setFecha(fila.get("fecha"));
 
         return categoria;
     }

@@ -5,6 +5,7 @@ public class Categoria {
     private String tipoCategoria;
     private String descripcion;
     private String nuevoNombre;
+    private String fecha;
 
 
     public String getNombre() {return nombre;}
@@ -18,4 +19,7 @@ public class Categoria {
 
     public String getNuevoNombre() {return nuevoNombre;}
     public void setNuevoNombre(String nuevoNombre) { this.nuevoNombre = nuevoNombre; }
+
+    public String getFecha() {return fecha;}
+    public void setFecha(String fecha) { this.fecha = fecha; }
 }
