@@ -1,7 +1,6 @@
 package co.com.Automatizacion.AxxionSystem.stepDefintions.Categorias;
 
 import co.com.Automatizacion.AxxionSystem.models.Categoria;
-import co.com.Automatizacion.AxxionSystem.tasks.Categorias.BorrarCategoria;
 import co.com.Automatizacion.AxxionSystem.tasks.Categorias.EditarCategoria;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;

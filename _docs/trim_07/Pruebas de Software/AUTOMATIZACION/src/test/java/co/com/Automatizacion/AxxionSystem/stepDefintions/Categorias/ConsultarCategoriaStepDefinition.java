@@ -2,7 +2,6 @@ package co.com.Automatizacion.AxxionSystem.stepDefintions.Categorias;
 
 import co.com.Automatizacion.AxxionSystem.models.Categoria;
 import co.com.Automatizacion.AxxionSystem.questions.Categorias.CategoriaConsultada;
-import co.com.Automatizacion.AxxionSystem.questions.Categorias.MensajeGuardado;
 import co.com.Automatizacion.AxxionSystem.tasks.Categorias.ConsultarCategoriaNombre;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;

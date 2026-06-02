@@ -1,10 +1,8 @@
 package co.com.Automatizacion.AxxionSystem.questions.Categorias;
 
-import co.com.Automatizacion.AxxionSystem.questions.Autenticacion.MensajeBienvenida;
 import co.com.Automatizacion.AxxionSystem.userInterfaces.CategoriasUI;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
-import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.questions.Text;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.slf4j.Logger;
