@@ -15,8 +15,8 @@ public class CategoriasStepDefinition {
                 NavegarA.laPaginaCategorias()
         );
     }
-    @Entonces("debería ver un mensaje de éxito {string}")
-    public void deberíaVerUnMensajeDeÉxito(String guardado) {
+    @Entonces("debería ver un mensaje de éxito")
+    public void deberíaVerUnMensajeDeÉxito() {
         OnStage.theActorInTheSpotlight()
                 .should(seeThat(MensajeGuardado.mensajeGuardado()));
     }

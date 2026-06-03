@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 public class ConsultarCategoriaStepDefinition {
     // FILTRO POR BUSQUEDA
 
-    @Cuando("el usuario ingresa el nombre de la categoria {string}")
+    @Cuando("el usuario ingresa el nombre de la categoria buscada")
     public void elUsuarioIngresaElNombreDeLaCategoria(List<Categoria> categoria) {
         OnStage.theActorInTheSpotlight()
                 .attemptsTo(ConsultarCategoriaNombre.search(categoria)

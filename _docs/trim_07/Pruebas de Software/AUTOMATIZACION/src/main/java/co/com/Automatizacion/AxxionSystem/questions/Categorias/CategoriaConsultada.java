@@ -29,7 +29,7 @@ public class CategoriaConsultada implements Question<String> {
             return Text.of(CategoriasUI.CATEGORIA_BUSQUEDA).answeredBy(actor).trim();
         } catch (Exception e){
             logger.error("El mensaje de guardado no fue encontrado: {}", e.getMessage());
-            return "#";
+            return e.getMessage();
         }
     }
 }

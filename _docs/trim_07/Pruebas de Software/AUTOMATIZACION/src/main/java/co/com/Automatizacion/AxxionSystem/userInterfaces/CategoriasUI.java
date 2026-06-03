@@ -12,11 +12,11 @@ public class CategoriasUI {
     public static final Target INPUT_NOMBRE = Target.the("Campo Nombre Categoria").locatedBy("//label[contains(., 'Nombre')]/following-sibling::input");
     public static final Target INPUT_TIPO_CATEGORIA = Target.the("Campo Tipo Categoria").locatedBy("//label[contains(., 'Tipo de categoria')]/following-sibling::input");
     public static final Target INPUT_DESCRIPCION = Target.the("Campo Descripcion").locatedBy("//label[contains(., 'Descrip')]/following-sibling::textarea");
+    public static final Target RESULTADO_CATEGORIAS = Target.the("Resultado de gestion de categorias").locatedBy("//div[contains(@class, 'bg-[#364153]') and contains(., '{0}')]");
 
     // Agregar Categoria
     public static final Target BOTON_AGREGAR_CATEGORIAS = Target.the("Boton Agregar Categoria").locatedBy("//span[contains(., 'Agregar Categoria')]");
     public static final Target BOTON_CREAR = Target.the("Boton Guardar").locatedBy("//button[contains(., 'Crear')]");
-    public static final Target CATEGORIA_CREADA = Target.the("Categora Creada {0}").locatedBy("//*[contains(., '{0}')]");
 
     // Borrar Categoria
     public static final Target BOTON_BORRAR_CATEGORIA = Target.the("Botón Borrar de la categoría {0}")

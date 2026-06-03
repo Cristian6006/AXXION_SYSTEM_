@@ -16,11 +16,10 @@ Característica: Consultar Categorías
   @ConsultarCategoria @Busqueda
 
   Esquema del escenario: Buscar categoria por Nombre
-    Cuando el usuario ingresa el nombre de la categoria "<palabra_buscada>"
-      | nombre |
-      | Iluminación |
+    Cuando el usuario ingresa el nombre de la categoria buscada
+    | nombre |
+    | Iluminación |
     Entonces debería ver unicamente resultados que contengan "<palabra_buscada>"
-
     Ejemplos:
       | palabra_buscada |
       | Iluminación     |
