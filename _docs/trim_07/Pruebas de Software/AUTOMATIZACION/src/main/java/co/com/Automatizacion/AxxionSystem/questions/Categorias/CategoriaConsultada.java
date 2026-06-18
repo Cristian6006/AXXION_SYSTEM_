@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static co.com.Automatizacion.AxxionSystem.userInterfaces.CategoriasUI.CATEGORIA_BUSQUEDA;
-import static co.com.Automatizacion.AxxionSystem.userInterfaces.CategoriasUI.MENSAJE_GUARDADO;
+// import static co.com.Automatizacion.AxxionSystem.userInterfaces.CategoriasUI.MENSAJE_GUARDADO;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
 
 public class CategoriaConsultada implements Question<String> {

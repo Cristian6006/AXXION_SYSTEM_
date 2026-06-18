@@ -2,7 +2,7 @@ package co.com.Automatizacion.AxxionSystem.userInterfaces;
 
 import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.screenplay.targets.Target;
-import org.openqa.selenium.By;
+// import org.openqa.selenium.By;
 
 @DefaultUrl("http://localhost:5173/Category")
 public class CategoriasUI {
