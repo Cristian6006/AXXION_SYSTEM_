@@ -5,7 +5,6 @@ import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.questions.Text;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-
 import static co.com.Automatizacion.AxxionSystem.userInterfaces.PrincipalUI.MENSAJE_BIENVENIDA;
 
 public class MensajeBienvenida implements Question<Boolean> {
