@@ -71,13 +71,17 @@ class AuthController extends Controller
         }
 
         try {
-        $result = $this->authService->refresh($refreshToken);
-        
-        // ¡Adjunta la nueva cookie a la respuesta!
-        return response()->json([
-            'access_token' => $result['access_token'],
-            'user'         => $result['user'],
-        ])->withCookie($result['cookie']);
+            $result = $this->authService->refresh($refreshToken);
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'access_token' => $result['access_token'],
+                    'token_type'   => $result['token_type'],
+                    'expires_in'   => $result['expires_in'],
+                    'user'         => $result['user'],
+                ],
+            ])->withCookie($result['cookie']);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,

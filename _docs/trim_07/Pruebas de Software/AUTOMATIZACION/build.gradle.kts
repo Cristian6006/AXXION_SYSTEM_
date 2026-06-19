@@ -34,13 +34,12 @@ dependencies {
     implementation("net.serenity-bdd:serenity-screenplay-rest:$serenityVersion")
     implementation("net.serenity-bdd:serenity-ensure:2.0.49")
     implementation("org.slf4j:slf4j-simple:2.0.18")
-    
     implementation("com.jcraft:jsch:0.1.55")
     implementation("log4j:log4j:1.2.17")
     implementation("org.apache.poi:poi:4.1.2")
     implementation("org.apache.poi:poi-ooxml:4.1.2")
     implementation("org.apache.commons:commons-math3:3.6.1")
-    
+
     testImplementation("junit:junit:4.13.2")
 }
 

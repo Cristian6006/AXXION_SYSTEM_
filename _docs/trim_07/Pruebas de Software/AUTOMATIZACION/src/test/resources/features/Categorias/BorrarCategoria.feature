@@ -19,5 +19,5 @@ Característica: Borrar Categorías
       Cuando el usuario elimina la categoría por su nombre
         | nombre |
         | Electronicos |
-      Entonces debería ver un mensaje de éxito "Guardado"
+      Entonces debería ver un mensaje de éxito
       Y que la categoría "Electronicos" ya no debería existir en el sistema

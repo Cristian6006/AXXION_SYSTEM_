@@ -10,7 +10,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  const devApiTarget = process.env.VITE_API_PROXY_TARGET || 'http://localhost:8000'
+  const devApiTarget = process.env.VITE_API_PROXY_TARGET ?? 'http://nginx:80'
   const projectRoot = fileURLToPath(new URL('.', import.meta.url))
   const monorepoRoot = path.resolve(projectRoot, '../..')
 
@@ -63,8 +63,6 @@ export default defineConfig(({ mode }) => {
           path.join(monorepoRoot, '_docs/**'),
           path.join(monorepoRoot, 'backend/**'),
         ],
-        // Alternativa si persiste el error: VITE_USE_POLLING=1 npm run dev
-        usePolling: process.env.VITE_USE_POLLING === '1',
       },
       proxy: {
         '/api': {
@@ -73,6 +71,7 @@ export default defineConfig(({ mode }) => {
           secure: false,
         },
       },
+      allowedHosts: ['nginx', 'localhost'],
     },
   }
 })

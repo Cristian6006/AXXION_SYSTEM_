@@ -1,0 +1,68 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf
+      - ./backend/axxion_api:/var/www/laravel
+      - vue_dist:/usr/share/nginx/html:ro
+    depends_on:
+      - php
+      - vue-build
+    networks:
+      - app-network
+
+  php:
+    build:
+      context: ./backend/axxion_api
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/axxion_api:/var/www/laravel
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: ${MYSQL_DATABASE}
+      DB_USERNAME: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  vue-build:
+    build:
+      context: ./frontend_web/axxion_system
+      dockerfile: Dockerfile
+    volumes:
+      - vue_dist:/usr/share/nginx/html
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./backend/sql/sistemarenta .sql:/docker-entrypoint-initdb.d/01-schema.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+  vue_dist:
+
+networks:
+  app-network:
+    driver: bridge
