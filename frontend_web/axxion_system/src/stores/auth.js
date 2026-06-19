@@ -64,7 +64,7 @@ export const useAuthStore = defineStore('auth', {
 
       try {
         const response = await axios.post('/auth/refresh');
-        const authData = response.data.data || response.data;
+        const authData = response.data.data;
 
         this.accessToken = authData.access_token;
         // Actualizamos el usuario con los datos que nos llegan.
