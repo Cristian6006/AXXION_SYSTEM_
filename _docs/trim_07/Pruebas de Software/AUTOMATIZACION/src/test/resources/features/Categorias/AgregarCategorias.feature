@@ -16,12 +16,15 @@ Característica: Gestión de Categorías
 
   @AgregarCategorias
 
-  Escenario: Agregar una categoría válida con éxito
+  Esquema del escenario: Agregar una categoría válida con éxito
     Cuando el usuario crea una nueva categoría
       | nombre   | tipoCategoria | descripcion   |
       | Electronicos | Equipos    | Dispositivos electronicos y gadgets    |
-    Entonces debería ver un mensaje de éxito "Guardado"
+    Entonces debería ver un mensaje de éxito
     Y la categoría "<nombre>" debería estar visible en la lista de categorías
+    Ejemplos:
+      | nombre |
+      | Electronicos |
 
 
 

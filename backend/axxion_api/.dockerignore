@@ -1,0 +1,9 @@
+vendor/
+.env
+storage/logs/*
+bootstrap/cache/*
+.git
+.gitignore
+.dockerignore
+Dockerfile
+node_modules/

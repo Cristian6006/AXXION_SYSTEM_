@@ -15,12 +15,15 @@ Característica: Editar Categorías
 
   @EditarCategoria
 
-  Escenario: Editar una categoría correctamente
+  Esquema del escenario: Editar una categoría correctamente
     Cuando el usuario actualiza el nombre de la categoría por el nuevo nombre
       | nombre || nuevoNombre |
-      | TestAutomatizacion || TestAutomatizacion2 |
-    Entonces debería ver un mensaje de éxito "Guardado"
-    Y que la categoría "Electrónica" debería estar visible en la tabla
+      | TestAutomatizacion2 || TestAutomatizacion |
+    Entonces debería ver un mensaje de éxito
+    Y que la categoría "<nuevoNombre>" debería estar visible en la tabla
+    Ejemplos:
+    | nuevoNombre |
+    | TestAutomatizacion |
 
 
 
