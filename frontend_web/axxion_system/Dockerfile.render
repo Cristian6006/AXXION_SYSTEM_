@@ -1,0 +1,23 @@
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL}/api
+
+COPY package.json package-lock.json ./
+RUN npm install --ignore-scripts --force
+
+COPY . .
+RUN npm run build --ignore-scripts --force
+
+FROM nginx:alpine
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY docker/nginx.render.conf /etc/nginx/conf.d/default.conf.template
+COPY docker/entrypoint.render.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 10000
+
+CMD ["/entrypoint.sh"]
