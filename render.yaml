@@ -3,17 +3,17 @@ databases:
     databaseName: sistemarenta
     user: axxion
     plan: free
+    region: oregon
 
 services:
   - type: web
     name: axxion-api
     runtime: docker
     plan: free
-    region: ohio
+    region: oregon
     branch: test
     rootDir: backend/axxion_api
     dockerfilePath: ./Dockerfile.render
-    healthCheckPath: /
     envVars:
       - key: APP_ENV
         value: production
@@ -38,7 +38,7 @@ services:
     name: axxion-frontend
     runtime: docker
     plan: free
-    region: ohio
+    region: oregon
     branch: test
     rootDir: frontend_web/axxion_system
     dockerfilePath: ./Dockerfile.render
