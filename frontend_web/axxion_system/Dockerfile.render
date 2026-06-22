@@ -5,8 +5,9 @@ WORKDIR /app
 ARG VITE_API_URL
 ENV VITE_API_URL=${VITE_API_URL}/api
 
-COPY package.json package-lock.json ./
-RUN npm ci --force
+COPY package.json ./
+RUN npm install \
+    && npm install @rollup/rollup-linux-x64-gnu --no-save
 
 COPY . .
 RUN npm run build
