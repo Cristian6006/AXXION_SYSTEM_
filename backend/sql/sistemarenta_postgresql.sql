@@ -132,6 +132,7 @@ INSERT INTO cliente (id, nombre, nombre2, apellido1, apellido2, rfc, telefono_pr
 
 -- --------------------------------------------------------
 
+
 --
 -- Estructura de tabla para la tabla cliente_direccion
 --
@@ -139,7 +140,7 @@ INSERT INTO cliente (id, nombre, nombre2, apellido1, apellido2, rfc, telefono_pr
 CREATE TABLE cliente_direccion (
   cliente_id INTEGER NOT NULL,
   direccion_id INTEGER NOT NULL,
-  es_principal tinyINTEGER DEFAULT TRUE
+  es_principal BOOLEAN DEFAULT TRUE
 );
 
 --
@@ -147,12 +148,12 @@ CREATE TABLE cliente_direccion (
 --
 
 INSERT INTO cliente_direccion (cliente_id, direccion_id, es_principal) VALUES
-(1, 1, 1),
-(2, 2, 1),
-(3, 3, 1),
-(4, 4, 1),
-(5, 5, 1),
-(6, 6, 1);
+(1, 1, TRUE),
+(2, 2, TRUE),
+(3, 3, TRUE),
+(4, 4, TRUE),
+(5, 5, TRUE),
+(6, 6, TRUE);
 
 -- --------------------------------------------------------
 
@@ -219,7 +220,7 @@ CREATE TABLE detalle_cotizacion (
   cantidad INTEGER NOT NULL,
   precio_unitario decimal(10,2) NOT NULL,
   subtotal decimal(10,2) GENERATED ALWAYS AS (cantidad * precio_unitario) STORED,
-  descuento_porcentaje decimal(5,2) DEFAULT FALSE.00,
+  descuento_porcentaje decimal(5,2) DEFAULT 0.00,
   impuestos_aplicables decimal(10,2) DEFAULT NULL,
   notas text DEFAULT NULL,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
@@ -447,24 +448,24 @@ CREATE TABLE producto (
 --
 
 INSERT INTO producto (id, nombre, descripcion, marca, modelo, precio_referencia_renta, precio_alquiler_dia, precio_alquiler_semanal, precio_alquiler_mensual, precio_compra, valor_actual, fecha_compra, condicion, ubicacion, notas, sku, numero_serie, categoria, especificaciones, estado, created_at, updated_at) VALUES
-(2, 't', 'Item creado automáticamente desde producto: t', 't', 't', NULL, 1.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Item creado automáticamente desde producto: t', NULL, 't', 'Equipos de Sonido', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 00:26:27', '2025-11-23 01:39:40'),
-(19, '23', NULL, '3', '3', NULL, 3.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, '3', 'Equipos de Sonido', '{\"processor\":\"3\",\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 02:21:40', '2025-11-23 02:21:40'),
-(20, 'Laptop Test', 'Item creado automáticamente desde producto: Laptop Test', 'TestBrand', 'TestModel X1', NULL, 30.00, 180.00, 600.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Item creado automáticamente desde producto: Laptop Test', NULL, 'SN-TEST-001', 'Equipos de Sonido', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 03:32:10', '2025-11-23 19:32:07'),
-(21, 'Laptop Dell Inspiron 15 3000', 'Actualizado desde producto: Laptop Dell Inspiron 15 3000 - 2025-11-23 09:24:51', 'Dell', 'Inspiron 15 3000', NULL, 50000.00, 300000.00, 0.00, 0.00, 0.00, NULL, 'excelente', 'Almacén Principal', 'Actualizado desde producto: Laptop Dell Inspiron 15 3000 - 2025-11-23 09:24:51', NULL, 'DL001234567', 'Equipos de Sonido', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 04:00:53', '2025-11-23 19:33:15'),
-(22, 'test 1', 'Item creado automáticamente desde producto: test 1', 'test 1', 'test 1', NULL, 10000.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Item creado automáticamente desde producto: test 1', NULL, 'test 1', 'Equipos de Sonido', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 20:00:12', '2025-11-23 20:01:40'),
-(23, 'test', NULL, 'test', 'test', NULL, 1.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, 'test', 'Equipos de Sonido', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 20:27:53', '2025-11-23 20:27:53'),
-(24, 'Producto Prueba Flujo', NULL, 'Marca Test', 'Modelo Test', NULL, 100.00, 0.00, 0.00, 1000.00, 0.00, '2025-11-23', 'excelente', 'Bodega', NULL, NULL, 'SERIE-TEST-FLOW-001', 'Equipos de Sonido', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 20:58:27', '2025-11-23 20:58:27'),
-(25, '1', 'Item creado automáticamente desde producto: 1', '1', '1', NULL, 1.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Item creado automáticamente desde producto: 1', NULL, '1', 'Herramientas Test', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 21:14:16', '2025-11-23 21:18:11'),
-(26, '2', NULL, '2', '2', NULL, 2.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, '2', 'Equipos de Sonido', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 21:25:34', '2025-11-23 21:25:34'),
-(27, '33', NULL, '33', '33', NULL, 33.00, 3.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, '33', 'Equipos de Sonido', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 21:31:31', '2025-11-23 21:31:31'),
-(28, '4', 'Actualizado desde producto: 4 - 2025-11-23 19:36:40', '4', '4', NULL, 4.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Actualizado desde producto: 4 - 2025-11-23 19:36:40', NULL, '4', 'Iluminación', '{\"processor\":\"4\",\"ram\":\"4\",\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 21:38:02', '2025-11-24 06:09:59'),
-(29, '123', NULL, '123', 'xxxxxx', NULL, 11.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, 'xxxxxxxxxxxxxx', 'Herramientas Test', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 21:47:34', '2025-11-23 21:47:34'),
-(30, '123', NULL, '134', '32', NULL, 2.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, '33223', 'Herramientas Test', '{\"processor\":null,\"ram\":null,\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-23 23:58:32', '2025-11-23 23:58:32'),
-(31, 't44', NULL, 't44', 't44', NULL, 444.00, 4444.00, 44.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, 't44', 'w', '{\"processor\":\"t\",\"ram\":\"t\",\"storage\":null,\"graphics\":null,\"screen\":null,\"os\":null}', 'disponible', '2025-11-24 05:34:50', '2025-11-24 05:34:50'),
-(32, 'Escalera Telescópica Aluminio 5.8m', 'Escalera telescópica multiposición en aluminio, se extiende hasta 5.8m.', 'Promart', 'ETL-58', 12000.00, 15000.00, 78000.00, 265000.00, 620000.00, 550000.00, '2023-06-12', 'Usado - Buen estado', 'Bodega Central - Área F', 'Verificar seguro de peldaños. Capacidad 150kg.', 'ESC-PROMART-001', 'PM1122334455', 'Equipos de Acceso', '[\"Altura m\\u00e1xima: 5.8m, Material: Aluminio, Capacidad: 150kg\"]', 'disponible', '2025-11-24 06:28:41', '2025-11-24 06:28:41'),
-(33, 'Sierra Circular DeWalt DWE575', 'Sierra circular de 7.25 pulgadas con motor de 1950W para cortes precisos.', 'DeWalt', 'DWE575', 18000.00, 22000.00, 115000.00, 390000.00, 650000.00, 550000.00, '2023-04-15', 'Usado - Excelente estado', 'Bodega Central - Estante B2', 'Incluye disco de corte premium y guía paralela.', 'SRC-DEWALT-001', 'DW5544332211', 'Herramientas Eléctricas', '[\"Potencia: 1950W, Disco: 7.25 pulgadas, Profundidad de corte: 65mm\"]', 'disponible', '2025-11-24 06:29:19', '2025-11-24 06:29:19'),
-(34, 'Martillo Demoledor Hilti TE 500-AVR', 'Martillo demoledor profesional de 1100W con sistema de reducción de vibración.', 'Hilti', 'TE 500-AVR', 35000.00, 42000.00, 220000.00, 750000.00, 1850000.00, 1600000.00, '2023-01-10', 'Usado - Buen estado', 'Bodega Central - Estante C1', 'Sistema anti-vibración. Incluye 3 cinceles y maletín.', 'MRT-HILTI-001', 'HT7788990011', 'Herramientas Eléctricas', '[\"Potencia: 1100W, Impactos: 2900 ipm, Peso: 5.8kg\"]', 'disponible', '2025-11-24 06:29:57', '2025-11-24 06:29:57'),
-(35, 'Compresor de Aire Stanley D200/10/24', 'Compresor portátil de 24 litros, ideal para herramientas neumáticas.', 'Stanley', 'D200/10/24', 22000.00, 28000.00, 145000.00, 490000.00, 850000.00, 720000.00, '2023-03-22', 'Usado - Buen estado', 'Bodega Central - Área D', 'Revisar nivel de aceite antes de cada uso. Incluye manguera.', 'CMP-STANLEY-001', 'ST2233445566', 'Equipos de Aire', '[\"Capacidad: 24L, Presi\\u00f3n: 8 bar, Potencia: 1.5HP\"]', 'disponible', '2025-11-24 06:30:27', '2025-11-24 06:30:27');
+(2, 't', 'Item creado automáticamente desde producto: t', 't', 't', NULL, 1.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Item creado automáticamente desde producto: t', NULL, 't', 'Equipos de Sonido', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 00:26:27', '2025-11-23 01:39:40'),
+(19, '23', NULL, '3', '3', NULL, 3.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, '3', 'Equipos de Sonido', '{"processor":"3","ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 02:21:40', '2025-11-23 02:21:40'),
+(20, 'Laptop Test', 'Item creado automáticamente desde producto: Laptop Test', 'TestBrand', 'TestModel X1', NULL, 30.00, 180.00, 600.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Item creado automáticamente desde producto: Laptop Test', NULL, 'SN-TEST-001', 'Equipos de Sonido', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 03:32:10', '2025-11-23 19:32:07'),
+(21, 'Laptop Dell Inspiron 15 3000', 'Actualizado desde producto: Laptop Dell Inspiron 15 3000 - 2025-11-23 09:24:51', 'Dell', 'Inspiron 15 3000', NULL, 50000.00, 300000.00, 0.00, 0.00, 0.00, NULL, 'excelente', 'Almacén Principal', 'Actualizado desde producto: Laptop Dell Inspiron 15 3000 - 2025-11-23 09:24:51', NULL, 'DL001234567', 'Equipos de Sonido', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 04:00:53', '2025-11-23 19:33:15'),
+(22, 'test 1', 'Item creado automáticamente desde producto: test 1', 'test 1', 'test 1', NULL, 10000.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Item creado automáticamente desde producto: test 1', NULL, 'test 1', 'Equipos de Sonido', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 20:00:12', '2025-11-23 20:01:40'),
+(23, 'test', NULL, 'test', 'test', NULL, 1.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, 'test', 'Equipos de Sonido', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 20:27:53', '2025-11-23 20:27:53'),
+(24, 'Producto Prueba Flujo', NULL, 'Marca Test', 'Modelo Test', NULL, 100.00, 0.00, 0.00, 1000.00, 0.00, '2025-11-23', 'excelente', 'Bodega', NULL, NULL, 'SERIE-TEST-FLOW-001', 'Equipos de Sonido', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 20:58:27', '2025-11-23 20:58:27'),
+(25, '1', 'Item creado automáticamente desde producto: 1', '1', '1', NULL, 1.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Item creado automáticamente desde producto: 1', NULL, '1', 'Herramientas Test', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 21:14:16', '2025-11-23 21:18:11'),
+(26, '2', NULL, '2', '2', NULL, 2.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, '2', 'Equipos de Sonido', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 21:25:34', '2025-11-23 21:25:34'),
+(27, '33', NULL, '33', '33', NULL, 33.00, 3.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, '33', 'Equipos de Sonido', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 21:31:31', '2025-11-23 21:31:31'),
+(28, '4', 'Actualizado desde producto: 4 - 2025-11-23 19:36:40', '4', '4', NULL, 4.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, 'Actualizado desde producto: 4 - 2025-11-23 19:36:40', NULL, '4', 'Iluminación', '{"processor":"4","ram":"4","storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 21:38:02', '2025-11-24 06:09:59'),
+(29, '123', NULL, '123', 'xxxxxx', NULL, 11.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, 'xxxxxxxxxxxxxx', 'Herramientas Test', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 21:47:34', '2025-11-23 21:47:34'),
+(30, '123', NULL, '134', '32', NULL, 2.00, 0.00, 0.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, '33223', 'Herramientas Test', '{"processor":null,"ram":null,"storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-23 23:58:32', '2025-11-23 23:58:32'),
+(31, 't44', NULL, 't44', 't44', NULL, 444.00, 4444.00, 44.00, 0.00, 0.00, NULL, 'excelente', NULL, NULL, NULL, 't44', 'w', '{"processor":"t","ram":"t","storage":null,"graphics":null,"screen":null,"os":null}', 'disponible', '2025-11-24 05:34:50', '2025-11-24 05:34:50'),
+(32, 'Escalera Telescópica Aluminio 5.8m', 'Escalera telescópica multiposición en aluminio, se extiende hasta 5.8m.', 'Promart', 'ETL-58', 12000.00, 15000.00, 78000.00, 265000.00, 620000.00, 550000.00, '2023-06-12', 'Usado - Buen estado', 'Bodega Central - Área F', 'Verificar seguro de peldaños. Capacidad 150kg.', 'ESC-PROMART-001', 'PM1122334455', 'Equipos de Acceso', '["Altura m\\u00e1xima: 5.8m, Material: Aluminio, Capacidad: 150kg"]', 'disponible', '2025-11-24 06:28:41', '2025-11-24 06:28:41'),
+(33, 'Sierra Circular DeWalt DWE575', 'Sierra circular de 7.25 pulgadas con motor de 1950W para cortes precisos.', 'DeWalt', 'DWE575', 18000.00, 22000.00, 115000.00, 390000.00, 650000.00, 550000.00, '2023-04-15', 'Usado - Excelente estado', 'Bodega Central - Estante B2', 'Incluye disco de corte premium y guía paralela.', 'SRC-DEWALT-001', 'DW5544332211', 'Herramientas Eléctricas', '["Potencia: 1950W, Disco: 7.25 pulgadas, Profundidad de corte: 65mm"]', 'disponible', '2025-11-24 06:29:19', '2025-11-24 06:29:19'),
+(34, 'Martillo Demoledor Hilti TE 500-AVR', 'Martillo demoledor profesional de 1100W con sistema de reducción de vibración.', 'Hilti', 'TE 500-AVR', 35000.00, 42000.00, 220000.00, 750000.00, 1850000.00, 1600000.00, '2023-01-10', 'Usado - Buen estado', 'Bodega Central - Estante C1', 'Sistema anti-vibración. Incluye 3 cinceles y maletín.', 'MRT-HILTI-001', 'HT7788990011', 'Herramientas Eléctricas', '["Potencia: 1100W, Impactos: 2900 ipm, Peso: 5.8kg"]', 'disponible', '2025-11-24 06:29:57', '2025-11-24 06:29:57'),
+(35, 'Compresor de Aire Stanley D200/10/24', 'Compresor portátil de 24 litros, ideal para herramientas neumáticas.', 'Stanley', 'D200/10/24', 22000.00, 28000.00, 145000.00, 490000.00, 850000.00, 720000.00, '2023-03-22', 'Usado - Buen estado', 'Bodega Central - Área D', 'Revisar nivel de aceite antes de cada uso. Incluye manguera.', 'CMP-STANLEY-001', 'ST2233445566', 'Equipos de Aire', '["Capacidad: 24L, Presi\\u00f3n: 8 bar, Potencia: 1.5HP"]', 'disponible', '2025-11-24 06:30:27', '2025-11-24 06:30:27');
 
 --
 -- Disparadores producto
@@ -518,7 +519,7 @@ INSERT INTO proveedor (id, nombre_empresa, rfc, nombre_contacto, telefono_contac
 CREATE TABLE proveedor_direccion (
   proveedor_id INTEGER NOT NULL,
   direccion_id INTEGER NOT NULL,
-  es_principal tinyINTEGER DEFAULT TRUE
+  es_principal BOOLEAN DEFAULT TRUE
 );
 
 --
@@ -526,10 +527,10 @@ CREATE TABLE proveedor_direccion (
 --
 
 INSERT INTO proveedor_direccion (proveedor_id, direccion_id, es_principal) VALUES
-(1, 2, 1),
-(2, 1, 1),
-(3, 4, 1),
-(4, 5, 1);
+(1, 2, TRUE),
+(2, 1, TRUE),
+(3, 4, TRUE),
+(4, 5, TRUE);
 
 -- --------------------------------------------------------
 
@@ -629,7 +630,7 @@ CREATE TABLE solicitud (
   cliente_id INTEGER NOT NULL,
   fecha_solicitud TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   nombre_producto_alternativo varchar(200) DEFAULT NULL,
-  cantidad_solicitada INTEGER DEFAULT TRUE,
+  cantidad_solicitada INTEGER DEFAULT 1,
   descripcion_necesidad text DEFAULT NULL,
   estado_solicitud estado_solicitud_enum DEFAULT 'Nueva',
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
@@ -833,7 +834,7 @@ CREATE INDEX IF NOT EXISTS idx_fecha_cambio ON auditoria_inventario (fecha_cambi
 -- Indices de la tabla categoria
 --
 ALTER TABLE ONLY categoria ADD PRIMARY KEY (id);
-ALTER TABLE ONLY categoria ADD CONSTRAINT nombre UNIQUE (nombre);
+ALTER TABLE ONLY categoria ADD CONSTRAINT categoria_nombre_unique UNIQUE (nombre);
 
 --
 -- Indices de la tabla categoria_subcategoria
@@ -845,7 +846,7 @@ CREATE INDEX IF NOT EXISTS subcategoria_id ON categoria_subcategoria (subcategor
 -- Indices de la tabla cliente
 --
 ALTER TABLE ONLY cliente ADD PRIMARY KEY (id);
-ALTER TABLE ONLY cliente ADD CONSTRAINT rfc UNIQUE (rfc);
+ALTER TABLE ONLY cliente ADD CONSTRAINT cliente_rfc_unique UNIQUE (rfc);
 ALTER TABLE ONLY cliente ADD CONSTRAINT correo_electronico UNIQUE (correo_electronico);
 
 --
@@ -920,7 +921,7 @@ CREATE INDEX IF NOT EXISTS subcategoria_id ON producto_subcategoria (subcategori
 --
 ALTER TABLE ONLY proveedor ADD PRIMARY KEY (id);
 ALTER TABLE ONLY proveedor ADD CONSTRAINT nombre_empresa UNIQUE (nombre_empresa);
-ALTER TABLE ONLY proveedor ADD CONSTRAINT rfc UNIQUE (rfc);
+ALTER TABLE ONLY proveedor ADD CONSTRAINT proveedor_rfc_unique UNIQUE (rfc);
 
 --
 -- Indices de la tabla proveedor_direccion
@@ -963,7 +964,7 @@ CREATE INDEX IF NOT EXISTS producto_id ON solicitud_producto (producto_id);
 -- Indices de la tabla subcategoria
 --
 ALTER TABLE ONLY subcategoria ADD PRIMARY KEY (id);
-ALTER TABLE ONLY subcategoria ADD CONSTRAINT nombre UNIQUE (nombre);
+ALTER TABLE ONLY subcategoria ADD CONSTRAINT subcategoria_nombre_unique UNIQUE (nombre);
 
 --
 -- Indices de la tabla usuario

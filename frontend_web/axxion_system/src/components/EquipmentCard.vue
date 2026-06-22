@@ -227,8 +227,9 @@ const getCurrentRental = computed(() => {
   
   // Fallback al método anterior
   if (props.equipment.rentas && Array.isArray(props.equipment.rentas)) {
-    const rentaActiva = props.equipment.rentas.find(renta => 
-      renta.estado === 'Activa' || renta.estado === 'active' || !renta.fecha_fin
+    const rentaActiva = props.equipment.rentas.find(renta =>
+      ['Programada', 'EnCurso', 'Retrasada', 'Activa', 'active'].includes(renta.estado)
+      || !renta.fecha_fin
     );
     if (rentaActiva) return rentaActiva;
   }

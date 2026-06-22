@@ -19,7 +19,7 @@ class ProductoController extends Controller
         try {
             // Eager load inventory items, their active rentals, and the client associated with those rentals
             $productos = Producto::with(['inventarioItems.rentas' => function($query) {
-                $query->whereIn('estado_renta', ['Programada', 'EnCurso', 'Activa'])
+                $query->whereIn('estado_renta', \App\Models\Renta::ESTADOS_ABIERTOS)
                       ->orderBy('fecha_inicio', 'desc');
             }, 'inventarioItems.rentas.cliente'])->get();
 

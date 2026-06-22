@@ -14,6 +14,9 @@ class Renta extends Model
 {
     use HasFactory;
 
+    /** Estados de renta no cerrados (valores del enum PostgreSQL estado_renta_enum). */
+    public const ESTADOS_ABIERTOS = ['Programada', 'EnCurso', 'Retrasada'];
+
     protected $table = 'renta';
 
     protected $fillable = [
@@ -75,5 +78,10 @@ class Renta extends Model
     public function devolucion()
     {
         return $this->hasOne(Devolucion::class);
+    }
+
+    public function scopeAbiertas($query)
+    {
+        return $query->whereIn('estado_renta', self::ESTADOS_ABIERTOS);
     }
 }

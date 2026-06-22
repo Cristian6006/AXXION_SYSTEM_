@@ -37,6 +37,11 @@ services:
         value: file
       - key: QUEUE_CONNECTION
         value: sync
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: axxion-frontend
+          envVarKey: RENDER_EXTERNAL_URL
 
   - type: web
     name: axxion-frontend

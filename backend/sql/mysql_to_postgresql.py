@@ -378,13 +378,9 @@ def strip_mysql_noise(content: str) -> str:
 
 def convert_syntax(content: str) -> str:
     content = re.sub(r"`([^`]+)`", r"\1", content)
+    content = re.sub(r"tinyint\(1\)", "BOOLEAN", content, flags=re.I)
     content = re.sub(r"int\(\d+\)\s+UNSIGNED", "INTEGER", content, flags=re.I)
     content = re.sub(r"int\(\d+\)", "INTEGER", content, flags=re.I)
-    content = re.sub(r"longtext", "TEXT", content, flags=re.I)
-    content = re.sub(r"datetime", "TIMESTAMP", content, flags=re.I)
-    content = re.sub(r"\btimestamp\b", "TIMESTAMP", content, flags=re.I)
-    content = re.sub(r"tinyint\(1\)", "BOOLEAN", content, flags=re.I)
-    content = re.sub(r"DEFAULT 1(?!\d)", "DEFAULT TRUE", content)
     content = re.sub(r"DEFAULT 0(?!\d)", "DEFAULT FALSE", content)
     content = re.sub(r"current_timestamp\(\)", "CURRENT_TIMESTAMP", content, flags=re.I)
     content = re.sub(r" ON UPDATE CURRENT_TIMESTAMP", "", content, flags=re.I)
