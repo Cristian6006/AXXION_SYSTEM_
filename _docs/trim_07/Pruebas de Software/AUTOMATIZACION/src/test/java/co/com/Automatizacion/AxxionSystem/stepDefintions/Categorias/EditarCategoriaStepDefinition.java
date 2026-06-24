@@ -1,29 +1,29 @@
 package co.com.Automatizacion.AxxionSystem.stepDefintions.Categorias;
 
-import co.com.Automatizacion.AxxionSystem.models.Categoria;
-import co.com.Automatizacion.AxxionSystem.questions.Categorias.LaCategoriaEsVisible;
+import co.com.Automatizacion.AxxionSystem.factory.Categoria.CategoriaFactory;
+import co.com.Automatizacion.AxxionSystem.models.Categorias.Categoria;
+import co.com.Automatizacion.AxxionSystem.questions.Categorias.CategoriaExiste;
 import co.com.Automatizacion.AxxionSystem.tasks.Categorias.EditarCategoria;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;
-import net.serenitybdd.screenplay.GivenWhenThen;
+import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actors.OnStage;
 
-import java.util.List;
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 public class EditarCategoriaStepDefinition {
-    @Cuando("el usuario actualiza el nombre de la categoría por el nuevo nombre")
-    public void elUsuarioActualizaElNombreDeLaCategoríaPorElNuevoNombre(List<Categoria> categoria) {
-        OnStage.theActorInTheSpotlight().attemptsTo(
-                EditarCategoria.edit(categoria)
-        );
+    private Categoria updateCategory;
+
+    @Cuando("el usuario actualiza el nombre de la categoría")
+    public void el_usuario_actualiza_el_nombre_de_la_categoría() {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        Categoria categoriaActual = actor.recall("CATEGORIA");
+        updateCategory = CategoriaFactory.updateCategory(categoriaActual);
+        actor.attemptsTo(EditarCategoria.con(updateCategory));
     }
-    @Entonces("que la categoría {string} debería estar visible en la tabla")
-    public void queLaCategoríaDeberíaEstarVisibleEnLaTabla(String categoriaBuscada) {
-        OnStage.theActorInTheSpotlight().should(
-                GivenWhenThen.seeThat(
-                        "La Categoria Editada",
-                        LaCategoriaEsVisible.enLosResultados(categoriaBuscada)
-                )
-        );
+    @Entonces("que la categoría debería estar visible en la tabla")
+    public void que_la_categoría_debería_estar_visible_en_la_tabla() {
+        Actor actor = OnStage.theActorInTheSpotlight();
+        actor.should(seeThat(CategoriaExiste.enLaLista(updateCategory)));
     }
 }

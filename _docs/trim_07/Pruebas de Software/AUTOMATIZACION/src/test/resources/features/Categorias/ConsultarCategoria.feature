@@ -7,30 +7,21 @@ Característica: Consultar Categorías
   Para encontrar información específica de manera rápida
 
   Antecedentes:
-    Dado que el usuario se encuentra en la pagina de inicio de sesion de Axxion System
-    Y inicie sesion con las credenciales (usuario y contraseña)
-      | usuario || contraseña |
-      | p@example.com || Us123456   |
-    Y que se muestra la pagina de gestión de categorías
+    Dado el administrador inicie sesion con las credenciales correctas
+    Y se encuentre en la pagina de gestion gestion de categorias
 
   @ConsultarCategoria @Busqueda
 
-  Esquema del escenario: Buscar categoria por Nombre
-    Cuando el usuario ingresa el nombre de la categoria buscada
-    | nombre |
-    | Iluminación |
-    Entonces debería ver unicamente resultados que contengan "<palabra_buscada>"
-    Ejemplos:
-      | palabra_buscada |
-      | Iluminación     |
-
+  Escenario: Buscar categoria por Nombre
+    Dado este crea una nueva categoría
+    Cuando ingrese el nombre de la categoria buscada
+    Entonces debería ver unicamente resultados que contengan la categoria buscada
 
 
   @ConsultarCategoria @FiltroPorFecha
 
     Escenario: Filtrar las categorias por fechas de creacion
+    Dado este crea una nueva categoría
     Cuando el usuario selecciona la fecha en el filtro de fechas
-      | fecha       |
-      | 21/02/2026  |
     Entonces debería ver solo las categorias creadas en la fecha seleccionada
 
