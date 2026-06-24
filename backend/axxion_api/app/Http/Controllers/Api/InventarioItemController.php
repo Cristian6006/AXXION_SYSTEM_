@@ -338,9 +338,9 @@ class InventarioItemController extends Controller
                           ->orderBy('fecha_inicio', 'desc');
                 },
                 'rentas' => function($query) {
-                    // Incluir rentas activas: estados específicos O sin fecha de devolución
+                    // Rentas abiertas: enum PostgreSQL (Programada, EnCurso, Retrasada) o sin devolución registrada
                     $query->where(function($q) {
-                        $q->whereIn('estado_renta', ['Programada', 'EnCurso', 'Activa', 'Pendiente'])
+                        $q->whereIn('estado_renta', \App\Models\Renta::ESTADOS_ABIERTOS)
                           ->orWhereNull('fecha_devolucion_real');
                     })
                     ->with('cliente')

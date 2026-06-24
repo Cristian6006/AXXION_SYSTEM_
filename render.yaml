@@ -1,0 +1,59 @@
+databases:
+  - name: axxion-db
+    databaseName: sistemarenta
+    user: axxion
+    plan: free
+    region: oregon
+
+services:
+  - type: web
+    name: axxion-api
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: test
+    rootDir: backend/axxion_api
+    dockerfilePath: ./Dockerfile.render
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: JWT_SECRET
+        generateValue: true
+      - key: APP_DEBUG
+        value: "false"
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_URL
+        fromDatabase:
+          name: axxion-db
+          property: connectionString
+      - key: CACHE_STORE
+        value: file
+      - key: SESSION_DRIVER
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: axxion-frontend
+          envVarKey: RENDER_EXTERNAL_URL
+
+  - type: web
+    name: axxion-frontend
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: test
+    rootDir: frontend_web/axxion_system
+    dockerfilePath: ./Dockerfile.render
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: axxion-api
+          envVarKey: RENDER_EXTERNAL_URL
