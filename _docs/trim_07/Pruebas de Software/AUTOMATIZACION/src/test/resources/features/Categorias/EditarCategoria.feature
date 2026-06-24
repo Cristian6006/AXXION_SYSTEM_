@@ -7,23 +7,17 @@ Característica: Editar Categorías
   Para actualizar su información cuando sea necesario
 
   Antecedentes:
-    Dado que el usuario se encuentra en la pagina de inicio de sesion de Axxion System
-    Y inicie sesion con las credenciales (usuario y contraseña)
-      | usuario || contraseña |
-      | p@example.com || Us123456   |
-    Y que se muestra la pagina de gestión de categorías
+    Dado el administrador inicie sesion con las credenciales correctas
+    Y se encuentre en la pagina de gestion gestion de categorias
 
   @EditarCategoria
 
-  Esquema del escenario: Editar una categoría correctamente
-    Cuando el usuario actualiza el nombre de la categoría por el nuevo nombre
-      | nombre || nuevoNombre |
-      | TestAutomatizacion2 || TestAutomatizacion |
+  Escenario: Editar una categoría correctamente
+    Dado este crea una nueva categoría
+    Cuando el usuario actualiza el nombre de la categoría
     Entonces debería ver un mensaje de éxito
-    Y que la categoría "<nuevoNombre>" debería estar visible en la tabla
-    Ejemplos:
-    | nuevoNombre |
-    | TestAutomatizacion |
+    Y que la categoría debería estar visible en la tabla
+
 
 
 

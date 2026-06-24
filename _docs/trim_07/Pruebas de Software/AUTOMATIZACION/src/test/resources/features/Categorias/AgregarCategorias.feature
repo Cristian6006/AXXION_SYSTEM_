@@ -7,24 +7,16 @@ Característica: Gestión de Categorías
   Para organizar los productos del inventario
 
   Antecedentes:
-    Dado que el usuario se encuentra en la pagina de inicio de sesion de Axxion System
-    Y inicie sesion con las credenciales (usuario y contraseña)
-      | usuario || contraseña |
-      | p@example.com || Us123456   |
-    Y que se muestra la pagina de gestión de categorías
-
+    Dado el administrador inicie sesion con las credenciales correctas
+    Y se encuentre en la pagina de gestion gestion de categorias
 
   @AgregarCategorias
 
-  Esquema del escenario: Agregar una categoría válida con éxito
-    Cuando el usuario crea una nueva categoría
-      | nombre   | tipoCategoria | descripcion   |
-      | Electronicos | Equipos    | Dispositivos electronicos y gadgets    |
+  Escenario: Agregar una categoría válida con éxito
+    Cuando este crea una nueva categoría
     Entonces debería ver un mensaje de éxito
-    Y la categoría "<nombre>" debería estar visible en la lista de categorías
-    Ejemplos:
-      | nombre |
-      | Electronicos |
+    Y la categoría debería estar visible en la lista de categorías
+
 
 
 

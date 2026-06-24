@@ -30,6 +30,7 @@ services:
         condition: service_healthy
     networks:
       - app-network
+    image: axxion-php
 
   vue-build:
     build:
@@ -39,6 +40,7 @@ services:
       - vue_dist:/usr/share/nginx/html
     networks:
       - app-network
+    image: axxion-vue 
 
   mysql:
     image: mysql:8.0
