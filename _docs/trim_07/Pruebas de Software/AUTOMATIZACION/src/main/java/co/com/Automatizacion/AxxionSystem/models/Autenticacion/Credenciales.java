@@ -13,8 +13,8 @@ public class Credenciales {
 
     public static Credenciales admin() {
         return new Credenciales(
-            "p@example.com",
-                "12345678"
+                "J@example.com",
+                "Axxion2025!"
         );
     }
 

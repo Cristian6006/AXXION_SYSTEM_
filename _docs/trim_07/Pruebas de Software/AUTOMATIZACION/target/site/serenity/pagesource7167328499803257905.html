@@ -1,0 +1,1690 @@
+<html lang='en'><head><link href='prism/prism.css' rel='stylesheet' /></head><body><script src='prism/prism.js'></script><body><div><pre><code class='language-html'>&lt;html lang=""&gt;<br/>
+ &lt;head&gt;<br/>
+  &lt;meta charset="UTF-8"&gt;<br/>
+  &lt;style type="text/css"&gt;:root, :host {<br/>
+  --fa-font-solid: normal 900 1em/1 "Font Awesome 7 Free";<br/>
+  --fa-font-regular: normal 400 1em/1 "Font Awesome 7 Free";<br/>
+  --fa-font-light: normal 300 1em/1 "Font Awesome 7 Pro";<br/>
+  --fa-font-thin: normal 100 1em/1 "Font Awesome 7 Pro";<br/>
+  --fa-font-duotone: normal 900 1em/1 "Font Awesome 7 Duotone";<br/>
+  --fa-font-duotone-regular: normal 400 1em/1 "Font Awesome 7 Duotone";<br/>
+  --fa-font-duotone-light: normal 300 1em/1 "Font Awesome 7 Duotone";<br/>
+  --fa-font-duotone-thin: normal 100 1em/1 "Font Awesome 7 Duotone";<br/>
+  --fa-font-brands: normal 400 1em/1 "Font Awesome 7 Brands";<br/>
+  --fa-font-sharp-solid: normal 900 1em/1 "Font Awesome 7 Sharp";<br/>
+  --fa-font-sharp-regular: normal 400 1em/1 "Font Awesome 7 Sharp";<br/>
+  --fa-font-sharp-light: normal 300 1em/1 "Font Awesome 7 Sharp";<br/>
+  --fa-font-sharp-thin: normal 100 1em/1 "Font Awesome 7 Sharp";<br/>
+  --fa-font-sharp-duotone-solid: normal 900 1em/1 "Font Awesome 7 Sharp Duotone";<br/>
+  --fa-font-sharp-duotone-regular: normal 400 1em/1 "Font Awesome 7 Sharp Duotone";<br/>
+  --fa-font-sharp-duotone-light: normal 300 1em/1 "Font Awesome 7 Sharp Duotone";<br/>
+  --fa-font-sharp-duotone-thin: normal 100 1em/1 "Font Awesome 7 Sharp Duotone";<br/>
+  --fa-font-slab-regular: normal 400 1em/1 "Font Awesome 7 Slab";<br/>
+  --fa-font-slab-press-regular: normal 400 1em/1 "Font Awesome 7 Slab Press";<br/>
+  --fa-font-whiteboard-semibold: normal 600 1em/1 "Font Awesome 7 Whiteboard";<br/>
+  --fa-font-thumbprint-light: normal 300 1em/1 "Font Awesome 7 Thumbprint";<br/>
+  --fa-font-notdog-solid: normal 900 1em/1 "Font Awesome 7 Notdog";<br/>
+  --fa-font-notdog-duo-solid: normal 900 1em/1 "Font Awesome 7 Notdog Duo";<br/>
+  --fa-font-etch-solid: normal 900 1em/1 "Font Awesome 7 Etch";<br/>
+  --fa-font-jelly-regular: normal 400 1em/1 "Font Awesome 7 Jelly";<br/>
+  --fa-font-jelly-fill-regular: normal 400 1em/1 "Font Awesome 7 Jelly Fill";<br/>
+  --fa-font-jelly-duo-regular: normal 400 1em/1 "Font Awesome 7 Jelly Duo";<br/>
+  --fa-font-chisel-regular: normal 400 1em/1 "Font Awesome 7 Chisel";<br/>
+}<br/>
+<br/>
+.svg-inline--fa {<br/>
+  box-sizing: content-box;<br/>
+  display: var(--fa-display, inline-block);<br/>
+  height: 1em;<br/>
+  overflow: visible;<br/>
+  vertical-align: -0.125em;<br/>
+  width: var(--fa-width, 1.25em);<br/>
+}<br/>
+.svg-inline--fa.fa-2xs {<br/>
+  vertical-align: 0.1em;<br/>
+}<br/>
+.svg-inline--fa.fa-xs {<br/>
+  vertical-align: 0em;<br/>
+}<br/>
+.svg-inline--fa.fa-sm {<br/>
+  vertical-align: -0.0714285714em;<br/>
+}<br/>
+.svg-inline--fa.fa-lg {<br/>
+  vertical-align: -0.2em;<br/>
+}<br/>
+.svg-inline--fa.fa-xl {<br/>
+  vertical-align: -0.25em;<br/>
+}<br/>
+.svg-inline--fa.fa-2xl {<br/>
+  vertical-align: -0.3125em;<br/>
+}<br/>
+.svg-inline--fa.fa-pull-left,<br/>
+.svg-inline--fa .fa-pull-start {<br/>
+  float: inline-start;<br/>
+  margin-inline-end: var(--fa-pull-margin, 0.3em);<br/>
+}<br/>
+.svg-inline--fa.fa-pull-right,<br/>
+.svg-inline--fa .fa-pull-end {<br/>
+  float: inline-end;<br/>
+  margin-inline-start: var(--fa-pull-margin, 0.3em);<br/>
+}<br/>
+.svg-inline--fa.fa-li {<br/>
+  width: var(--fa-li-width, 2em);<br/>
+  inset-inline-start: calc(-1 * var(--fa-li-width, 2em));<br/>
+  inset-block-start: 0.25em; /* syncing vertical alignment with Web Font rendering */<br/>
+}<br/>
+<br/>
+.fa-layers-counter, .fa-layers-text {<br/>
+  display: inline-block;<br/>
+  position: absolute;<br/>
+  text-align: center;<br/>
+}<br/>
+<br/>
+.fa-layers {<br/>
+  display: inline-block;<br/>
+  height: 1em;<br/>
+  position: relative;<br/>
+  text-align: center;<br/>
+  vertical-align: -0.125em;<br/>
+  width: var(--fa-width, 1.25em);<br/>
+}<br/>
+.fa-layers .svg-inline--fa {<br/>
+  inset: 0;<br/>
+  margin: auto;<br/>
+  position: absolute;<br/>
+  transform-origin: center center;<br/>
+}<br/>
+<br/>
+.fa-layers-text {<br/>
+  left: 50%;<br/>
+  top: 50%;<br/>
+  transform: translate(-50%, -50%);<br/>
+  transform-origin: center center;<br/>
+}<br/>
+<br/>
+.fa-layers-counter {<br/>
+  background-color: var(--fa-counter-background-color, #ff253a);<br/>
+  border-radius: var(--fa-counter-border-radius, 1em);<br/>
+  box-sizing: border-box;<br/>
+  color: var(--fa-inverse, #fff);<br/>
+  line-height: var(--fa-counter-line-height, 1);<br/>
+  max-width: var(--fa-counter-max-width, 5em);<br/>
+  min-width: var(--fa-counter-min-width, 1.5em);<br/>
+  overflow: hidden;<br/>
+  padding: var(--fa-counter-padding, 0.25em 0.5em);<br/>
+  right: var(--fa-right, 0);<br/>
+  text-overflow: ellipsis;<br/>
+  top: var(--fa-top, 0);<br/>
+  transform: scale(var(--fa-counter-scale, 0.25));<br/>
+  transform-origin: top right;<br/>
+}<br/>
+<br/>
+.fa-layers-bottom-right {<br/>
+  bottom: var(--fa-bottom, 0);<br/>
+  right: var(--fa-right, 0);<br/>
+  top: auto;<br/>
+  transform: scale(var(--fa-layers-scale, 0.25));<br/>
+  transform-origin: bottom right;<br/>
+}<br/>
+<br/>
+.fa-layers-bottom-left {<br/>
+  bottom: var(--fa-bottom, 0);<br/>
+  left: var(--fa-left, 0);<br/>
+  right: auto;<br/>
+  top: auto;<br/>
+  transform: scale(var(--fa-layers-scale, 0.25));<br/>
+  transform-origin: bottom left;<br/>
+}<br/>
+<br/>
+.fa-layers-top-right {<br/>
+  top: var(--fa-top, 0);<br/>
+  right: var(--fa-right, 0);<br/>
+  transform: scale(var(--fa-layers-scale, 0.25));<br/>
+  transform-origin: top right;<br/>
+}<br/>
+<br/>
+.fa-layers-top-left {<br/>
+  left: var(--fa-left, 0);<br/>
+  right: auto;<br/>
+  top: var(--fa-top, 0);<br/>
+  transform: scale(var(--fa-layers-scale, 0.25));<br/>
+  transform-origin: top left;<br/>
+}<br/>
+<br/>
+.fa-1x {<br/>
+  font-size: 1em;<br/>
+}<br/>
+<br/>
+.fa-2x {<br/>
+  font-size: 2em;<br/>
+}<br/>
+<br/>
+.fa-3x {<br/>
+  font-size: 3em;<br/>
+}<br/>
+<br/>
+.fa-4x {<br/>
+  font-size: 4em;<br/>
+}<br/>
+<br/>
+.fa-5x {<br/>
+  font-size: 5em;<br/>
+}<br/>
+<br/>
+.fa-6x {<br/>
+  font-size: 6em;<br/>
+}<br/>
+<br/>
+.fa-7x {<br/>
+  font-size: 7em;<br/>
+}<br/>
+<br/>
+.fa-8x {<br/>
+  font-size: 8em;<br/>
+}<br/>
+<br/>
+.fa-9x {<br/>
+  font-size: 9em;<br/>
+}<br/>
+<br/>
+.fa-10x {<br/>
+  font-size: 10em;<br/>
+}<br/>
+<br/>
+.fa-2xs {<br/>
+  font-size: calc(10 / 16 * 1em); /* converts a 10px size into an em-based value that's relative to the scale's 16px base */<br/>
+  line-height: calc(1 / 10 * 1em); /* sets the line-height of the icon back to that of it's parent */<br/>
+  vertical-align: calc((6 / 10 - 0.375) * 1em); /* vertically centers the icon taking into account the surrounding text's descender */<br/>
+}<br/>
+<br/>
+.fa-xs {<br/>
+  font-size: calc(12 / 16 * 1em); /* converts a 12px size into an em-based value that's relative to the scale's 16px base */<br/>
+  line-height: calc(1 / 12 * 1em); /* sets the line-height of the icon back to that of it's parent */<br/>
+  vertical-align: calc((6 / 12 - 0.375) * 1em); /* vertically centers the icon taking into account the surrounding text's descender */<br/>
+}<br/>
+<br/>
+.fa-sm {<br/>
+  font-size: calc(14 / 16 * 1em); /* converts a 14px size into an em-based value that's relative to the scale's 16px base */<br/>
+  line-height: calc(1 / 14 * 1em); /* sets the line-height of the icon back to that of it's parent */<br/>
+  vertical-align: calc((6 / 14 - 0.375) * 1em); /* vertically centers the icon taking into account the surrounding text's descender */<br/>
+}<br/>
+<br/>
+.fa-lg {<br/>
+  font-size: calc(20 / 16 * 1em); /* converts a 20px size into an em-based value that's relative to the scale's 16px base */<br/>
+  line-height: calc(1 / 20 * 1em); /* sets the line-height of the icon back to that of it's parent */<br/>
+  vertical-align: calc((6 / 20 - 0.375) * 1em); /* vertically centers the icon taking into account the surrounding text's descender */<br/>
+}<br/>
+<br/>
+.fa-xl {<br/>
+  font-size: calc(24 / 16 * 1em); /* converts a 24px size into an em-based value that's relative to the scale's 16px base */<br/>
+  line-height: calc(1 / 24 * 1em); /* sets the line-height of the icon back to that of it's parent */<br/>
+  vertical-align: calc((6 / 24 - 0.375) * 1em); /* vertically centers the icon taking into account the surrounding text's descender */<br/>
+}<br/>
+<br/>
+.fa-2xl {<br/>
+  font-size: calc(32 / 16 * 1em); /* converts a 32px size into an em-based value that's relative to the scale's 16px base */<br/>
+  line-height: calc(1 / 32 * 1em); /* sets the line-height of the icon back to that of it's parent */<br/>
+  vertical-align: calc((6 / 32 - 0.375) * 1em); /* vertically centers the icon taking into account the surrounding text's descender */<br/>
+}<br/>
+<br/>
+.fa-width-auto {<br/>
+  --fa-width: auto;<br/>
+}<br/>
+<br/>
+.fa-fw,<br/>
+.fa-width-fixed {<br/>
+  --fa-width: 1.25em;<br/>
+}<br/>
+<br/>
+.fa-ul {<br/>
+  list-style-type: none;<br/>
+  margin-inline-start: var(--fa-li-margin, 2.5em);<br/>
+  padding-inline-start: 0;<br/>
+}<br/>
+.fa-ul &gt; li {<br/>
+  position: relative;<br/>
+}<br/>
+<br/>
+.fa-li {<br/>
+  inset-inline-start: calc(-1 * var(--fa-li-width, 2em));<br/>
+  position: absolute;<br/>
+  text-align: center;<br/>
+  width: var(--fa-li-width, 2em);<br/>
+  line-height: inherit;<br/>
+}<br/>
+<br/>
+/* Heads Up: Bordered Icons will not be supported in the future!<br/>
+  - This feature will be deprecated in the next major release of Font Awesome (v8)!<br/>
+  - You may continue to use it in this version *v7), but it will not be supported in Font Awesome v8.<br/>
+*/<br/>
+/* Notes:<br/>
+* --@{v.$css-prefix}-border-width = 1/16 by default (to render as ~1px based on a 16px default font-size)<br/>
+* --@{v.$css-prefix}-border-padding =<br/>
+  ** 3/16 for vertical padding (to give ~2px of vertical whitespace around an icon considering it's vertical alignment)<br/>
+  ** 4/16 for horizontal padding (to give ~4px of horizontal whitespace around an icon)<br/>
+*/<br/>
+.fa-border {<br/>
+  border-color: var(--fa-border-color, #eee);<br/>
+  border-radius: var(--fa-border-radius, 0.1em);<br/>
+  border-style: var(--fa-border-style, solid);<br/>
+  border-width: var(--fa-border-width, 0.0625em);<br/>
+  box-sizing: var(--fa-border-box-sizing, content-box);<br/>
+  padding: var(--fa-border-padding, 0.1875em 0.25em);<br/>
+}<br/>
+<br/>
+.fa-pull-left,<br/>
+.fa-pull-start {<br/>
+  float: inline-start;<br/>
+  margin-inline-end: var(--fa-pull-margin, 0.3em);<br/>
+}<br/>
+<br/>
+.fa-pull-right,<br/>
+.fa-pull-end {<br/>
+  float: inline-end;<br/>
+  margin-inline-start: var(--fa-pull-margin, 0.3em);<br/>
+}<br/>
+<br/>
+.fa-beat {<br/>
+  animation-name: fa-beat;<br/>
+  animation-delay: var(--fa-animation-delay, 0s);<br/>
+  animation-direction: var(--fa-animation-direction, normal);<br/>
+  animation-duration: var(--fa-animation-duration, 1s);<br/>
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);<br/>
+  animation-timing-function: var(--fa-animation-timing, ease-in-out);<br/>
+}<br/>
+<br/>
+.fa-bounce {<br/>
+  animation-name: fa-bounce;<br/>
+  animation-delay: var(--fa-animation-delay, 0s);<br/>
+  animation-direction: var(--fa-animation-direction, normal);<br/>
+  animation-duration: var(--fa-animation-duration, 1s);<br/>
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);<br/>
+  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));<br/>
+}<br/>
+<br/>
+.fa-fade {<br/>
+  animation-name: fa-fade;<br/>
+  animation-delay: var(--fa-animation-delay, 0s);<br/>
+  animation-direction: var(--fa-animation-direction, normal);<br/>
+  animation-duration: var(--fa-animation-duration, 1s);<br/>
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);<br/>
+  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));<br/>
+}<br/>
+<br/>
+.fa-beat-fade {<br/>
+  animation-name: fa-beat-fade;<br/>
+  animation-delay: var(--fa-animation-delay, 0s);<br/>
+  animation-direction: var(--fa-animation-direction, normal);<br/>
+  animation-duration: var(--fa-animation-duration, 1s);<br/>
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);<br/>
+  animation-timing-function: var(--fa-animation-timing, cubic-bezier(0.4, 0, 0.6, 1));<br/>
+}<br/>
+<br/>
+.fa-flip {<br/>
+  animation-name: fa-flip;<br/>
+  animation-delay: var(--fa-animation-delay, 0s);<br/>
+  animation-direction: var(--fa-animation-direction, normal);<br/>
+  animation-duration: var(--fa-animation-duration, 1s);<br/>
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);<br/>
+  animation-timing-function: var(--fa-animation-timing, ease-in-out);<br/>
+}<br/>
+<br/>
+.fa-shake {<br/>
+  animation-name: fa-shake;<br/>
+  animation-delay: var(--fa-animation-delay, 0s);<br/>
+  animation-direction: var(--fa-animation-direction, normal);<br/>
+  animation-duration: var(--fa-animation-duration, 1s);<br/>
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);<br/>
+  animation-timing-function: var(--fa-animation-timing, linear);<br/>
+}<br/>
+<br/>
+.fa-spin {<br/>
+  animation-name: fa-spin;<br/>
+  animation-delay: var(--fa-animation-delay, 0s);<br/>
+  animation-direction: var(--fa-animation-direction, normal);<br/>
+  animation-duration: var(--fa-animation-duration, 2s);<br/>
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);<br/>
+  animation-timing-function: var(--fa-animation-timing, linear);<br/>
+}<br/>
+<br/>
+.fa-spin-reverse {<br/>
+  --fa-animation-direction: reverse;<br/>
+}<br/>
+<br/>
+.fa-pulse,<br/>
+.fa-spin-pulse {<br/>
+  animation-name: fa-spin;<br/>
+  animation-direction: var(--fa-animation-direction, normal);<br/>
+  animation-duration: var(--fa-animation-duration, 1s);<br/>
+  animation-iteration-count: var(--fa-animation-iteration-count, infinite);<br/>
+  animation-timing-function: var(--fa-animation-timing, steps(8));<br/>
+}<br/>
+<br/>
+@media (prefers-reduced-motion: reduce) {<br/>
+  .fa-beat,<br/>
+  .fa-bounce,<br/>
+  .fa-fade,<br/>
+  .fa-beat-fade,<br/>
+  .fa-flip,<br/>
+  .fa-pulse,<br/>
+  .fa-shake,<br/>
+  .fa-spin,<br/>
+  .fa-spin-pulse {<br/>
+    animation: none !important;<br/>
+    transition: none !important;<br/>
+  }<br/>
+}<br/>
+@keyframes fa-beat {<br/>
+  0%, 90% {<br/>
+    transform: scale(1);<br/>
+  }<br/>
+  45% {<br/>
+    transform: scale(var(--fa-beat-scale, 1.25));<br/>
+  }<br/>
+}<br/>
+@keyframes fa-bounce {<br/>
+  0% {<br/>
+    transform: scale(1, 1) translateY(0);<br/>
+  }<br/>
+  10% {<br/>
+    transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, 0.9)) translateY(0);<br/>
+  }<br/>
+  30% {<br/>
+    transform: scale(var(--fa-bounce-jump-scale-x, 0.9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -0.5em));<br/>
+  }<br/>
+  50% {<br/>
+    transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, 0.95)) translateY(0);<br/>
+  }<br/>
+  57% {<br/>
+    transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -0.125em));<br/>
+  }<br/>
+  64% {<br/>
+    transform: scale(1, 1) translateY(0);<br/>
+  }<br/>
+  100% {<br/>
+    transform: scale(1, 1) translateY(0);<br/>
+  }<br/>
+}<br/>
+@keyframes fa-fade {<br/>
+  50% {<br/>
+    opacity: var(--fa-fade-opacity, 0.4);<br/>
+  }<br/>
+}<br/>
+@keyframes fa-beat-fade {<br/>
+  0%, 100% {<br/>
+    opacity: var(--fa-beat-fade-opacity, 0.4);<br/>
+    transform: scale(1);<br/>
+  }<br/>
+  50% {<br/>
+    opacity: 1;<br/>
+    transform: scale(var(--fa-beat-fade-scale, 1.125));<br/>
+  }<br/>
+}<br/>
+@keyframes fa-flip {<br/>
+  50% {<br/>
+    transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));<br/>
+  }<br/>
+}<br/>
+@keyframes fa-shake {<br/>
+  0% {<br/>
+    transform: rotate(-15deg);<br/>
+  }<br/>
+  4% {<br/>
+    transform: rotate(15deg);<br/>
+  }<br/>
+  8%, 24% {<br/>
+    transform: rotate(-18deg);<br/>
+  }<br/>
+  12%, 28% {<br/>
+    transform: rotate(18deg);<br/>
+  }<br/>
+  16% {<br/>
+    transform: rotate(-22deg);<br/>
+  }<br/>
+  20% {<br/>
+    transform: rotate(22deg);<br/>
+  }<br/>
+  32% {<br/>
+    transform: rotate(-12deg);<br/>
+  }<br/>
+  36% {<br/>
+    transform: rotate(12deg);<br/>
+  }<br/>
+  40%, 100% {<br/>
+    transform: rotate(0deg);<br/>
+  }<br/>
+}<br/>
+@keyframes fa-spin {<br/>
+  0% {<br/>
+    transform: rotate(0deg);<br/>
+  }<br/>
+  100% {<br/>
+    transform: rotate(360deg);<br/>
+  }<br/>
+}<br/>
+.fa-rotate-90 {<br/>
+  transform: rotate(90deg);<br/>
+}<br/>
+<br/>
+.fa-rotate-180 {<br/>
+  transform: rotate(180deg);<br/>
+}<br/>
+<br/>
+.fa-rotate-270 {<br/>
+  transform: rotate(270deg);<br/>
+}<br/>
+<br/>
+.fa-flip-horizontal {<br/>
+  transform: scale(-1, 1);<br/>
+}<br/>
+<br/>
+.fa-flip-vertical {<br/>
+  transform: scale(1, -1);<br/>
+}<br/>
+<br/>
+.fa-flip-both,<br/>
+.fa-flip-horizontal.fa-flip-vertical {<br/>
+  transform: scale(-1, -1);<br/>
+}<br/>
+<br/>
+.fa-rotate-by {<br/>
+  transform: rotate(var(--fa-rotate-angle, 0));<br/>
+}<br/>
+<br/>
+.svg-inline--fa .fa-primary {<br/>
+  fill: var(--fa-primary-color, currentColor);<br/>
+  opacity: var(--fa-primary-opacity, 1);<br/>
+}<br/>
+<br/>
+.svg-inline--fa .fa-secondary {<br/>
+  fill: var(--fa-secondary-color, currentColor);<br/>
+  opacity: var(--fa-secondary-opacity, 0.4);<br/>
+}<br/>
+<br/>
+.svg-inline--fa.fa-swap-opacity .fa-primary {<br/>
+  opacity: var(--fa-secondary-opacity, 0.4);<br/>
+}<br/>
+<br/>
+.svg-inline--fa.fa-swap-opacity .fa-secondary {<br/>
+  opacity: var(--fa-primary-opacity, 1);<br/>
+}<br/>
+<br/>
+.svg-inline--fa mask .fa-primary,<br/>
+.svg-inline--fa mask .fa-secondary {<br/>
+  fill: black;<br/>
+}<br/>
+<br/>
+.svg-inline--fa.fa-inverse {<br/>
+  fill: var(--fa-inverse, #fff);<br/>
+}<br/>
+<br/>
+.fa-stack {<br/>
+  display: inline-block;<br/>
+  height: 2em;<br/>
+  line-height: 2em;<br/>
+  position: relative;<br/>
+  vertical-align: middle;<br/>
+  width: 2.5em;<br/>
+}<br/>
+<br/>
+.fa-inverse {<br/>
+  color: var(--fa-inverse, #fff);<br/>
+}<br/>
+<br/>
+.svg-inline--fa.fa-stack-1x {<br/>
+  height: 1em;<br/>
+  width: 1.25em;<br/>
+}<br/>
+.svg-inline--fa.fa-stack-2x {<br/>
+  height: 2em;<br/>
+  width: 2.5em;<br/>
+}<br/>
+<br/>
+.fa-stack-1x,<br/>
+.fa-stack-2x {<br/>
+  bottom: 0;<br/>
+  left: 0;<br/>
+  margin: auto;<br/>
+  position: absolute;<br/>
+  right: 0;<br/>
+  top: 0;<br/>
+  z-index: var(--fa-stack-z-index, auto);<br/>
+}&lt;/style&gt;<br/>
+  &lt;link rel="icon" href="/favicon.ico"&gt;<br/>
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br/>
+  &lt;title&gt;Inventario | Teleperformance&lt;/title&gt;<br/>
+  &lt;script type="module" crossorigin="" src="/assets/index-DAUtm_Kc.js"&gt;&lt;/script&gt;<br/>
+  &lt;link rel="stylesheet" crossorigin="" href="/assets/index-DGA-Z8mI.css"&gt;<br/>
+  &lt;link rel="manifest" href="/manifest.webmanifest"&gt;<br/>
+  &lt;style&gt;:root{--swal2-outline: 0 0 0 3px rgba(100, 150, 200, 0.5);--swal2-container-padding: 0.625em;--swal2-backdrop: rgba(0, 0, 0, 0.4);--swal2-backdrop-transition: background-color 0.15s;--swal2-width: 32em;--swal2-padding: 0 0 1.25em;--swal2-border: none;--swal2-border-radius: 0.3125rem;--swal2-background: white;--swal2-color: #545454;--swal2-show-animation: swal2-show 0.3s;--swal2-hide-animation: swal2-hide 0.15s forwards;--swal2-icon-zoom: 1;--swal2-icon-animations: true;--swal2-title-padding: 0.8em 1em 0;--swal2-html-container-padding: 1em 1.6em 0.3em;--swal2-input-border: 1px solid #d9d9d9;--swal2-input-border-radius: 0.1875em;--swal2-input-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06), 0 0 0 3px transparent;--swal2-input-background: transparent;--swal2-input-transition: border-color 0.2s, box-shadow 0.2s;--swal2-input-hover-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06), 0 0 0 3px transparent;--swal2-input-focus-border: 1px solid #b4dbed;--swal2-input-focus-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06), 0 0 0 3px rgba(100, 150, 200, 0.5);--swal2-progress-step-background: #add8e6;--swal2-validation-message-background: #f0f0f0;--swal2-validation-message-color: #666;--swal2-footer-border-color: #eee;--swal2-footer-background: transparent;--swal2-footer-color: inherit;--swal2-timer-progress-bar-background: rgba(0, 0, 0, 0.3);--swal2-close-button-position: initial;--swal2-close-button-inset: auto;--swal2-close-button-font-size: 2.5em;--swal2-close-button-color: #ccc;--swal2-close-button-transition: color 0.2s, box-shadow 0.2s;--swal2-close-button-outline: initial;--swal2-close-button-box-shadow: inset 0 0 0 3px transparent;--swal2-close-button-focus-box-shadow: inset var(--swal2-outline);--swal2-close-button-hover-transform: none;--swal2-actions-justify-content: center;--swal2-actions-width: auto;--swal2-actions-margin: 1.25em auto 0;--swal2-actions-padding: 0;--swal2-actions-border-radius: 0;--swal2-actions-background: transparent;--swal2-action-button-transition: background-color 0.2s, box-shadow 0.2s;--swal2-action-button-hover: black 10%;--swal2-action-button-active: black 10%;--swal2-confirm-button-box-shadow: none;--swal2-confirm-button-border-radius: 0.25em;--swal2-confirm-button-background-color: #7066e0;--swal2-confirm-button-color: #fff;--swal2-deny-button-box-shadow: none;--swal2-deny-button-border-radius: 0.25em;--swal2-deny-button-background-color: #dc3741;--swal2-deny-button-color: #fff;--swal2-cancel-button-box-shadow: none;--swal2-cancel-button-border-radius: 0.25em;--swal2-cancel-button-background-color: #6e7881;--swal2-cancel-button-color: #fff;--swal2-toast-show-animation: swal2-toast-show 0.5s;--swal2-toast-hide-animation: swal2-toast-hide 0.1s forwards;--swal2-toast-border: none;--swal2-toast-box-shadow: 0 0 1px hsl(0deg 0% 0% / 0.075), 0 1px 2px hsl(0deg 0% 0% / 0.075), 1px 2px 4px hsl(0deg 0% 0% / 0.075), 1px 3px 8px hsl(0deg 0% 0% / 0.075), 2px 4px 16px hsl(0deg 0% 0% / 0.075)}[data-swal2-theme=dark]{--swal2-dark-theme-black: #19191a;--swal2-dark-theme-white: #e1e1e1;--swal2-background: var(--swal2-dark-theme-black);--swal2-color: var(--swal2-dark-theme-white);--swal2-footer-border-color: #555;--swal2-input-background: color-mix(in srgb, var(--swal2-dark-theme-black), var(--swal2-dark-theme-white) 10%);--swal2-validation-message-background: color-mix( in srgb, var(--swal2-dark-theme-black), var(--swal2-dark-theme-white) 10% );--swal2-validation-message-color: var(--swal2-dark-theme-white);--swal2-timer-progress-bar-background: rgba(255, 255, 255, 0.7)}@media(prefers-color-scheme: dark){[data-swal2-theme=auto]{--swal2-dark-theme-black: #19191a;--swal2-dark-theme-white: #e1e1e1;--swal2-background: var(--swal2-dark-theme-black);--swal2-color: var(--swal2-dark-theme-white);--swal2-footer-border-color: #555;--swal2-input-background: color-mix(in srgb, var(--swal2-dark-theme-black), var(--swal2-dark-theme-white) 10%);--swal2-validation-message-background: color-mix( in srgb, var(--swal2-dark-theme-black), var(--swal2-dark-theme-white) 10% );--swal2-validation-message-color: var(--swal2-dark-theme-white);--swal2-timer-progress-bar-background: rgba(255, 255, 255, 0.7)}}body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto !important}body.swal2-no-backdrop .swal2-container{background-color:rgba(0,0,0,0) !important;pointer-events:none}body.swal2-no-backdrop .swal2-container .swal2-popup{pointer-events:all}body.swal2-no-backdrop .swal2-container .swal2-modal{box-shadow:0 0 10px var(--swal2-backdrop)}body.swal2-toast-shown .swal2-container{box-sizing:border-box;width:360px;max-width:100%;background-color:rgba(0,0,0,0);pointer-events:none}body.swal2-toast-shown .swal2-container.swal2-top{inset:0 auto auto 50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{inset:0 0 auto auto}body.swal2-toast-shown .swal2-container.swal2-top-start,body.swal2-toast-shown .swal2-container.swal2-top-left{inset:0 auto auto 0}body.swal2-toast-shown .swal2-container.swal2-center-start,body.swal2-toast-shown .swal2-container.swal2-center-left{inset:50% auto auto 0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{inset:50% auto auto 50%;transform:translate(-50%, -50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{inset:50% 0 auto auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-start,body.swal2-toast-shown .swal2-container.swal2-bottom-left{inset:auto auto 0 0}body.swal2-toast-shown .swal2-container.swal2-bottom{inset:auto auto 0 50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{inset:auto 0 0 auto}@media print{body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown){overflow-y:scroll !important}body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown)&gt;[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop,.swal2-toast-shown) .swal2-container{position:static !important}}div:where(.swal2-container){display:grid;position:fixed;z-index:1060;inset:0;box-sizing:border-box;grid-template-areas:"top-start     top            top-end" "center-start  center         center-end" "bottom-start  bottom-center  bottom-end";grid-template-rows:minmax(min-content, auto) minmax(min-content, auto) minmax(min-content, auto);height:100%;padding:var(--swal2-container-padding);overflow-x:hidden;transition:var(--swal2-backdrop-transition);-webkit-overflow-scrolling:touch}div:where(.swal2-container).swal2-backdrop-show,div:where(.swal2-container).swal2-noanimation{background:var(--swal2-backdrop)}div:where(.swal2-container).swal2-backdrop-hide{background:rgba(0,0,0,0) !important}div:where(.swal2-container).swal2-top-start,div:where(.swal2-container).swal2-center-start,div:where(.swal2-container).swal2-bottom-start{grid-template-columns:minmax(0, 1fr) auto auto}div:where(.swal2-container).swal2-top,div:where(.swal2-container).swal2-center,div:where(.swal2-container).swal2-bottom{grid-template-columns:auto minmax(0, 1fr) auto}div:where(.swal2-container).swal2-top-end,div:where(.swal2-container).swal2-center-end,div:where(.swal2-container).swal2-bottom-end{grid-template-columns:auto auto minmax(0, 1fr)}div:where(.swal2-container).swal2-top-start&gt;.swal2-popup{align-self:start}div:where(.swal2-container).swal2-top&gt;.swal2-popup{grid-column:2;place-self:start center}div:where(.swal2-container).swal2-top-end&gt;.swal2-popup,div:where(.swal2-container).swal2-top-right&gt;.swal2-popup{grid-column:3;place-self:start end}div:where(.swal2-container).swal2-center-start&gt;.swal2-popup,div:where(.swal2-container).swal2-center-left&gt;.swal2-popup{grid-row:2;align-self:center}div:where(.swal2-container).swal2-center&gt;.swal2-popup{grid-column:2;grid-row:2;place-self:center center}div:where(.swal2-container).swal2-center-end&gt;.swal2-popup,div:where(.swal2-container).swal2-center-right&gt;.swal2-popup{grid-column:3;grid-row:2;place-self:center end}div:where(.swal2-container).swal2-bottom-start&gt;.swal2-popup,div:where(.swal2-container).swal2-bottom-left&gt;.swal2-popup{grid-column:1;grid-row:3;align-self:end}div:where(.swal2-container).swal2-bottom&gt;.swal2-popup{grid-column:2;grid-row:3;place-self:end center}div:where(.swal2-container).swal2-bottom-end&gt;.swal2-popup,div:where(.swal2-container).swal2-bottom-right&gt;.swal2-popup{grid-column:3;grid-row:3;place-self:end end}div:where(.swal2-container).swal2-grow-row&gt;.swal2-popup,div:where(.swal2-container).swal2-grow-fullscreen&gt;.swal2-popup{grid-column:1/4;width:100%}div:where(.swal2-container).swal2-grow-column&gt;.swal2-popup,div:where(.swal2-container).swal2-grow-fullscreen&gt;.swal2-popup{grid-row:1/4;align-self:stretch}div:where(.swal2-container).swal2-no-transition{transition:none !important}div:where(.swal2-container)[popover]{width:auto;border:0}div:where(.swal2-container) div:where(.swal2-popup){display:none;position:relative;box-sizing:border-box;grid-template-columns:minmax(0, 100%);width:var(--swal2-width);max-width:100%;padding:var(--swal2-padding);border:var(--swal2-border);border-radius:var(--swal2-border-radius);background:var(--swal2-background);color:var(--swal2-color);font-family:inherit;font-size:1rem;container-name:swal2-popup}div:where(.swal2-container) div:where(.swal2-popup):focus{outline:none}div:where(.swal2-container) div:where(.swal2-popup).swal2-loading{overflow-y:hidden}div:where(.swal2-container) div:where(.swal2-popup).swal2-draggable{cursor:grab}div:where(.swal2-container) div:where(.swal2-popup).swal2-draggable div:where(.swal2-icon){cursor:grab}div:where(.swal2-container) div:where(.swal2-popup).swal2-dragging{cursor:grabbing}div:where(.swal2-container) div:where(.swal2-popup).swal2-dragging div:where(.swal2-icon){cursor:grabbing}div:where(.swal2-container) h2:where(.swal2-title){position:relative;max-width:100%;margin:0;padding:var(--swal2-title-padding);color:inherit;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;overflow-wrap:break-word;cursor:initial}div:where(.swal2-container) div:where(.swal2-actions){display:flex;z-index:1;box-sizing:border-box;flex-wrap:wrap;align-items:center;justify-content:var(--swal2-actions-justify-content);width:var(--swal2-actions-width);margin:var(--swal2-actions-margin);padding:var(--swal2-actions-padding);border-radius:var(--swal2-actions-border-radius);background:var(--swal2-actions-background)}div:where(.swal2-container) div:where(.swal2-loader){display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:#2778c4 rgba(0,0,0,0) #2778c4 rgba(0,0,0,0)}div:where(.swal2-container) button:where(.swal2-styled){margin:.3125em;padding:.625em 1.1em;transition:var(--swal2-action-button-transition);border:none;box-shadow:0 0 0 3px rgba(0,0,0,0);font-weight:500}div:where(.swal2-container) button:where(.swal2-styled):not([disabled]){cursor:pointer}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm){border-radius:var(--swal2-confirm-button-border-radius);background:initial;background-color:var(--swal2-confirm-button-background-color);box-shadow:var(--swal2-confirm-button-box-shadow);color:var(--swal2-confirm-button-color);font-size:1em}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm):hover{background-color:color-mix(in srgb, var(--swal2-confirm-button-background-color), var(--swal2-action-button-hover))}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm):active{background-color:color-mix(in srgb, var(--swal2-confirm-button-background-color), var(--swal2-action-button-active))}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-deny){border-radius:var(--swal2-deny-button-border-radius);background:initial;background-color:var(--swal2-deny-button-background-color);box-shadow:var(--swal2-deny-button-box-shadow);color:var(--swal2-deny-button-color);font-size:1em}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-deny):hover{background-color:color-mix(in srgb, var(--swal2-deny-button-background-color), var(--swal2-action-button-hover))}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-deny):active{background-color:color-mix(in srgb, var(--swal2-deny-button-background-color), var(--swal2-action-button-active))}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel){border-radius:var(--swal2-cancel-button-border-radius);background:initial;background-color:var(--swal2-cancel-button-background-color);box-shadow:var(--swal2-cancel-button-box-shadow);color:var(--swal2-cancel-button-color);font-size:1em}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel):hover{background-color:color-mix(in srgb, var(--swal2-cancel-button-background-color), var(--swal2-action-button-hover))}div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-cancel):active{background-color:color-mix(in srgb, var(--swal2-cancel-button-background-color), var(--swal2-action-button-active))}div:where(.swal2-container) button:where(.swal2-styled):focus-visible{outline:none;box-shadow:var(--swal2-action-button-focus-box-shadow)}div:where(.swal2-container) button:where(.swal2-styled)[disabled]:not(.swal2-loading){opacity:.4}div:where(.swal2-container) button:where(.swal2-styled)::-moz-focus-inner{border:0}div:where(.swal2-container) div:where(.swal2-footer){margin:1em 0 0;padding:1em 1em 0;border-top:1px solid var(--swal2-footer-border-color);background:var(--swal2-footer-background);color:var(--swal2-footer-color);font-size:1em;text-align:center;cursor:initial}div:where(.swal2-container) .swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;grid-column:auto !important;overflow:hidden;border-bottom-right-radius:var(--swal2-border-radius);border-bottom-left-radius:var(--swal2-border-radius)}div:where(.swal2-container) div:where(.swal2-timer-progress-bar){width:100%;height:.25em;background:var(--swal2-timer-progress-bar-background)}div:where(.swal2-container) img:where(.swal2-image){max-width:100%;margin:2em auto 1em;cursor:initial}div:where(.swal2-container) button:where(.swal2-close){position:var(--swal2-close-button-position);inset:var(--swal2-close-button-inset);z-index:2;align-items:center;justify-content:center;width:1.2em;height:1.2em;margin-top:0;margin-right:0;margin-bottom:-1.2em;padding:0;overflow:hidden;transition:var(--swal2-close-button-transition);border:none;border-radius:var(--swal2-border-radius);outline:var(--swal2-close-button-outline);background:rgba(0,0,0,0);color:var(--swal2-close-button-color);font-family:monospace;font-size:var(--swal2-close-button-font-size);cursor:pointer;justify-self:end}div:where(.swal2-container) button:where(.swal2-close):hover{transform:var(--swal2-close-button-hover-transform);background:rgba(0,0,0,0);color:#f27474}div:where(.swal2-container) button:where(.swal2-close):focus-visible{outline:none;box-shadow:var(--swal2-close-button-focus-box-shadow)}div:where(.swal2-container) button:where(.swal2-close)::-moz-focus-inner{border:0}div:where(.swal2-container) div:where(.swal2-html-container){z-index:1;justify-content:center;margin:0;padding:var(--swal2-html-container-padding);overflow:auto;color:inherit;font-size:1.125em;font-weight:normal;line-height:normal;text-align:center;overflow-wrap:break-word;word-break:break-word;cursor:initial}div:where(.swal2-container) input:where(.swal2-input),div:where(.swal2-container) input:where(.swal2-file),div:where(.swal2-container) textarea:where(.swal2-textarea),div:where(.swal2-container) select:where(.swal2-select),div:where(.swal2-container) div:where(.swal2-radio),div:where(.swal2-container) label:where(.swal2-checkbox){margin:1em 2em 3px}div:where(.swal2-container) input:where(.swal2-input),div:where(.swal2-container) input:where(.swal2-file),div:where(.swal2-container) textarea:where(.swal2-textarea){box-sizing:border-box;width:auto;transition:var(--swal2-input-transition);border:var(--swal2-input-border);border-radius:var(--swal2-input-border-radius);background:var(--swal2-input-background);box-shadow:var(--swal2-input-box-shadow);color:inherit;font-size:1.125em}div:where(.swal2-container) input:where(.swal2-input).swal2-inputerror,div:where(.swal2-container) input:where(.swal2-file).swal2-inputerror,div:where(.swal2-container) textarea:where(.swal2-textarea).swal2-inputerror{border-color:#f27474 !important;box-shadow:0 0 2px #f27474 !important}div:where(.swal2-container) input:where(.swal2-input):hover,div:where(.swal2-container) input:where(.swal2-file):hover,div:where(.swal2-container) textarea:where(.swal2-textarea):hover{box-shadow:var(--swal2-input-hover-box-shadow)}div:where(.swal2-container) input:where(.swal2-input):focus,div:where(.swal2-container) input:where(.swal2-file):focus,div:where(.swal2-container) textarea:where(.swal2-textarea):focus{border:var(--swal2-input-focus-border);outline:none;box-shadow:var(--swal2-input-focus-box-shadow)}div:where(.swal2-container) input:where(.swal2-input)::placeholder,div:where(.swal2-container) input:where(.swal2-file)::placeholder,div:where(.swal2-container) textarea:where(.swal2-textarea)::placeholder{color:#ccc}div:where(.swal2-container) .swal2-range{margin:1em 2em 3px;background:var(--swal2-background)}div:where(.swal2-container) .swal2-range input{width:80%}div:where(.swal2-container) .swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}div:where(.swal2-container) .swal2-range input,div:where(.swal2-container) .swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}div:where(.swal2-container) .swal2-input{height:2.625em;padding:0 .75em}div:where(.swal2-container) .swal2-file{width:75%;margin-right:auto;margin-left:auto;background:var(--swal2-input-background);font-size:1.125em}div:where(.swal2-container) .swal2-textarea{height:6.75em;padding:.75em}div:where(.swal2-container) .swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:var(--swal2-input-background);color:inherit;font-size:1.125em}div:where(.swal2-container) .swal2-radio,div:where(.swal2-container) .swal2-checkbox{align-items:center;justify-content:center;background:var(--swal2-background);color:inherit}div:where(.swal2-container) .swal2-radio label,div:where(.swal2-container) .swal2-checkbox label{margin:0 .6em;font-size:1.125em}div:where(.swal2-container) .swal2-radio input,div:where(.swal2-container) .swal2-checkbox input{flex-shrink:0;margin:0 .4em}div:where(.swal2-container) label:where(.swal2-input-label){display:flex;justify-content:center;margin:1em auto 0}div:where(.swal2-container) div:where(.swal2-validation-message){align-items:center;justify-content:center;margin:1em 0 0;padding:.625em;overflow:hidden;background:var(--swal2-validation-message-background);color:var(--swal2-validation-message-color);font-size:1em;font-weight:300}div:where(.swal2-container) div:where(.swal2-validation-message)::before{content:"!";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}div:where(.swal2-container) .swal2-progress-steps{flex-wrap:wrap;align-items:center;max-width:100%;margin:1.25em auto;padding:0;background:rgba(0,0,0,0);font-weight:600}div:where(.swal2-container) .swal2-progress-steps li{display:inline-block;position:relative}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:#2778c4;color:#fff;line-height:2em;text-align:center}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#2778c4}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:var(--swal2-progress-step-background);color:#fff}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:var(--swal2-progress-step-background)}div:where(.swal2-container) .swal2-progress-steps .swal2-progress-step-line{z-index:10;flex-shrink:0;width:2.5em;height:.4em;margin:0 -1px;background:#2778c4}div:where(.swal2-icon){position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:2.5em auto .6em;zoom:var(--swal2-icon-zoom);border:.25em solid rgba(0,0,0,0);border-radius:50%;border-color:#000;font-family:inherit;line-height:5em;cursor:default;user-select:none}div:where(.swal2-icon) .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}div:where(.swal2-icon).swal2-error{border-color:#f27474;color:#f27474}div:where(.swal2-icon).swal2-error .swal2-x-mark{position:relative;flex-grow:1}div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}div:where(.swal2-icon).swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}@container swal2-popup style(--swal2-icon-animations:true){div:where(.swal2-icon).swal2-error.swal2-icon-show{animation:swal2-animate-error-icon .5s}div:where(.swal2-icon).swal2-error.swal2-icon-show .swal2-x-mark{animation:swal2-animate-error-x-mark .5s}}div:where(.swal2-icon).swal2-warning{border-color:#f8bb86;color:#f8bb86}@container swal2-popup style(--swal2-icon-animations:true){div:where(.swal2-icon).swal2-warning.swal2-icon-show{animation:swal2-animate-error-icon .5s}div:where(.swal2-icon).swal2-warning.swal2-icon-show .swal2-icon-content{animation:swal2-animate-i-mark .5s}}div:where(.swal2-icon).swal2-info{border-color:#3fc3ee;color:#3fc3ee}@container swal2-popup style(--swal2-icon-animations:true){div:where(.swal2-icon).swal2-info.swal2-icon-show{animation:swal2-animate-error-icon .5s}div:where(.swal2-icon).swal2-info.swal2-icon-show .swal2-icon-content{animation:swal2-animate-i-mark .8s}}div:where(.swal2-icon).swal2-question{border-color:#87adbd;color:#87adbd}@container swal2-popup style(--swal2-icon-animations:true){div:where(.swal2-icon).swal2-question.swal2-icon-show{animation:swal2-animate-error-icon .5s}div:where(.swal2-icon).swal2-question.swal2-icon-show .swal2-icon-content{animation:swal2-animate-question-mark .8s}}div:where(.swal2-icon).swal2-success{border-color:#a5dc86;color:#a5dc86}div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;border-radius:50%}div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=left]{top:-0.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=right]{top:-0.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}div:where(.swal2-icon).swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-0.25em;left:-0.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}div:where(.swal2-icon).swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}div:where(.swal2-icon).swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}div:where(.swal2-icon).swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}div:where(.swal2-icon).swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}@container swal2-popup style(--swal2-icon-animations:true){div:where(.swal2-icon).swal2-success.swal2-icon-show .swal2-success-line-tip{animation:swal2-animate-success-line-tip .75s}div:where(.swal2-icon).swal2-success.swal2-icon-show .swal2-success-line-long{animation:swal2-animate-success-line-long .75s}div:where(.swal2-icon).swal2-success.swal2-icon-show .swal2-success-circular-line-right{animation:swal2-rotate-success-circular-line 4.25s ease-in}}[class^=swal2]{-webkit-tap-highlight-color:rgba(0,0,0,0)}.swal2-show{animation:var(--swal2-show-animation)}.swal2-hide{animation:var(--swal2-hide-animation)}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{margin-right:initial;margin-left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}.swal2-toast{box-sizing:border-box;grid-column:1/4 !important;grid-row:1/4 !important;grid-template-columns:min-content auto min-content;padding:1em;overflow-y:hidden;border:var(--swal2-toast-border);background:var(--swal2-background);box-shadow:var(--swal2-toast-box-shadow);pointer-events:all}.swal2-toast&gt;*{grid-column:2}.swal2-toast h2:where(.swal2-title){margin:.5em 1em;padding:0;font-size:1em;text-align:initial}.swal2-toast .swal2-loading{justify-content:center}.swal2-toast input:where(.swal2-input){height:2em;margin:.5em;font-size:1em}.swal2-toast .swal2-validation-message{font-size:1em}.swal2-toast div:where(.swal2-footer){margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-toast button:where(.swal2-close){grid-column:3/3;grid-row:1/99;align-self:center;width:.8em;height:.8em;margin:0;font-size:2em}.swal2-toast div:where(.swal2-html-container){margin:.5em 1em;padding:0;overflow:initial;font-size:1em;text-align:initial}.swal2-toast div:where(.swal2-html-container):empty{padding:0}.swal2-toast .swal2-loader{grid-column:1;grid-row:1/99;align-self:center;width:2em;height:2em;margin:.25em}.swal2-toast .swal2-icon{grid-column:1;grid-row:1/99;align-self:center;width:2em;min-width:2em;height:2em;margin:0 .5em 0 0}.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:bold}.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-toast div:where(.swal2-actions){justify-content:flex-start;height:auto;margin:0;margin-top:.5em;padding:0 .5em}.swal2-toast button:where(.swal2-styled){margin:.25em .5em;padding:.4em .6em;font-size:1em}.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;border-radius:50%}.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-0.8em;left:-0.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-0.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}@container swal2-popup style(--swal2-icon-animations:true){.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{animation:swal2-toast-animate-success-line-tip .75s}.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{animation:swal2-toast-animate-success-line-long .75s}}.swal2-toast.swal2-show{animation:var(--swal2-toast-show-animation)}.swal2-toast.swal2-hide{animation:var(--swal2-toast-hide-animation)}@keyframes swal2-show{0%{transform:translate3d(0, -50px, 0) scale(0.9);opacity:0}100%{transform:translate3d(0, 0, 0) scale(1);opacity:1}}@keyframes swal2-hide{0%{transform:translate3d(0, 0, 0) scale(1);opacity:1}100%{transform:translate3d(0, -50px, 0) scale(0.9);opacity:0}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-0.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(0.4);opacity:0}50%{margin-top:1.625em;transform:scale(0.4);opacity:0}80%{margin-top:-0.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0deg);opacity:1}}@keyframes swal2-rotate-loading{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}@keyframes swal2-animate-question-mark{0%{transform:rotateY(-360deg)}100%{transform:rotateY(0)}}@keyframes swal2-animate-i-mark{0%{transform:rotateZ(45deg);opacity:0}25%{transform:rotateZ(-25deg);opacity:.4}50%{transform:rotateZ(15deg);opacity:.8}75%{transform:rotateZ(-5deg);opacity:1}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-toast-show{0%{transform:translateY(-0.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(0.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0deg)}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-0.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}&lt;/style&gt;<br/>
+  &lt;style&gt;x-vue-echarts{display:block;width:100%;height:100%;min-width:0}<br/>
+&lt;/style&gt;<br/>
+ &lt;/head&gt;<br/>
+ &lt;body&gt;<br/>
+  &lt;div id="app" data-v-app=""&gt;<br/>
+   &lt;div&gt;<br/>
+    &lt;div data-v-6c1753fe="" class="app flex"&gt;<br/>
+     &lt;div data-v-c8c64aae="" data-v-6c1753fe="" class="contents"&gt;<br/>
+      &lt;!----&gt;<br/>
+      &lt;button data-v-c8c64aae="" class="md:hidden fixed top-4 left-4 z-30 bg-gray-800 text-white p-3 rounded-lg shadow-lg hover:bg-[#01995f] transition-colors"&gt;<br/>
+       &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-bars w-6 h-6" data-prefix="fas" data-icon="bars" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+        &lt;path class="" fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"&gt;&lt;/path&gt;<br/>
+       &lt;/svg&gt;<br/>
+      &lt;/button&gt;<br/>
+      &lt;aside data-v-c8c64aae="" class="sidebar bg-gray-800 text-white flex-shrink-0 transition-all duration-300 fixed inset-y-0 left-0 z-50 w-70 transform -translate-x-full md:relative md:translate-x-0 md:w-70"&gt;<br/>
+       &lt;button data-v-c8c64aae="" class="absolute -right-3 top-6 bg-[#01995f] hover:bg-[#017a4a] text-white rounded-full p-2 shadow-lg transition-all duration-300 z-10" title="Colapsar sidebar"&gt;<br/>
+        &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-chevron-left w-3 h-3" data-prefix="fas" data-icon="chevron-left" role="img" viewBox="0 0 320 512" aria-hidden="true"&gt;<br/>
+         &lt;path class="" fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"&gt;&lt;/path&gt;<br/>
+        &lt;/svg&gt;<br/>
+       &lt;/button&gt;<br/>
+       &lt;button data-v-c8c64aae="" class="md:hidden absolute right-4 top-4 text-white hover:text-[#01995f]"&gt;<br/>
+        &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-xmark w-6 h-6" data-prefix="fas" data-icon="xmark" role="img" viewBox="0 0 384 512" aria-hidden="true"&gt;<br/>
+         &lt;path class="" fill="currentColor" d="M55.1 73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L147.2 256 9.9 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192.5 301.3 329.9 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.8 256 375.1 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192.5 210.7 55.1 73.4z"&gt;&lt;/path&gt;<br/>
+        &lt;/svg&gt;<br/>
+       &lt;/button&gt;<br/>
+       &lt;div data-v-c8c64aae="" class="p-4 flex h-18 items-center justify-center text-xl font-bold border-b border-gray-700 overflow-hidden"&gt;<br/>
+        &lt;span data-v-c8c64aae=""&gt;AXION SYSTEM&lt;/span&gt;<br/>
+       &lt;/div&gt;<br/>
+       &lt;nav data-v-c8c64aae="" class="mt-6"&gt;<br/>
+        &lt;ul data-v-c8c64aae="" class="space-y-1"&gt;<br/>
+         &lt;li data-v-c8c64aae=""&gt;&lt;a data-v-c8c64aae="" href="/home" class="sidebar-item flex items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"&gt;<br/>
+           &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-house w-5 h-5 flex-shrink-0" data-prefix="fas" data-icon="house" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+           &lt;span data-v-c8c64aae="" class="ml-3"&gt;Inicio&lt;/span&gt;<br/>
+          &lt;/a&gt;&lt;/li&gt;<br/>
+         &lt;li data-v-c8c64aae=""&gt;&lt;a data-v-c8c64aae="" href="/User" class="sidebar-item flex items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"&gt;<br/>
+           &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-users w-5 h-5 flex-shrink-0" data-prefix="fas" data-icon="users" role="img" viewBox="0 0 640 512" aria-hidden="true"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M320 16a104 104 0 1 1 0 208 104 104 0 1 1 0-208zM96 88a72 72 0 1 1 0 144 72 72 0 1 1 0-144zM0 416c0-70.7 57.3-128 128-128 12.8 0 25.2 1.9 36.9 5.4-32.9 36.8-52.9 85.4-52.9 138.6l0 16c0 11.4 2.4 22.2 6.7 32L32 480c-17.7 0-32-14.3-32-32l0-32zm521.3 64c4.3-9.8 6.7-20.6 6.7-32l0-16c0-53.2-20-101.8-52.9-138.6 11.7-3.5 24.1-5.4 36.9-5.4 70.7 0 128 57.3 128 128l0 32c0 17.7-14.3 32-32 32l-86.7 0zM472 160a72 72 0 1 1 144 0 72 72 0 1 1 -144 0zM160 432c0-88.4 71.6-160 160-160s160 71.6 160 160l0 16c0 17.7-14.3 32-32 32l-256 0c-17.7 0-32-14.3-32-32l0-16z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+           &lt;span data-v-c8c64aae="" class="ml-3"&gt;Usuarios&lt;/span&gt;<br/>
+          &lt;/a&gt;&lt;/li&gt;<br/>
+         &lt;li data-v-c8c64aae=""&gt;&lt;a data-v-c8c64aae="" href="/Category" class="sidebar-item flex items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"&gt;<br/>
+           &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-tags w-5 h-5 flex-shrink-0" data-prefix="fas" data-icon="tags" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M401.2 39.1L549.4 189.4c27.7 28.1 27.7 73.1 0 101.2L393 448.9c-9.3 9.4-24.5 9.5-33.9 .2s-9.5-24.5-.2-33.9L515.3 256.8c9.2-9.3 9.2-24.4 0-33.7L367 72.9c-9.3-9.4-9.2-24.6 .2-33.9s24.6-9.2 33.9 .2zM32.1 229.5L32.1 96c0-35.3 28.7-64 64-64l133.5 0c17 0 33.3 6.7 45.3 18.7l144 144c25 25 25 65.5 0 90.5L285.4 418.7c-25 25-65.5 25-90.5 0l-144-144c-12-12-18.7-28.3-18.7-45.3zm144-85.5a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+           &lt;span data-v-c8c64aae="" class="ml-3"&gt;Categorías&lt;/span&gt;<br/>
+          &lt;/a&gt;&lt;/li&gt;<br/>
+         &lt;li data-v-c8c64aae=""&gt;&lt;a data-v-c8c64aae="" aria-current="page" href="/Inventory" class="router-link-active router-link-exact-active sidebar-item flex items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"&gt;<br/>
+           &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-boxes-stacked w-5 h-5 flex-shrink-0" data-prefix="fas" data-icon="boxes-stacked" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M224 0l0 64c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-64 32 0c35.3 0 64 28.7 64 64l0 128c0 5.5-.7 10.9-2 16l-252 0c-1.3-5.1-2-10.5-2-16l0-128c0-35.3 28.7-64 64-64l32 0zm96 512c-11.2 0-21.8-2.9-31-8 9.5-16.5 15-35.6 15-56l0-128c0-20.4-5.5-39.5-15-56 9.2-5.1 19.7-8 31-8l32 0 0 64c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-64 32 0c35.3 0 64 28.7 64 64l0 128c0 35.3-28.7 64-64 64l-128 0zM0 320c0-35.3 28.7-64 64-64l32 0 0 64c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-64 32 0c35.3 0 64 28.7 64 64l0 128c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 320z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+           &lt;span data-v-c8c64aae="" class="ml-3"&gt;Inventario&lt;/span&gt;<br/>
+          &lt;/a&gt;&lt;/li&gt;<br/>
+         &lt;li data-v-c8c64aae=""&gt;&lt;a data-v-c8c64aae="" href="/Solicitudes" class="sidebar-item flex items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"&gt;<br/>
+           &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-file-contract w-5 h-5 flex-shrink-0" data-prefix="fas" data-icon="file-contract" role="img" viewBox="0 0 384 512" aria-hidden="true"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M0 64C0 28.7 28.7 0 64 0L213.5 0c17 0 33.3 6.7 45.3 18.7L365.3 125.3c12 12 18.7 28.3 18.7 45.3L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm208-5.5l0 93.5c0 13.3 10.7 24 24 24L325.5 176 208 58.5zM88 64C74.7 64 64 74.7 64 88s10.7 24 24 24l48 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L88 64zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24l48 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-48 0zm70.3 160c-11.3 0-21.9 5.1-28.9 13.9L69.3 409c-8.3 10.3-6.6 25.5 3.7 33.7s25.5 6.6 33.7-3.8l47.1-58.8 15.2 50.7c3 10.2 12.4 17.1 23 17.1l104 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-86.1 0-16.1-53.6c-4.7-15.7-19.1-26.4-35.5-26.4z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+           &lt;span data-v-c8c64aae="" class="ml-3"&gt;Solicitudes&lt;/span&gt;<br/>
+          &lt;/a&gt;&lt;/li&gt;<br/>
+         &lt;li data-v-c8c64aae=""&gt;<br/>
+          &lt;button data-v-c8c64aae="" class="w-full flex justify-between items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"&gt;<br/>
+           &lt;div data-v-c8c64aae="" class="flex items-center"&gt;<br/>
+            &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-chart-bar w-5 h-5 flex-shrink-0" data-prefix="fas" data-icon="chart-bar" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+             &lt;path class="" fill="currentColor" d="M32 32c17.7 0 32 14.3 32 32l0 336c0 8.8 7.2 16 16 16l400 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L80 480c-44.2 0-80-35.8-80-80L0 64C0 46.3 14.3 32 32 32zm96 64c0-17.7 14.3-32 32-32l192 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-192 0c-17.7 0-32-14.3-32-32zm32 80l128 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-128 0c-17.7 0-32-14.3-32-32s14.3-32 32-32zm0 112l256 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-256 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"&gt;&lt;/path&gt;<br/>
+            &lt;/svg&gt;<br/>
+            &lt;span data-v-c8c64aae="" class="ml-3"&gt;Reportes&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-chevron-down w-3 h-3" data-prefix="fas" data-icon="chevron-down" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+          &lt;/button&gt;<br/>
+          &lt;!----&gt;<br/>
+         &lt;/li&gt;<br/>
+         &lt;li data-v-c8c64aae=""&gt;&lt;a data-v-c8c64aae="" href="/Alerts" class="sidebar-item flex items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"&gt;<br/>
+           &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-bell w-5 h-5 flex-shrink-0" data-prefix="fas" data-icon="bell" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M224 0c-17.7 0-32 14.3-32 32l0 3.2C119 50 64 114.6 64 192l0 21.7c0 48.1-16.4 94.8-46.4 132.4L7.8 358.3C2.7 364.6 0 372.4 0 380.5 0 400.1 15.9 416 35.5 416l376.9 0c19.6 0 35.5-15.9 35.5-35.5 0-8.1-2.7-15.9-7.8-22.2l-9.8-12.2C400.4 308.5 384 261.8 384 213.7l0-21.7c0-77.4-55-142-128-156.8l0-3.2c0-17.7-14.3-32-32-32zM162 464c7.1 27.6 32.2 48 62 48s54.9-20.4 62-48l-124 0z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+           &lt;span data-v-c8c64aae="" class="ml-3"&gt;Alertas&lt;/span&gt;<br/>
+          &lt;/a&gt;&lt;/li&gt;<br/>
+         &lt;li data-v-c8c64aae=""&gt;&lt;a data-v-c8c64aae="" href="/Mantenace" class="sidebar-item flex items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"&gt;<br/>
+           &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-screwdriver-wrench w-5 h-5 flex-shrink-0" data-prefix="fas" data-icon="screwdriver-wrench" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M224.1 97.1l0 49.6 .5 .5c6.5-82.4 75.4-147.2 159.5-147.2 20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1l-88.7 88.7c-3 3-4.7 7.1-4.7 11.3l0 41.4c0 8.8 7.2 16 16 16l41.4 0c4.2 0 8.3-1.7 11.3-4.7l88.7-88.7c7.6-7.6 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 60.6-33.7 113.4-83.5 140.5l81.5 81.5c18.7 18.7 18.7 49.1 0 67.9l-60.1 60.1c-18.7 18.7-49.1 18.7-67.9 0L288.1 384c-27.4-27.4-33.6-67.9-18.5-101.3l-90.7-90.7-49.6 0c-10.7 0-20.7-5.3-26.6-14.2L23.4 58.9c-4.2-6.3-3.4-14.8 2-20.2L70.8-6.7c5.4-5.4 13.8-6.2 20.2-2L209.9 70.5c8.9 5.9 14.2 15.9 14.2 26.6zm-8.5 199.5c-6.3 37 2.4 76.1 26.4 107.4L147 498.9c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8l135.4-135.4 35 35z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+           &lt;span data-v-c8c64aae="" class="ml-3"&gt;Mantenimientos&lt;/span&gt;<br/>
+          &lt;/a&gt;&lt;/li&gt;<br/>
+         &lt;li data-v-c8c64aae=""&gt;&lt;a data-v-c8c64aae="" href="/Rental" class="sidebar-item flex items-center py-3 px-4 hover:bg-[#01995f] transition-all duration-200 rounded-lg mx-2"&gt;<br/>
+           &lt;svg data-v-c8c64aae="" class="svg-inline--fa fa-calendar-check w-5 h-5 flex-shrink-0" data-prefix="fas" data-icon="calendar-check" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 32 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 128C0 92.7 28.7 64 64 64l32 0 0-32c0-17.7 14.3-32 32-32zM308.4 228.7c7-11.2 3.6-26-7.6-33.1s-26-3.6-33.1 7.6l-61.4 98.3-27-36c-8-10.6-23-12.8-33.6-4.8s-12.8 23-4.8 33.6l48 64c4.7 6.3 12.3 9.9 20.2 9.6s15.1-4.5 19.3-11.3l80-128z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+           &lt;span data-v-c8c64aae="" class="ml-3"&gt;Alquiler&lt;/span&gt;<br/>
+          &lt;/a&gt;&lt;/li&gt;<br/>
+        &lt;/ul&gt;<br/>
+       &lt;/nav&gt;<br/>
+      &lt;/aside&gt;<br/>
+     &lt;/div&gt;<br/>
+     &lt;!----&gt;<br/>
+     &lt;!----&gt;<br/>
+     &lt;!----&gt;<br/>
+     &lt;main data-v-6c1753fe="" class="container h-screen p-4 flex-1 overflow-y-auto"&gt;<br/>
+      &lt;div data-v-6c1753fe="" class="rounded-lg flex-col"&gt;<br/>
+       &lt;div data-v-6c1753fe=""&gt;<br/>
+        &lt;header class="flex items-center justify-between border-b pb-4 mb-6 flex-shrink-0"&gt;<br/>
+         &lt;h1 class="text-3xl font-semibold text-gray-800"&gt;AXXION SYSTEM&lt;/h1&gt;<br/>
+         &lt;div class="flex items-center space-x-4"&gt;<br/>
+          &lt;div&gt;<br/>
+           &lt;span class="text-lg font-medium text-gray-700"&gt;Administrador&lt;/span&gt;<br/>
+           &lt;svg class="svg-inline--fa fa-user-tie fa-xl fa-fade" data-prefix="fas" data-icon="user-tie" role="img" viewBox="0 0 448 512" aria-hidden="true" style="color: rgb(99, 230, 190);"&gt;<br/>
+            &lt;path class="" fill="currentColor" d="M224 248a120 120 0 1 1 0-240 120 120 0 1 1 0 240zm-30.5 56l61 0c9.7 0 17.5 7.8 17.5 17.5 0 4.2-1.5 8.2-4.2 11.4l-27.4 32 31 115.1 .6 0 34.6-138.5c2.2-8.7 11.1-14 19.5-10.8 61.9 23.6 105.9 83.6 105.9 153.8 0 15.1-12.3 27.4-27.4 27.4L43.4 512c-15.1 0-27.4-12.3-27.4-27.4 0-70.2 44-130.2 105.9-153.8 8.4-3.2 17.3 2.1 19.5 10.8l34.6 138.5 .6 0 31-115.1-27.4-32c-2.7-3.2-4.2-7.2-4.2-11.4 0-9.7 7.8-17.5 17.5-17.5z"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;svg class="h-8 w-8 text-red-500 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;<br/>
+           &lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"&gt;&lt;/path&gt;<br/>
+          &lt;/svg&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/header&gt;<br/>
+       &lt;/div&gt;<br/>
+       &lt;div data-v-6c1753fe="" class="mb-8"&gt;<br/>
+        &lt;h1 data-v-6c1753fe="" class="text-3xl font-bold text-gray-900 dark:text-white mb-6"&gt;<br/>
+         &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-laptop mr-3 text-blue-600" data-prefix="fas" data-icon="laptop" role="img" viewBox="0 0 640 512" aria-hidden="true"&gt;<br/>
+          &lt;path class="" fill="currentColor" d="M128 32C92.7 32 64 60.7 64 96l0 240 64 0 0-240 384 0 0 240 64 0 0-240c0-35.3-28.7-64-64-64L128 32zM19.2 384C8.6 384 0 392.6 0 403.2 0 445.6 34.4 480 76.8 480l486.4 0c42.4 0 76.8-34.4 76.8-76.8 0-10.6-8.6-19.2-19.2-19.2L19.2 384z"&gt;&lt;/path&gt;<br/>
+         &lt;/svg&gt;<br/>
+         Gestión de Inventario<br/>
+        &lt;/h1&gt;<br/>
+        &lt;div data-v-6c1753fe="" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"&gt;<br/>
+         &lt;div data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 bg-gradient-to-r from-blue-500 to-blue-600 text-white" href=""&gt;<br/>
+          &lt;!----&gt;<br/>
+          &lt;div&gt;<br/>
+           &lt;div data-v-6c1753fe="" class="p-6"&gt;<br/>
+            &lt;div data-v-6c1753fe="" class="flex items-center justify-between"&gt;<br/>
+             &lt;div data-v-6c1753fe=""&gt;<br/>
+              &lt;p data-v-6c1753fe="" class="text-blue-100 text-sm font-medium"&gt;Equipos Disponibles&lt;/p&gt;<br/>
+              &lt;p data-v-6c1753fe="" class="text-3xl font-bold"&gt;8&lt;/p&gt;<br/>
+             &lt;/div&gt;<br/>
+             &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-circle-check text-4xl text-blue-200" data-prefix="fas" data-icon="circle-check" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zm84.4-299.3l-80 128c-4.2 6.7-11.4 10.9-19.3 11.3s-15.5-3.2-20.2-9.6l-48-64c-8-10.6-5.8-25.6 4.8-33.6s25.6-5.8 33.6 4.8l27 36 61.4-98.3c7-11.2 21.8-14.7 33.1-7.6s14.7 21.8 7.6 33.1z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+         &lt;div data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 bg-gradient-to-r from-green-500 to-green-600 text-white" href=""&gt;<br/>
+          &lt;!----&gt;<br/>
+          &lt;div&gt;<br/>
+           &lt;div data-v-6c1753fe="" class="p-6"&gt;<br/>
+            &lt;div data-v-6c1753fe="" class="flex items-center justify-between"&gt;<br/>
+             &lt;div data-v-6c1753fe=""&gt;<br/>
+              &lt;p data-v-6c1753fe="" class="text-green-100 text-sm font-medium"&gt;Equipos Alquilados&lt;/p&gt;<br/>
+              &lt;p data-v-6c1753fe="" class="text-3xl font-bold"&gt;6&lt;/p&gt;<br/>
+             &lt;/div&gt;<br/>
+             &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-handshake text-4xl text-green-200" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+         &lt;div data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white" href=""&gt;<br/>
+          &lt;!----&gt;<br/>
+          &lt;div&gt;<br/>
+           &lt;div data-v-6c1753fe="" class="p-6"&gt;<br/>
+            &lt;div data-v-6c1753fe="" class="flex items-center justify-between"&gt;<br/>
+             &lt;div data-v-6c1753fe=""&gt;<br/>
+              &lt;p data-v-6c1753fe="" class="text-yellow-100 text-sm font-medium"&gt;En Mantenimiento&lt;/p&gt;<br/>
+              &lt;p data-v-6c1753fe="" class="text-3xl font-bold"&gt;2&lt;/p&gt;<br/>
+             &lt;/div&gt;<br/>
+             &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-screwdriver-wrench text-4xl text-yellow-200" data-prefix="fas" data-icon="screwdriver-wrench" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M224.1 97.1l0 49.6 .5 .5c6.5-82.4 75.4-147.2 159.5-147.2 20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1l-88.7 88.7c-3 3-4.7 7.1-4.7 11.3l0 41.4c0 8.8 7.2 16 16 16l41.4 0c4.2 0 8.3-1.7 11.3-4.7l88.7-88.7c7.6-7.6 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 60.6-33.7 113.4-83.5 140.5l81.5 81.5c18.7 18.7 18.7 49.1 0 67.9l-60.1 60.1c-18.7 18.7-49.1 18.7-67.9 0L288.1 384c-27.4-27.4-33.6-67.9-18.5-101.3l-90.7-90.7-49.6 0c-10.7 0-20.7-5.3-26.6-14.2L23.4 58.9c-4.2-6.3-3.4-14.8 2-20.2L70.8-6.7c5.4-5.4 13.8-6.2 20.2-2L209.9 70.5c8.9 5.9 14.2 15.9 14.2 26.6zm-8.5 199.5c-6.3 37 2.4 76.1 26.4 107.4L147 498.9c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8l135.4-135.4 35 35z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+         &lt;div data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 bg-gradient-to-r from-purple-500 to-purple-600 text-white" href=""&gt;<br/>
+          &lt;!----&gt;<br/>
+          &lt;div&gt;<br/>
+           &lt;div data-v-6c1753fe="" class="p-6"&gt;<br/>
+            &lt;div data-v-6c1753fe="" class="flex items-center justify-between"&gt;<br/>
+             &lt;div data-v-6c1753fe=""&gt;<br/>
+              &lt;p data-v-6c1753fe="" class="text-purple-100 text-sm font-medium"&gt;Ingresos del Mes&lt;/p&gt;<br/>
+              &lt;p data-v-6c1753fe="" class="text-3xl font-bold"&gt;$0&lt;/p&gt;<br/>
+             &lt;/div&gt;<br/>
+             &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-dollar-sign text-4xl text-purple-200" data-prefix="fas" data-icon="dollar-sign" role="img" viewBox="0 0 320 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M136 24c0-13.3 10.7-24 24-24s24 10.7 24 24l0 40 56 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-114.9 0c-24.9 0-45.1 20.2-45.1 45.1 0 22.5 16.5 41.5 38.7 44.7l91.6 13.1c53.8 7.7 93.7 53.7 93.7 108 0 60.3-48.9 109.1-109.1 109.1l-10.9 0 0 40c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-40-72 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l130.9 0c24.9 0 45.1-20.2 45.1-45.1 0-22.5-16.5-41.5-38.7-44.7l-91.6-13.1C55.9 273.5 16 227.4 16 173.1 16 112.9 64.9 64 125.1 64l10.9 0 0-40z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-6c1753fe="" class="mb-6"&gt;<br/>
+         &lt;h3 data-v-6c1753fe="" class="text-lg font-semibold text-gray-900 dark:text-white mb-4"&gt;<br/>
+          &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-bell mr-2 text-orange-500" data-prefix="fas" data-icon="bell" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+           &lt;path class="" fill="currentColor" d="M224 0c-17.7 0-32 14.3-32 32l0 3.2C119 50 64 114.6 64 192l0 21.7c0 48.1-16.4 94.8-46.4 132.4L7.8 358.3C2.7 364.6 0 372.4 0 380.5 0 400.1 15.9 416 35.5 416l376.9 0c19.6 0 35.5-15.9 35.5-35.5 0-8.1-2.7-15.9-7.8-22.2l-9.8-12.2C400.4 308.5 384 261.8 384 213.7l0-21.7c0-77.4-55-142-128-156.8l0-3.2c0-17.7-14.3-32-32-32zM162 464c7.1 27.6 32.2 48 62 48s54.9-20.4 62-48l-124 0z"&gt;&lt;/path&gt;<br/>
+          &lt;/svg&gt;<br/>
+          Alertas del Sistema<br/>
+         &lt;/h3&gt;<br/>
+         &lt;div data-v-6c1753fe="" class="space-y-3"&gt;<br/>
+          &lt;div data-v-6c1753fe="" class="p-4 gap-3 text-sm dark:bg-gray-800 rounded-lg text-green-800 bg-green-50 flex items-center border-green-500 dark:text-green-400" role="alert"&gt;<br/>
+           &lt;div class="flex items-center"&gt;<br/>
+            &lt;svg class="size-5 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"&gt;<br/>
+             &lt;path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"&gt;&lt;/path&gt;<br/>
+            &lt;/svg&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;span data-v-6c1753fe="" class="font-medium"&gt;Equipo Agregado&lt;/span&gt;<br/>
+           &lt;p data-v-6c1753fe="" class="mt-1"&gt;El equipo ha sido agregado exitosamente.&lt;/p&gt;<br/>
+           &lt;button type="button" class="ml-auto -mr-1.5 -my-1.5 rounded-lg focus:ring-2 p-1.5 inline-flex h-8 w-8 dark:bg-gray-800 dark:hover:bg-gray-700 text-green-500 dark:text-green-400 bg-green-50 hover:bg-green-200 focus:ring-green-400" aria-label="Close"&gt;&lt;span class="sr-only"&gt;Dismiss&lt;/span&gt;<br/>
+            &lt;svg class="size-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"&gt;<br/>
+             &lt;path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"&gt;&lt;/path&gt;<br/>
+            &lt;/svg&gt;&lt;/button&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-6c1753fe="" class="p-4 gap-3 text-sm dark:bg-gray-800 rounded-lg text-yellow-800 bg-yellow-50 flex items-center border-yellow-500 dark:text-yellow-400" role="alert"&gt;<br/>
+           &lt;div class="flex items-center"&gt;<br/>
+            &lt;svg class="size-5 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"&gt;<br/>
+             &lt;path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"&gt;&lt;/path&gt;<br/>
+            &lt;/svg&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;span data-v-6c1753fe="" class="font-medium"&gt;Mantenimiento Programado&lt;/span&gt;<br/>
+           &lt;p data-v-6c1753fe="" class="mt-1"&gt;2 equipos requieren mantenimiento esta semana&lt;/p&gt;<br/>
+           &lt;button type="button" class="ml-auto -mr-1.5 -my-1.5 rounded-lg focus:ring-2 p-1.5 inline-flex h-8 w-8 dark:bg-gray-800 dark:hover:bg-gray-700 text-yellow-500 dark:text-yellow-300 bg-yellow-50 hover:bg-yellow-200 focus:ring-yellow-400" aria-label="Close"&gt;&lt;span class="sr-only"&gt;Dismiss&lt;/span&gt;<br/>
+            &lt;svg class="size-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"&gt;<br/>
+             &lt;path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"&gt;&lt;/path&gt;<br/>
+            &lt;/svg&gt;&lt;/button&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+       &lt;/div&gt;<br/>
+       &lt;div data-v-6c1753fe="" class="flex flex-wrap gap-4 mb-6"&gt;<br/>
+        &lt;button data-v-6c1753fe="" class="text-white bg-gradient-to-br from-green-400 to-blue-600 focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg hover:bg-gradient-to-bl text-base px-5 py-2.5" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+          &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-plus mr-2" data-prefix="fas" data-icon="plus" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+           &lt;path class="" fill="currentColor" d="M256 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 160-160 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l160 0 0 160c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160 160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-160 0 0-160z"&gt;&lt;/path&gt;<br/>
+          &lt;/svg&gt; Agregar Equipo &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+        &lt;!----&gt;<br/>
+        &lt;button data-v-6c1753fe="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-base px-5 py-2.5" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+          &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-file-export mr-2" data-prefix="fas" data-icon="file-export" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+           &lt;path class="" fill="currentColor" d="M96.5 0c-35.3 0-64 28.7-64 64l0 384c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-96 78.1 0-31 31c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l72-72c9.4-9.4 9.4-24.6 0-33.9l-72-72c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l31 31-78.1 0 0-133.5c0-17-6.7-33.3-18.7-45.3L291.2 18.7C279.2 6.7 263 0 246 0L96.5 0zM358 176l-93.5 0c-13.3 0-24-10.7-24-24L240.5 58.5 358 176zM224.5 328c0-13.3 10.7-24 24-24l104 0 0 48-104 0c-13.3 0-24-10.7-24-24z"&gt;&lt;/path&gt;<br/>
+          &lt;/svg&gt; Exportar Reporte &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+        &lt;button data-v-6c1753fe="" class="text-base px-5 py-2.5" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+          &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-arrows-rotate mr-2" data-prefix="fas" data-icon="arrows-rotate" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+           &lt;path class="" fill="currentColor" d="M65.9 228.5c13.3-93 93.4-164.5 190.1-164.5 53 0 101 21.5 135.8 56.2 .2 .2 .4 .4 .6 .6l7.6 7.2-47.9 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-128c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 53.4-11.3-10.7C390.5 28.6 326.5 0 256 0 127 0 20.3 95.4 2.6 219.5 .1 237 12.2 253.2 29.7 255.7s33.7-9.7 36.2-27.1zm443.5 64c2.5-17.5-9.7-33.7-27.1-36.2s-33.7 9.7-36.2 27.1c-13.3 93-93.4 164.5-190.1 164.5-53 0-101-21.5-135.8-56.2-.2-.2-.4-.4-.6-.6l-7.6-7.2 47.9 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 320c-8.5 0-16.7 3.4-22.7 9.5S-.1 343.7 0 352.3l1 127c.1 17.7 14.6 31.9 32.3 31.7S65.2 496.4 65 478.7l-.4-51.5 10.7 10.1c46.3 46.1 110.2 74.7 180.7 74.7 129 0 235.7-95.4 253.4-219.5z"&gt;&lt;/path&gt;<br/>
+          &lt;/svg&gt; Actualizar Vista &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+       &lt;/div&gt;<br/>
+       &lt;div data-v-6c1753fe="" class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6"&gt;<br/>
+        &lt;div data-v-6c1753fe="" class="grid grid-cols-1 md:grid-cols-4 gap-4"&gt;<br/>
+         &lt;div data-v-6c1753fe=""&gt;<br/>
+          &lt;label data-v-6c1753fe="" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"&gt; Buscar Equipo &lt;/label&gt;<br/>
+          &lt;div data-v-6c1753fe="" class=""&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div class="relative flex items-center has-[input:focus]:ring-offset-0 has-[input:focus]:ring-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg has-[input:focus]:ring-blue-500 has-[input:focus]:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:has-[input:focus]:ring-blue-500 dark:has-[input:focus]:border-blue-500"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;input placeholder="Buscar por nombre, modelo o serie..." icon="fa-solid fa-search" autocomplete="off" class="block flex-grow w-full bg-transparent text-inherit ring-offset-0 ring-0 border-0 focus:ring-offset-0 focus:ring-0 focus:border-0 dark:placeholder-gray-400 p-2.5 text-sm" type="text"&gt;&lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;!----&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+         &lt;div data-v-6c1753fe=""&gt;<br/>
+          &lt;label data-v-6c1753fe="" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"&gt; Estado &lt;/label&gt;&lt;select data-v-6c1753fe="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"&gt;&lt;option value="" data-v-6c1753fe=""&gt;Todos los estados&lt;/option&gt;&lt;option value="disponible" data-v-6c1753fe=""&gt;Disponible&lt;/option&gt;&lt;option value="alquilado" data-v-6c1753fe=""&gt;Alquilado&lt;/option&gt;&lt;option value="mantenimiento" data-v-6c1753fe=""&gt;En Mantenimiento&lt;/option&gt;&lt;option value="de_baja" data-v-6c1753fe=""&gt;De Baja&lt;/option&gt;&lt;/select&gt;<br/>
+         &lt;/div&gt;<br/>
+         &lt;div data-v-6c1753fe=""&gt;<br/>
+          &lt;label data-v-6c1753fe="" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"&gt; Categoría &lt;/label&gt;&lt;select data-v-6c1753fe="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"&gt;&lt;option data-v-6c1753fe="" value=""&gt;Todas las categorías&lt;/option&gt;&lt;option data-v-6c1753fe="" value="Equipos de Sonido"&gt;Equipos de Sonido&lt;/option&gt;&lt;option data-v-6c1753fe="" value="Iluminación"&gt;Iluminación&lt;/option&gt;&lt;option data-v-6c1753fe="" value="Video"&gt;Video&lt;/option&gt;&lt;option data-v-6c1753fe="" value="Herramientas Test"&gt;Herramientas Test&lt;/option&gt;&lt;option data-v-6c1753fe="" value="w"&gt;w&lt;/option&gt;&lt;/select&gt;<br/>
+         &lt;/div&gt;<br/>
+         &lt;div data-v-6c1753fe="" class="flex items-end"&gt;<br/>
+          &lt;button data-v-6c1753fe="" class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg hover:bg-gradient-to-bl text-base px-5 py-2.5 w-full" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+            &lt;svg data-v-6c1753fe="" class="svg-inline--fa fa-xmark mr-2" data-prefix="fas" data-icon="xmark" role="img" viewBox="0 0 384 512" aria-hidden="true"&gt;<br/>
+             &lt;path class="" fill="currentColor" d="M55.1 73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L147.2 256 9.9 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192.5 301.3 329.9 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.8 256 375.1 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192.5 210.7 55.1 73.4z"&gt;&lt;/path&gt;<br/>
+            &lt;/svg&gt; Limpiar Filtros &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+       &lt;/div&gt;<br/>
+       &lt;!----&gt;<br/>
+       &lt;div data-v-6c1753fe="" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="123" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-handshake w-3 h-3 mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Alquilado<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Herramientas Test&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;123&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;123 xxxxxx&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: xxxxxxxxxxxxxx&lt;/p&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$11.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $0.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $0.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex items-center mb-2"&gt;<br/>
+             &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-user w-4 h-4 mr-2 text-blue-500" data-prefix="fas" data-icon="user" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-blue-700 dark:text-blue-300"&gt;Cliente Actual&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-blue-600 dark:text-blue-400"&gt;Luis Fernando Rodriguez Morales&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-blue-500 dark:text-blue-500"&gt;Hasta: 8 dic 2025&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Escalera Telescópica Aluminio 5.8m" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-handshake w-3 h-3 mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Alquilado<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Equipos de Acceso&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Escalera Telescópica Aluminio 5.8m&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;Promart ETL-58&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: PM1122334455&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Ubicación: Bodega Central - Área F&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$15000.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $78000.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $265000.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex items-center mb-2"&gt;<br/>
+             &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-user w-4 h-4 mr-2 text-blue-500" data-prefix="fas" data-icon="user" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-blue-700 dark:text-blue-300"&gt;Cliente Actual&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-blue-600 dark:text-blue-400"&gt;Carlos Alberto Sanchez Ruiz&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-blue-500 dark:text-blue-500"&gt;Hasta: 8 dic 2025&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Sierra Circular DeWalt DWE575" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-handshake w-3 h-3 mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Alquilado<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Herramientas Eléctricas&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Sierra Circular DeWalt DWE575&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;DeWalt DWE575&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: DW5544332211&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Ubicación: Bodega Central - Estante B2&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$22000.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $115000.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $390000.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex items-center mb-2"&gt;<br/>
+             &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-user w-4 h-4 mr-2 text-blue-500" data-prefix="fas" data-icon="user" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-blue-700 dark:text-blue-300"&gt;Cliente Actual&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-blue-600 dark:text-blue-400"&gt;Eventos Grandes SA de CV&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-blue-500 dark:text-blue-500"&gt;Hasta: 8 dic 2025&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Martillo Demoledor Hilti TE 500-AVR" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-handshake w-3 h-3 mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Alquilado<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Herramientas Eléctricas&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Martillo Demoledor Hilti TE 500-AVR&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;Hilti TE 500-AVR&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: HT7788990011&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Ubicación: Bodega Central - Estante C1&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$42000.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $220000.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $750000.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex items-center mb-2"&gt;<br/>
+             &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-user w-4 h-4 mr-2 text-blue-500" data-prefix="fas" data-icon="user" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-blue-700 dark:text-blue-300"&gt;Cliente Actual&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-blue-600 dark:text-blue-400"&gt;Carlos Alberto Sanchez Ruiz&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-blue-500 dark:text-blue-500"&gt;Hasta: 8 dic 2025&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Compresor de Aire Stanley D200/10/24" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-handshake w-3 h-3 mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Alquilado<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Equipos de Aire&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Compresor de Aire Stanley D200/10/24&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;Stanley D200/10/24&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: ST2233445566&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Ubicación: Bodega Central - Área D&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$28000.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $145000.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $490000.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex items-center mb-2"&gt;<br/>
+             &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-user w-4 h-4 mr-2 text-blue-500" data-prefix="fas" data-icon="user" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-blue-700 dark:text-blue-300"&gt;Cliente Actual&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-blue-600 dark:text-blue-400"&gt;Eventos Grandes SA de CV&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-blue-500 dark:text-blue-500"&gt;Hasta: 8 dic 2025&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Proyector portátil" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-circle-check w-3 h-3 mr-1" data-prefix="fas" data-icon="circle-check" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zm84.4-299.3l-80 128c-4.2 6.7-11.4 10.9-19.3 11.3s-15.5-3.2-20.2-9.6l-48-64c-8-10.6-5.8-25.6 4.8-33.6s25.6-5.8 33.6 4.8l27 36 61.4-98.3c7-11.2 21.8-14.7 33.1-7.6s14.7 21.8 7.6 33.1z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Disponible<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Video&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Proyector portátil&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;Epson Incredible Concrete Clock&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: SN-EPS-2026-001-1782921984082&lt;/p&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$18.50&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $0.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $0.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-handshake mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Alquilar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-screwdriver-wrench mr-1" data-prefix="fas" data-icon="screwdriver-wrench" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M224.1 97.1l0 49.6 .5 .5c6.5-82.4 75.4-147.2 159.5-147.2 20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1l-88.7 88.7c-3 3-4.7 7.1-4.7 11.3l0 41.4c0 8.8 7.2 16 16 16l41.4 0c4.2 0 8.3-1.7 11.3-4.7l88.7-88.7c7.6-7.6 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 60.6-33.7 113.4-83.5 140.5l81.5 81.5c18.7 18.7 18.7 49.1 0 67.9l-60.1 60.1c-18.7 18.7-49.1 18.7-67.9 0L288.1 384c-27.4-27.4-33.6-67.9-18.5-101.3l-90.7-90.7-49.6 0c-10.7 0-20.7-5.3-26.6-14.2L23.4 58.9c-4.2-6.3-3.4-14.8 2-20.2L70.8-6.7c5.4-5.4 13.8-6.2 20.2-2L209.9 70.5c8.9 5.9 14.2 15.9 14.2 26.6zm-8.5 199.5c-6.3 37 2.4 76.1 26.4 107.4L147 498.9c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8l135.4-135.4 35 35z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Mantener &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="exampĺe 1" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-handshake w-3 h-3 mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Alquilado<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Iluminación&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;exampĺe 1&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;example 1 001&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: 001&lt;/p&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$1.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $1.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $1.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex items-center mb-2"&gt;<br/>
+             &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-user w-4 h-4 mr-2 text-blue-500" data-prefix="fas" data-icon="user" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-blue-700 dark:text-blue-300"&gt;Cliente Actual&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-blue-600 dark:text-blue-400"&gt;Carlos Alberto Sanchez Ruiz&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-blue-500 dark:text-blue-500"&gt;Hasta: 15 jul 2026&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Proyector portátil" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-circle-check w-3 h-3 mr-1" data-prefix="fas" data-icon="circle-check" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zm84.4-299.3l-80 128c-4.2 6.7-11.4 10.9-19.3 11.3s-15.5-3.2-20.2-9.6l-48-64c-8-10.6-5.8-25.6 4.8-33.6s25.6-5.8 33.6 4.8l27 36 61.4-98.3c7-11.2 21.8-14.7 33.1-7.6s14.7 21.8 7.6 33.1z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Disponible<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Video&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Proyector portátil&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;Epson Fantastic Steel Knife&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: SN-EPS-2026-001-1782923044544&lt;/p&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$18.50&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $0.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $0.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-handshake mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Alquilar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-screwdriver-wrench mr-1" data-prefix="fas" data-icon="screwdriver-wrench" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M224.1 97.1l0 49.6 .5 .5c6.5-82.4 75.4-147.2 159.5-147.2 20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1l-88.7 88.7c-3 3-4.7 7.1-4.7 11.3l0 41.4c0 8.8 7.2 16 16 16l41.4 0c4.2 0 8.3-1.7 11.3-4.7l88.7-88.7c7.6-7.6 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 60.6-33.7 113.4-83.5 140.5l81.5 81.5c18.7 18.7 18.7 49.1 0 67.9l-60.1 60.1c-18.7 18.7-49.1 18.7-67.9 0L288.1 384c-27.4-27.4-33.6-67.9-18.5-101.3l-90.7-90.7-49.6 0c-10.7 0-20.7-5.3-26.6-14.2L23.4 58.9c-4.2-6.3-3.4-14.8 2-20.2L70.8-6.7c5.4-5.4 13.8-6.2 20.2-2L209.9 70.5c8.9 5.9 14.2 15.9 14.2 26.6zm-8.5 199.5c-6.3 37 2.4 76.1 26.4 107.4L147 498.9c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8l135.4-135.4 35 35z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Mantener &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Equipo QA Cotizacion 1782923107053" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-handshake w-3 h-3 mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Alquilado<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Video&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Equipo QA Cotizacion 1782923107053&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;Sony QA-COT-1782923107053&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: SN-COT-1782923107053&lt;/p&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$50.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $0.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $0.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex items-center mb-2"&gt;<br/>
+             &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-user w-4 h-4 mr-2 text-blue-500" data-prefix="fas" data-icon="user" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-blue-700 dark:text-blue-300"&gt;Cliente Actual&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-blue-600 dark:text-blue-400"&gt;Carlos Alberto Sanchez Ruiz&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-blue-500 dark:text-blue-500"&gt;Hasta: 15 jul 2026&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Equipo QA Cotizacion 1782923215444" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-circle-check w-3 h-3 mr-1" data-prefix="fas" data-icon="circle-check" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zm84.4-299.3l-80 128c-4.2 6.7-11.4 10.9-19.3 11.3s-15.5-3.2-20.2-9.6l-48-64c-8-10.6-5.8-25.6 4.8-33.6s25.6-5.8 33.6 4.8l27 36 61.4-98.3c7-11.2 21.8-14.7 33.1-7.6s14.7 21.8 7.6 33.1z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Disponible<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Video&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Equipo QA Cotizacion 1782923215444&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;Sony QA-COT-1782923215444&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: SN-COT-1782923215444&lt;/p&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$50.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $0.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $0.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-handshake mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Alquilar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-screwdriver-wrench mr-1" data-prefix="fas" data-icon="screwdriver-wrench" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M224.1 97.1l0 49.6 .5 .5c6.5-82.4 75.4-147.2 159.5-147.2 20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1l-88.7 88.7c-3 3-4.7 7.1-4.7 11.3l0 41.4c0 8.8 7.2 16 16 16l41.4 0c4.2 0 8.3-1.7 11.3-4.7l88.7-88.7c7.6-7.6 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 60.6-33.7 113.4-83.5 140.5l81.5 81.5c18.7 18.7 18.7 49.1 0 67.9l-60.1 60.1c-18.7 18.7-49.1 18.7-67.9 0L288.1 384c-27.4-27.4-33.6-67.9-18.5-101.3l-90.7-90.7-49.6 0c-10.7 0-20.7-5.3-26.6-14.2L23.4 58.9c-4.2-6.3-3.4-14.8 2-20.2L70.8-6.7c5.4-5.4 13.8-6.2 20.2-2L209.9 70.5c8.9 5.9 14.2 15.9 14.2 26.6zm-8.5 199.5c-6.3 37 2.4 76.1 26.4 107.4L147 498.9c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8l135.4-135.4 35 35z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Mantener &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Proyector portátil" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-circle-check w-3 h-3 mr-1" data-prefix="fas" data-icon="circle-check" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zm84.4-299.3l-80 128c-4.2 6.7-11.4 10.9-19.3 11.3s-15.5-3.2-20.2-9.6l-48-64c-8-10.6-5.8-25.6 4.8-33.6s25.6-5.8 33.6 4.8l27 36 61.4-98.3c7-11.2 21.8-14.7 33.1-7.6s14.7 21.8 7.6 33.1z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Disponible<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Video&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Proyector portátil&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;Epson Heavy Duty Iron Gloves&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: SN-EPS-2026-001-1782923256506&lt;/p&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$18.50&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $0.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $0.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-handshake mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Alquilar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-screwdriver-wrench mr-1" data-prefix="fas" data-icon="screwdriver-wrench" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M224.1 97.1l0 49.6 .5 .5c6.5-82.4 75.4-147.2 159.5-147.2 20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1l-88.7 88.7c-3 3-4.7 7.1-4.7 11.3l0 41.4c0 8.8 7.2 16 16 16l41.4 0c4.2 0 8.3-1.7 11.3-4.7l88.7-88.7c7.6-7.6 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 60.6-33.7 113.4-83.5 140.5l81.5 81.5c18.7 18.7 18.7 49.1 0 67.9l-60.1 60.1c-18.7 18.7-49.1 18.7-67.9 0L288.1 384c-27.4-27.4-33.6-67.9-18.5-101.3l-90.7-90.7-49.6 0c-10.7 0-20.7-5.3-26.6-14.2L23.4 58.9c-4.2-6.3-3.4-14.8 2-20.2L70.8-6.7c5.4-5.4 13.8-6.2 20.2-2L209.9 70.5c8.9 5.9 14.2 15.9 14.2 26.6zm-8.5 199.5c-6.3 37 2.4 76.1 26.4 107.4L147 498.9c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8l135.4-135.4 35 35z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Mantener &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+        &lt;div data-v-a3f9f259="" data-v-6c1753fe="" class="block max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 equipment-card hover:shadow-lg transition-shadow duration-300" href=""&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="relative"&gt;<br/>
+           &lt;img data-v-a3f9f259="" src="https://axxion-frontend.onrender.com/assets/items-Do2IzbVp.png" alt="Equipo QA Cotizacion 1782923270323" class="w-full h-48 object-cover rounded-t-lg"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 right-3"&gt;<br/>
+            &lt;span data-v-4bab550a="" data-v-a3f9f259="" class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 px-2.5 py-0.5 text-xs inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"&gt;<br/>
+             &lt;svg data-v-4bab550a="" class="svg-inline--fa fa-handshake w-3 h-3 mr-1" data-prefix="fas" data-icon="handshake" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M268.9 85.2L152.3 214.8c-4.6 5.1-4.4 13 .5 17.9 30.5 30.5 80 30.5 110.5 0l31.8-31.8c4.2-4.2 9.5-6.5 14.9-6.9 6.8-.6 13.8 1.7 19 6.9L505.6 376 576 320 576 32 464 96 440.2 80.1C424.4 69.6 405.9 64 386.9 64l-70.4 0c-1.1 0-2.3 0-3.4 .1-16.9 .9-32.8 8.5-44.2 21.1zM116.6 182.7L223.4 64 183.8 64c-25.5 0-49.9 10.1-67.9 28.1L112 96 0 32 0 320 156.4 450.3c23 19.2 52 29.7 81.9 29.7l15.7 0-7-7c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l41 41 9 0c19.1 0 37.8-4.3 54.8-12.3L359 441c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l32 32 17.5-17.5c8.9-8.9 11.5-21.8 7.6-33.1l-137.9-136.8-14.9 14.9c-49.3 49.3-129.1 49.3-178.4 0-23-23-23.9-59.9-2.2-84z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt; Alquilado<br/>
+            &lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="absolute top-3 left-3"&gt;<br/>
+            &lt;span data-v-a3f9f259="" class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full"&gt;Video&lt;/span&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+          &lt;div data-v-a3f9f259="" class="p-6"&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4"&gt;<br/>
+            &lt;h3 data-v-a3f9f259="" class="text-lg font-semibold text-gray-900 dark:text-white mb-1"&gt;Equipo QA Cotizacion 1782923270323&lt;/h3&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-gray-600 dark:text-gray-400 mb-2"&gt;Sony QA-COT-1782923270323&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-gray-500 dark:text-gray-500"&gt;Serie: SN-COT-1782923270323&lt;/p&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 space-y-2"&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center mb-2"&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-gray-700 dark:text-gray-300"&gt;Tarifa Diaria&lt;/span&gt;&lt;span data-v-a3f9f259="" class="text-lg font-bold text-green-600"&gt;$50.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Semanal: $0.00&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;Mensual: $0.00&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400"&gt;<br/>
+             &lt;span data-v-a3f9f259=""&gt;Ingresos:&lt;/span&gt;&lt;span data-v-a3f9f259=""&gt;$0&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg"&gt;<br/>
+            &lt;div data-v-a3f9f259="" class="flex items-center mb-2"&gt;<br/>
+             &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-user w-4 h-4 mr-2 text-blue-500" data-prefix="fas" data-icon="user" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+              &lt;path class="" fill="currentColor" d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"&gt;&lt;/path&gt;<br/>
+             &lt;/svg&gt;<br/>
+             &lt;span data-v-a3f9f259="" class="text-sm font-medium text-blue-700 dark:text-blue-300"&gt;Cliente Actual&lt;/span&gt;<br/>
+            &lt;/div&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-sm text-blue-600 dark:text-blue-400"&gt;Carlos Alberto Sanchez Ruiz&lt;/p&gt;<br/>
+            &lt;p data-v-a3f9f259="" class="text-xs text-blue-500 dark:text-blue-500"&gt;Hasta: 15 jul 2026&lt;/p&gt;<br/>
+           &lt;/div&gt;<br/>
+           &lt;!----&gt;<br/>
+           &lt;div data-v-a3f9f259="" class="flex flex-wrap gap-2"&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-eye mr-1" data-prefix="fas" data-icon="eye" role="img" viewBox="0 0 576 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6-46.8 43.5-78.1 95.4-93 131.1-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47.1 43.7 111.8 80.6 192.6 80.6s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1-47.1-43.7-111.8-80.6-192.6-80.6zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64-11.5 0-22.3-3-31.7-8.4-1 10.9-.1 22.1 2.9 33.2 13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-12.2-45.7-55.5-74.8-101.1-70.8 5.3 9.3 8.4 20.1 8.4 31.7z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Ver &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;!----&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-pen-to-square mr-1" data-prefix="fas" data-icon="pen-to-square" role="img" viewBox="0 0 512 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L368 46.1 465.9 144 490.3 119.6c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L432 177.9 334.1 80 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Editar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+            &lt;button data-v-a3f9f259="" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg hover:bg-gradient-to-br text-sm px-3 py-1.5 flex-1" href=""&gt;&lt;!----&gt;&lt;span class=""&gt;&lt;!----&gt;<br/>
+              &lt;svg data-v-a3f9f259="" class="svg-inline--fa fa-trash mr-1" data-prefix="fas" data-icon="trash" role="img" viewBox="0 0 448 512" aria-hidden="true"&gt;<br/>
+               &lt;path class="" fill="currentColor" d="M136.7 5.9L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-8.7-26.1C306.9-7.2 294.7-16 280.9-16L167.1-16c-13.8 0-26 8.8-30.4 21.9zM416 144L32 144 53.1 467.1C54.7 492.4 75.7 512 101 512L347 512c25.3 0 46.3-19.6 47.9-44.9L416 144z"&gt;&lt;/path&gt;<br/>
+              &lt;/svg&gt; Eliminar &lt;!----&gt;&lt;/span&gt;&lt;!----&gt;&lt;/button&gt;<br/>
+           &lt;/div&gt;<br/>
+          &lt;/div&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/div&gt;<br/>
+       &lt;/div&gt;<br/>
+       &lt;div data-v-6c1753fe="" class="mt-8 flex justify-center"&gt;<br/>
+        &lt;nav data-v-6c1753fe="" aria-label="Navigation"&gt;<br/>
+         &lt;!----&gt;<br/>
+         &lt;div class="inline-flex"&gt;<br/>
+          &lt;!----&gt;<br/>
+          &lt;button disabled class="ml-0 flex h-8 items-center justify-center gap-1 border border-gray-300 bg-white px-3 leading-tight text-gray-500 first:rounded-l-lg last:rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white [&amp;:not(:last-child)]:border-r-0 disabled:cursor-not-allowed disabled:opacity-50"&gt;<br/>
+           &lt;svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" aria-hidden="true" class="size-5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"&gt;<br/>
+            &lt;path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;<br/>
+           Prev<br/>
+          &lt;/button&gt;<br/>
+          &lt;button disabled class="flex h-8 items-center justify-center border border-r-0 border-gray-300 px-3 text-sm leading-tight dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:text-white bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:bg-gray-700 dark:text-white"&gt;1&lt;/button&gt;<br/>
+          &lt;button class="flex h-8 items-center justify-center border border-r-0 border-gray-300 bg-white px-3 text-sm leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"&gt;2&lt;/button&gt;<br/>
+          &lt;button class="ml-0 flex h-8 items-center justify-center gap-1 border border-gray-300 bg-white px-3 leading-tight text-gray-500 first:rounded-l-lg last:rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white [&amp;:not(:last-child)]:border-r-0"&gt;Next<br/>
+           &lt;svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 20 20" aria-hidden="true" class="size-5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"&gt;<br/>
+            &lt;path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"&gt;&lt;/path&gt;<br/>
+           &lt;/svg&gt;&lt;/button&gt;<br/>
+          &lt;!----&gt;<br/>
+         &lt;/div&gt;<br/>
+        &lt;/nav&gt;<br/>
+       &lt;/div&gt;<br/>
+      &lt;/div&gt;<br/>
+     &lt;/main&gt;<br/>
+     &lt;!----&gt;<br/>
+     &lt;!----&gt;<br/>
+     &lt;!----&gt;<br/>
+    &lt;/div&gt;<br/>
+    &lt;footer data-v-efc5680a="" data-v-6c1753fe=""&gt;<br/>
+     &lt;footer data-v-efc5680a="" class="mt-auto p-4 bg-white rounded-lg shadow-sm md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 mt-auto"&gt;<br/>
+      &lt;span data-v-efc5680a="" class="block text-sm text-gray-500 sm:text-center dark:text-gray-400"&gt; © 2026 &lt;a class="hover:underline" href="#"&gt;AXION SYSTEM™&lt;/a&gt; Todos los derechos reservados.&lt;/span&gt;<br/>
+      &lt;ul data-v-efc5680a="" class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0"&gt;<br/>
+       &lt;li data-v-efc5680a="" class="mr-4 md:mr-6 last:mr-0"&gt;&lt;a href="#" class="hover:underline"&gt; Acerca de &lt;/a&gt;&lt;/li&gt;<br/>
+       &lt;li data-v-efc5680a="" class="mr-4 md:mr-6 last:mr-0"&gt;&lt;a href="#" class="hover:underline"&gt; Política de Privacidad &lt;/a&gt;&lt;/li&gt;<br/>
+       &lt;li data-v-efc5680a="" class="mr-4 md:mr-6 last:mr-0"&gt;&lt;a href="#" class="hover:underline"&gt; Licencias &lt;/a&gt;&lt;/li&gt;<br/>
+       &lt;li data-v-efc5680a="" class="mr-4 md:mr-6 last:mr-0"&gt;&lt;a href="#" class="hover:underline"&gt; Contacto &lt;/a&gt;&lt;/li&gt;<br/>
+      &lt;/ul&gt;<br/>
+     &lt;/footer&gt;<br/>
+    &lt;/footer&gt;<br/>
+   &lt;/div&gt;<br/>
+  &lt;/div&gt;<br/>
+ &lt;/body&gt;<br/>
+&lt;/html&gt;</code></pre></div></body></html>

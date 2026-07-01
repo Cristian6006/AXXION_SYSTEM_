@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Registro exitoso de un equipo en inventario" skipped="0" tests="1" time="15.21" timestamp="2026-07-01 12:23:56"><testcase name="El alta con datos mínimos obligatorios confirma el registro y prioriza el nuevo ítem en el listado"/></testsuite>
