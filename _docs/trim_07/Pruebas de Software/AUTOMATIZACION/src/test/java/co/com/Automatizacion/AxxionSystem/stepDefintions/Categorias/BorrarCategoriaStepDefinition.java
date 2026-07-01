@@ -3,7 +3,6 @@ package co.com.Automatizacion.AxxionSystem.stepDefintions.Categorias;
 import co.com.Automatizacion.AxxionSystem.models.Categorias.Categoria;
 import co.com.Automatizacion.AxxionSystem.questions.Categorias.CategoriaExiste;
 import co.com.Automatizacion.AxxionSystem.tasks.Categorias.BorrarCategoria;
-import co.com.Automatizacion.AxxionSystem.tasks.Categorias.ConsultarCategoriaNombre;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;
 import net.serenitybdd.screenplay.Actor;

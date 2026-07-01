@@ -1,4 +1,4 @@
-package co.com.Automatizacion.AxxionSystem.runners.Categorias;
+package co.com.Automatizacion.AxxionSystem.runners;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
@@ -11,11 +11,9 @@ import static io.cucumber.junit.platform.engine.Constants.*;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "co.com.Automatizacion.AxxionSystem")
-@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@ConsultarCategoria")
 @ConfigurationParameter(
         key = PLUGIN_PROPERTY_NAME,
         value = "net.serenitybdd.cucumber.core.plugin.SerenityReporterParallel"
 )
-
-public class ConsultarCategoriaSuite {
+public class AxxionSuite {
 }

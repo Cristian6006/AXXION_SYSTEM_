@@ -26,5 +26,5 @@ public class CategoriasUI {
     // Consultar Categoria
     public static final Target INPUT_BUSQUEDA_NOMBRE = Target.the("Buscador de categoria por nombre").locatedBy("//input[@placeholder='Buscar Categorias']");
     public static final Target INPUT_BUSQUEDA_FECHA = Target.the("Buscador de categoria por fecha").locatedBy("//div[descendant::input[@type='date']]");
-    public static final Target CATEGORIA_BUSQUEDA = Target.the("categoria buscada").locatedBy("//div[contains(@class, 'bg-[#364153]') and contains(., 'Iluminación')]");
+    public static final Target CATEGORIA_BUSQUEDA = Target.the("categoria buscada").locatedBy("//div[contains(@class, 'bg-[#364153]') and contains(., '{0}')]");
 }
