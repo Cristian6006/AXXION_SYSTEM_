@@ -52,13 +52,26 @@ tasks.withType<JavaCompile> {
 }
 
 
+val headless = (System.getenv("HEADLESS") ?: "false").toBoolean()
+
 tasks.withType<Test> {
     useJUnitPlatform()
+    maxParallelForks = 1
+    if (headless) {
+        systemProperty("environment", "headless")
+    }
     systemProperty("cucumber.publish.quiet", "true")
     jvmArgs(
         "--add-opens", "java.base/java.lang=ALL-UNNAMED",
         "--add-opens", "java.base/java.util=ALL-UNNAMED",
-        "--add-opens", "java.base/java.lang.reflect=ALL-UNNAMED"
+        "--add-opens", "java.base/java.lang.reflect=ALL-UNNAMED",
+        "-Djava.util.logging.config.file=${project.projectDir}/src/test/resources/logging.properties"
     )
     finalizedBy("aggregate")
+}
+
+tasks.named<Test>("test") {
+    filter {
+        includeTestsMatching("co.com.Automatizacion.AxxionSystem.runners.AxxionSystemSuite")
+    }
 }
